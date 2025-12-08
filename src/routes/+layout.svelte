@@ -57,7 +57,7 @@
 >
 	<div
 		class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-		style="background: radial-gradient(600px circle at {mouseX}px {mouseY}px, rgba(251, 111, 146, 0.04), transparent 80%);"
+		style="background: radial-gradient(600px circle at {mouseX}px {mouseY}px, rgba(191, 215, 234,0.04), transparent 80%);"
 	></div>
 	<div class="layout-container flex h-full grow flex-col relative z-10">
 		<div class="px-4 sm:px-6 lg:px-8 flex flex-1 justify-center py-5">
