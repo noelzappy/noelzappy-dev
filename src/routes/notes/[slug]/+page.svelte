@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
 	import SEOHead from '$lib/components/seo-head.svelte';
+	import Newsletter from '$lib/components/newsletter.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -17,6 +18,7 @@
 	}
 
 	onMount(() => {
+		// Handle external links
 		const links = contentElement.querySelectorAll('a');
 		links.forEach((link) => {
 			link.setAttribute('target', '_blank');
@@ -82,6 +84,9 @@
 	>
 		{@html data.post.html}
 	</div>
+
+	<Newsletter />
+
 	<footer class="border-t border-neutral-800 pt-8">
 		<a
 			href="/notes"

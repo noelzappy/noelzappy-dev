@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Newsletter from '$lib/components/newsletter.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -26,7 +27,7 @@
 
 	{#if data.posts.length > 0}
 		<div class="flex flex-col gap-10">
-			{#each data.posts as post (post.id)}
+			{#each data.posts as post, index (post.id)}
 				<a class="group" href={`/notes/${post.slug}`} data-sveltekit-preload-data>
 					<div class="grid sm:grid-cols-4 gap-2">
 						<div class="sm:col-span-3 flex flex-col gap-1.5">
@@ -55,6 +56,10 @@
 						</div>
 					</div>
 				</a>
+
+				{#if index === 0 && data.pagination.page === 1}
+					<Newsletter />
+				{/if}
 			{/each}
 		</div>
 

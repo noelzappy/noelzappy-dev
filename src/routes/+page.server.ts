@@ -1,12 +1,21 @@
-import { getFeaturedProjects } from '$lib/integrations/ghost';
+import { getFeaturedProjects, getFeaturedNotes } from '$lib/integrations/ghost';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
 	try {
-		const posts = await getFeaturedProjects();
+		const [projects, notes] = await Promise.all([getFeaturedProjects(), getFeaturedNotes()]);
 
 		return {
-			posts: posts.map((post) => ({
+			posts: projects.map((post) => ({
+				id: post.id,
+				slug: post.slug,
+				title: post.title,
+				excerpt: post.excerpt,
+				publishedAt: post.published_at,
+				featureImage: post.feature_image,
+				tags: post.tags?.map((tag) => tag.name) || []
+			})),
+			notes: notes.map((post) => ({
 				id: post.id,
 				slug: post.slug,
 				title: post.title,
@@ -18,7 +27,8 @@ export const load: PageServerLoad = async () => {
 		};
 	} catch {
 		return {
-			posts: []
+			posts: [],
+			notes: []
 		};
 	}
 };

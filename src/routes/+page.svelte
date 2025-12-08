@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Expertise } from '$lib/shared/expertise';
+	import Newsletter from '$lib/components/newsletter.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -65,3 +66,34 @@
 		{/each}
 	</div>
 </section>
+<section class="flex flex-col gap-3">
+	<h2 class="text-base font-semibold text-neutral-100">Featured Notes</h2>
+	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-800">
+		{#each data.notes as note (note.slug)}
+			<a
+				class="group flex items-start justify-between gap-4 py-4"
+				href={`/notes/${note.slug}`}
+				data-sveltekit-preload-data
+			>
+				<div class="flex flex-col gap-1 flex-1 min-w-0">
+					<span
+						class="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors"
+					>
+						{note.title}
+					</span>
+					{#if note.excerpt}
+						<span class="text-xs text-neutral-500 line-clamp-1">
+							{note.excerpt}
+						</span>
+					{/if}
+				</div>
+				<span
+					class="material-symbols-outlined text-xl text-neutral-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+				>
+					arrow_forward
+				</span>
+			</a>
+		{/each}
+	</div>
+</section>
+<Newsletter />

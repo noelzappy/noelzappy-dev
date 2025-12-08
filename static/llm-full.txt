@@ -1,0 +1,211 @@
+# Emmanuel Noel Zappy Yeboah - Portfolio
+
+> Senior Software Engineer | Full-Stack Developer | 6+ Years Experience
+> https://noelzappy.dev | @noelzappy
+
+## About
+
+Emmanuel Noel Zappy Yeboah is a senior software engineer with over 6 years of experience, specializing in building modern web and mobile applications. His journey in tech has been driven by a relentless curiosity and a desire to solve complex problems.
+
+Beyond his own startups and projects, he has delivered software for startups and teams across fintech, SaaS, content platforms, and mobile apps. These systems are designed and shipped to stay reliable even under real-world pressure.
+
+## Technical Expertise
+
+### Backend Development
+- Languages: Python, TypeScript, Node.js, Go, Java
+- Frameworks: FastAPI, Express.js, NestJS
+- Architecture: REST APIs, GraphQL, microservices
+- Focus: Scalable server-side applications, API design, performance optimization
+
+### Database & Data
+- Relational: PostgreSQL, MySQL
+- NoSQL: MongoDB, Redis, Firebase
+- Skills: Performance tuning, migrations, indexing, query optimization
+- Experience with distributed data systems and caching strategies
+
+### Frontend & Mobile Development
+- Modern Frameworks: Svelte, React, React Native, Next.js, SvelteKit
+- Styling: TailwindCSS, responsive design
+- Languages: JavaScript, TypeScript
+- Approach: Component-driven design, performance-focused UI/UX
+
+### Infrastructure & DevOps
+- Containerization: Docker, Kubernetes
+- Cloud Platforms: AWS, GCP, Azure, Cloudflare Pages
+- CI/CD: Automated deployment pipelines
+- Monitoring: Observability, logging, metrics, performance tracking
+
+### AI & Automation
+- LLM Workflows: Large language model integration
+- AI Techniques: Embeddings, retrieval pipelines, orchestration
+- Development: AI-assisted development practices
+- Focus: Practical AI implementation in production systems
+
+### Professional Skills
+- Technical Writing: Documentation, API specifications
+- Collaboration: Async communication, distributed teams
+- Leadership: Code reviews, mentoring, technical guidance
+- Processes: Agile methodologies, best practices
+
+## Technical Stack
+
+### Current Portfolio Site
+- **Framework**: SvelteKit 2.x with Svelte 5
+- **Styling**: TailwindCSS 4.x with Typography plugin
+- **Hosting**: Cloudflare Pages (edge deployment)
+- **CMS**: Ghost CMS (headless) at cms.noelzappy.dev
+- **Type Safety**: TypeScript throughout
+- **Testing**: Vitest with Playwright browser testing
+- **Code Quality**: ESLint, Prettier, svelte-check
+
+### Key Features
+- Server-side rendering (SSR) with SvelteKit
+- Ghost CMS integration for dynamic content (projects, notes)
+- Pagination for content listings
+- SEO optimization: Open Graph, Twitter Cards, JSON-LD structured data
+- Responsive design with mobile-first approach
+- Interactive UI: Cursor spotlight effect, animated logo border
+- Fixed translucent navigation on scroll
+- Performance optimizations: Preloading, lazy loading
+
+## Architecture
+
+### Frontend Architecture
+- **Router**: SvelteKit file-based routing
+- **State Management**: Svelte 5 runes ($state, $props, $derived)
+- **Data Loading**: Server-side with +page.server.ts files
+- **Components**: Reusable components (SEOHead, Navbar, Footer)
+- **Styling**: Utility-first with TailwindCSS, scoped styles where needed
+
+### Content Management
+- **Ghost CMS Integration**: 
+  - Headless CMS for blog posts and projects
+  - Content API v6.10
+  - Tag-based content organization (projects, notes)
+  - Featured content selection
+  - Reading time calculation
+  - Excerpt generation
+
+### Deployment
+- **Platform**: Cloudflare Pages
+- **Build**: Static site generation with server-side rendering
+- **Edge Runtime**: Cloudflare Workers for server functions
+- **Performance**: Global CDN, edge caching
+- **Configuration**: wrangler.toml for deployment settings
+
+## Projects
+
+Emmanuel's portfolio showcases projects across various domains:
+- Fintech solutions
+- SaaS platforms
+- Content management systems
+- Mobile applications
+- Open source contributions
+- Contract work
+- Personal projects
+
+All projects are documented with:
+- Detailed descriptions
+- Technical stack information
+- Featured images
+- Reading time estimates
+- Tags for categorization
+- Publication dates
+
+## Notes & Writing
+
+Technical blog covering:
+- Software engineering best practices
+- Architecture patterns
+- Technology deep dives
+- Problem-solving approaches
+- Industry insights
+
+Content is:
+- Paginated for easy browsing
+- Tagged for organization
+- SEO optimized
+- Mobile responsive
+- Accessible
+
+## Contact & Social
+
+- **Website**: https://noelzappy.dev
+- **Twitter**: @noelzappy
+- **Email**: Available via contact page
+- **GitHub**: Portfolio source available
+
+## SEO & Discoverability
+
+The portfolio is optimized for search engines and social media:
+- Semantic HTML structure
+- Meta descriptions on all pages
+- Open Graph tags for social sharing
+- Twitter Card support
+- JSON-LD structured data (BlogPosting, Article schemas)
+- Canonical URLs
+- Sitemap (robots.txt included)
+- Fast loading times
+- Mobile-friendly design
+
+## Design Philosophy
+
+The portfolio embodies:
+- **Minimalism**: Clean, focused design without clutter
+- **Performance**: Fast loading, optimized assets
+- **Accessibility**: Semantic HTML, proper ARIA labels
+- **Responsiveness**: Mobile-first, works on all devices
+- **User Experience**: Smooth transitions, intuitive navigation
+- **Dark Theme**: Easy on the eyes, professional appearance
+
+## Technical Highlights
+
+### Animation & Interactivity
+- Cursor spotlight effect with lerp interpolation
+- Animated rainbow border on logo
+- Smooth hover transitions on cards and links
+- Active navigation state tracking
+- Fixed navbar with scroll-based background
+
+### Code Quality
+- TypeScript for type safety
+- ESLint and Prettier for code consistency
+- Svelte-check for component validation
+- Zero linting errors in production
+- Proper error handling
+
+### Performance Optimizations
+- SvelteKit preloading for instant navigation
+- Lazy loading for images
+- Efficient rendering with Svelte 5
+- Minimal JavaScript bundle size
+- Edge deployment for low latency
+
+## Content Strategy
+
+Content is organized into three main sections:
+1. **About**: Personal introduction and expertise overview
+2. **Projects**: Showcase of professional and personal work
+3. **Notes**: Technical writing and insights
+
+All content is:
+- Fetched from Ghost CMS
+- Cached at the edge
+- Server-rendered for SEO
+- Client-hydrated for interactivity
+
+## Future Enhancements
+
+The portfolio is built with extensibility in mind:
+- Easy to add new content types
+- Scalable Ghost CMS integration
+- Modular component architecture
+- Environment-based configuration
+- Type-safe throughout
+
+---
+
+Last Updated: December 2025
+Portfolio Version: 0.0.1
+Built with: SvelteKit, Ghost CMS, TailwindCSS, TypeScript
+Deployed on: Cloudflare Pages
