@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Newsletter from '$lib/components/newsletter.svelte';
+	import SEOHead from '$lib/components/seo-head.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -12,7 +13,35 @@
 			day: 'numeric'
 		});
 	}
+
+	const structuredData = {
+		'@context': 'https://schema.org',
+		'@type': 'Blog',
+		name: 'Noel Zappy Notes',
+		description:
+			'Insights and reflections on software engineering, technology trends, and personal experiences in the tech industry.',
+		url: 'https://noelzappy.dev/notes',
+		author: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		},
+		publisher: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		}
+	};
 </script>
+
+<SEOHead
+	title="Notes - Tech Blog"
+	description="Read Emmanuel Noel Zappy Yeboah's insights on software engineering, web development, cloud architecture, and technology trends. Technical articles and personal experiences."
+	canonical="https://noelzappy.dev/notes"
+	ogType="website"
+	keywords="Tech Blog, Software Engineering Blog, Web Development Articles, Cloud Architecture, TypeScript Tutorials, Python Tips, DevOps Insights"
+	{structuredData}
+/>
 
 <div class="flex flex-col gap-12 sm:gap-16">
 	<div class="flex flex-col gap-1.5">

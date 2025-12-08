@@ -1,17 +1,32 @@
 <script lang="ts">
+	import SEOHead from '$lib/components/seo-head.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 
-	function formatDate(dateString: string) {
-		const date = new Date(dateString);
-		return date.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: 'short',
-			day: 'numeric'
-		});
-	}
+	const structuredData = {
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		name: 'Projects Showcase',
+		description:
+			'A selection of projects from over the years of professional experience, focusing on clean, performant, and user-centric solutions.',
+		url: 'https://noelzappy.dev/projects',
+		author: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		}
+	};
 </script>
+
+<SEOHead
+	title="Projects Showcase"
+	description="Explore Emmanuel Noel Zappy Yeboah's portfolio of web and mobile applications across fintech, SaaS, and enterprise solutions. Clean, performant, and user-centric projects."
+	canonical="https://noelzappy.dev/projects"
+	ogType="website"
+	keywords="Software Projects, Web Development Portfolio, Mobile Apps, Fintech Projects, SaaS Solutions, Full-Stack Projects"
+	{structuredData}
+/>
 
 <div class="flex flex-col gap-12 sm:gap-16">
 	<div class="flex flex-col gap-2">
