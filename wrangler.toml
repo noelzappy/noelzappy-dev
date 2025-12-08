@@ -1,0 +1,8 @@
+name = "noelzappy-dev"
+compatibility_date = "2025-12-08"
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[env.production]
+routes = [
+  { pattern = "/*", zone_name = "noelzappy.dev" }
+]
