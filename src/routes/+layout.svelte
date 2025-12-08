@@ -1,8 +1,8 @@
 <script lang="ts">
 	import './layout.css';
 	import favicon from '$lib/assets/favicon.svg';
-	import Navbar from '$lib/pages/partials/navbar.svelte';
-	import Footer from '$lib/pages/partials/footer.svelte';
+	import Navbar from '$lib/partials/navbar.svelte';
+	import Footer from '$lib/partials/footer.svelte';
 	import { onMount } from 'svelte';
 
 	let { children } = $props();
