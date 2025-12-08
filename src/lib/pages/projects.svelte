@@ -50,9 +50,9 @@
 				<div class="flex items-center gap-x-2">
 					<a
 						class="inline-flex items-center text-sm font-medium text-white hover:text-gray-300 group-hover:underline"
-						href={project.linkTo}
+						href={`/projects/${project.id}`}
 					>
-						{project.linkText}
+						View Project
 						<span
 							class="material-symbols-outlined text-base ml-1 transition-transform group-hover:translate-x-1"
 						>

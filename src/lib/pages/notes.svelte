@@ -14,7 +14,7 @@
 	</div>
 	<div class="flex flex-col gap-10">
 		{#each Notes as note}
-			<a class="group" href={note.linkTo}>
+			<a class="group" href={`/notes/${note.id}`}>
 				<div class="grid sm:grid-cols-4 gap-2">
 					<p class="sm:col-span-1 text-sm text-gray-400">
 						{note.date}
