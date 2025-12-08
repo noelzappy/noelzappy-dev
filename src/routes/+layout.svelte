@@ -3,8 +3,37 @@
 	import favicon from '$lib/assets/favicon.svg';
 	import Navbar from '$lib/pages/partials/navbar.svelte';
 	import Footer from '$lib/pages/partials/footer.svelte';
+	import { onMount } from 'svelte';
 
 	let { children } = $props();
+
+	let mouseX = $state(0);
+	let mouseY = $state(0);
+	let targetX = 0;
+	let targetY = 0;
+
+	function handleMouseMove(event: MouseEvent) {
+		targetX = event.clientX;
+		targetY = event.clientY;
+	}
+
+	onMount(() => {
+		let animationFrameId: number;
+
+		function animate() {
+			mouseX += (targetX - mouseX) * 0.1;
+			mouseY += (targetY - mouseY) * 0.1;
+			animationFrameId = requestAnimationFrame(animate);
+		}
+
+		animate();
+
+		return () => {
+			if (animationFrameId) {
+				cancelAnimationFrame(animationFrameId);
+			}
+		};
+	});
 </script>
 
 <svelte:head>
@@ -21,8 +50,16 @@
 	/>
 </svelte:head>
 
-<div class="relative flex h-auto min-h-screen w-full flex-col">
-	<div class="layout-container flex h-full grow flex-col">
+<div
+	class="relative flex h-auto min-h-screen w-full flex-col overflow-hidden"
+	role="main"
+	onmousemove={handleMouseMove}
+>
+	<div
+		class="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
+		style="background: radial-gradient(600px circle at {mouseX}px {mouseY}px, rgba(251, 111, 146, 0.04), transparent 80%);"
+	></div>
+	<div class="layout-container flex h-full grow flex-col relative z-10">
 		<div class="px-4 sm:px-6 lg:px-8 flex flex-1 justify-center py-5">
 			<div class="layout-content-container flex flex-col w-full max-w-4xl flex-1">
 				<Navbar />
