@@ -9,9 +9,14 @@
 	];
 
 	let scrolled = $state(false);
+	let mobileMenuOpen = $state(false);
 
 	function isActive(href: string) {
 		return page.url.pathname.startsWith(href);
+	}
+
+	function isHome() {
+		return page.url.pathname === '/';
 	}
 
 	onMount(() => {
@@ -25,77 +30,125 @@
 </script>
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 bg-[#333333]/80 backdrop-blur-md transition-all duration-300 {scrolled
+	class="fixed top-0 left-0 right-0 z-50 bg-[#333333]/90 backdrop-blur-md transition-all duration-300 {scrolled
 		? 'border-b border-neutral-700/50 shadow-lg'
 		: 'border-b border-transparent'}"
 >
-	<div class="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between text-sm font-medium">
-		<h1 class="text-xl text-neutral-100 hover:text-white transition-colors">
-			<a href="/" class="logo-wrapper inline-block px-2 py-1" data-sveltekit-preload-data>Zappy</a>
-		</h1>
-		<nav class="flex items-center gap-6">
+	<div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+		<a
+			href="/"
+			class="flex items-center gap-3 group"
+			data-sveltekit-preload-data
+			class:logo-active={isHome()}
+		>
+			<div class="w-8 h-8 flex-shrink-0">
+				<svg
+					width="32"
+					height="32"
+					viewBox="0 0 100 100"
+					fill="none"
+					xmlns="http://www.w3.org/2000/svg"
+					class="transition-transform duration-300 group-hover:scale-110"
+				>
+					<rect width="100" height="100" rx="20" fill="#1a1a1a" />
+					<path
+						d="M35 30 L15 50 L35 70"
+						stroke="#FFFFFF"
+						stroke-width="6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<path
+						d="M65 30 L85 50 L65 70"
+						stroke="#FFFFFF"
+						stroke-width="6"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+					/>
+					<path
+						d="M55 25 L42 50 H52 L45 75"
+						stroke="#FF6B35"
+						stroke-width="4"
+						fill="#FF6B35"
+						stroke-linejoin="round"
+						class="logo-bolt"
+					/>
+				</svg>
+			</div>
+			<span
+				class="text-xl font-semibold text-neutral-100 group-hover:text-white transition-colors hidden sm:block"
+			>
+				Zappy
+			</span>
+		</a>
+
+		<!-- Desktop Navigation -->
+		<nav class="hidden sm:flex items-center gap-8">
 			{#each NavMenu as item (item.href)}
 				<a
-					class="transition-colors {isActive(item.href)
-						? 'text-white font-semibold'
+					class="relative text-sm font-medium transition-colors {isActive(item.href)
+						? 'text-white'
 						: 'text-neutral-400 hover:text-white'}"
 					href={item.href}
 					data-sveltekit-preload-data
 				>
 					{item.name}
+					{#if isActive(item.href)}
+						<span
+							class="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full"
+						></span>
+					{/if}
 				</a>
 			{/each}
 		</nav>
+
+		<!-- Mobile Menu Button -->
+		<button
+			class="sm:hidden p-2 text-neutral-400 hover:text-white transition-colors"
+			onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+			aria-label="Toggle menu"
+		>
+			<span class="material-symbols-outlined text-2xl">
+				{mobileMenuOpen ? 'close' : 'menu'}
+			</span>
+		</button>
 	</div>
+
+	<!-- Mobile Navigation -->
+	{#if mobileMenuOpen}
+		<nav class="sm:hidden border-t border-neutral-700/50 bg-[#333333]/95 backdrop-blur-md">
+			<div class="max-w-4xl mx-auto px-6 py-4 flex flex-col gap-4">
+				{#each NavMenu as item (item.href)}
+					<a
+						class="text-base font-medium transition-colors {isActive(item.href)
+							? 'text-white'
+							: 'text-neutral-400 hover:text-white'}"
+						href={item.href}
+						data-sveltekit-preload-data
+						onclick={() => (mobileMenuOpen = false)}
+					>
+						{item.name}
+					</a>
+				{/each}
+			</div>
+		</nav>
+	{/if}
 </header>
 
 <style>
-	@keyframes rotate-border {
-		0% {
-			background-position: 0% 50%;
-		}
+	.logo-active .logo-bolt {
+		animation: pulse-glow 2s ease-in-out infinite;
+	}
+
+	@keyframes pulse-glow {
+		0%,
 		100% {
-			background-position: 200% 50%;
+			opacity: 1;
+			filter: drop-shadow(0 0 2px #ff6b35);
 		}
-	}
-
-	.logo-wrapper {
-		position: relative;
-		display: inline-block;
-	}
-
-	.logo-wrapper::before {
-		content: '';
-		position: absolute;
-		inset: -2px;
-		border-radius: 0.375rem;
-		padding: 2px;
-		background: linear-gradient(
-			90deg,
-			#667eea,
-			#764ba2,
-			#f093fb,
-			#4facfe,
-			#00f2fe,
-			#43e97b,
-			#568d66,
-			#899878,
-			#667eea
-		);
-		background-size: 200% 100%;
-		-webkit-mask:
-			linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		-webkit-mask-composite: xor;
-		mask:
-			linear-gradient(#fff 0 0) content-box,
-			linear-gradient(#fff 0 0);
-		mask-composite: exclude;
-		opacity: 1;
-		animation: rotate-border 3s linear infinite;
-	}
-
-	.logo-wrapper:hover::before {
-		opacity: 1;
+		50% {
+			opacity: 0.8;
+			filter: drop-shadow(0 0 6px #ff6b35);
+		}
 	}
 </style>
