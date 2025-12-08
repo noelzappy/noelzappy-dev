@@ -37,8 +37,8 @@
 
 <svelte:head>
 	<!-- Favicons -->
-	<link rel="icon" type="image/png" href="/og-image.png" />
-	<link rel="apple-touch-icon" href="/og-image.png" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<link rel="apple-touch-icon" href="/favicon.svg" />
 
 	<!-- Global Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
