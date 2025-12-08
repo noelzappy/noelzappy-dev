@@ -28,7 +28,7 @@
 		{#each data.posts as project (project.slug)}
 			<a
 				class="group flex items-center justify-between py-4"
-				href={project.linkTo}
+				href={`/projects/${project.slug}`}
 				data-sveltekit-preload-data
 			>
 				<span class="text-neutral-300 group-hover:text-white transition-colors">
