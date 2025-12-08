@@ -29,10 +29,11 @@
 
 	{#if data.projects.length > 0}
 		<div class="flex flex-col">
-			{#each data.projects as project}
+			{#each data.projects as project (project.id)}
 				<a
 					href={`/projects/${project.slug}`}
 					class="group grid grid-cols-12 gap-x-4 gap-y-2 py-6 border-b border-gray-800"
+					data-sveltekit-preload-data
 				>
 					<div class="col-span-12 md:col-span-2 flex flex-wrap gap-2">
 						<span class="text-xs text-gray-500 font-medium">{formatDate(project.publishedAt)}</span>
@@ -73,6 +74,7 @@
 						<a
 							href={`/projects?page=${data.pagination.prev}`}
 							class="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+							data-sveltekit-preload-data
 						>
 							← Previous
 						</a>
@@ -86,6 +88,7 @@
 						<a
 							href={`/projects?page=${data.pagination.next}`}
 							class="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+							data-sveltekit-preload-data
 						>
 							Next →
 						</a>

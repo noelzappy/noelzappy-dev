@@ -8,11 +8,15 @@
 
 <header class="flex items-center justify-between text-sm font-medium">
 	<h1 class="text-xl text-neutral-100 hover:text-white transition-colors">
-		<a href="/" class="logo-wrapper inline-block px-2 py-1">Zappy</a>
+		<a href="/" class="logo-wrapper inline-block px-2 py-1" data-sveltekit-preload-data>Zappy</a>
 	</h1>
 	<nav class="flex items-center gap-6">
-		{#each NavMenu as item}
-			<a class="text-neutral-400 hover:text-white transition-colors" href={item.href}>
+		{#each NavMenu as item (item.href)}
+			<a
+				class="text-neutral-400 hover:text-white transition-colors"
+				href={item.href}
+				data-sveltekit-preload-data
+			>
 				{item.name}
 			</a>
 		{/each}

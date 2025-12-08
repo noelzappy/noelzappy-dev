@@ -66,6 +66,7 @@
 						<a
 							href={`/notes?page=${data.pagination.prev}`}
 							class="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+							data-sveltekit-preload-data
 						>
 							← Previous
 						</a>
@@ -79,6 +80,7 @@
 						<a
 							href={`/notes?page=${data.pagination.next}`}
 							class="text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+							data-sveltekit-preload-data
 						>
 							Next →
 						</a>

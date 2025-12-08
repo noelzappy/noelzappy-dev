@@ -25,8 +25,12 @@
 <section class="flex flex-col gap-8">
 	<h2 class="text-sm font-medium text-neutral-100">Featured Projects</h2>
 	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-800">
-		{#each data.posts as project}
-			<a class="group flex items-center justify-between py-4" href={project.linkTo}>
+		{#each data.posts as project (project.slug)}
+			<a
+				class="group flex items-center justify-between py-4"
+				href={project.linkTo}
+				data-sveltekit-preload-data
+			>
 				<span class="text-neutral-300 group-hover:text-white transition-colors">
 					{project.title}
 				</span>
