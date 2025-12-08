@@ -1,5 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	let {
+		title = 'Subscribe to my Newsletter',
+		description = 'Join my newsletter to get the latest insights on software engineering and technology delivered to your inbox.'
+	} = $props();
 
 	let newsletterContainer: HTMLDivElement;
 
@@ -25,10 +29,9 @@
 <div class="border border-neutral-800 rounded-lg p-6 bg-neutral-900/50 backdrop-blur-sm">
 	<div class="flex flex-col gap-4 text-center">
 		<div class="flex flex-col gap-2">
-			<h3 class="text-lg font-semibold text-neutral-100">Enjoy this note? Subscribe for more!</h3>
+			<h3 class="text-lg font-semibold text-neutral-100">{title}</h3>
 			<p class="text-sm text-neutral-400">
-				Join my newsletter to get the latest insights on software engineering and technology
-				delivered to your inbox.
+				{description}
 			</p>
 		</div>
 		<div bind:this={newsletterContainer} class="max-w-md mx-auto w-full"></div>

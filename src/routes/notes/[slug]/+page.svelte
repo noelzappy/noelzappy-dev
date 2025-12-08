@@ -85,7 +85,10 @@
 		{@html data.post.html}
 	</div>
 
-	<Newsletter />
+	<Newsletter
+		title="Enjoy this note? Subscribe for more!"
+		description="Join my newsletter to get the latest insights on software engineering and technology delivered to your inbox."
+	/>
 
 	<footer class="border-t border-neutral-800 pt-8">
 		<a
