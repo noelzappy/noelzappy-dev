@@ -34,7 +34,7 @@
 			Projects Showcase
 		</h1>
 
-		<div class="flex flex-col gap-6 text-base leading-7 text-neutral-400">
+		<div class="flex flex-col gap-6 text-base leading-7 text-neutral-300">
 			<p>
 				A selection of projects from over the years of professional experience, focusing on clean,
 				performant, and user-centric solutions.
@@ -47,12 +47,12 @@
 			{#each data.projects as project (project.id)}
 				<a
 					href={`/projects/${project.slug}`}
-					class="group grid grid-cols-12 gap-x-4 gap-y-2 py-6 border-b border-gray-800"
+					class="group grid grid-cols-12 gap-x-4 gap-y-2 py-6 border-b border-neutral-500"
 					data-sveltekit-preload-data
 				>
 					<div class="col-span-12 md:col-span-2 flex items-start">
 						<div
-							class="w-full aspect-square rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700 flex items-center justify-center group-hover:border-neutral-600 transition-colors"
+							class="w-full aspect-square rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700 flex items-center justify-center group-hover:border-neutral-600 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
 						>
 							<img
 								src={project.featureImage}
@@ -62,7 +62,9 @@
 							/>
 						</div>
 					</div>
-					<div class="col-span-12 md:col-span-10 flex flex-col gap-3">
+					<div
+						class="col-span-12 md:col-span-10 flex flex-col gap-3 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
+					>
 						<h3
 							class="text-lg font-semibold text-white group-hover:text-neutral-200 transition-colors"
 						>
@@ -70,7 +72,7 @@
 						</h3>
 
 						{#if project.excerpt}
-							<p class="text-gray-400 text-base leading-relaxed">
+							<p class="text-neutral-300 text-base leading-relaxed">
 								{project.excerpt}
 							</p>
 						{/if}
@@ -94,7 +96,7 @@
 
 		<!-- Pagination -->
 		{#if data.pagination.pages > 1}
-			<div class="flex items-center justify-between border-t border-neutral-800 pt-8">
+			<div class="flex items-center justify-between border-t border-neutral-500 pt-8">
 				<div class="flex gap-6">
 					{#if data.pagination.prev}
 						<a

@@ -25,9 +25,7 @@
 </script>
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md transition-all duration-300 {scrolled
-		? 'border-b border-neutral-800/50 shadow-lg'
-		: 'border-b border-transparent'}"
+	class="fixed top-0 left-0 right-0 z-50 bg-[#333333]/80 backdrop-blur-md transition-all duration-300"
 >
 	<div class="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between text-sm font-medium">
 		<h1 class="text-xl text-neutral-100 hover:text-white transition-colors">

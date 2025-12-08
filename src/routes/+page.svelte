@@ -20,7 +20,7 @@
 	<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">
 		Hi, I'm... <br />Emmanuel Noel Zappy Yeboah
 	</h1>
-	<div class="flex flex-col gap-6 text-base leading-7 text-neutral-400">
+	<div class="flex flex-col gap-6 text-base leading-7 text-neutral-300">
 		<p>
 			I'm a senior software engineer with over 6 years of experience, specializing in building
 			modern web & mobile applications. My journey in tech has been driven by a relentless curiosity
@@ -35,27 +35,27 @@
 </section>
 <section class="flex flex-col gap-3">
 	<h2 class="text-base font-semibold text-neutral-100">Featured Projects</h2>
-	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-800">
+	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-500">
 		{#each data.posts as project (project.slug)}
 			<a
 				class="group flex items-start justify-between gap-4 py-4"
 				href={`/projects/${project.slug}`}
 				data-sveltekit-preload-data
 			>
-				<div class="flex flex-col gap-1 flex-1 min-w-0">
-					<span
-						class="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors"
-					>
+				<div
+					class="flex flex-col gap-1 flex-1 min-w-0 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
+				>
+					<span class="text-sm font-medium text-neutral-200">
 						{project.title}
 					</span>
 					{#if project.excerpt}
-						<span class="text-xs text-neutral-500 line-clamp-1">
+						<span class="text-xs text-neutral-300 line-clamp-1">
 							{project.excerpt}
 						</span>
 					{/if}
 				</div>
 				<span
-					class="material-symbols-outlined text-xl text-neutral-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					class="material-symbols-outlined text-xl text-neutral-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
 				>
 					arrow_forward
 				</span>
@@ -68,37 +68,39 @@
 	<div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
 		{#each Expertise as skill (skill.name)}
 			<div
-				class="flex flex-col gap-1 border cursor-pointer text-neutral-400 hover:text-white border-neutral-800 p-2 transition-all duration-300 rounded hover:scale-105 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/50"
+				class="flex flex-col gap-1 border cursor-pointer text-neutral-400 hover:text-white border-neutral-500 p-2 transition-all duration-300 rounded hover:scale-105 hover:border-neutral-400 hover:shadow-lg hover:shadow-neutral-900/50"
 			>
-				<h3 class="font-medium text-sm text-neutral-300">{skill.name}</h3>
-				<p class="text-neutral-500">{skill.details}</p>
+				<h3 class="font-medium text-sm text-neutral-200 group-hover:text-white">{skill.name}</h3>
+				<p class="text-neutral-300">{skill.details}</p>
 			</div>
 		{/each}
 	</div>
 </section>
 <section class="flex flex-col gap-3">
 	<h2 class="text-base font-semibold text-neutral-100">Featured Notes</h2>
-	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-800">
+	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-500">
 		{#each data.notes as note (note.slug)}
 			<a
 				class="group flex items-start justify-between gap-4 py-4"
 				href={`/notes/${note.slug}`}
 				data-sveltekit-preload-data
 			>
-				<div class="flex flex-col gap-1 flex-1 min-w-0">
+				<div
+					class="flex flex-col gap-1 flex-1 min-w-0 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
+				>
 					<span
-						class="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors"
+						class="text-sm font-medium text-neutral-200 group-hover:text-white transition-colors"
 					>
 						{note.title}
 					</span>
 					{#if note.excerpt}
-						<span class="text-xs text-neutral-500 line-clamp-1">
+						<span class="text-xs text-neutral-300 line-clamp-1">
 							{note.excerpt}
 						</span>
 					{/if}
 				</div>
 				<span
-					class="material-symbols-outlined text-xl text-neutral-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					class="material-symbols-outlined text-xl text-neutral-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
 				>
 					arrow_forward
 				</span>

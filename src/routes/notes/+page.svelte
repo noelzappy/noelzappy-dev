@@ -46,7 +46,7 @@
 <div class="flex flex-col gap-12 sm:gap-16">
 	<div class="flex flex-col gap-1.5">
 		<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">Notes</h1>
-		<div class="flex flex-col gap-6 text-base leading-7 text-neutral-400">
+		<div class="flex flex-col gap-6 text-base leading-7 text-neutral-300">
 			<p>
 				Insights and reflections on software engineering, technology trends, and my personal
 				experiences in the tech industry.
@@ -59,28 +59,19 @@
 			{#each data.posts as post, index (post.id)}
 				<a class="group" href={`/notes/${post.slug}`} data-sveltekit-preload-data>
 					<div class="grid sm:grid-cols-4 gap-2">
-						<div class="sm:col-span-3 flex flex-col gap-1.5">
+						<div
+							class="sm:col-span-3 flex flex-col gap-1.5 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
+						>
 							<p class="text-lg font-medium text-gray-200 group-hover:text-white transition-colors">
 								{post.title}
 							</p>
-							<p class="sm:col-span-1 text-sm text-gray-400">
+							<p class="sm:col-span-1 text-sm text-neutral-300">
 								{formatDate(post.publishedAt)}
 							</p>
 							{#if post.excerpt}
-								<p class="text-base text-gray-400">
+								<p class="text-base text-neutral-300 hover:text-white transition-colors">
 									{post.excerpt}
 								</p>
-							{/if}
-							{#if post.tags.length > 0}
-								<div class="flex flex-wrap gap-2 mt-2">
-									{#each post.tags as tag (tag)}
-										<span
-											class="text-xs px-2 py-1 rounded bg-neutral-800 text-neutral-400 border border-neutral-700"
-										>
-											{tag}
-										</span>
-									{/each}
-								</div>
 							{/if}
 						</div>
 					</div>

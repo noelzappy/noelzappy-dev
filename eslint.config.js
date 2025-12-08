@@ -27,7 +27,8 @@ export default defineConfig(
 			'no-undef': 'off',
 			// Disable @html warning since we trust Ghost CMS content and sanitize links in onMount
 			'svelte/no-at-html-tags': 'off',
-			'svelte/no-navigation-without-resolve': 'off'
+			'svelte/no-navigation-without-resolve': 'off',
+			'svelte/no-dom-manipulating': 'off'
 		}
 	},
 	{
