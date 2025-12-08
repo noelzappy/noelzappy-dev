@@ -34,7 +34,7 @@
 		? 'border-b border-neutral-700/50 shadow-lg'
 		: 'border-b border-transparent'}"
 >
-	<div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+	<div class="max-w-4xl mx-auto px-6 md:px-0 py-4 flex items-center justify-between">
 		<a
 			href="/"
 			class="flex items-center gap-3 group"
@@ -82,7 +82,6 @@
 			</span>
 		</a>
 
-		<!-- Desktop Navigation -->
 		<nav class="hidden sm:flex items-center gap-8">
 			{#each NavMenu as item (item.href)}
 				<a
@@ -102,7 +101,6 @@
 			{/each}
 		</nav>
 
-		<!-- Mobile Menu Button -->
 		<button
 			class="sm:hidden p-2 text-neutral-400 hover:text-white transition-colors"
 			onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
@@ -114,9 +112,10 @@
 		</button>
 	</div>
 
-	<!-- Mobile Navigation -->
 	{#if mobileMenuOpen}
-		<nav class="sm:hidden border-t border-neutral-700/50 bg-[#333333]/95 backdrop-blur-md">
+		<nav
+			class="sm:hidden border-t border-neutral-700/50 bg-[#333333]/95 backdrop-blur-md shadow-2xl transition-all duration-300"
+		>
 			<div class="max-w-4xl mx-auto px-6 py-4 flex flex-col gap-4">
 				{#each NavMenu as item (item.href)}
 					<a

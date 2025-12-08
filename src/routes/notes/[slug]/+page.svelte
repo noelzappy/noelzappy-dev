@@ -52,14 +52,13 @@
 </script>
 
 <SEOHead
-	title={data.post.title}
-	description={data.post.excerpt}
+	title={data.post.title || 'Note by Noel Zappy'}
+	description={data.post.excerpt || 'Note by Emmanuel Noel Zappy Yeboah'}
 	canonical={`https://noelzappy.dev/notes/${data.post.slug}`}
 	ogType="article"
-	ogImage={data.post.featureImage}
-	publishedTime={data.post.publishedAt}
-	modifiedTime={data.post.updatedAt}
-	tags={data.post.tags}
+	ogImage={data.post.featureImage || 'https://noelzappy.dev/og-image.png'}
+	publishedTime={data.post.publishedAt || ''}
+	modifiedTime={data.post.updatedAt || ''}
 	{structuredData}
 />
 
@@ -69,8 +68,8 @@
 			{data.post.title}
 		</h1>
 		<div class="flex items-center gap-4 text-sm text-neutral-400">
-			<time dateTime={data.post.publishedAt}>
-				{formatDate(data.post.publishedAt)}
+			<time dateTime={data.post.publishedAt || ''}>
+				{formatDate(data.post.publishedAt || '')}
 			</time>
 			{#if data.post.readingTime}
 				<span>·</span>

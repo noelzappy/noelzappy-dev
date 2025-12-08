@@ -70,7 +70,7 @@
 							</span>
 						</div>
 						<span class="text-xs text-neutral-500">
-							{formatDate(post.publishedAt)}
+							{formatDate(post.publishedAt || '')}
 						</span>
 						{#if post.excerpt}
 							<p class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">

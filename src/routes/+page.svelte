@@ -36,6 +36,46 @@
 			thousands of users daily. I thrive in environments where quality code meets real-world impact.
 		</p>
 	</div>
+	<div class="flex items-center gap-4 pt-2">
+		<a
+			href="https://github.com/noelzappy"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+			aria-label="GitHub"
+		>
+			<span class="material-symbols-outlined text-xl">code</span>
+			<span class="hidden sm:inline">GitHub</span>
+		</a>
+		<a
+			href="https://www.linkedin.com/in/noelzappy"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+			aria-label="LinkedIn"
+		>
+			<span class="material-symbols-outlined text-xl">work</span>
+			<span class="hidden sm:inline">LinkedIn</span>
+		</a>
+		<a
+			href="https://x.com/noelzappy"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="group flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+			aria-label="Twitter/X"
+		>
+			<span class="material-symbols-outlined text-xl">tag</span>
+			<span class="hidden sm:inline">X (Twitter)</span>
+		</a>
+		<a
+			href="mailto:noelzappy@gmail.com"
+			class="group flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
+			aria-label="Email"
+		>
+			<span class="material-symbols-outlined text-xl">mail</span>
+			<span class="hidden sm:inline">Email</span>
+		</a>
+	</div>
 </section>
 <Newsletter />
 <section class="flex flex-col gap-4">
@@ -56,20 +96,32 @@
 	<div class="grid grid-cols-1 gap-3">
 		{#each data.posts as project (project.slug)}
 			<a
-				class="group flex items-start justify-between gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 				href={`/projects/${project.slug}`}
+				class="group flex items-start gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 				data-sveltekit-preload-data
 			>
+				<div class="w-20 h-20 flex-shrink-0">
+					<div
+						class="w-full h-full rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700"
+					>
+						<img
+							src={project.featureImage}
+							alt={project.title}
+							class="w-full h-full object-cover"
+							loading="lazy"
+						/>
+					</div>
+				</div>
 				<div class="flex flex-col gap-2 flex-1 min-w-0">
-					<span
+					<h3
 						class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
 					>
 						{project.title}
-					</span>
+					</h3>
 					{#if project.excerpt}
-						<span class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
+						<p class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
 							{project.excerpt}
-						</span>
+						</p>
 					{/if}
 				</div>
 				<span

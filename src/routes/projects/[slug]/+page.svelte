@@ -50,14 +50,13 @@
 </script>
 
 <SEOHead
-	title={data.project.title}
-	description={data.project.excerpt}
+	title={data.project.title || 'Project by Noel Zappy'}
+	description={data.project.excerpt || 'Project by Emmanuel Noel Zappy Yeboah'}
 	canonical={`https://noelzappy.dev/projects/${data.project.slug}`}
 	ogType="article"
-	ogImage={data.project.featureImage}
-	publishedTime={data.project.publishedAt}
-	modifiedTime={data.project.updatedAt}
-	tags={data.project.tags}
+	ogImage={data.project.featureImage || 'https://noelzappy.dev/og-image.png'}
+	publishedTime={data.project.publishedAt || ''}
+	modifiedTime={data.project.updatedAt || ''}
 	{structuredData}
 />
 
@@ -68,7 +67,7 @@
 		</h1>
 		<div class="flex items-center gap-4 text-sm text-neutral-400">
 			<time dateTime={data.project.publishedAt}>
-				{formatDate(data.project.publishedAt)}
+				{formatDate(data.project.publishedAt || '')}
 			</time>
 			{#if data.project.readingTime}
 				<span>·</span>
@@ -77,11 +76,11 @@
 		</div>
 	</header>
 	{#if data.project.featureImage}
-		<div class="w-full aspect-video overflow-hidden rounded-lg border border-neutral-800">
+		<div class="w-full rounded-lg">
 			<img
 				src={data.project.featureImage}
 				alt={data.project.title}
-				class="w-full h-full object-cover"
+				class="w-full h-auto rounded-md"
 			/>
 		</div>
 	{/if}
