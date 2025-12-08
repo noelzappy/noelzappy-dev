@@ -9,7 +9,7 @@ const api = new GhostContentAPI({
 export async function getFeaturedProjects() {
 	const posts = await api.posts.browse({
 		limit: 3,
-		// filter: 'featured:true',
+		filter: 'featured:true+tag:projects',
 		order: 'published_at DESC'
 	});
 	return posts;
@@ -33,7 +33,7 @@ export async function fetchProjectPosts(page: number = 1, limit: number = 10) {
 	const posts = await api.posts.browse({
 		page,
 		limit,
-		// filter: 'tag:projects',
+		filter: 'tag:projects',
 		order: 'published_at DESC'
 	});
 	return posts;

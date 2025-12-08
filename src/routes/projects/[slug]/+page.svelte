@@ -76,6 +76,15 @@
 			{/if}
 		</div>
 	</header>
+	{#if data.project.featureImage}
+		<div class="w-full aspect-video overflow-hidden rounded-lg border border-neutral-800">
+			<img
+				src={data.project.featureImage}
+				alt={data.project.title}
+				class="w-full h-full object-cover"
+			/>
+		</div>
+	{/if}
 	<div
 		bind:this={contentElement}
 		class="prose prose-invert max-w-none text-base leading-7 text-neutral-400 prose-headings:font-medium prose-headings:text-neutral-100 prose-a:text-neutral-100 prose-a:underline prose-a:underline-offset-2 hover:prose-a:text-white prose-strong:text-neutral-200 prose-code:text-neutral-300 prose-code:bg-neutral-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-neutral-900 prose-pre:border prose-pre:border-neutral-800 prose-img:rounded-lg prose-ul:list-disc prose-ol:list-decimal"

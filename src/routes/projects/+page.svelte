@@ -35,8 +35,17 @@
 					class="group grid grid-cols-12 gap-x-4 gap-y-2 py-6 border-b border-gray-800"
 					data-sveltekit-preload-data
 				>
-					<div class="col-span-12 md:col-span-2 flex flex-wrap gap-2">
-						<span class="text-xs text-gray-500 font-medium">{formatDate(project.publishedAt)}</span>
+					<div class="col-span-12 md:col-span-2 flex items-start">
+						<div
+							class="w-full aspect-square rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700 flex items-center justify-center group-hover:border-neutral-600 transition-colors"
+						>
+							<img
+								src={project.featureImage}
+								alt={project.type}
+								class="w-full h-full object-cover"
+								loading="lazy"
+							/>
+						</div>
 					</div>
 					<div class="col-span-12 md:col-span-10 flex flex-col gap-3">
 						<h3
@@ -44,11 +53,13 @@
 						>
 							{project.title}
 						</h3>
+
 						{#if project.excerpt}
 							<p class="text-gray-400 text-base leading-relaxed">
 								{project.excerpt}
 							</p>
 						{/if}
+
 						<div class="flex items-center gap-x-2">
 							<span
 								class="inline-flex items-center text-sm font-medium text-neutral-400 group-hover:text-white transition-colors"
