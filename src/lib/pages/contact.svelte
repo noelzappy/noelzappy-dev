@@ -7,26 +7,37 @@
 	];
 </script>
 
-<div class="w-full">
-	<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">Contact Me</h1>
-	<div class="flex flex-col gap-6 text-base leading-7 text-neutral-400">
-		<p>
-			For projects, collaborations, or inquiries, please reach out via email or connect with me on
-			social media.
+<div class="flex flex-col gap-12">
+	<div class="flex flex-col gap-6">
+		<div class="flex flex-col gap-3">
+			<h1 class="text-4xl font-semibold tracking-tight text-neutral-100 sm:text-5xl">
+				Get in Touch
+			</h1>
+			<p class="text-lg text-neutral-300 font-light">
+				Open to projects, collaborations, and opportunities
+			</p>
+		</div>
+		<p class="text-base leading-relaxed text-neutral-300">
+			Whether you have a project in mind, want to collaborate, or just want to chat about tech, feel
+			free to reach out through any of the channels below.
 		</p>
 	</div>
 
-	<div class="mt-12 space-y-4">
+	<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 		{#each contactLinks as contactLink (contactLink.href)}
 			<a
-				class="flex items-center gap-3 text-lg font-medium text-gray-300 hover:text-white transition-colors group"
+				class="group flex items-center justify-between gap-3 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 				href={contactLink.href}
 				target="_blank"
 				rel="noopener noreferrer"
 			>
-				<span>{contactLink.text}</span>
 				<span
-					class="material-symbols-outlined text-gray-500 group-hover:text-white transition-colors"
+					class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
+				>
+					{contactLink.text}
+				</span>
+				<span
+					class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-white"
 				>
 					arrow_outward
 				</span>

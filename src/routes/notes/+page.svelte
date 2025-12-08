@@ -44,37 +44,45 @@
 />
 
 <div class="flex flex-col gap-12 sm:gap-16">
-	<div class="flex flex-col gap-1.5">
-		<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">Notes</h1>
-		<div class="flex flex-col gap-6 text-base leading-7 text-neutral-300">
-			<p>
-				Insights and reflections on software engineering, technology trends, and my personal
-				experiences in the tech industry.
+	<div class="flex flex-col gap-6">
+		<div class="flex flex-col gap-3">
+			<h1 class="text-4xl font-semibold tracking-tight text-neutral-100 sm:text-5xl">Notes</h1>
+			<p class="text-lg text-neutral-300 font-light">
+				Thoughts on software engineering, architecture, and building great products
 			</p>
 		</div>
 	</div>
 
 	{#if data.posts.length > 0}
-		<div class="flex flex-col gap-10">
+		<div class="flex flex-col gap-4">
 			{#each data.posts as post, index (post.id)}
-				<a class="group" href={`/notes/${post.slug}`} data-sveltekit-preload-data>
-					<div class="grid sm:grid-cols-4 gap-2">
-						<div
-							class="sm:col-span-3 flex flex-col gap-1.5 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
-						>
-							<p class="text-lg font-medium text-gray-200 group-hover:text-white transition-colors">
+				<a
+					class="group flex items-start justify-between gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
+					href={`/notes/${post.slug}`}
+					data-sveltekit-preload-data
+				>
+					<div class="flex flex-col gap-2 flex-1 min-w-0">
+						<div class="flex items-center gap-3">
+							<span
+								class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
+							>
 								{post.title}
-							</p>
-							<p class="sm:col-span-1 text-sm text-neutral-300">
-								{formatDate(post.publishedAt)}
-							</p>
-							{#if post.excerpt}
-								<p class="text-base text-neutral-300 hover:text-white transition-colors">
-									{post.excerpt}
-								</p>
-							{/if}
+							</span>
 						</div>
+						<span class="text-xs text-neutral-500">
+							{formatDate(post.publishedAt)}
+						</span>
+						{#if post.excerpt}
+							<p class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
+								{post.excerpt}
+							</p>
+						{/if}
 					</div>
+					<span
+						class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					>
+						arrow_forward
+					</span>
 				</a>
 
 				{#if index === 0 && data.pagination.page === 1}

@@ -29,67 +29,52 @@
 />
 
 <div class="flex flex-col gap-12 sm:gap-16">
-	<div class="flex flex-col gap-2">
-		<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">
-			Projects Showcase
-		</h1>
-
-		<div class="flex flex-col gap-6 text-base leading-7 text-neutral-300">
-			<p>
-				A selection of projects from over the years of professional experience, focusing on clean,
-				performant, and user-centric solutions.
+	<div class="flex flex-col gap-6">
+		<div class="flex flex-col gap-3">
+			<h1 class="text-4xl font-semibold tracking-tight text-neutral-100 sm:text-5xl">Projects</h1>
+			<p class="text-lg text-neutral-300 font-light">
+				A curated collection of work spanning fintech, SaaS, and enterprise solutions
 			</p>
 		</div>
 	</div>
 
 	{#if data.projects.length > 0}
-		<div class="flex flex-col">
+		<div class="grid grid-cols-1 gap-4">
 			{#each data.projects as project (project.id)}
 				<a
 					href={`/projects/${project.slug}`}
-					class="group grid grid-cols-12 gap-x-4 gap-y-2 py-6 border-b border-neutral-500"
+					class="group flex items-start gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 					data-sveltekit-preload-data
 				>
-					<div class="col-span-12 md:col-span-2 flex items-start">
+					<div class="w-20 h-20 flex-shrink-0">
 						<div
-							class="w-full aspect-square rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700 flex items-center justify-center group-hover:border-neutral-600 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
+							class="w-full h-full rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700"
 						>
 							<img
 								src={project.featureImage}
-								alt={project.type}
+								alt={project.title}
 								class="w-full h-full object-cover"
 								loading="lazy"
 							/>
 						</div>
 					</div>
-					<div
-						class="col-span-12 md:col-span-10 flex flex-col gap-3 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
-					>
+					<div class="flex flex-col gap-2 flex-1 min-w-0">
 						<h3
-							class="text-lg font-semibold text-white group-hover:text-neutral-200 transition-colors"
+							class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
 						>
 							{project.title}
 						</h3>
-
 						{#if project.excerpt}
-							<p class="text-neutral-300 text-base leading-relaxed">
+							<p class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
 								{project.excerpt}
 							</p>
 						{/if}
-
-						<div class="flex items-center gap-x-2">
-							<span
-								class="inline-flex items-center text-sm font-medium text-neutral-400 group-hover:text-white transition-colors"
-							>
-								View Project
-								<span
-									class="material-symbols-outlined text-base ml-1 transition-transform group-hover:translate-x-1"
-								>
-									arrow_right_alt
-								</span>
-							</span>
-						</div>
 					</div>
+					<span
+						class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					>
+						arrow_forward
+					</span>
 				</a>
 			{/each}
 		</div>

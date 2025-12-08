@@ -16,46 +16,64 @@
 	structuredData={HomepageStructuredData}
 />
 
-<section class="flex flex-col gap-2">
-	<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">
-		Hi, I'm... <br />Emmanuel Noel Zappy Yeboah
-	</h1>
-	<div class="flex flex-col gap-6 text-base leading-7 text-neutral-300">
+<section class="flex flex-col gap-6">
+	<div class="flex flex-col gap-3">
+		<h1 class="text-4xl font-semibold tracking-tight text-neutral-100 sm:text-5xl">
+			Hi, I'm Emmanuel 👋
+		</h1>
+		<p class="text-lg text-neutral-300 font-light">
+			Senior Software Engineer • 6+ years building reliable systems
+		</p>
+	</div>
+	<div class="flex flex-col gap-5 text-base leading-relaxed text-neutral-300">
 		<p>
-			I'm a senior software engineer with over 6 years of experience, specializing in building
-			modern web & mobile applications. My journey in tech has been driven by a relentless curiosity
-			and a desire to solve complex problems.
+			I specialize in building modern web and mobile applications with a focus on performance,
+			scalability, and user experience. My journey in tech has been driven by curiosity and a
+			passion for solving complex problems with elegant solutions.
 		</p>
 		<p>
-			Beyond my own startups and projects, I’ve delivered software for startups and teams across
-			fintech, SaaS, content platforms, and mobile apps. These systems are designed and shipped to
-			stay reliable even under real-world pressure.
+			From fintech platforms to SaaS products, I've delivered production systems that serve
+			thousands of users daily. I thrive in environments where quality code meets real-world impact.
 		</p>
 	</div>
 </section>
-<section class="flex flex-col gap-3">
-	<h2 class="text-base font-semibold text-neutral-100">Featured Projects</h2>
-	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-500">
+<Newsletter />
+<section class="flex flex-col gap-4">
+	<div class="flex items-center justify-between">
+		<h2 class="text-xl font-semibold text-neutral-100">Featured Projects</h2>
+		<a
+			href="/projects"
+			class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+		>
+			View all
+			<span
+				class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+			>
+				arrow_forward
+			</span>
+		</a>
+	</div>
+	<div class="grid grid-cols-1 gap-3">
 		{#each data.posts as project (project.slug)}
 			<a
-				class="group flex items-start justify-between gap-4 py-4"
+				class="group flex items-start justify-between gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 				href={`/projects/${project.slug}`}
 				data-sveltekit-preload-data
 			>
-				<div
-					class="flex flex-col gap-1 flex-1 min-w-0 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
-				>
-					<span class="text-sm font-medium text-neutral-200">
+				<div class="flex flex-col gap-2 flex-1 min-w-0">
+					<span
+						class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
+					>
 						{project.title}
 					</span>
 					{#if project.excerpt}
-						<span class="text-xs text-neutral-300 line-clamp-1">
+						<span class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
 							{project.excerpt}
 						</span>
 					{/if}
 				</div>
 				<span
-					class="material-symbols-outlined text-xl text-neutral-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
 				>
 					arrow_forward
 				</span>
@@ -63,44 +81,59 @@
 		{/each}
 	</div>
 </section>
-<section class="flex flex-col gap-8">
-	<h2 class="text-md font-medium text-neutral-100">Expertise</h2>
-	<div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
+<section class="flex flex-col gap-5">
+	<h2 class="text-xl font-semibold text-neutral-100">Core Expertise</h2>
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		{#each Expertise as skill (skill.name)}
 			<div
-				class="flex flex-col gap-1 border cursor-pointer text-neutral-400 hover:text-white border-neutral-500 p-2 transition-all duration-300 rounded hover:scale-105 hover:border-neutral-400 hover:shadow-lg hover:shadow-neutral-900/50"
+				class="group flex flex-col gap-2 border border-neutral-700 bg-neutral-800/20 p-4 rounded-lg transition-all duration-300 hover:bg-neutral-800/40 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/30"
 			>
-				<h3 class="font-medium text-sm text-neutral-200 group-hover:text-white">{skill.name}</h3>
-				<p class="text-neutral-300">{skill.details}</p>
+				<h3
+					class="font-semibold text-base text-neutral-100 group-hover:text-white transition-colors"
+				>
+					{skill.name}
+				</h3>
+				<p class="text-sm text-neutral-400 leading-relaxed">{skill.details}</p>
 			</div>
 		{/each}
 	</div>
 </section>
-<section class="flex flex-col gap-3">
-	<h2 class="text-base font-semibold text-neutral-100">Featured Notes</h2>
-	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-500">
+<section class="flex flex-col gap-4">
+	<div class="flex items-center justify-between">
+		<h2 class="text-xl font-semibold text-neutral-100">Latest Notes</h2>
+		<a
+			href="/notes"
+			class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+		>
+			View all
+			<span
+				class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+			>
+				arrow_forward
+			</span>
+		</a>
+	</div>
+	<div class="grid grid-cols-1 gap-3">
 		{#each data.notes as note (note.slug)}
 			<a
-				class="group flex items-start justify-between gap-4 py-4"
+				class="group flex items-start justify-between gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 				href={`/notes/${note.slug}`}
 				data-sveltekit-preload-data
 			>
-				<div
-					class="flex flex-col gap-1 flex-1 min-w-0 group-hover:text-white group-hover:translate-x-1 transition-transform duration-300"
-				>
+				<div class="flex flex-col gap-2 flex-1 min-w-0">
 					<span
-						class="text-sm font-medium text-neutral-200 group-hover:text-white transition-colors"
+						class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
 					>
 						{note.title}
 					</span>
 					{#if note.excerpt}
-						<span class="text-xs text-neutral-300 line-clamp-1">
+						<span class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
 							{note.excerpt}
 						</span>
 					{/if}
 				</div>
 				<span
-					class="material-symbols-outlined text-xl text-neutral-400 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
 				>
 					arrow_forward
 				</span>
@@ -108,4 +141,3 @@
 		{/each}
 	</div>
 </section>
-<Newsletter />
