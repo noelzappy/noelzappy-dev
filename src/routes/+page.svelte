@@ -22,20 +22,29 @@
 		</p>
 	</div>
 </section>
-<section class="flex flex-col gap-8">
-	<h2 class="text-sm font-medium text-neutral-100">Featured Projects</h2>
+<section class="flex flex-col gap-3">
+	<h2 class="text-base font-semibold text-neutral-100">Featured Projects</h2>
 	<div class="grid grid-cols-1 gap-1 divide-y divide-neutral-800">
 		{#each data.posts as project (project.slug)}
 			<a
-				class="group flex items-center justify-between py-4"
+				class="group flex items-start justify-between gap-4 py-4"
 				href={`/projects/${project.slug}`}
 				data-sveltekit-preload-data
 			>
-				<span class="text-neutral-300 group-hover:text-white transition-colors">
-					{project.title}
-				</span>
+				<div class="flex flex-col gap-1 flex-1 min-w-0">
+					<span
+						class="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors"
+					>
+						{project.title}
+					</span>
+					{#if project.excerpt}
+						<span class="text-xs text-neutral-500 line-clamp-1">
+							{project.excerpt}
+						</span>
+					{/if}
+				</div>
 				<span
-					class="material-symbols-outlined text-xl text-neutral-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white"
+					class="material-symbols-outlined text-xl text-neutral-500 transition-transform duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
 				>
 					arrow_forward
 				</span>
@@ -45,7 +54,7 @@
 </section>
 <section class="flex flex-col gap-8">
 	<h2 class="text-md font-medium text-neutral-100">Expertise</h2>
-	<div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-sm">
+	<div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-3 text-sm">
 		{#each Expertise as skill (skill.name)}
 			<div
 				class="flex flex-col gap-1 border cursor-pointer text-neutral-400 hover:text-white border-neutral-800 p-2 transition-all duration-300 rounded hover:scale-105 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/50"
