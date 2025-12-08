@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
+	import SEOHead from '$lib/components/seo-head.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -22,7 +23,43 @@
 			link.setAttribute('rel', 'noopener noreferrer');
 		});
 	});
+
+	const structuredData = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: data.post.title,
+		description: data.post.excerpt,
+		image: data.post.featureImage || 'https://noelzappy.dev/og-image.png',
+		datePublished: data.post.publishedAt,
+		dateModified: data.post.updatedAt || data.post.publishedAt,
+		author: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		},
+		publisher: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		},
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://noelzappy.dev/notes/${data.post.slug}`
+		}
+	});
 </script>
+
+<SEOHead
+	title={data.post.title}
+	description={data.post.excerpt}
+	canonical={`https://noelzappy.dev/notes/${data.post.slug}`}
+	ogType="article"
+	ogImage={data.post.featureImage}
+	publishedTime={data.post.publishedAt}
+	modifiedTime={data.post.updatedAt}
+	tags={data.post.tags}
+	{structuredData}
+/>
 
 <article class="flex flex-col gap-8">
 	<header class="flex flex-col gap-4">
@@ -38,17 +75,6 @@
 				<span>{data.post.readingTime} min read</span>
 			{/if}
 		</div>
-		{#if data.post.tags.length > 0}
-			<div class="flex flex-wrap gap-2">
-				{#each data.post.tags as tag (tag)}
-					<span
-						class="text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-400 border border-neutral-700"
-					>
-						{tag}
-					</span>
-				{/each}
-			</div>
-		{/if}
 	</header>
 	<div
 		bind:this={contentElement}

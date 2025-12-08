@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
+	import SEOHead from '$lib/components/seo-head.svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -22,18 +23,49 @@
 			link.setAttribute('rel', 'noopener noreferrer');
 		});
 	});
+
+	const structuredData = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'Article',
+		headline: data.project.title,
+		description: data.project.excerpt,
+		image: data.project.featureImage || 'https://noelzappy.dev/og-image.png',
+		datePublished: data.project.publishedAt,
+		dateModified: data.project.updatedAt || data.project.publishedAt,
+		author: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		},
+		publisher: {
+			'@type': 'Person',
+			name: 'Emmanuel Noel Zappy Yeboah',
+			url: 'https://noelzappy.dev'
+		},
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://noelzappy.dev/projects/${data.project.slug}`
+		}
+	});
 </script>
+
+<SEOHead
+	title={data.project.title}
+	description={data.project.excerpt}
+	canonical={`https://noelzappy.dev/projects/${data.project.slug}`}
+	ogType="article"
+	ogImage={data.project.featureImage}
+	publishedTime={data.project.publishedAt}
+	modifiedTime={data.project.updatedAt}
+	tags={data.project.tags}
+	{structuredData}
+/>
 
 <article class="flex flex-col gap-8">
 	<header class="flex flex-col gap-4">
 		<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">
 			{data.project.title}
 		</h1>
-		{#if data.project.excerpt}
-			<p class="text-lg text-neutral-400">
-				{data.project.excerpt}
-			</p>
-		{/if}
 		<div class="flex items-center gap-4 text-sm text-neutral-400">
 			<time dateTime={data.project.publishedAt}>
 				{formatDate(data.project.publishedAt)}
@@ -43,17 +75,6 @@
 				<span>{data.project.readingTime} min read</span>
 			{/if}
 		</div>
-		{#if data.project.tags.length > 0}
-			<div class="flex flex-wrap gap-2">
-				{#each data.project.tags as tag (tag)}
-					<span
-						class="text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-400 border border-neutral-700"
-					>
-						{tag}
-					</span>
-				{/each}
-			</div>
-		{/if}
 	</header>
 	<div
 		bind:this={contentElement}
