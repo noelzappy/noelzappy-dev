@@ -36,36 +36,22 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href="/og-image.png" />
-	<title>Noel Zappy - Software Engineer Portfolio</title>
-	<meta
-		name="description"
-		content="Portfolio of Emmanuel Noel Zappy Yeboah, a senior software engineer specializing in modern web and mobile applications."
-	/>
+	<!-- Favicons -->
+	<link rel="icon" type="image/png" href="/og-image.png" />
+	<link rel="apple-touch-icon" href="/og-image.png" />
+
+	<!-- Global Meta -->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta name="author" content="Emmanuel Noel Zappy Yeboah" />
-	<meta
-		name="keywords"
-		content="Noel Zappy, Emmanuel Yeboah, Software Engineer, Web Developer, Mobile Developer, Portfolio, Full-Stack Developer, React, Node.js, Svelte, SvelteKit, JavaScript, TypeScript, Node, Frontend Developer, Backend Developer, NodeJs, Golang, Java, Python"
-	/>
 	<meta name="theme-color" content="#0d1117" />
-	<meta property="og:title" content="Noel Zappy - Software Engineer Portfolio" />
-	<meta
-		property="og:description"
-		content="Portfolio of Emmanuel Noel Zappy Yeboah, a senior software engineer specializing in modern web and mobile applications."
-	/>
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://noelzappy.dev" />
-	<meta property="og:image" content="https://noelzappy.dev/og-image.png" />
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Noel Zappy - Software Engineer Portfolio" />
-	<meta
-		name="twitter:description"
-		content="Portfolio of Emmanuel Noel Zappy Yeboah, a senior software engineer specializing in modern web and mobile applications."
-	/>
-	<meta name="twitter:image" content="https://noelzappy.dev/og-image.png" />
+
+	<!-- Performance & Resource Hints -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+	<link rel="preconnect" href="https://cms.noelzappy.dev" />
+	<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
+
+	<!-- Fonts -->
 	<link
 		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
 		rel="stylesheet"

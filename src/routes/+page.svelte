@@ -1,10 +1,20 @@
 <script lang="ts">
-	import { Expertise } from '$lib/shared/expertise';
+	import { Expertise, HomepageStructuredData } from '$lib/shared/constants';
 	import Newsletter from '$lib/components/newsletter.svelte';
+	import SEOHead from '$lib/components/seo-head.svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
 </script>
+
+<SEOHead
+	title="Noel Zappy - Senior Software Engineer | Portfolio"
+	description="Emmanuel Noel Zappy Yeboah is a senior software engineer with 6+ years of experience in web, mobile, and cloud development. Specializing in Python, TypeScript, React, and scalable architectures."
+	canonical="https://noelzappy.dev"
+	ogType="website"
+	keywords="Noel Zappy, Emmanuel Yeboah, Software Engineer, Web Developer, Mobile Developer, Portfolio, Full-Stack Developer, React, Node.js, Svelte, SvelteKit, JavaScript, TypeScript, Python, Go, Java, AWS, GCP, Azure, Docker, Kubernetes"
+	structuredData={HomepageStructuredData}
+/>
 
 <section class="flex flex-col gap-2">
 	<h1 class="text-3xl font-medium tracking-tight text-neutral-100 sm:text-4xl">

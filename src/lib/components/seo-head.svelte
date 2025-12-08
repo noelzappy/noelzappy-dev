@@ -9,6 +9,7 @@
 		modifiedTime?: string;
 		tags?: string[];
 		structuredData?: object;
+		keywords?: string;
 	}
 
 	let {
@@ -20,22 +21,28 @@
 		publishedTime,
 		modifiedTime,
 		tags = [],
-		structuredData
+		structuredData,
+		keywords
 	}: SEOProps = $props();
 </script>
 
 <svelte:head>
+	<!-- Primary Meta Tags -->
 	<title>{title} | Noel Zappy</title>
 	<meta name="description" content={description} />
+	{#if keywords}
+		<meta name="keywords" content={keywords} />
+	{/if}
 	<link rel="canonical" href={canonical} />
 
-	<!-- Open Graph -->
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
+	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content={ogType} />
 	<meta property="og:url" content={canonical} />
+	<meta property="og:title" content={title} />
+	<meta property="og:description" content={description} />
 	<meta property="og:image" content={ogImage} />
 	<meta property="og:site_name" content="Noel Zappy" />
+	<meta property="og:locale" content="en_US" />
 	{#if publishedTime}
 		<meta property="article:published_time" content={publishedTime} />
 	{/if}
@@ -48,6 +55,7 @@
 
 	<!-- Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:url" content={canonical} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
 	<meta name="twitter:image" content={ogImage} />
