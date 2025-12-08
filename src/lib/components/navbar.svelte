@@ -1,9 +1,15 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+
 	const NavMenu = [
 		{ name: 'Projects', href: '/projects' },
 		{ name: 'Notes', href: '/notes' },
 		{ name: 'Contact', href: '/contact' }
 	];
+
+	function isActive(href: string) {
+		return $page.url.pathname.startsWith(href);
+	}
 </script>
 
 <header class="flex items-center justify-between text-sm font-medium">
@@ -13,7 +19,9 @@
 	<nav class="flex items-center gap-6">
 		{#each NavMenu as item (item.href)}
 			<a
-				class="text-neutral-400 hover:text-white transition-colors"
+				class="transition-colors {isActive(item.href)
+					? 'text-white font-semibold'
+					: 'text-neutral-400 hover:text-white'}"
 				href={item.href}
 				data-sveltekit-preload-data
 			>
