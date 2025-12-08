@@ -26,8 +26,8 @@
 
 	{#if data.posts.length > 0}
 		<div class="flex flex-col gap-10">
-			{#each data.posts as post}
-				<a class="group" href={`/notes/${post.slug}`}>
+			{#each data.posts as post (post.id)}
+				<a class="group" href={`/notes/${post.slug}`} data-sveltekit-preload-data>
 					<div class="grid sm:grid-cols-4 gap-2">
 						<p class="sm:col-span-1 text-sm text-gray-400">
 							{formatDate(post.publishedAt)}
@@ -43,7 +43,7 @@
 							{/if}
 							{#if post.tags.length > 0}
 								<div class="flex flex-wrap gap-2 mt-2">
-									{#each post.tags as tag}
+									{#each post.tags as tag (tag)}
 										<span
 											class="text-xs px-2 py-1 rounded bg-neutral-800 text-neutral-400 border border-neutral-700"
 										>

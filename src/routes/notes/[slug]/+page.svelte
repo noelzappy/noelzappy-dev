@@ -40,7 +40,7 @@
 		</div>
 		{#if data.post.tags.length > 0}
 			<div class="flex flex-wrap gap-2">
-				{#each data.post.tags as tag}
+				{#each data.post.tags as tag (tag)}
 					<span
 						class="text-xs px-3 py-1 rounded-full bg-neutral-800 text-neutral-400 border border-neutral-700"
 					>
@@ -60,6 +60,7 @@
 		<a
 			href="/notes"
 			class="inline-flex items-center text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+			data-sveltekit-preload-data
 		>
 			<span class="material-symbols-outlined text-base mr-1"> arrow_back </span>
 			Back to all notes

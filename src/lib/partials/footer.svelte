@@ -3,13 +3,22 @@
 		<a
 			class="text-gray-400 hover:text-white text-sm font-medium transition-colors"
 			href="/projects"
+			data-sveltekit-preload-data
 		>
 			Projects
 		</a>
-		<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="/">
+		<a
+			class="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+			href="/"
+			data-sveltekit-preload-data
+		>
 			About
 		</a>
-		<a class="text-gray-400 hover:text-white text-sm font-medium transition-colors" href="/contact">
+		<a
+			class="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+			href="/contact"
+			data-sveltekit-preload-data
+		>
 			Contact
 		</a>
 	</div>

@@ -42,7 +42,7 @@
 <section class="flex flex-col gap-8">
 	<h2 class="text-md font-medium text-neutral-100">Expertise</h2>
 	<div class="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-4 text-sm">
-		{#each Expertise as skill}
+		{#each Expertise as skill (skill.name)}
 			<div
 				class="flex flex-col gap-1 border cursor-pointer text-neutral-400 hover:text-white border-neutral-800 p-2 transition-all duration-300 rounded hover:scale-105 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/50"
 			>

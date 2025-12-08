@@ -17,7 +17,7 @@
 	</div>
 
 	<div class="mt-12 space-y-4">
-		{#each contactLinks as contactLink}
+		{#each contactLinks as contactLink (contactLink.href)}
 			<a
 				class="flex items-center gap-3 text-lg font-medium text-gray-300 hover:text-white transition-colors group"
 				href={contactLink.href}
