@@ -89,7 +89,7 @@
 		<div class="px-4 sm:px-6 lg:px-8 flex flex-1 justify-center py-5">
 			<div class="layout-content-container flex flex-col w-full max-w-4xl flex-1">
 				<Navbar />
-				<main class="flex flex-col gap-16 py-12 sm:py-16">
+				<main class="flex flex-col gap-16 py-12 sm:py-16 mt-16">
 					{@render children()}
 				</main>
 				<Footer />

@@ -29,12 +29,12 @@
 			{#each data.posts as post (post.id)}
 				<a class="group" href={`/notes/${post.slug}`} data-sveltekit-preload-data>
 					<div class="grid sm:grid-cols-4 gap-2">
-						<p class="sm:col-span-1 text-sm text-gray-400">
-							{formatDate(post.publishedAt)}
-						</p>
 						<div class="sm:col-span-3 flex flex-col gap-1.5">
 							<p class="text-lg font-medium text-gray-200 group-hover:text-white transition-colors">
 								{post.title}
+							</p>
+							<p class="sm:col-span-1 text-sm text-gray-400">
+								{formatDate(post.publishedAt)}
 							</p>
 							{#if post.excerpt}
 								<p class="text-base text-gray-400">
