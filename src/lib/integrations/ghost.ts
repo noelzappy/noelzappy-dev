@@ -17,7 +17,7 @@ export async function getFeaturedProjects() {
 
 export async function getFeaturedNotes() {
 	const posts = await api.posts.browse({
-		limit: 3,
+		limit: 10,
 		filter: 'featured:true+tag:-projects',
 		order: 'published_at DESC'
 	});

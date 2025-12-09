@@ -176,7 +176,7 @@
 	</div>
 </section>
 <Newsletter />
-<section class="flex flex-col gap-4">
+<section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
 		<h2 class="text-xl font-semibold text-neutral-100">Latest Notes</h2>
 		<a
@@ -191,16 +191,19 @@
 			</span>
 		</a>
 	</div>
-	<div class="grid grid-cols-1 gap-3">
+	<div class="grid grid-cols-1 gap-4">
 		{#each data.notes as note (note.slug)}
 			<a
-				class="group flex items-start justify-between gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
+				class="group relative flex items-start justify-between gap-4 p-5 sm:p-6 rounded-xl border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300 hover:shadow-lg hover:shadow-neutral-900/30 overflow-hidden"
 				href={`/notes/${note.slug}`}
 				data-sveltekit-preload-data
 			>
-				<div class="flex flex-col gap-2 flex-1 min-w-0">
+				<div
+					class="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-neutral-500 to-neutral-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+				></div>
+				<div class="flex flex-col gap-2.5 flex-1 min-w-0">
 					<span
-						class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
+						class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
 					>
 						{note.title}
 					</span>

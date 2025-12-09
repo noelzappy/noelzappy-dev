@@ -57,18 +57,19 @@
 		<div class="flex flex-col gap-4">
 			{#each data.posts as post, index (post.id)}
 				<a
-					class="group flex items-start justify-between gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
+					class="group relative flex items-start justify-between gap-4 p-5 sm:p-6 rounded-xl border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300 hover:shadow-lg hover:shadow-neutral-900/30 overflow-hidden"
 					href={`/notes/${post.slug}`}
 					data-sveltekit-preload-data
 				>
-					<div class="flex flex-col gap-2 flex-1 min-w-0">
-						<div class="flex items-center gap-3">
-							<span
-								class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
-							>
-								{post.title}
-							</span>
-						</div>
+					<div
+						class="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-neutral-500 to-neutral-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+					></div>
+					<div class="flex flex-col gap-2.5 flex-1 min-w-0">
+						<span
+							class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
+						>
+							{post.title}
+						</span>
 						<span class="text-xs text-neutral-500">
 							{formatDate(post.publishedAt || '')}
 						</span>
