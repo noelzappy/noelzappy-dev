@@ -27,13 +27,13 @@
 	</div>
 	<div class="flex flex-col gap-5 text-base leading-relaxed text-neutral-300">
 		<p>
-			I specialize in building modern web and mobile applications with a focus on performance,
-			scalability, and user experience. My journey in tech has been driven by curiosity and a
-			passion for solving complex problems with elegant solutions.
+			I build web and mobile applications that actually hold up in the real world. I care deeply
+			about performance, clean architecture, and user flows that make sense, especially in
+			environments with real constraints.
 		</p>
 		<p>
-			From fintech platforms to SaaS products, I've delivered production systems that serve
-			thousands of users daily. I thrive in environments where quality code meets real-world impact.
+			I’ve founded and built products in fintech and SaaS, often owning systems end-to-end, from
+			architecture to launch, serving thousands of users in production.
 		</p>
 	</div>
 	<div class="flex items-center gap-6 pt-2">
