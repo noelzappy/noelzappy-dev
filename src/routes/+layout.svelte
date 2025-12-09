@@ -63,7 +63,7 @@
 </svelte:head>
 
 <div
-	class="relative flex h-auto min-h-screen w-full flex-col overflow-hidden"
+	class="relative flex h-auto min-h-screen w-full flex-col"
 	role="main"
 	onmousemove={handleMouseMove}
 >

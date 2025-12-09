@@ -98,50 +98,64 @@
 	</div>
 </section>
 
-<section class="flex flex-col gap-4">
-	<div class="flex items-center justify-between">
-		<h2 class="text-xl font-semibold text-neutral-100">Featured Projects</h2>
-		<a
-			href="/projects"
-			class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
-		>
-			View all
-			<span
-				class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
-			>
-				arrow_forward
-			</span>
-		</a>
-	</div>
-	<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-		{#each data.posts as project (project.slug)}
+<section class="flex flex-col gap-6">
+	<div class="flex items-center justify-between mb-6">
+		<h2 class="text-xl font-semibold text-neutral-100">Projects</h2>
+		<div class="flex items-center gap-4">
 			<a
-				href={`/projects/${project.slug}`}
-				class="group flex flex-col gap-4 p-6 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300 min-h-[200px]"
-				data-sveltekit-preload-data
+				href="/projects"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
 			>
-				<div class="flex-1 flex flex-col gap-3">
-					<h3
-						class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
-					>
-						{project.title}
-					</h3>
-					{#if project.excerpt}
-						<p class="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
-							{project.excerpt}
-						</p>
-					{/if}
-				</div>
-				<div class="flex items-center justify-between">
-					<span class="text-xs text-neutral-500 uppercase tracking-wide">View Project</span>
-					<span
-						class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white"
-					>
-						arrow_forward
-					</span>
-				</div>
+				View all
+				<span
+					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+				>
+					arrow_forward
+				</span>
 			</a>
-		{/each}
+		</div>
+	</div>
+
+	<div class="w-screen relative -left-4 sm:-left-6 lg:-left-8">
+		<div
+			class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8"
+			style="scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;"
+		>
+			{#each data.posts as project (project.slug)}
+				<a
+					href={`/projects/${project.slug}`}
+					class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden"
+					data-sveltekit-preload-data
+				>
+					{#if project.featureImage}
+						<img
+							src={project.featureImage}
+							alt={project.title}
+							class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+						/>
+						<div
+							class="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent"
+						></div>
+					{:else}
+						<div class="absolute inset-0 bg-linear-to-br from-neutral-800 to-neutral-900"></div>
+					{/if}
+					<div class="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end">
+						<h3
+							class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-neutral-100 transition-colors"
+						>
+							{project.title}
+						</h3>
+						{#if project.excerpt}
+							<p
+								class="text-xs sm:text-sm md:text-base text-neutral-300 line-clamp-3 leading-relaxed"
+							>
+								{project.excerpt}
+							</p>
+						{/if}
+					</div>
+				</a>
+			{/each}
+		</div>
 	</div>
 </section>
 <section class="flex flex-col gap-5">

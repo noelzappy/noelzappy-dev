@@ -39,42 +39,42 @@
 	</div>
 
 	{#if data.projects.length > 0}
-		<div class="grid grid-cols-1 gap-4">
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 			{#each data.projects as project (project.id)}
 				<a
 					href={`/projects/${project.slug}`}
-					class="group flex items-start gap-4 p-4 rounded-lg border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
+					class="group flex flex-col rounded-xl overflow-hidden border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300"
 					data-sveltekit-preload-data
 				>
-					<div class="w-20 h-20 flex-shrink-0">
-						<div
-							class="w-full h-full rounded-lg overflow-hidden bg-neutral-800 border border-neutral-700"
-						>
-							<img
-								src={project.featureImage}
-								alt={project.title}
-								class="w-full h-full object-cover"
-								loading="lazy"
-							/>
-						</div>
+					<div class="aspect-video w-full overflow-hidden bg-neutral-900">
+						<img
+							src={project.featureImage}
+							alt={project.title}
+							class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+							loading="lazy"
+						/>
 					</div>
-					<div class="flex flex-col gap-2 flex-1 min-w-0">
+					<div class="flex flex-col gap-3 p-5">
 						<h3
-							class="text-base font-medium text-neutral-100 group-hover:text-white transition-colors"
+							class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
 						>
 							{project.title}
 						</h3>
 						{#if project.excerpt}
-							<p class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
+							<p class="text-sm text-neutral-400 line-clamp-3 leading-relaxed">
 								{project.excerpt}
 							</p>
 						{/if}
+						<div
+							class="flex items-center gap-2 text-sm text-neutral-500 group-hover:text-neutral-400 transition-colors mt-1"
+						>
+							<span>Read more</span>
+							<span
+								class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+								>arrow_forward</span
+							>
+						</div>
 					</div>
-					<span
-						class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
-					>
-						arrow_forward
-					</span>
 				</a>
 			{/each}
 		</div>
