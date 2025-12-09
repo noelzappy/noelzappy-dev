@@ -8,7 +8,7 @@ const api = new GhostContentAPI({
 
 export async function getFeaturedProjects() {
 	const posts = await api.posts.browse({
-		limit: 3,
+		limit: 4,
 		filter: 'featured:true+tag:projects',
 		order: 'published_at DESC'
 	});
