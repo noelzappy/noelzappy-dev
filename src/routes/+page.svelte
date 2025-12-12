@@ -121,41 +121,61 @@
 			class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8"
 			style="scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;"
 		>
-			{#each data.posts as project (project.slug)}
-				<a
-					href={`/projects/${project.slug}`}
-					class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden"
-					data-sveltekit-preload-data
-				>
-					{#if project.featureImage}
-						<img
-							src={project.featureImage}
-							alt={project.title}
-							class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-							loading="lazy"
-						/>
+			{#await data.streamed.posts}
+				<div class="flex gap-4 sm:gap-6">
+					{#each Array(3) as _, idx}
 						<div
-							class="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent"
-						></div>
-					{:else}
-						<div class="absolute inset-0 bg-linear-to-br from-neutral-800 to-neutral-900"></div>
-					{/if}
-					<div class="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end">
-						<h3
-							class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-neutral-100 transition-colors"
+							class="relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl overflow-hidden bg-neutral-800/20"
 						>
-							{project.title}
-						</h3>
-						{#if project.excerpt}
-							<p
-								class="text-xs sm:text-sm md:text-base text-neutral-300 line-clamp-3 leading-relaxed"
-							>
-								{project.excerpt}
-							</p>
+							<div class="absolute inset-0 bg-neutral-700/40 animate-pulse"></div>
+							<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+							<div class="absolute left-0 right-0 bottom-0 p-5 sm:p-6 md:p-8">
+								<div class="h-6 bg-neutral-600 rounded-md w-2/3 mb-3 animate-pulse"></div>
+								<div class="space-y-2">
+									<div class="h-3 bg-neutral-600 rounded w-5/6 animate-pulse"></div>
+									<div class="h-3 bg-neutral-600 rounded w-3/4 animate-pulse"></div>
+								</div>
+							</div>
+						</div>
+					{/each}
+				</div>
+			{:then posts}
+				{#each posts as project (project.slug)}
+					<a
+						href={`/projects/${project.slug}`}
+						class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden"
+						data-sveltekit-preload-data
+					>
+						{#if project.feature_image}
+							<img
+								src={project.feature_image}
+								alt={project.title}
+								class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+								loading="lazy"
+							/>
+							<div
+								class="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent"
+							></div>
+						{:else}
+							<div class="absolute inset-0 bg-linear-to-br from-neutral-800 to-neutral-900"></div>
 						{/if}
-					</div>
-				</a>
-			{/each}
+						<div class="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end">
+							<h3
+								class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-neutral-100 transition-colors"
+							>
+								{project.title}
+							</h3>
+							{#if project.excerpt}
+								<p
+									class="text-xs sm:text-sm md:text-base text-neutral-300 line-clamp-3 leading-relaxed"
+								>
+									{project.excerpt}
+								</p>
+							{/if}
+						</div>
+					</a>
+				{/each}
+			{/await}
 		</div>
 	</div>
 </section>
@@ -194,33 +214,52 @@
 		</a>
 	</div>
 	<div class="grid grid-cols-1 gap-4">
-		{#each data.notes as note (note.slug)}
-			<a
-				class="group relative flex items-start justify-between gap-4 p-5 sm:p-6 rounded-xl border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300 hover:shadow-lg hover:shadow-neutral-900/30 overflow-hidden"
-				href={`/notes/${note.slug}`}
-				data-sveltekit-preload-data
-			>
-				<div
-					class="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-neutral-500 to-neutral-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-				></div>
-				<div class="flex flex-col gap-2.5 flex-1 min-w-0">
-					<span
-						class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
+		{#await data.streamed.notes}
+			<div class="flex flex-col gap-3 w-full">
+				{#each Array(3) as _, i}
+					<div
+						class="relative rounded-xl p-5 sm:p-6 bg-neutral-800/20 hover:bg-neutral-800/30 overflow-hidden"
 					>
-						{note.title}
-					</span>
-					{#if note.excerpt}
-						<span class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
-							{note.excerpt}
-						</span>
-					{/if}
-				</div>
-				<span
-					class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+						<div class="absolute left-0 top-0 bottom-0 w-1 bg-neutral-700/40"></div>
+						<div class="flex items-center gap-4">
+							<div class="flex-1">
+								<div class="h-5 bg-neutral-700 rounded w-1/2 mb-2 animate-pulse"></div>
+								<div class="h-3 bg-neutral-700 rounded w-3/4 animate-pulse"></div>
+							</div>
+							<div class="w-6 h-6 bg-neutral-700 rounded animate-pulse"></div>
+						</div>
+					</div>
+				{/each}
+			</div>
+		{:then notes}
+			{#each notes as note (note.slug)}
+				<a
+					class="group relative flex items-start justify-between gap-4 p-5 sm:p-6 rounded-xl border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300 hover:shadow-lg hover:shadow-neutral-900/30 overflow-hidden"
+					href={`/notes/${note.slug}`}
+					data-sveltekit-preload-data
 				>
-					arrow_forward
-				</span>
-			</a>
-		{/each}
+					<div
+						class="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-neutral-500 to-neutral-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+					></div>
+					<div class="flex flex-col gap-2.5 flex-1 min-w-0">
+						<span
+							class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
+						>
+							{note.title}
+						</span>
+						{#if note.excerpt}
+							<span class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
+								{note.excerpt}
+							</span>
+						{/if}
+					</div>
+					<span
+						class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
+					>
+						arrow_forward
+					</span>
+				</a>
+			{/each}
+		{/await}
 	</div>
 </section>
