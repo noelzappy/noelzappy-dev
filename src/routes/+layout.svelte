@@ -45,16 +45,12 @@
 	<meta name="author" content="Emmanuel Noel Zappy Yeboah" />
 	<meta name="theme-color" content="#0d1117" />
 
-	<!-- Performance & Resource Hints -->
-	<link rel="preconnect" href="https://fonts.googleapis.com" />
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
-	<link rel="preconnect" href="https://cms.noelzappy.dev" />
-	<link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-
-	<!-- Fonts -->
 	<link
-		href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap"
-		rel="stylesheet"
+		rel="preload"
+		href="/fonts/Inter-Variable.woff2"
+		as="font"
+		type="font/woff2"
+		crossorigin="anonymous"
 	/>
 	<link
 		href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"

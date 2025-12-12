@@ -132,6 +132,7 @@
 							src={project.featureImage}
 							alt={project.title}
 							class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+							loading="lazy"
 						/>
 						<div
 							class="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent"
@@ -221,23 +222,5 @@
 				</span>
 			</a>
 		{/each}
-	</div>
-</section>
-
-<section>
-	<!-- NPC Playing Card -->
-	<div class="gap-5">
-		<h2 class="text-xl font-semibold text-neutral-100">What I'm Listening To</h2>
-
-		<div class="mt-5">
-			<a href="https://npc.aikins.xyz/u/noelzappy" target="_blank" rel="noopener noreferrer"
-				><img
-					src="https://npc-api.aikins.xyz/v1/users/noelzappy/card.png?theme=dark&orientation=horizontal"
-					alt="Now Playing"
-					loading="lazy"
-					class="w-full rounded-lg border border-neutral-700 hover:border-neutral-500 transition-colors object-cover"
-				/></a
-			>
-		</div>
 	</div>
 </section>
