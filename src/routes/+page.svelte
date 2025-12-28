@@ -3,6 +3,9 @@
 	import Newsletter from '$lib/components/newsletter.svelte';
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import type { PageData } from './$types';
+	import GhContributions from '$lib/components/gh-contributions.svelte';
+	import Experiences from '$lib/components/experiences.svelte';
+	import PinnedRepos from '$lib/components/pinned-repos.svelte';
 
 	let { data }: { data: PageData } = $props();
 </script>
@@ -100,7 +103,7 @@
 
 <section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between mb-6">
-		<h2 class="text-xl font-semibold text-neutral-100">Projects</h2>
+		<h2 class="text-xl font-semibold text-neutral-100">My Projects</h2>
 		<div class="flex items-center gap-4">
 			<a
 				href="/projects"
@@ -123,7 +126,7 @@
 		>
 			{#await data.streamed.posts}
 				<div class="flex gap-4 sm:gap-6">
-					{#each Array(3) as _, idx}
+					{#each Array(3) as _, _idx (_idx)}
 						<div
 							class="relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl overflow-hidden bg-neutral-800/20"
 						>
@@ -179,6 +182,36 @@
 		</div>
 	</div>
 </section>
+
+<section>
+	<div class="flex items-center justify-between mb-6">
+		<h2 class="text-xl font-semibold text-neutral-100">GitHub Contributions</h2>
+		<div class="flex items-center gap-4">
+			<a
+				href="https://github.com/noelzappy"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				View Contributions
+				<span
+					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+				>
+					arrow_forward
+				</span>
+			</a>
+		</div>
+	</div>
+
+	<div>
+		<GhContributions />
+	</div>
+</section>
+
+<section>
+	<PinnedRepos />
+</section>
+
 <section class="flex flex-col gap-5">
 	<h2 class="text-xl font-semibold text-neutral-100">Core Expertise</h2>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -196,7 +229,31 @@
 		{/each}
 	</div>
 </section>
-<Newsletter />
+
+<section>
+	<div class="flex items-center justify-between mb-6">
+		<h2 class="text-xl font-semibold text-neutral-100">Companies I've Worked For</h2>
+		<div class="flex items-center gap-4">
+			<a
+				href="https://www.linkedin.com/in/noelzappy/"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				View on LinkedIn
+				<span
+					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+				>
+					arrow_forward
+				</span>
+			</a>
+		</div>
+	</div>
+
+	<div>
+		<Experiences />
+	</div>
+</section>
 
 <section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
@@ -216,7 +273,7 @@
 	<div class="grid grid-cols-1 gap-4">
 		{#await data.streamed.notes}
 			<div class="flex flex-col gap-3 w-full">
-				{#each Array(3) as _, i}
+				{#each Array(3) as _, _i (_i)}
 					<div
 						class="relative rounded-xl p-5 sm:p-6 bg-neutral-800/20 hover:bg-neutral-800/30 overflow-hidden"
 					>
@@ -263,3 +320,4 @@
 		{/await}
 	</div>
 </section>
+<Newsletter />

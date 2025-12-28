@@ -1,7 +1,6 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
 
-/* Self-hosted Inter font (woff2) - ensure files exist in /static/fonts */
 @font-face {
 	font-family: 'Inter';
 	src: url('/fonts/Inter-Variable.woff2') format('woff2');
@@ -37,4 +36,48 @@ html.dark,
 body {
 	background-color: #333333;
 	color: #d4d4d4;
+}
+
+* {
+	scrollbar-width: thin;
+	scrollbar-color: #c55832 #333333;
+}
+*::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #a1a1aa;
+	background-image: linear-gradient(180deg, #bfd7ea 0%, #a1a1aa 100%);
+	border-radius: 10px;
+	border: 2px solid transparent;
+	background-clip: content-box;
+	transition: background-color 0.3s ease-in-out;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background-color: #71717a;
+	background-image: linear-gradient(180deg, #a1a1aa 0%, #bfd7ea 100%);
+}
+
+html.dark * {
+	scrollbar-color: #71717a #333;
+}
+
+html.dark *::-webkit-scrollbar-thumb {
+	background-color: #52525b;
+	background-image: linear-gradient(180deg, #71717a 0%, #52525b 100%);
+}
+
+html.dark *::-webkit-scrollbar-thumb:hover {
+	background-color: #71717a;
+	background-image: linear-gradient(180deg, #52525b 0%, #71717a 100%);
+}
+
+html.dark *::-webkit-scrollbar-track {
+	background: transparent;
 }
