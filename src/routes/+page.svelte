@@ -4,6 +4,7 @@
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import type { PageData } from './$types';
 	import GhContributions from '$lib/components/gh-contributions.svelte';
+	import Experiences from '$lib/components/experiences.svelte';
 
 	let { data }: { data: PageData } = $props();
 </script>
@@ -206,6 +207,31 @@
 	</div>
 </section>
 
+<section>
+	<div class="flex items-center justify-between mb-6">
+		<h2 class="text-xl font-semibold text-neutral-100">Companies I've Worked For</h2>
+		<div class="flex items-center gap-4">
+			<a
+				href="https://www.linkedin.com/in/noelzappy/"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				View on LinkedIn
+				<span
+					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+				>
+					arrow_forward
+				</span>
+			</a>
+		</div>
+	</div>
+
+	<div>
+		<Experiences />
+	</div>
+</section>
+
 <section class="flex flex-col gap-5">
 	<h2 class="text-xl font-semibold text-neutral-100">Core Expertise</h2>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -223,7 +249,6 @@
 		{/each}
 	</div>
 </section>
-<Newsletter />
 
 <section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
@@ -290,3 +315,4 @@
 		{/await}
 	</div>
 </section>
+<Newsletter />
