@@ -5,6 +5,7 @@
 	import type { PageData } from './$types';
 	import GhContributions from '$lib/components/gh-contributions.svelte';
 	import Experiences from '$lib/components/experiences.svelte';
+	import PinnedRepos from '$lib/components/pinned-repos.svelte';
 
 	let { data }: { data: PageData } = $props();
 </script>
@@ -208,6 +209,28 @@
 </section>
 
 <section>
+	<PinnedRepos />
+</section>
+
+<section class="flex flex-col gap-5">
+	<h2 class="text-xl font-semibold text-neutral-100">Core Expertise</h2>
+	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+		{#each Expertise as skill (skill.name)}
+			<div
+				class="group flex flex-col gap-2 border border-neutral-700 bg-neutral-800/20 p-4 rounded-lg transition-all duration-300 hover:bg-neutral-800/40 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/30"
+			>
+				<h3
+					class="font-semibold text-base text-neutral-100 group-hover:text-white transition-colors"
+				>
+					{skill.name}
+				</h3>
+				<p class="text-sm text-neutral-400 leading-relaxed">{skill.details}</p>
+			</div>
+		{/each}
+	</div>
+</section>
+
+<section>
 	<div class="flex items-center justify-between mb-6">
 		<h2 class="text-xl font-semibold text-neutral-100">Companies I've Worked For</h2>
 		<div class="flex items-center gap-4">
@@ -231,24 +254,6 @@
 		<Experiences />
 	</div>
 </section>
-
-<!-- <section class="flex flex-col gap-5">
-	<h2 class="text-xl font-semibold text-neutral-100">Core Expertise</h2>
-	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-		{#each Expertise as skill (skill.name)}
-			<div
-				class="group flex flex-col gap-2 border border-neutral-700 bg-neutral-800/20 p-4 rounded-lg transition-all duration-300 hover:bg-neutral-800/40 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/30"
-			>
-				<h3
-					class="font-semibold text-base text-neutral-100 group-hover:text-white transition-colors"
-				>
-					{skill.name}
-				</h3>
-				<p class="text-sm text-neutral-400 leading-relaxed">{skill.details}</p>
-			</div>
-		{/each}
-	</div>
-</section> -->
 
 <section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
