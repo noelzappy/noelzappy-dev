@@ -25,18 +25,19 @@
 			Hi, I'm Emmanuel 👋
 		</h1>
 		<p class="text-lg text-neutral-300 font-light">
-			Senior Software Engineer • 6+ years building reliable systems
+			Software Engineer & Product Builder • {new Date().getFullYear() - 2019}+ years building
+			reliable systems
 		</p>
 	</div>
 	<div class="flex flex-col gap-5 text-base leading-relaxed text-neutral-300">
 		<p>
-			I build web and mobile applications that actually hold up in the real world. I care deeply
-			about performance, clean architecture, and user flows that make sense, especially in
-			environments with real constraints.
+			I build web and mobile applications that actually hold up in the real world. I specialize in
+			performance, clean architecture, and user flows that work—even in environments with strict
+			constraints.
 		</p>
 		<p>
-			I’ve founded and built products in fintech and SaaS, often owning systems end-to-end, from
-			architecture to launch, serving thousands of users in production.
+			I’ve founded and scaled fintech SaaS products, owning systems from the first line of code to
+			thousands of daily users.
 		</p>
 	</div>
 	<div class="flex items-center gap-6 pt-2">
