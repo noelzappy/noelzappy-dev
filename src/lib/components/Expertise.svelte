@@ -62,7 +62,7 @@
 						<div class="flex flex-wrap gap-2">
 							{#each category.topSkills as skill (skill)}
 								<span
-									class="px-3 py-1 text-sm font-medium text-sky-200 bg-sky-900/50 border border-sky-800 rounded-full"
+									class="px-3 py-1 text-sm font-medium text-white bg-orange-500/50 border border-orange-800 rounded-full"
 								>
 									{skill}
 								</span>
