@@ -232,7 +232,7 @@
 
 <section>
 	<div class="flex items-center justify-between mb-6">
-		<h2 class="text-xl font-semibold text-neutral-100">Companies I've Worked For</h2>
+		<h2 class="text-xl font-semibold text-neutral-100">Experiences</h2>
 		<div class="flex items-center gap-4">
 			<a
 				href="https://www.linkedin.com/in/noelzappy/"

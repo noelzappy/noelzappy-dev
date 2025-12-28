@@ -66,3 +66,6 @@ export const HomepageStructuredData = {
 		name: 'Software Engineering'
 	}
 };
+
+export const GITHUB_USERNAME = 'noelzappy';
+export const GITHUB_API_URL = 'https://api.github.com/graphql';
