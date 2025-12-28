@@ -102,7 +102,7 @@
 
 <section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between mb-6">
-		<h2 class="text-xl font-semibold text-neutral-100">Projects</h2>
+		<h2 class="text-xl font-semibold text-neutral-100">My Projects</h2>
 		<div class="flex items-center gap-4">
 			<a
 				href="/projects"
@@ -232,7 +232,7 @@
 	</div>
 </section>
 
-<section class="flex flex-col gap-5">
+<!-- <section class="flex flex-col gap-5">
 	<h2 class="text-xl font-semibold text-neutral-100">Core Expertise</h2>
 	<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 		{#each Expertise as skill (skill.name)}
@@ -248,7 +248,7 @@
 			</div>
 		{/each}
 	</div>
-</section>
+</section> -->
 
 <section class="flex flex-col gap-6">
 	<div class="flex items-center justify-between">
