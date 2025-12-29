@@ -205,6 +205,7 @@
 							<div class="week-col grid grid-rows-7 gap-1">
 								{#each week.contributionDays as day (day.date)}
 									<div
+										role="figure"
 										class="day-cell w-4 h-4 rounded-sm transition-transform duration-100 ease-in-out hover:scale-110 {getContributionColor(
 											day.contributionLevel
 										)}"
