@@ -1,33 +1,3 @@
-export const Expertise = [
-	{
-		name: 'Backend',
-		details:
-			'Python, TypeScript, Node.js, FastAPI, Express.js, NestJS, Go, Java, REST, GraphQL, microservices'
-	},
-	{
-		name: 'Databases',
-		details: 'PostgreSQL, MySQL, MongoDB, Redis, Firebase, performance tuning, migrations, indexing'
-	},
-	{
-		name: 'Frontend & Mobile',
-		details:
-			'Svelte, React, React Native, Next.js, TailwindCSS, JavaScript, TypeScript, component-driven design'
-	},
-	{
-		name: 'Infrastructure',
-		details: 'Docker, Kubernetes, AWS, GCP, Azure, CI/CD, observability, logging, metrics'
-	},
-	{
-		name: 'AI & Automation',
-		details:
-			'LLM workflows, embeddings, retrieval pipelines, orchestration, AI-assisted development'
-	},
-	{
-		name: 'Communication',
-		details: 'Technical writing, async collaboration, leadership, code reviews'
-	}
-];
-
 export const HomepageStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
@@ -66,3 +36,6 @@ export const HomepageStructuredData = {
 		name: 'Software Engineering'
 	}
 };
+
+export const GITHUB_USERNAME = 'noelzappy';
+export const GITHUB_API_URL = 'https://api.github.com/graphql';

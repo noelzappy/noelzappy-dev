@@ -178,41 +178,43 @@
 		<h2 class="text-base font-semibold mb-2">
 			{totalContributions} contributions in the last year
 		</h2>
-		<div>
-			<div
-				class="month-labels grid text-xs text-gray-600 dark:text-gray-400 pl-8"
-				style="grid-template-columns: repeat({weeks.length}, minmax(0, 1fr));"
-			>
-				{#each monthLabelPositions as { label, position } (position)}
-					<div class="month-label text-left" style="grid-column-start: {position + 1};">
-						{label}
-					</div>
-				{/each}
+		<div class="flex gap-3">
+			<div class="day-labels hidden sm:flex flex-col justify-between text-xs text-gray-500 pt-8">
+				<span></span>
+				<span>Mon</span>
+				<span></span>
+				<span>Wed</span>
+				<span></span>
+				<span>Fri</span>
+				<span></span>
 			</div>
-			<div class="flex gap-2 mt-1">
-				<div class="day-labels hidden sm:flex flex-col justify-between text-xs text-gray-500">
-					<span></span>
-					<span>Mon</span>
-					<span></span>
-					<span>Wed</span>
-					<span></span>
-					<span>Fri</span>
-					<span></span>
-				</div>
-				<div class="graph-grid grid grid-flow-col auto-cols-fr gap-1 w-full">
-					{#each weeks as week, i (i)}
-						<div class="week-col grid grid-rows-7 gap-1">
-							{#each week.contributionDays as day (day.date)}
-								<div
-									class="day-cell aspect-square rounded-sm transition-transform duration-100 ease-in-out hover:scale-110 {getContributionColor(
-										day.contributionLevel
-									)}"
-									on:mouseenter={(e) => showTooltip(e, day)}
-									on:mouseleave={hideTooltip}
-								></div>
-							{/each}
-						</div>
-					{/each}
+			<div class="overflow-x-auto w-full">
+				<div class="min-w-[60rem]">
+					<div
+						class="month-labels grid text-xs text-gray-600 dark:text-gray-400"
+						style="grid-template-columns: repeat({weeks.length}, minmax(0, 1fr));"
+					>
+						{#each monthLabelPositions as { label, position } (position)}
+							<div class="month-label text-left" style="grid-column-start: {position + 1};">
+								{label}
+							</div>
+						{/each}
+					</div>
+					<div class="graph-grid grid grid-flow-col gap-1 mt-1">
+						{#each weeks as week, i (i)}
+							<div class="week-col grid grid-rows-7 gap-1">
+								{#each week.contributionDays as day (day.date)}
+									<div
+										class="day-cell w-4 h-4 rounded-sm transition-transform duration-100 ease-in-out hover:scale-110 {getContributionColor(
+											day.contributionLevel
+										)}"
+										on:mouseenter={(e) => showTooltip(e, day)}
+										on:mouseleave={hideTooltip}
+									></div>
+								{/each}
+							</div>
+						{/each}
+					</div>
 				</div>
 			</div>
 		</div>
