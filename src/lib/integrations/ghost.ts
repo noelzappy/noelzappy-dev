@@ -1,8 +1,8 @@
 import GhostContentAPI from '@tryghost/content-api';
 
 const api = new GhostContentAPI({
-	url: 'https://cms.noelzappy.dev',
-	key: '2eb51bfb14a886e3ade9604e72', // process.env.GHOST_CONTENT_API_KEY || '',
+	url: 'https://ghost.noelzappy.dev',
+	key: '37dbb3b5cdb18df2d315e3d798', // process.env.GHOST_CONTENT_API_KEY || '',
 	version: 'v6.10'
 });
 
