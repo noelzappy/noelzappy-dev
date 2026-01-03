@@ -59,7 +59,7 @@ export function getAllProjects(): ProjectData[] {
 
 export function getProjectBySlug(slug: string): ProjectData | null {
 	const allProjects = getAllProjects();
-	return allProjects.find((project) => project.id === slug) || null;
+	return allProjects.find((project) => project.slug === slug) || null;
 }
 
 export function getFeaturedProjects(limit: number = 5): ProjectData[] {
