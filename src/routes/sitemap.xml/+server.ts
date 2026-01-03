@@ -1,4 +1,5 @@
-import { fetchPosts, fetchProjectPosts } from '$lib/integrations/ghost';
+import { fetchPosts } from '$lib/integrations/ghost';
+import { getAllProjects } from '$lib/data/projects-loader';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
@@ -6,13 +7,12 @@ export const GET: RequestHandler = async () => {
 
 	try {
 		// Fetch all posts and projects (increased limit to get all)
-		const [notesData, projectsData] = await Promise.all([
+		const [notesData, projects] = await Promise.all([
 			fetchPosts(1, 100),
-			fetchProjectPosts(1, 100)
+			Promise.resolve(getAllProjects())
 		]);
 
 		const notes = notesData || [];
-		const projects = projectsData || [];
 
 		const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -58,7 +58,7 @@ export const GET: RequestHandler = async () => {
 			(project) => `
 	<url>
 		<loc>${baseUrl}/projects/${project.slug}</loc>
-		<lastmod>${new Date(project.updated_at || project.published_at || new Date()).toISOString()}</lastmod>
+		<lastmod>${new Date(project.published_at || new Date()).toISOString()}</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>`

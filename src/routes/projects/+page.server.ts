@@ -1,4 +1,4 @@
-import { fetchProjectPosts } from '$lib/integrations/ghost';
+import { getAllProjects } from '$lib/data/projects-loader';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
@@ -6,25 +6,30 @@ export const load: PageServerLoad = async ({ url }) => {
 	const limit = 10;
 
 	try {
-		const posts = await fetchProjectPosts(page, limit);
+		const allProjects = getAllProjects();
+		const total = allProjects.length;
+		const pages = Math.ceil(total / limit);
+		const start = (page - 1) * limit;
+		const end = start + limit;
+		const paginatedProjects = allProjects.slice(start, end);
 
 		return {
-			projects: posts.map((post) => ({
-				id: post.id,
-				slug: post.slug,
-				title: post.title,
-				excerpt: post.excerpt,
-				publishedAt: post.published_at,
-				featureImage: post.feature_image,
-				tags: post.tags?.map((tag) => tag.name) || []
+			projects: paginatedProjects.map((project) => ({
+				id: project.slug,
+				slug: project.slug,
+				title: project.title,
+				excerpt: project.excerpt,
+				publishedAt: project.published_at,
+				featureImage: project.feature_image || '',
+				tags: []
 			})),
-			pagination: posts.meta?.pagination || {
-				page: 1,
+			pagination: {
+				page,
 				limit,
-				pages: 1,
-				total: 0,
-				prev: null,
-				next: null
+				pages,
+				total,
+				prev: page > 1 ? page - 1 : null,
+				next: page < pages ? page + 1 : null
 			}
 		};
 	} catch {

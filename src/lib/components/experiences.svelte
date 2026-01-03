@@ -19,9 +19,9 @@
 			url: 'https://built.africa/'
 		},
 		{
-			name: 'Common Wealth Media Inc',
-			logo: '/imgs/commonwealth-logo.jpg',
-			url: 'https://commonwealthmedia.com/'
+			name: 'Common Wealth (Fetch Agent)',
+			logo: '/imgs/fetch-agent.png',
+			url: 'https://fetchagent.com/'
 		},
 
 		{
@@ -65,7 +65,7 @@
 <section class="antialiased">
 	<div class="max-w-7xl mx-auto">
 		<div
-			class="relative flex flex-col gap-8 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]"
+			class="carousel-container relative flex flex-col gap-8 overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_10%,white_90%,transparent)]"
 		>
 			<div class="flex animate-scroll-left min-w-max">
 				{#each [...companies1, ...companies1] as company, i (i)}
@@ -127,5 +127,10 @@
 	}
 	.animate-scroll-right {
 		animation: scroll-right 30s linear infinite;
+	}
+
+	.carousel-container:hover .animate-scroll-left,
+	.carousel-container:hover .animate-scroll-right {
+		animation-play-state: paused;
 	}
 </style>
