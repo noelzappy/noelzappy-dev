@@ -1,5 +1,24 @@
-import matter from 'gray-matter';
+import yaml from 'js-yaml';
 import type { ProjectData } from './projects';
+
+function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
+	const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
+	const match = content.match(frontmatterRegex);
+
+	if (!match) {
+		return { data: {}, content };
+	}
+
+	const frontmatter = match[1];
+	const markdown = match[2];
+
+	try {
+		const data = yaml.load(frontmatter) as Record<string, unknown>;
+		return { data: data || {}, content: markdown };
+	} catch {
+		return { data: {}, content: markdown };
+	}
+}
 
 const projectFiles = import.meta.glob('./projects/*.md', {
 	query: '?raw',
@@ -12,7 +31,7 @@ function parseProjects(): ProjectData[] {
 
 	for (const [filePath, content] of Object.entries(projectFiles)) {
 		const fileName = filePath.split('/').pop() || '';
-		const { data, content: markdown } = matter(content);
+		const { data, content: markdown } = parseFrontmatter(content);
 
 		projects.push({
 			...data,
