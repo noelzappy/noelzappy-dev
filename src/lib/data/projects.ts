@@ -1,4 +1,5 @@
 export interface ProjectFrontmatter {
+	id: string;
 	title: string;
 	slug: string;
 	excerpt: string;
@@ -25,27 +26,4 @@ export interface ProjectFrontmatter {
 
 export interface ProjectData extends ProjectFrontmatter {
 	html: string;
-}
-
-export interface ProjectListItem {
-	id: string;
-	slug: string;
-	title: string;
-	excerpt: string;
-	publishedAt: string;
-	featuredImage: string;
-	tags: string[];
-}
-
-export interface ProjectDetail {
-	id: string;
-	slug: string;
-	title: string;
-	html: string;
-	publishedAt: string;
-	updatedAt: string;
-	featuredImage: string;
-	excerpt: string;
-	tags: string[];
-	readingTime: number;
 }

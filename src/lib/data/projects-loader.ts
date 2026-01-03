@@ -16,9 +16,11 @@ export function getAllProjects(): ProjectData[] {
 
 			return {
 				...data,
+				id: fileName.replace('.md', ''),
 				html: content
 			} as ProjectData;
 		})
+		.filter((project) => project.id)
 		.sort((a, b) => {
 			return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 		});

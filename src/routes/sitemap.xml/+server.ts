@@ -27,7 +27,7 @@ export const GET: RequestHandler = async () => {
 		<priority>1.0</priority>
 		<lastmod>${new Date().toISOString()}</lastmod>
 	</url>
-	
+
 	<!-- Projects Listing -->
 	<url>
 		<loc>${baseUrl}/projects</loc>
@@ -35,7 +35,7 @@ export const GET: RequestHandler = async () => {
 		<priority>0.9</priority>
 		<lastmod>${new Date().toISOString()}</lastmod>
 	</url>
-	
+
 	<!-- Notes Listing -->
 	<url>
 		<loc>${baseUrl}/notes</loc>
@@ -43,7 +43,7 @@ export const GET: RequestHandler = async () => {
 		<priority>0.9</priority>
 		<lastmod>${new Date().toISOString()}</lastmod>
 	</url>
-	
+
 	<!-- Contact -->
 	<url>
 		<loc>${baseUrl}/contact</loc>
@@ -51,20 +51,20 @@ export const GET: RequestHandler = async () => {
 		<priority>0.7</priority>
 		<lastmod>${new Date().toISOString()}</lastmod>
 	</url>
-	
+
 	<!-- Individual Projects -->
 	${projects
 		.map(
 			(project) => `
 	<url>
 		<loc>${baseUrl}/projects/${project.slug}</loc>
-		<lastmod>${new Date(project.published_at || new Date()).toISOString()}</lastmod>
+		<lastmod>${new Date(project.publishedAt || new Date()).toISOString()}</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.8</priority>
 	</url>`
 		)
 		.join('')}
-	
+
 	<!-- Individual Notes -->
 	${notes
 		.map(

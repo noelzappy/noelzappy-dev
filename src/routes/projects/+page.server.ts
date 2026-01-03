@@ -21,7 +21,10 @@ export const load: PageServerLoad = async ({ url }) => {
 				excerpt: project.excerpt,
 				publishedAt: project.publishedAt,
 				featureImage: project.featuredImage || '',
-				tags: []
+				status: project.status || '',
+				role: project.role || '',
+				featuredStack: project.featuredStack || [],
+				client: project.client || ''
 			})),
 			pagination: {
 				page,
