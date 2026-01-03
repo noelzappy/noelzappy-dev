@@ -1,46 +1,46 @@
-import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
 import type { ProjectData } from './projects';
 
-const projectsDirectory = path.join(process.cwd(), 'src/lib/data/projects');
+const projectFiles = import.meta.glob('./projects/*.md', {
+	query: '?raw',
+	eager: true,
+	import: 'default'
+}) as Record<string, string>;
 
-export function getAllProjects(): ProjectData[] {
-	const fileNames = fs.readdirSync(projectsDirectory);
-	const projects = fileNames
-		.filter((fileName) => fileName.endsWith('.md'))
-		.map((fileName) => {
-			const fullPath = path.join(projectsDirectory, fileName);
-			const fileContents = fs.readFileSync(fullPath, 'utf8');
-			const { data, content } = matter(fileContents);
+function parseProjects(): ProjectData[] {
+	const projects: ProjectData[] = [];
 
-			return {
-				...data,
-				id: fileName.replace('.md', ''),
-				html: content
-			} as ProjectData;
-		})
+	for (const [filePath, content] of Object.entries(projectFiles)) {
+		const fileName = filePath.split('/').pop() || '';
+		const { data, content: markdown } = matter(content);
+
+		projects.push({
+			...data,
+			id: fileName.replace('.md', ''),
+			html: markdown
+		} as ProjectData);
+	}
+
+	return projects
 		.filter((project) => project.id)
 		.sort((a, b) => {
 			return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 		});
+}
 
-	return projects;
+// Cache the parsed projects
+let cachedProjects: ProjectData[] | null = null;
+
+export function getAllProjects(): ProjectData[] {
+	if (!cachedProjects) {
+		cachedProjects = parseProjects();
+	}
+	return cachedProjects;
 }
 
 export function getProjectBySlug(slug: string): ProjectData | null {
-	try {
-		const fullPath = path.join(projectsDirectory, `${slug}.md`);
-		const fileContents = fs.readFileSync(fullPath, 'utf8');
-		const { data, content } = matter(fileContents);
-
-		return {
-			...data,
-			html: content
-		} as ProjectData;
-	} catch (_error) {
-		return null;
-	}
+	const allProjects = getAllProjects();
+	return allProjects.find((project) => project.id === slug) || null;
 }
 
 export function getFeaturedProjects(limit: number = 5): ProjectData[] {
