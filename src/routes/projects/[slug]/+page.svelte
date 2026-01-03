@@ -2,6 +2,7 @@
 	import type { PageData } from './$types';
 	import { onMount } from 'svelte';
 	import SEOHead from '$lib/components/seo-head.svelte';
+	import { ArrowRight } from 'lucide-svelte';
 
 	let { data }: { data: PageData } = $props();
 
@@ -89,13 +90,6 @@
 	<!-- Breadcrumbs & Quick Nav -->
 	<div class="flex flex-wrap items-center justify-between gap-4">
 		<div class="flex items-center gap-2 text-sm">
-			<a
-				href="/projects"
-				class="text-neutral-500 hover:text-neutral-300 transition-colors"
-				data-sveltekit-preload-data
-			>
-				Projects
-			</a>
 			<span class="material-symbols-outlined text-base text-neutral-600">chevron_right</span>
 			<span class="text-neutral-200 font-medium truncate max-w-[200px]">{data.project.title}</span>
 		</div>
@@ -138,7 +132,7 @@
 		<!-- Background Image -->
 		{#if data.project.featuredImage}
 			<div
-				class="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+				class="absolute inset-0 z-0 bg-cover bg-top transition-transform duration-700 group-hover:scale-105"
 				style="background-image: url('{data.project.featuredImage}');"
 			></div>
 		{/if}
@@ -221,7 +215,7 @@
 	<!-- Main Grid Layout -->
 	<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pt-4">
 		<!-- Left Sidebar (Metadata & Stack) -->
-		<aside class="lg:col-span-4 flex flex-col gap-6 order-2 lg:order-1">
+		<aside class="lg:col-span-4 flex flex-col gap-6 order-1">
 			<!-- Project Details Card -->
 			<div class="bg-neutral-800/30 rounded-xl p-6 border border-neutral-700/50">
 				<h3 class="text-base font-bold text-neutral-100 mb-5 flex items-center gap-2">
@@ -384,11 +378,6 @@
 									class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
 									loading="lazy"
 								/>
-								<div
-									class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
-								>
-									<span class="material-symbols-outlined text-white text-4xl">zoom_in</span>
-								</div>
 							</div>
 						{/each}
 					</div>
@@ -417,6 +406,7 @@
 				data-sveltekit-preload-data
 			>
 				Contact Me
+				<ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
 			</a>
 		</div>
 	</div>
