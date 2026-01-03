@@ -137,7 +137,7 @@
 				class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8"
 				style="scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;"
 			>
-				{#await data.streamed.posts}
+				{#await data.streamed.projects}
 					<div class="flex gap-4 sm:gap-6">
 						{#each Array(3) as _, _idx (_idx)}
 							<div
@@ -155,16 +155,16 @@
 							</div>
 						{/each}
 					</div>
-				{:then posts}
-					{#each posts as project (project.slug)}
+				{:then projects}
+					{#each projects as project (project.slug)}
 						<a
 							href={`/projects/${project.slug}`}
-							class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden"
+							class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden border border-neutral-700/30 hover:border-orange-500/30 transition-all duration-300"
 							data-sveltekit-preload-data
 						>
-							{#if project.feature_image}
+							{#if project.featuredImage}
 								<img
-									src={project.feature_image}
+									src={project.featuredImage}
 									alt={project.title}
 									class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
 									loading="lazy"
@@ -175,18 +175,76 @@
 							{:else}
 								<div class="absolute inset-0 bg-linear-to-br from-neutral-800 to-neutral-900"></div>
 							{/if}
+
+							<!-- Status Badge -->
+							{#if project.status}
+								<div class="absolute top-4 left-4 sm:top-5 sm:left-5">
+									<span
+										class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full border backdrop-blur-sm {project.status.toLowerCase() ===
+										'shipped'
+											? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+											: project.status.toLowerCase() === 'in progress'
+												? 'bg-orange-500/20 text-orange-400 border-orange-500/30'
+												: 'bg-neutral-500/20 text-neutral-400 border-neutral-500/30'}"
+									>
+										{#if project.status.toLowerCase() === 'shipped'}
+											<span class="relative flex h-1.5 w-1.5">
+												<span
+													class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+												></span>
+												<span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"
+												></span>
+											</span>
+										{/if}
+										{project.status}
+									</span>
+								</div>
+							{/if}
+
 							<div class="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end">
 								<h3
-									class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-neutral-100 transition-colors"
+									class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-orange-400 transition-colors"
 								>
 									{project.title}
 								</h3>
+
+								<!-- Role & Client -->
+								{#if project.role}
+									<p class="text-xs sm:text-sm text-neutral-400 mb-2">
+										{project.role}
+										{#if project.client}
+											<span class="text-neutral-500">•</span>
+											{project.client}
+										{/if}
+									</p>
+								{/if}
+
 								{#if project.excerpt}
 									<p
-										class="text-xs sm:text-sm md:text-base text-neutral-300 line-clamp-3 leading-relaxed"
+										class="text-xs sm:text-sm md:text-base text-neutral-300 line-clamp-2 leading-relaxed mb-3"
 									>
 										{project.excerpt}
 									</p>
+								{/if}
+
+								<!-- Tech Stack -->
+								{#if project.featuredStack && project.featuredStack.length > 0}
+									<div class="flex flex-wrap gap-1.5">
+										{#each project.featuredStack?.slice(0, 3) as tech (tech)}
+											<span
+												class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-white/10 backdrop-blur-sm text-neutral-200 border border-white/10"
+											>
+												{tech}
+											</span>
+										{/each}
+										{#if project.featuredStack.length > 3}
+											<span
+												class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-white/5 text-neutral-400"
+											>
+												+{project.featuredStack.length - 3}
+											</span>
+										{/if}
+									</div>
 								{/if}
 							</div>
 						</a>

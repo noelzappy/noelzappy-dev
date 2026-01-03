@@ -1,37 +1,29 @@
-export type Project = {
+export interface ProjectFrontmatter {
 	id: string;
-	slug: string;
 	title: string;
-	tagline: string;
-	metadata: {
-		type: string;
-		status: string;
-		timeline: string;
-		roles: string[];
-	};
-	teamSize: number;
-	stack: {
-		featured: string[];
-		full: string[];
-	};
-	links: {
-		live: string | null;
-		repo: string | null;
-		demoVideo: string | null;
-	};
-	assets: {
-		logo: string;
-		thumbnail: string;
-		hero: string;
-		gallery: string[];
-	};
-	metrics: {
-		label: string;
+	slug: string;
+	excerpt: string;
+	featured: boolean;
+	publishedAt: string;
+	featuredImage?: string;
+	liveUrl?: string;
+	iosUrl?: string;
+	androidUrl?: string;
+	github?: string;
+	role: string;
+	team?: string; // 4 Members (1 PM, 2 Developers, 1 Designer, etc)
+	status: string; // Shipped, In Progress, Cancelled, Archived
+	client?: string;
+	gallery?: string[];
+	featuredStack?: string[];
+	stack?: string[];
+	stats?: {
+		key: string;
 		value: string;
+		description?: string;
 	}[];
-	content: {
-		problem: string;
-		solution: string;
-		technicalChallenge: string;
-	};
-};
+}
+
+export interface ProjectData extends ProjectFrontmatter {
+	html: string;
+}

@@ -1,22 +1,23 @@
-import { getFeaturedProjects, getFeaturedNotes } from '$lib/integrations/ghost';
+import { getFeaturedProjects as getMarkdownFeaturedProjects } from '$lib/data/projects-loader';
+import { getFeaturedNotes } from '$lib/integrations/ghost';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
 	try {
-		const projects = getFeaturedProjects().catch(() => []),
-			notes = getFeaturedNotes().catch(() => []);
+		const markdownProjects = getMarkdownFeaturedProjects();
+		const notes = getFeaturedNotes().catch(() => []);
 
 		return {
 			streamed: {
-				posts: projects,
+				projects: Promise.resolve(markdownProjects),
 				notes: notes
 			}
 		};
 	} catch {
 		return {
 			streamed: {
-				posts: [],
-				notes: []
+				projects: Promise.resolve([]),
+				notes: Promise.resolve([])
 			}
 		};
 	}
