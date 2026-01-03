@@ -7,27 +7,16 @@ export const load: PageServerLoad = async () => {
 		const markdownProjects = getMarkdownFeaturedProjects();
 		const notes = getFeaturedNotes().catch(() => []);
 
-		// Transform markdown projects to match Ghost API format
-		const projects = markdownProjects.map((project) => ({
-			id: project.slug,
-			slug: project.slug,
-			title: project.title,
-			excerpt: project.excerpt,
-			published_at: project.published_at,
-			feature_image: project.feature_image || '',
-			tags: []
-		}));
-
 		return {
 			streamed: {
-				posts: Promise.resolve(projects),
+				projects: Promise.resolve(markdownProjects),
 				notes: notes
 			}
 		};
 	} catch {
 		return {
 			streamed: {
-				posts: Promise.resolve([]),
+				projects: Promise.resolve([]),
 				notes: Promise.resolve([])
 			}
 		};

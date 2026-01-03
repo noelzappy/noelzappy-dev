@@ -3,7 +3,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ url }) => {
 	const page = Number(url.searchParams.get('page')) || 1;
-	const limit = 10;
+	const limit = 50;
 
 	try {
 		const allProjects = getAllProjects();
@@ -19,8 +19,8 @@ export const load: PageServerLoad = async ({ url }) => {
 				slug: project.slug,
 				title: project.title,
 				excerpt: project.excerpt,
-				publishedAt: project.published_at,
-				featureImage: project.feature_image || '',
+				publishedAt: project.publishedAt,
+				featureImage: project.featuredImage || '',
 				tags: []
 			})),
 			pagination: {

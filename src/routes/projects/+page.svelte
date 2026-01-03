@@ -50,7 +50,7 @@
 						<img
 							src={project.featureImage}
 							alt={project.title}
-							class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+							class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-cover object-top"
 							loading="lazy"
 						/>
 					</div>

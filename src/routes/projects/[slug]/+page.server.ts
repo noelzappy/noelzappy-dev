@@ -13,9 +13,9 @@ export const load: PageServerLoad = async ({ params }) => {
 					slug: project.slug,
 					title: project.title,
 					html: project.html,
-					publishedAt: project.published_at,
-					updatedAt: project.published_at,
-					featureImage: project.feature_image || '',
+					publishedAt: project.publishedAt,
+					updatedAt: project.publishedAt,
+					featureImage: project.featuredImage || '',
 					excerpt: project.excerpt,
 					tags: [],
 					readingTime: 0

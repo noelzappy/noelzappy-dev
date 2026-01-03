@@ -5,9 +5,6 @@ import type { ProjectData } from './projects';
 
 const projectsDirectory = path.join(process.cwd(), 'src/lib/data/projects');
 
-/**
- * Get all project markdown files
- */
 export function getAllProjects(): ProjectData[] {
 	const fileNames = fs.readdirSync(projectsDirectory);
 	const projects = fileNames
@@ -23,16 +20,12 @@ export function getAllProjects(): ProjectData[] {
 			} as ProjectData;
 		})
 		.sort((a, b) => {
-			// Sort by published date descending
-			return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+			return new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime();
 		});
 
 	return projects;
 }
 
-/**
- * Get a single project by slug
- */
 export function getProjectBySlug(slug: string): ProjectData | null {
 	try {
 		const fullPath = path.join(projectsDirectory, `${slug}.md`);
@@ -48,9 +41,6 @@ export function getProjectBySlug(slug: string): ProjectData | null {
 	}
 }
 
-/**
- * Get featured projects
- */
 export function getFeaturedProjects(limit: number = 5): ProjectData[] {
 	const allProjects = getAllProjects();
 	return allProjects.filter((project) => project.featured).slice(0, limit);

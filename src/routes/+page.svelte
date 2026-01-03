@@ -137,7 +137,7 @@
 				class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8"
 				style="scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;"
 			>
-				{#await data.streamed.posts}
+				{#await data.streamed.projects}
 					<div class="flex gap-4 sm:gap-6">
 						{#each Array(3) as _, _idx (_idx)}
 							<div
@@ -155,16 +155,16 @@
 							</div>
 						{/each}
 					</div>
-				{:then posts}
-					{#each posts as project (project.slug)}
+				{:then projects}
+					{#each projects as project (project.slug)}
 						<a
 							href={`/projects/${project.slug}`}
 							class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden"
 							data-sveltekit-preload-data
 						>
-							{#if project.feature_image}
+							{#if project.featuredImage}
 								<img
-									src={project.feature_image}
+									src={project.featuredImage}
 									alt={project.title}
 									class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
 									loading="lazy"
