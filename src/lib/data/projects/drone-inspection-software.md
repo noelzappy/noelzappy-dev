@@ -4,7 +4,8 @@ slug: "drone-inspection-software"
 excerpt: "This was a cloud-based drone inspection platform I built as a solo developer. It’s designed for inspecting things like transmission towers, wind turbines, and solar panels using images captured by drones."
 featured: false
 publishedAt: "2023-07-06T00:00:00.000Z"
-featuredImage: "https://ghost.noelzappy.dev/content/images/2025/12/mapthis.png"role: "Solo Developer"
+featuredImage: "https://ghost.noelzappy.dev/content/images/2025/12/mapthis.png"
+role: "Solo Developer"
 team: "1 Member (Solo)"
 status: "Shipped"
 featuredStack:

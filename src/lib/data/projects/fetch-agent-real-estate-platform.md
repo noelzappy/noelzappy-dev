@@ -4,7 +4,8 @@ slug: "fetch-agent-real-estate-platform"
 excerpt: "I led the development of the platform’s core infrastructure, building scalable APIs and agent-filtering systems to help users find real estate agents tailored to their needs."
 featured: true
 publishedAt: "2025-04-06T15:20:30.000Z"
-featuredImage: "/portfolio/fetch-agent-platform.png"liveUrl: "https://fetchagent.com"
+featuredImage: "/portfolio/fetch-agent-platform.png"
+liveUrl: "https://fetchagent.com"
 role: "Senior Backend Developer"
 status: "Shipped"
 featuredStack:
