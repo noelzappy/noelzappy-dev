@@ -19,6 +19,8 @@ stack:
   - 'APIs'
   - 'Backend Architecture'
   - 'Redis'
+categories:
+  - 'Web App'
 gallery:
   - '/portfolio/fetch-agent/fetch-agent.png'
   - '/portfolio/fetch-agent/1.png'

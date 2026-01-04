@@ -21,6 +21,8 @@ stack:
   - 'Multi-tenant Architecture'
   - 'WhatsApp API'
   - 'Mobile Money Integration'
+categories:
+  - 'Web App'
 stats:
   - key: 'Transactions'
     value: '₵5M+'

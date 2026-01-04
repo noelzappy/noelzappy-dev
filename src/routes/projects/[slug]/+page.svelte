@@ -275,6 +275,25 @@
 							<span class="text-neutral-200 text-sm font-semibold">{data.project.client}</span>
 						</div>
 					{/if}
+
+					{#if data.project.categories?.length}
+						{#if data.project.client}
+							<div class="w-full h-px bg-neutral-700/50"></div>
+						{/if}
+						<div class="grid grid-cols-[90px_1fr] items-start">
+							<span class="text-neutral-500 text-sm font-medium">Type</span>
+							<div class="flex flex-wrap gap-1.5">
+								{#each data.project.categories as category (category)}
+									<a
+										href="/projects?category={encodeURIComponent(category)}"
+										class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-md bg-orange-500/10 text-orange-400 border border-orange-500/20 hover:bg-orange-500/20 transition-colors"
+									>
+										{category}
+									</a>
+								{/each}
+							</div>
+						</div>
+					{/if}
 				</div>
 			</div>
 

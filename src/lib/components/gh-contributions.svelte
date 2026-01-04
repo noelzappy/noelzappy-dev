@@ -176,7 +176,7 @@
 		</p>
 	{:else}
 		<h2 class="text-base font-semibold mb-2">
-			{totalContributions} contributions in the last year
+			{totalContributions?.toLocaleString()} contributions in the last year
 		</h2>
 		<div class="flex gap-3">
 			<div class="day-labels hidden sm:flex flex-col justify-between text-xs text-gray-500 pt-8">

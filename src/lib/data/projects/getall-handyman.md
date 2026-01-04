@@ -17,6 +17,9 @@ stack:
   - 'Cloud Functions'
   - 'iOS'
   - 'Android'
+categories:
+  - 'Mobile App'
+  - 'Web App'
 gallery:
   - 'https://ghost.noelzappy.dev/content/images/2025/12/getall.png'
 ---

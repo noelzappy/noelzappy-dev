@@ -36,6 +36,7 @@ export const load: PageServerLoad = async ({ params }) => {
 					featuredStack: project.featuredStack || [],
 					stack: project.stack || [],
 					stats: project.stats || [],
+					categories: project.categories || [],
 					readingTime: Math.ceil(project.html.split(/\s+/).length / 200)
 				},
 				prevProject: prevProject ? { slug: prevProject.slug, title: prevProject.title } : null,

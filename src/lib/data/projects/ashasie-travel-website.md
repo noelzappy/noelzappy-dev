@@ -18,6 +18,8 @@ stack:
   - 'JavaScript'
   - 'SEO'
   - 'Responsive Design'
+categories:
+  - 'Website'
 gallery:
   - '/portfolio/ashasie/ashasie-tour.png'
   - '/portfolio/ashasie/ashasie-1.png'

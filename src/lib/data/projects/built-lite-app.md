@@ -19,6 +19,8 @@ stack:
   - 'Offline-First'
   - 'iOS'
   - 'Android'
+categories:
+  - 'Mobile App'
 gallery:
   - '/portfolio/builtliteapp.png'
 ---

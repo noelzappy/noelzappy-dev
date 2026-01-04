@@ -7,6 +7,14 @@
 		>
 			Projects
 		</a>
+
+		<a
+			class="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+			href="/open-source"
+			data-sveltekit-preload-data
+		>
+			Open Source
+		</a>
 		<a
 			class="text-gray-400 hover:text-white text-sm font-medium transition-colors"
 			href="/"

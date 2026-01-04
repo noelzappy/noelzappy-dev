@@ -23,6 +23,9 @@ stack:
   - 'React'
   - 'iOS'
   - 'Android'
+categories:
+  - 'Mobile App'
+  - 'Web App'
 stats:
   - key: 'Users Migrated'
     value: '170,000+'

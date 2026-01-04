@@ -19,6 +19,8 @@ stack:
   - 'JavaScript'
   - 'Responsive Design'
   - 'Email System'
+categories:
+  - 'Website'
 gallery:
   - '/portfolio/reeno-group.png'
 ---

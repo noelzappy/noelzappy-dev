@@ -21,6 +21,8 @@ stack:
   - 'Android'
   - 'In-App Wallet'
   - 'POS'
+categories:
+  - 'Mobile App'
 stats:
   - key: 'Installs'
     value: '50,000+'

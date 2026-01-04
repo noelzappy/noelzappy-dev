@@ -32,6 +32,19 @@
 				return 'bg-neutral-500/20 text-neutral-400 border-neutral-500/30';
 		}
 	}
+
+	function getCategoryIcon(category: string) {
+		switch (category) {
+			case 'Mobile App':
+				return 'phone_iphone';
+			case 'Web App':
+				return 'web';
+			case 'Website':
+				return 'language';
+			default:
+				return 'folder';
+		}
+	}
 </script>
 
 <SEOHead
@@ -50,6 +63,33 @@
 			<p class="text-lg text-neutral-300 font-light">
 				A curated collection of work spanning fintech, SaaS, and enterprise solutions
 			</p>
+		</div>
+
+		<!-- Category Filter -->
+		<div class="flex flex-wrap gap-2">
+			<a
+				href="/projects"
+				class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border transition-all {!data.activeCategory
+					? 'bg-orange-500/20 text-orange-400 border-orange-500/30'
+					: 'bg-neutral-800/50 text-neutral-400 border-neutral-700/50 hover:border-neutral-600 hover:text-neutral-300'}"
+				data-sveltekit-preload-data
+			>
+				<span class="material-symbols-outlined text-base">apps</span>
+				All
+			</a>
+			{#each data.categories as category (category)}
+				<a
+					href="/projects?category={encodeURIComponent(category)}"
+					class="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg border transition-all {data.activeCategory ===
+					category
+						? 'bg-orange-500/20 text-orange-400 border-orange-500/30'
+						: 'bg-neutral-800/50 text-neutral-400 border-neutral-700/50 hover:border-neutral-600 hover:text-neutral-300'}"
+					data-sveltekit-preload-data
+				>
+					<span class="material-symbols-outlined text-base">{getCategoryIcon(category)}</span>
+					{category}
+				</a>
+			{/each}
 		</div>
 	</div>
 

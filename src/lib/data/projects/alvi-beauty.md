@@ -26,6 +26,9 @@ stack:
   - 'Android'
   - 'Firebase'
   - 'Redis'
+categories:
+  - 'Mobile App'
+  - 'Web App'
 gallery:
   - '/portfolio/alvibeauty.png'
 ---

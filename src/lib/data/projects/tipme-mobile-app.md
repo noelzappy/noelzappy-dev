@@ -21,6 +21,9 @@ stack:
   - 'QR Code'
   - 'Java'
   - 'iBeacon'
+categories:
+  - 'Mobile App'
+  - 'Web App'
 gallery:
   - 'https://ghost.noelzappy.dev/content/images/2025/12/tipme.png'
 ---

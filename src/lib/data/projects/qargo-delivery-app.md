@@ -21,6 +21,8 @@ stack:
   - 'Real-time Tracking'
   - 'In-App Wallet'
   - 'Push Notifications'
+categories:
+  - 'Mobile App'
 stats:
   - key: 'Rating'
     value: '4.8'

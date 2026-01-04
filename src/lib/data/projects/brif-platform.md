@@ -20,6 +20,9 @@ stack:
   - 'PostgreSQL'
   - 'GitHub Actions'
   - 'Vercel'
+categories:
+  - 'Web App'
+  - 'Website'
 stats:
   - key: 'LCP Improvement'
     value: '35%'

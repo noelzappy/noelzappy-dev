@@ -17,6 +17,8 @@ stack:
   - 'Next.js'
   - 'SEO'
   - 'Accessibility'
+categories:
+  - 'Website'
 gallery:
   - '/portfolio/built-website.png'
 ---

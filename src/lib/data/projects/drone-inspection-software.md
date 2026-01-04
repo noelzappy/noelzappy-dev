@@ -16,6 +16,8 @@ stack:
   - 'Node.js'
   - 'Cloud Infrastructure'
   - 'Image Processing'
+categories:
+  - 'Web App'
 gallery:
   - 'https://ghost.noelzappy.dev/content/images/2025/12/mapthis.png'
 ---
