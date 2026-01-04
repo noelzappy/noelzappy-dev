@@ -1,9 +1,9 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { GITHUB_ACCESS_TOKEN } from '$env/static/private';
 import { fetchSelectedGithubRepos } from '$lib/integrations/github';
 
-export const GET: RequestHandler = async () => {
+export const GET: RequestHandler = async ({ platform }) => {
+	const GITHUB_ACCESS_TOKEN = platform?.env?.GITHUB_ACCESS_TOKEN;
 	try {
 		const repos = await fetchSelectedGithubRepos(GITHUB_ACCESS_TOKEN);
 		return json({ repos });
