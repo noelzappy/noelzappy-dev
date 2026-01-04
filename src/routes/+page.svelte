@@ -115,70 +115,61 @@
 	</section>
 
 	<section class="flex flex-col gap-6">
-		<div class="flex items-center justify-between mb-6">
+		<div class="flex items-center justify-between">
 			<h2 class="text-xl font-semibold text-neutral-100">My Projects</h2>
-			<div class="flex items-center gap-4">
-				<a
-					href="/projects"
-					class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+			<a
+				href="/projects"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+			>
+				View all
+				<span
+					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
 				>
-					View all
-					<span
-						class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
-					>
-						arrow_forward
-					</span>
-				</a>
-			</div>
+					arrow_forward
+				</span>
+			</a>
 		</div>
 
-		<div class="w-screen relative -left-4 sm:-left-6 lg:-left-8">
-			<div
-				class="flex gap-4 sm:gap-6 overflow-x-auto pb-4 pl-4 sm:pl-6 lg:pl-8 pr-4 sm:pr-6 lg:pr-8"
-				style="scrollbar-width: none; -ms-overflow-style: none; scroll-behavior: smooth;"
-			>
-				{#await data.streamed.projects}
-					<div class="flex gap-4 sm:gap-6">
-						{#each Array(3) as _, _idx (_idx)}
-							<div
-								class="relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl overflow-hidden bg-neutral-800/20"
-							>
-								<div class="absolute inset-0 bg-neutral-700/40 animate-pulse"></div>
-								<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-								<div class="absolute left-0 right-0 bottom-0 p-5 sm:p-6 md:p-8">
-									<div class="h-6 bg-neutral-600 rounded-md w-2/3 mb-3 animate-pulse"></div>
-									<div class="space-y-2">
-										<div class="h-3 bg-neutral-600 rounded w-5/6 animate-pulse"></div>
-										<div class="h-3 bg-neutral-600 rounded w-3/4 animate-pulse"></div>
-									</div>
-								</div>
+		{#await data.streamed.projects}
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				{#each Array(4) as _, _idx (_idx)}
+					<div
+						class="flex flex-col rounded-xl overflow-hidden border border-neutral-700/50 bg-neutral-800/20"
+					>
+						<div class="aspect-video w-full bg-neutral-800/40 animate-pulse"></div>
+						<div class="flex flex-col gap-3 p-5">
+							<div class="h-5 bg-neutral-700 rounded w-2/3 animate-pulse"></div>
+							<div class="h-3 bg-neutral-700 rounded w-1/3 animate-pulse"></div>
+							<div class="space-y-2">
+								<div class="h-3 bg-neutral-700 rounded w-full animate-pulse"></div>
+								<div class="h-3 bg-neutral-700 rounded w-4/5 animate-pulse"></div>
 							</div>
-						{/each}
+						</div>
 					</div>
-				{:then projects}
-					{#each projects as project (project.slug)}
-						<a
-							href={`/projects/${project.slug}`}
-							class="group relative shrink-0 w-[80vw] sm:w-[70vw] md:w-[500px] lg:w-[600px] aspect-4/3 rounded-xl sm:rounded-2xl overflow-hidden border border-neutral-700/30 hover:border-orange-500/30 transition-all duration-300"
-							data-sveltekit-preload-data
-						>
+				{/each}
+			</div>
+		{:then projects}
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+				{#each projects as project (project.slug)}
+					<a
+						href={`/projects/${project.slug}`}
+						class="group flex flex-col rounded-xl overflow-hidden border border-neutral-700/50 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-orange-500/30 transition-all duration-300"
+						data-sveltekit-preload-data
+					>
+						<div class="aspect-video w-full overflow-hidden bg-neutral-900 relative">
 							{#if project.featuredImage}
 								<img
 									src={project.featuredImage}
 									alt={project.title}
-									class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+									class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-cover object-top"
 									loading="lazy"
 								/>
-								<div
-									class="absolute inset-0 bg-linear-to-t from-black/90 via-black/50 to-transparent"
-								></div>
 							{:else}
-								<div class="absolute inset-0 bg-linear-to-br from-neutral-800 to-neutral-900"></div>
+								<div class="w-full h-full bg-linear-to-br from-neutral-800 to-neutral-900"></div>
 							{/if}
-
-							<!-- Status Badge -->
+							<!-- Status Badge Overlay -->
 							{#if project.status}
-								<div class="absolute top-4 left-4 sm:top-5 sm:left-5">
+								<div class="absolute top-3 left-3">
 									<span
 										class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full border backdrop-blur-sm {project.status.toLowerCase() ===
 										'shipped'
@@ -200,58 +191,67 @@
 									</span>
 								</div>
 							{/if}
-
-							<div class="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col justify-end">
+						</div>
+						<div class="flex flex-col gap-3 p-5">
+							<div class="flex items-start justify-between gap-2">
 								<h3
-									class="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 group-hover:text-orange-400 transition-colors"
+									class="text-lg font-semibold text-neutral-100 group-hover:text-orange-400 transition-colors"
 								>
 									{project.title}
 								</h3>
-
-								<!-- Role & Client -->
-								{#if project.role}
-									<p class="text-xs sm:text-sm text-neutral-400 mb-2">
-										{project.role}
-										{#if project.client}
-											<span class="text-neutral-500">•</span>
-											{project.client}
-										{/if}
-									</p>
-								{/if}
-
-								{#if project.excerpt}
-									<p
-										class="text-xs sm:text-sm md:text-base text-neutral-300 line-clamp-2 leading-relaxed mb-3"
-									>
-										{project.excerpt}
-									</p>
-								{/if}
-
-								<!-- Tech Stack -->
-								{#if project.featuredStack && project.featuredStack.length > 0}
-									<div class="flex flex-wrap gap-1.5">
-										{#each project.featuredStack?.slice(0, 3) as tech (tech)}
-											<span
-												class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-white/10 backdrop-blur-sm text-neutral-200 border border-white/10"
-											>
-												{tech}
-											</span>
-										{/each}
-										{#if project.featuredStack.length > 3}
-											<span
-												class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-white/5 text-neutral-400"
-											>
-												+{project.featuredStack.length - 3}
-											</span>
-										{/if}
-									</div>
-								{/if}
 							</div>
-						</a>
-					{/each}
-				{/await}
+
+							<!-- Role & Client -->
+							{#if project.role}
+								<p class="text-xs text-neutral-500 font-medium">
+									{project.role}
+									{#if project.client}
+										<span class="text-neutral-600">•</span>
+										{project.client}
+									{/if}
+								</p>
+							{/if}
+
+							{#if project.excerpt}
+								<p class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
+									{project.excerpt}
+								</p>
+							{/if}
+
+							<!-- Tech Stack Tags -->
+							{#if project.featuredStack && project.featuredStack.length > 0}
+								<div class="flex flex-wrap gap-1.5 mt-1">
+									{#each project.featuredStack.slice(0, 3) as tech (tech)}
+										<span
+											class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-neutral-700/50 text-neutral-300"
+										>
+											{tech}
+										</span>
+									{/each}
+									{#if project.featuredStack.length > 3}
+										<span
+											class="inline-flex items-center px-2 py-0.5 text-xs font-medium rounded-md bg-neutral-700/30 text-neutral-500"
+										>
+											+{project.featuredStack.length - 3}
+										</span>
+									{/if}
+								</div>
+							{/if}
+
+							<div
+								class="flex items-center gap-2 text-sm text-neutral-500 group-hover:text-orange-400 transition-colors mt-auto pt-2"
+							>
+								<span>View project</span>
+								<span
+									class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+									>arrow_forward</span
+								>
+							</div>
+						</div>
+					</a>
+				{/each}
 			</div>
-		</div>
+		{/await}
 	</section>
 
 	<section>
