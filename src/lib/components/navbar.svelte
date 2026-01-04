@@ -4,6 +4,7 @@
 
 	const NavMenu = [
 		{ name: 'Projects', href: '/projects' },
+		{ name: 'Open Source', href: '/open-source' },
 		{ name: 'Notes', href: '/notes' },
 		{ name: 'Contact', href: '/contact' }
 	];
