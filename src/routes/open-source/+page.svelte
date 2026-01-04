@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { Github, Star, GitFork, ExternalLink } from 'lucide-svelte';
-	import type { PageData } from './$types';
 	import GhContributions from '$lib/components/gh-contributions.svelte';
-
-	export let data: PageData;
+	import { onMount } from 'svelte';
 
 	type Repo = {
 		name: string;
@@ -17,8 +15,9 @@
 		} | null;
 	};
 
-	let repos = data.repos as Repo[];
-	let githubUsername = data.githubUsername;
+	let repos: Repo[] = $state([]);
+
+	const githubUsername = 'noelzappy';
 
 	function formatNumber(num: number): string {
 		if (num >= 1000) {
@@ -26,6 +25,20 @@
 		}
 		return num.toString();
 	}
+
+	onMount(async () => {
+		try {
+			const response = await fetch('/api/github-repos');
+			if (!response.ok) {
+				console.error('Failed to fetch repositories');
+				return;
+			}
+			const data = await response.json();
+			repos = data.repos;
+		} catch (error) {
+			console.error('Error fetching repositories:', error);
+		}
+	});
 </script>
 
 <svelte:head>
