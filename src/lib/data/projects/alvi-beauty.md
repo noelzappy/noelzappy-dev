@@ -3,7 +3,7 @@ title: 'Alvi Beauty'
 slug: 'alvi-beauty'
 excerpt: 'Alvi Beauty is a multi-platform beauty service booking product I worked on as a contracted developer for Romarianec Tech. It lets users book beauty services from home while giving service providers and admins the tools they need to manage everything smoothly.'
 featured: true
-publishedAt: '2024-04-06T00:00:00.000Z'
+publishedAt: '2022-04-06T00:00:00.000Z'
 featuredImage: '/portfolio/alvibeauty.png'
 liveUrl: 'https://alvibeauty.com/en-ua'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.beautypoisk.user'

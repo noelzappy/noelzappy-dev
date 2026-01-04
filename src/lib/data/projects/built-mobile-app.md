@@ -3,7 +3,7 @@ title: 'Built Mobile App'
 slug: 'built-mobile-app'
 excerpt: 'I rewrote the mobile app for Built, a financial technology company, to enhance functionality and user experience. The revamped app, designed to simplify financial data management for small businesses, saw a significant increase in installs from 700 to 50,000+.'
 featured: true
-publishedAt: '2025-01-01T21:38:00.000Z'
+publishedAt: '2022-12-01T21:38:00.000Z'
 featuredImage: '/portfolio/builtapp.png'
 liveUrl: 'https://built.africa'
 iosUrl: 'https://apps.apple.com/gh/app/built-accounting/id1547855525'
