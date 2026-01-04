@@ -2,20 +2,11 @@
 	import { Github, Star, GitFork, ExternalLink } from 'lucide-svelte';
 	import GhContributions from '$lib/components/gh-contributions.svelte';
 	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 
-	type Repo = {
-		name: string;
-		description: string | null;
-		url: string;
-		stargazerCount: number;
-		forkCount: number;
-		primaryLanguage: {
-			name: string;
-			color: string;
-		} | null;
-	};
+	let { data }: { data: PageData } = $props();
 
-	let repos: Repo[] = $state([]);
+	const repos = $derived(data?.repos || []);
 
 	const githubUsername = 'noelzappy';
 
@@ -25,20 +16,6 @@
 		}
 		return num.toString();
 	}
-
-	onMount(async () => {
-		try {
-			const response = await fetch('/api/github-repos');
-			if (!response.ok) {
-				console.error('Failed to fetch repositories');
-				return;
-			}
-			const data = await response.json();
-			repos = data.repos;
-		} catch (error) {
-			console.error('Error fetching repositories:', error);
-		}
-	});
 </script>
 
 <svelte:head>
@@ -83,7 +60,7 @@
 					href={repo.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="group relative flex flex-col rounded-xl border border-neutral-800 bg-neutral-900/50 p-5 transition-all duration-300 hover:bg-neutral-800/40 hover:border-neutral-600"
+					class="group relative flex flex-col rounded-xl border border-neutral-800 bg-neutral-900/50 p-5 transition-all duration-300 hover:bg-neutral-800/40 hover:border-orange-500"
 				>
 					<div class="mb-3 flex items-start justify-between">
 						<div class="flex items-center gap-2">

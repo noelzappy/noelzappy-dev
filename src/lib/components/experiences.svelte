@@ -73,7 +73,7 @@
 						href={company.url}
 						target="_blank"
 						rel="noopener"
-						class="group flex-shrink-0 mx-4 flex items-center justify-center p-4 bg-neutral-800/20 rounded-2xl h-28 w-44 border border-neutral-700 hover:bg-neutral-800/40 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/30 transition-all duration-300"
+						class="group flex-shrink-0 mx-4 flex items-center justify-center p-4 bg-neutral-800/20 rounded-2xl h-28 w-44 border border-neutral-700 hover:bg-neutral-800/40 hover:border-orange-500 hover:shadow-lg hover:shadow-neutral-900/30 transition-all duration-300"
 					>
 						<img
 							src={company.logo}
@@ -90,7 +90,7 @@
 						href={company.url}
 						target="_blank"
 						rel="noopener"
-						class="group flex-shrink-0 mx-4 flex items-center justify-center p-4 bg-neutral-800/20 rounded-2xl h-28 w-44 border border-neutral-700 hover:bg-neutral-800/40 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/30 transition-all duration-300"
+						class="group flex-shrink-0 mx-4 flex items-center justify-center p-4 bg-neutral-800/20 rounded-2xl h-28 w-44 border border-neutral-700 hover:bg-neutral-800/40 hover:border-orange-500 hover:shadow-lg hover:shadow-neutral-900/30 transition-all duration-300"
 					>
 						<img
 							src={company.logo}

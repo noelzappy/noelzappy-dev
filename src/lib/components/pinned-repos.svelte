@@ -38,7 +38,23 @@
 </script>
 
 <section class="flex flex-col gap-6">
-	<h2 class="text-xl font-semibold text-neutral-100">Pinned Repositories</h2>
+	<div class="flex items-center justify-between mb-6">
+		<h2 class="text-xl font-semibold text-neutral-100">Pinned Repositories</h2>
+		<div class="flex items-center gap-4">
+			<a
+				href="/open-source"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-orange-500 transition-colors"
+			>
+				View Open Source
+				<span
+					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
+				>
+					arrow_forward
+				</span>
+			</a>
+		</div>
+	</div>
+
 	{#if loading}
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			{#each Array(6) as _, i (i)}
@@ -67,7 +83,7 @@
 					href={repo.url}
 					target="_blank"
 					rel="noopener noreferrer"
-					class="group flex flex-col gap-4 border border-neutral-700 bg-neutral-800/20 p-4 rounded-lg transition-all duration-300 hover:bg-neutral-800/40 hover:border-neutral-600 hover:shadow-lg hover:shadow-neutral-900/30"
+					class="group flex flex-col gap-4 border border-neutral-700 bg-neutral-800/20 p-4 rounded-lg transition-all duration-300 hover:bg-neutral-800/40 hover:border-orange-500 hover:shadow-lg hover:shadow-neutral-900/30"
 				>
 					<div class="flex items-center gap-2">
 						<svg

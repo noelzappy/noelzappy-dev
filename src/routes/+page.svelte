@@ -8,6 +8,7 @@
 	import PinnedRepos from '$lib/components/pinned-repos.svelte';
 	import Expertise from '$lib/components/expertise.svelte';
 	import ProjectCard from '$lib/components/project-card.svelte';
+	import NoteCard from '$lib/components/note-card.svelte';
 	import { ArrowRight } from 'lucide-svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -47,7 +48,7 @@
 		<div class="flex flex-wrap items-center gap-6 pt-4">
 			<a
 				href="/contact"
-				class="group inline-flex items-center gap-2 justify-center rounded-lg border border-neutral-600 bg-neutral-800/50 px-4 py-2 text-sm font-medium text-neutral-100 hover:bg-neutral-700/80 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 focus:ring-offset-neutral-900 transition-all"
+				class="group inline-flex items-center gap-2 justify-center rounded-lg border border-neutral-600 bg-neutral-800/50 px-4 py-2 text-sm font-medium text-neutral-100 hover:bg-orange-500/80 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 focus:ring-offset-neutral-900 transition-all"
 			>
 				<span>Get in Touch</span>
 				<ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -57,7 +58,7 @@
 					href="https://www.linkedin.com/in/noelzappy"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-neutral-400 hover:text-white transition-colors"
+					class="text-neutral-400 hover:text-orange-500 transition-colors"
 					aria-label="LinkedIn"
 				>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -70,7 +71,7 @@
 					href="https://x.com/noelzappy"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-neutral-400 hover:text-white transition-colors"
+					class="text-neutral-400 hover:text-orange-500 transition-colors"
 					aria-label="X (Twitter)"
 				>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -81,7 +82,7 @@
 				</a>
 				<a
 					href="mailto:noelzappy@gmail.com"
-					class="text-neutral-400 hover:text-white transition-colors"
+					class="text-neutral-400 hover:text-orange-500 transition-colors"
 					aria-label="Email"
 				>
 					<svg
@@ -102,7 +103,7 @@
 					href="https://github.com/noelzappy"
 					target="_blank"
 					rel="noopener noreferrer"
-					class="text-neutral-400 hover:text-white transition-colors"
+					class="text-neutral-400 hover:text-orange-500 transition-colors"
 					aria-label="GitHub"
 				>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -120,9 +121,9 @@
 			<h2 class="text-xl font-semibold text-neutral-100">My Projects</h2>
 			<a
 				href="/projects"
-				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-orange-500 transition-colors"
 			>
-				View all
+				View all (20+)
 				<span
 					class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1"
 				>
@@ -164,7 +165,7 @@
 			<div class="flex items-center gap-4">
 				<a
 					href="https://www.linkedin.com/in/noelzappy/"
-					class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+					class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-orange-500 transition-colors"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
@@ -192,7 +193,7 @@
 			<h2 class="text-xl font-semibold text-neutral-100">Latest Notes</h2>
 			<a
 				href="/notes"
-				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+				class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-orange-500 transition-colors"
 			>
 				View all
 				<span
@@ -222,32 +223,7 @@
 				</div>
 			{:then notes}
 				{#each notes as note (note.slug)}
-					<a
-						class="group relative flex items-start justify-between gap-4 p-5 sm:p-6 rounded-xl border border-neutral-700 bg-neutral-800/20 hover:bg-neutral-800/40 hover:border-neutral-600 transition-all duration-300 hover:shadow-lg hover:shadow-neutral-900/30 overflow-hidden"
-						href={`/notes/${note.slug}`}
-						data-sveltekit-preload-data
-					>
-						<div
-							class="absolute left-0 top-0 bottom-0 w-1 bg-linear-to-b from-neutral-500 to-neutral-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-						></div>
-						<div class="flex flex-col gap-2.5 flex-1 min-w-0">
-							<span
-								class="text-lg font-semibold text-neutral-100 group-hover:text-white transition-colors"
-							>
-								{note.title}
-							</span>
-							{#if note.excerpt}
-								<span class="text-sm text-neutral-400 line-clamp-2 leading-relaxed">
-									{note.excerpt}
-								</span>
-							{/if}
-						</div>
-						<span
-							class="material-symbols-outlined text-xl text-neutral-500 transition-all duration-300 group-hover:translate-x-1 group-hover:text-white shrink-0"
-						>
-							arrow_forward
-						</span>
-					</a>
+					<NoteCard {note} />
 				{/each}
 			{/await}
 		</div>
@@ -260,7 +236,7 @@
 			<div class="flex items-center gap-4">
 				<a
 					href="https://github.com/noelzappy"
-					class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-white transition-colors"
+					class="group flex items-center gap-1 text-sm text-neutral-400 hover:text-orange-500 transition-colors"
 					target="_blank"
 					rel="noopener noreferrer"
 				>
