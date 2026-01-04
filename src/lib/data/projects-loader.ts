@@ -62,7 +62,7 @@ export function getProjectBySlug(slug: string): ProjectData | null {
 	return allProjects.find((project) => project.slug === slug) || null;
 }
 
-export function getFeaturedProjects(limit: number = 5): ProjectData[] {
+export function getFeaturedProjects(limit: number = 6): ProjectData[] {
 	const allProjects = getAllProjects();
 	return allProjects.filter((project) => project.featured).slice(0, limit);
 }

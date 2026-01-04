@@ -91,7 +91,6 @@
 	<div class="flex flex-wrap items-center justify-between gap-4">
 		<div class="flex items-center gap-2 text-sm">
 			<span class="material-symbols-outlined text-base text-neutral-600">chevron_right</span>
-			<span class="text-neutral-200 font-medium truncate max-w-[200px]">{data.project.title}</span>
 		</div>
 		<div class="flex gap-3">
 			{#if data.prevProject}
@@ -273,6 +272,25 @@
 						<div class="grid grid-cols-[90px_1fr] items-baseline">
 							<span class="text-neutral-500 text-sm font-medium">Client</span>
 							<span class="text-neutral-200 text-sm font-semibold">{data.project.client}</span>
+						</div>
+					{/if}
+
+					{#if data.project.categories?.length}
+						{#if data.project.client}
+							<div class="w-full h-px bg-neutral-700/50"></div>
+						{/if}
+						<div class="grid grid-cols-[90px_1fr] items-start">
+							<span class="text-neutral-500 text-sm font-medium">Type</span>
+							<div class="flex flex-wrap gap-1.5">
+								{#each data.project.categories as category (category)}
+									<a
+										href="/projects?category={encodeURIComponent(category)}"
+										class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-medium rounded-md bg-orange-500/10 text-orange-400 border border-orange-500/20 hover:bg-orange-500/20 transition-colors"
+									>
+										{category}
+									</a>
+								{/each}
+							</div>
 						</div>
 					{/if}
 				</div>

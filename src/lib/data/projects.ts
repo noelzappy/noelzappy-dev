@@ -1,3 +1,7 @@
+export type ProjectCategory = 'Mobile App' | 'Web App' | 'Website';
+
+export const PROJECT_CATEGORIES: ProjectCategory[] = ['Mobile App', 'Web App', 'Website'];
+
 export interface ProjectFrontmatter {
 	id: string;
 	title: string;
@@ -17,6 +21,7 @@ export interface ProjectFrontmatter {
 	gallery?: string[];
 	featuredStack?: string[];
 	stack?: string[];
+	categories?: ProjectCategory[];
 	stats?: {
 		key: string;
 		value: string;
