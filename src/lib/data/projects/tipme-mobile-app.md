@@ -3,7 +3,7 @@ title: 'TipMe Mobile App'
 slug: 'tipme-mobile-app'
 excerpt: 'Street performers bring life to public spaces, but the shift to cashless transactions has made it harder for them to receive tips. TipMe solves this problem by offering a frictionless digital tipping solution, allowing performers to collect donations effortlessly.'
 featured: false
-publishedAt: '2025-03-31T22:02:20.000Z'
+publishedAt: '2022-03-31T22:02:20.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/tipme.png'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.tipmeapp.tipme'
 role: 'Full Stack Developer'

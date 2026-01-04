@@ -91,7 +91,6 @@
 	<div class="flex flex-wrap items-center justify-between gap-4">
 		<div class="flex items-center gap-2 text-sm">
 			<span class="material-symbols-outlined text-base text-neutral-600">chevron_right</span>
-			<span class="text-neutral-200 font-medium truncate max-w-[200px]">{data.project.title}</span>
 		</div>
 		<div class="flex gap-3">
 			{#if data.prevProject}
