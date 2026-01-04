@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { Github, Star, GitFork, ExternalLink } from 'lucide-svelte';
 	import GhContributions from '$lib/components/gh-contributions.svelte';
-	import { onMount } from 'svelte';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
