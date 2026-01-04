@@ -6,8 +6,10 @@ featured: true
 publishedAt: '2024-04-06T00:00:00.000Z'
 featuredImage: '/portfolio/alvibeauty.png'
 liveUrl: 'https://alvibeauty.com/en-ua'
-role: 'Backend Developer & System Architect'
-team: 'Romarianec Tech Team'
+androidUrl: 'https://play.google.com/store/apps/details?id=com.beautypoisk.user'
+iosUrl: 'https://apps.apple.com/app/alvibeauty-client/id1640579339'
+role: 'Fullstack Developer & System Architect'
+team: '2 Developers, 1 Designer, 1 QA Engineer'
 status: 'Shipped'
 client: 'Romarianec Tech'
 featuredStack:
@@ -16,10 +18,14 @@ featuredStack:
   - 'React Native'
 stack:
   - 'Node.js'
+  - 'Express.js'
+  - 'React'
   - 'MongoDB'
   - 'React Native'
   - 'iOS'
   - 'Android'
+  - 'Firebase'
+  - 'Redis'
 gallery:
   - '/portfolio/alvibeauty.png'
 ---
