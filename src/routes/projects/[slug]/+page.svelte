@@ -125,44 +125,49 @@
 	</div>
 
 	<!-- Hero Section -->
-	<div
-		class="relative rounded-2xl overflow-hidden bg-neutral-800/30 min-h-[400px] md:min-h-[480px] flex flex-col justify-end p-6 md:p-12 group border border-neutral-700/50"
-	>
-		<!-- Background Image -->
-		{#if data.project.featuredImage}
-			<div
-				class="absolute inset-0 z-0 bg-cover bg-top transition-transform duration-700 group-hover:scale-105"
-				style="background-image: url('{data.project.featuredImage}');"
-			></div>
-		{/if}
-		<!-- Gradient Overlay -->
-		<div
-			class="absolute inset-0 z-10 bg-gradient-to-t from-neutral-900 via-neutral-900/80 to-transparent"
-		></div>
-
-		<!-- Content -->
-		<div class="relative z-20 max-w-3xl flex flex-col gap-6">
-			<div class="flex items-center gap-3">
-				<div class="bg-white/10 backdrop-blur-md p-2 rounded-lg border border-white/10">
-					<span class="material-symbols-outlined text-white text-2xl">rocket_launch</span>
+	<div class="flex flex-col gap-8">
+		<!-- Header Content -->
+		<div class="flex flex-col gap-5">
+			<!-- Status Badge -->
+			{#if data.project.status}
+				<div class="flex items-center gap-3">
+					<span
+						class="inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-full border backdrop-blur-sm
+						{data.project.status.toLowerCase() === 'shipped'
+							? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
+							: data.project.status.toLowerCase() === 'in progress'
+								? 'bg-orange-500/20 text-orange-400 border-orange-500/30'
+								: data.project.status.toLowerCase() === 'cancelled'
+									? 'bg-red-500/20 text-red-400 border-red-500/30'
+									: 'bg-neutral-500/20 text-neutral-400 border-neutral-500/30'}"
+					>
+						{#if data.project.status.toLowerCase() === 'shipped'}
+							<span class="relative flex h-2 w-2">
+								<span
+									class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+								></span>
+								<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+							</span>
+						{/if}
+						{data.project.status}
+					</span>
 				</div>
-				<span
-					class="text-orange-400 font-bold tracking-wider uppercase text-xs bg-orange-500/20 px-3 py-1 rounded-full border border-orange-500/20"
-				>
-					{data.project.status || 'Project'}
-				</span>
-			</div>
+			{/if}
 
-			<div>
-				<h1 class="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-3">
+			<!-- Title & Excerpt -->
+			<div class="flex flex-col gap-3">
+				<h1 class="text-neutral-100 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
 					{data.project.title}
 				</h1>
-				<p class="text-neutral-400 text-base md:text-lg font-normal max-w-xl leading-relaxed">
-					{data.project.excerpt}
-				</p>
+				{#if data.project.excerpt}
+					<p class="text-neutral-400 text-base md:text-lg max-w-2xl leading-relaxed">
+						{data.project.excerpt}
+					</p>
+				{/if}
 			</div>
 
-			<div class="flex flex-wrap gap-3 pt-2">
+			<!-- Action Buttons -->
+			<div class="flex flex-wrap gap-3">
 				{#if data.project.liveUrl}
 					<a
 						href={data.project.liveUrl}
@@ -179,7 +184,7 @@
 						href={data.project.iosUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center justify-center gap-2 h-11 px-5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 text-white text-sm font-bold rounded-lg transition-all"
+						class="flex items-center justify-center gap-2 h-11 px-5 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-200 text-sm font-bold rounded-lg transition-all"
 					>
 						<span class="material-symbols-outlined text-lg">phone_iphone</span>
 						<span>iOS App</span>
@@ -190,7 +195,7 @@
 						href={data.project.androidUrl}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center justify-center gap-2 h-11 px-5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 text-white text-sm font-bold rounded-lg transition-all"
+						class="flex items-center justify-center gap-2 h-11 px-5 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-200 text-sm font-bold rounded-lg transition-all"
 					>
 						<span class="material-symbols-outlined text-lg">android</span>
 						<span>Android App</span>
@@ -201,7 +206,7 @@
 						href={data.project.github}
 						target="_blank"
 						rel="noopener noreferrer"
-						class="flex items-center justify-center gap-2 h-11 px-5 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 text-white text-sm font-bold rounded-lg transition-all"
+						class="flex items-center justify-center gap-2 h-11 px-5 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-200 text-sm font-bold rounded-lg transition-all"
 					>
 						<span class="material-symbols-outlined text-lg">code</span>
 						<span>View Code</span>
@@ -209,6 +214,20 @@
 				{/if}
 			</div>
 		</div>
+
+		<!-- Featured Image -->
+		{#if data.project.featuredImage}
+			<div
+				class="relative rounded-2xl overflow-hidden border border-neutral-700/50 bg-neutral-800/30 group"
+			>
+				<img
+					src={data.project.featuredImage}
+					alt={data.project.title}
+					class="w-full h-auto max-h-[560px] object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+					loading="eager"
+				/>
+			</div>
+		{/if}
 	</div>
 
 	<!-- Main Grid Layout -->
