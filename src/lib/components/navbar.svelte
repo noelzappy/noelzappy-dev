@@ -10,7 +10,6 @@
 	];
 
 	let scrolled = $state(false);
-	let mobileMenuOpen = $state(false);
 
 	function isActive(href: string) {
 		return page.url.pathname.startsWith(href);
@@ -76,9 +75,7 @@
 					/>
 				</svg>
 			</div>
-			<span
-				class="text-xl font-semibold text-neutral-100 group-hover:text-white transition-colors hidden sm:block"
-			>
+			<span class="text-xl font-semibold text-neutral-100 group-hover:text-white transition-colors">
 				Zappy
 			</span>
 		</a>
@@ -101,38 +98,26 @@
 				</a>
 			{/each}
 		</nav>
-
-		<button
-			class="sm:hidden p-2 text-neutral-400 hover:text-white transition-colors"
-			onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
-			aria-label="Toggle menu"
-		>
-			<span class="material-symbols-outlined text-2xl">
-				{mobileMenuOpen ? 'close' : 'menu'}
-			</span>
-		</button>
 	</div>
 
-	{#if mobileMenuOpen}
-		<nav
-			class="sm:hidden border-t border-neutral-700/50 bg-[#333333]/95 backdrop-blur-md shadow-2xl transition-all duration-300"
-		>
-			<div class="max-w-4xl mx-auto px-6 py-4 flex flex-col gap-4">
-				{#each NavMenu as item (item.href)}
-					<a
-						class="text-base font-medium transition-colors {isActive(item.href)
-							? 'text-white'
-							: 'text-neutral-400 hover:text-white'}"
-						href={item.href}
-						data-sveltekit-preload-data
-						onclick={() => (mobileMenuOpen = false)}
-					>
-						{item.name}
-					</a>
-				{/each}
-			</div>
-		</nav>
-	{/if}
+	<nav class="sm:hidden flex items-center gap-8 max-w-4xl mx-auto px-6">
+		{#each NavMenu as item (item.href)}
+			<a
+				class="relative text-sm font-medium transition-colors {isActive(item.href)
+					? 'text-white'
+					: 'text-neutral-400 hover:text-white'}"
+				href={item.href}
+				data-sveltekit-preload-data
+			>
+				{item.name}
+				{#if isActive(item.href)}
+					<span
+						class="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-orange-500 to-orange-400 rounded-full"
+					></span>
+				{/if}
+			</a>
+		{/each}
+	</nav>
 </header>
 
 <style>
