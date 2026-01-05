@@ -23,15 +23,15 @@
 	function getStatusColor(status: string) {
 		switch (status.toLowerCase()) {
 			case 'shipped':
-				return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+				return 'bg-emerald-500 text-white border-emerald-500/30';
 			case 'in progress':
-				return 'bg-orange-500/20 text-orange-400 border-orange-500/30';
+				return 'bg-orange-500 text-white border-orange-500/30';
 			case 'cancelled':
-				return 'bg-red-500/20 text-red-400 border-red-500/30';
+				return 'bg-red-500 text-white border-red-500/30';
 			case 'archived':
-				return 'bg-neutral-500/20 text-neutral-400 border-neutral-500/30';
+				return 'bg-neutral-500 text-white border-neutral-500/30';
 			default:
-				return 'bg-neutral-500/20 text-neutral-400 border-neutral-500/30';
+				return 'bg-neutral-500 text-white border-neutral-500/30';
 		}
 	}
 </script>
