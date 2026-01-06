@@ -34,13 +34,13 @@ body {
 
 html.dark,
 body {
-	background-color: #333333;
+	background-color: #000000;
 	color: #d4d4d4;
 }
 
 * {
 	scrollbar-width: thin;
-	scrollbar-color: #c55832 #333333;
+	scrollbar-color: #c55832 #000000;
 }
 *::-webkit-scrollbar {
 	width: 5px;
