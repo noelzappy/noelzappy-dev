@@ -87,7 +87,6 @@
 />
 
 <div class="flex flex-col gap-8 -mt-8">
-	<!-- Breadcrumbs & Quick Nav -->
 	<div class="flex flex-wrap items-center justify-between gap-4">
 		<div class="flex items-center gap-2 text-sm">
 			<span class="material-symbols-outlined text-base text-neutral-600">chevron_right</span>
@@ -124,11 +123,8 @@
 		</div>
 	</div>
 
-	<!-- Hero Section -->
 	<div class="flex flex-col gap-8">
-		<!-- Header Content -->
 		<div class="flex flex-col gap-5">
-			<!-- Status Badge -->
 			{#if data.project.status}
 				<div class="flex items-center gap-3">
 					<span
@@ -154,7 +150,6 @@
 				</div>
 			{/if}
 
-			<!-- Title & Excerpt -->
 			<div class="flex flex-col gap-3">
 				<h1 class="text-neutral-100 text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
 					{data.project.title}
@@ -166,7 +161,6 @@
 				{/if}
 			</div>
 
-			<!-- Action Buttons -->
 			<div class="flex flex-wrap gap-3">
 				{#if data.project.liveUrl}
 					<a
@@ -215,7 +209,6 @@
 			</div>
 		</div>
 
-		<!-- Featured Image -->
 		{#if data.project.featuredImage}
 			<div
 				class="relative rounded-2xl overflow-hidden border border-neutral-700/50 bg-neutral-800/30 group"
@@ -223,18 +216,22 @@
 				<img
 					src={data.project.featuredImage}
 					alt={data.project.title}
-					class="w-full h-auto max-h-[560px] object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+					class="project-image w-full h-auto max-h-[560px] object-cover object-top transition-all duration-700 group-hover:scale-[1.02]"
 					loading="eager"
 				/>
+				<div
+					class="absolute inset-0 pointer-events-none bg-linear-to-t from-neutral-900/60 via-transparent to-neutral-900/30 transition-opacity duration-300 group-hover:opacity-50"
+				></div>
+				<div
+					class="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-50"
+					style="box-shadow: inset 0 0 60px 15px rgba(0, 0, 0, 0.5);"
+				></div>
 			</div>
 		{/if}
 	</div>
 
-	<!-- Main Grid Layout -->
 	<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 pt-4">
-		<!-- Left Sidebar (Metadata & Stack) -->
 		<aside class="lg:col-span-4 flex flex-col gap-6 order-1">
-			<!-- Project Details Card -->
 			<div class="bg-neutral-800/30 rounded-xl p-6 border border-neutral-700/50">
 				<h3 class="text-base font-bold text-neutral-100 mb-5 flex items-center gap-2">
 					<span class="material-symbols-outlined text-orange-400">info</span>
@@ -315,7 +312,6 @@
 				</div>
 			</div>
 
-			<!-- Tech Stack -->
 			{#if data.project.featuredStack?.length || data.project.stack?.length}
 				<div class="bg-neutral-800/30 rounded-xl p-6 border border-neutral-700/50">
 					<h3 class="text-base font-bold text-neutral-100 mb-4 flex items-center gap-2">
@@ -361,9 +357,7 @@
 			{/if}
 		</aside>
 
-		<!-- Right Content (Narrative & Gallery) -->
 		<div class="lg:col-span-8 flex flex-col gap-10 order-1 lg:order-2">
-			<!-- Stats Banner -->
 			{#if data.project.stats?.length}
 				<div
 					class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-neutral-800/30 rounded-xl p-6 border border-neutral-700/50"
@@ -384,7 +378,6 @@
 				</div>
 			{/if}
 
-			<!-- Content Section -->
 			<section>
 				<h2 class="text-2xl font-bold text-neutral-100 mb-6">About This Project</h2>
 				<div
@@ -395,7 +388,6 @@
 				</div>
 			</section>
 
-			<!-- Gallery Section -->
 			{#if data.project.gallery?.length}
 				<section>
 					<div class="flex items-center justify-between mb-6">
@@ -412,9 +404,16 @@
 								<img
 									src={image}
 									alt="Gallery image {index + 1}"
-									class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
+									class="gallery-image object-cover w-full h-full transition-all duration-500 group-hover:scale-110"
 									loading="lazy"
 								/>
+								<div
+									class="absolute inset-0 pointer-events-none bg-linear-to-t from-neutral-900/60 via-transparent to-neutral-900/30 transition-opacity duration-300 group-hover:opacity-50"
+								></div>
+								<div
+									class="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-50"
+									style="box-shadow: inset 0 0 60px 15px rgba(0, 0, 0, 0.5);"
+								></div>
 							</div>
 						{/each}
 					</div>
@@ -423,7 +422,6 @@
 		</div>
 	</div>
 
-	<!-- Bottom CTA -->
 	<div class="py-10 border-t border-neutral-700/50 mt-6 text-center">
 		<h2 class="text-xl font-bold text-neutral-100 mb-2">Like what you see?</h2>
 		<p class="text-neutral-500 mb-6">
@@ -448,3 +446,14 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.project-image,
+	.gallery-image {
+		filter: brightness(0.85) contrast(1.05);
+	}
+	:global(.group:hover) .project-image,
+	:global(.group:hover) .gallery-image {
+		filter: brightness(1) contrast(1);
+	}
+</style>

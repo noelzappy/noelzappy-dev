@@ -17,7 +17,6 @@
 
 	let { project }: Props = $props();
 
-	// Normalize image property (homepage uses featuredImage, projects page uses featureImage)
 	const imageUrl = $derived(project.featuredImage || project.featureImage);
 
 	function getStatusColor(status: string) {
@@ -46,13 +45,22 @@
 			<img
 				src={imageUrl}
 				alt={project.title}
-				class="w-full h-full transition-transform duration-500 group-hover:scale-105 object-cover object-top"
+				class="project-image w-full h-full transition-all duration-500 group-hover:scale-105 object-cover object-top"
 				loading="lazy"
 			/>
+
+			<div
+				class="absolute inset-0 pointer-events-none bg-linear-to-t from-neutral-900/60 via-transparent to-neutral-900/30 transition-opacity duration-300 group-hover:opacity-50"
+			></div>
+
+			<div
+				class="absolute inset-0 pointer-events-none transition-opacity duration-300 group-hover:opacity-50"
+				style="box-shadow: inset 0 0 60px 15px rgba(0, 0, 0, 0.5);"
+			></div>
 		{:else}
 			<div class="w-full h-full bg-linear-to-br from-neutral-800 to-neutral-900"></div>
 		{/if}
-		<!-- Status Badge Overlay -->
+
 		{#if project.status}
 			<div class="absolute top-3 left-3">
 				<span
@@ -82,7 +90,6 @@
 			</h3>
 		</div>
 
-		<!-- Role & Client -->
 		{#if project.role}
 			<p class="text-xs text-neutral-500 font-medium">
 				{project.role}
@@ -99,7 +106,6 @@
 			</p>
 		{/if}
 
-		<!-- Tech Stack Tags -->
 		{#if project.featuredStack && project.featuredStack.length > 0}
 			<div class="flex flex-wrap gap-1.5 mt-1">
 				{#each project.featuredStack.slice(0, 3) as tech (tech)}
@@ -130,3 +136,12 @@
 		</div>
 	</div>
 </a>
+
+<style>
+	.project-image {
+		filter: brightness(0.85) contrast(1.05);
+	}
+	:global(.group:hover) .project-image {
+		filter: brightness(1) contrast(1);
+	}
+</style>
