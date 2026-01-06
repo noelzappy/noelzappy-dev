@@ -30,7 +30,7 @@
 </script>
 
 <header
-	class="fixed top-0 left-0 right-0 z-50 bg-[#333333]/90 backdrop-blur-md transition-all duration-300 {scrolled
+	class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md transition-all duration-300 {scrolled
 		? 'border-b border-neutral-700/50 shadow-lg'
 		: 'border-b border-transparent'}"
 >
