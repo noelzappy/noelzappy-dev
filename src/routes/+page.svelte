@@ -15,7 +15,7 @@
 </script>
 
 <SEOHead
-	title="Noel Zappy - Senior Software Engineer | Portfolio"
+	title="Emmanuel Yeboah - Senior Software Engineer | Portfolio"
 	description="Emmanuel Noel Zappy Yeboah is a senior software engineer with 6+ years of experience in web, mobile, and cloud development. Specializing in Python, TypeScript, React, and scalable architectures."
 	canonical="https://noelzappy.dev"
 	ogType="website"
