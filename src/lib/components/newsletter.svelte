@@ -18,7 +18,7 @@
 			script.src = 'https://cdn.jsdelivr.net/ghost/signup-form@~0.3/umd/signup-form.min.js';
 			script.setAttribute('data-button-color', '#222526');
 			script.setAttribute('data-button-text-color', '#FFFFFF');
-			script.setAttribute('data-site', 'https://cms.noelzappy.dev/');
+			script.setAttribute('data-site', 'https://ghost.noelzappy.dev/');
 			script.setAttribute('data-locale', 'en');
 			script.async = true;
 			newsletterContainer.appendChild(script);
