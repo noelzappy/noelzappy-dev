@@ -11,28 +11,28 @@
 
 	const expertiseData: SkillCategory[] = [
 		{
-			title: 'Backend',
+			title: 'Backend Systems',
 			icon: Server,
-			topSkills: ['Go', 'Node.js', 'PostgreSQL'],
-			otherSkills: ['Python', 'FastAPI', 'NestJS']
+			topSkills: ['Node.js (NestJS)', 'Python (FastAPI)', 'PostgreSQL (At Scale)'],
+			otherSkills: ['Redis (Caching)', 'Microservices', 'TypeScript']
 		},
 		{
-			title: 'Frontend',
+			title: 'Web & Mobile',
 			icon: MonitorSmartphone,
-			topSkills: ['SvelteKit', 'React Native', 'Tailwind CSS'],
-			otherSkills: ['React', 'TypeScript', 'Next.Js']
+			topSkills: ['React Native (Offline-First)', 'Next.js', 'SvelteKit'],
+			otherSkills: ['Real-time / WebSockets', 'Tailwind CSS', 'React']
 		},
 		{
 			title: 'Infrastructure',
 			icon: Cloud,
-			topSkills: ['Docker', 'Linux/VPS'],
-			otherSkills: ['AWS', 'Kubernetes', 'CI/CD']
+			topSkills: ['CI/CD (GitHub Actions)', 'Docker', 'Cloud Architecture'],
+			otherSkills: ['AWS / Google Cloud', 'Linux', 'Automated Testing']
 		},
 		{
-			title: 'Product Engineering',
+			title: 'Specialized Domains', // Renamed from "Product Engineering"
 			icon: Pickaxe,
-			topSkills: ['System Design', 'MVP Strategy'],
-			otherSkills: ['Analytics & Metrics', 'SEO', ' Technical Scoping', 'User Flow Optimization']
+			topSkills: ['Agentic AI Systems', 'Fintech Infrastructure', 'Legacy Migrations'],
+			otherSkills: ['System Design', 'MVP Strategy', 'User Flow Optimization']
 		}
 	];
 </script>

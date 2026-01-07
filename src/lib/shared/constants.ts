@@ -2,14 +2,20 @@ export const HomepageStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
 	name: 'Emmanuel Noel Zappy Yeboah',
-	alternateName: 'Noel Zappy',
+	alternateName: 'Emmanuel Noel Zappy Yeboah',
 	url: 'https://noelzappy.dev',
 	image: 'https://noelzappy.dev/og-image.png',
-	sameAs: ['https://twitter.com/noelzappy', 'https://github.com/noelzappy'],
+	sameAs: [
+		'https://twitter.com/noelzappy',
+		'https://github.com/noelzappy',
+		'https://x.com/noelzappy',
+		'https://linkedin.com/in/noelzappy'
+	],
 	jobTitle: 'Senior Software Engineer',
 	worksFor: {
 		'@type': 'Organization',
-		name: 'Freelance/Contract'
+		name: 'Software Engineering',
+		url: 'https://noelzappy.dev'
 	},
 	description:
 		'Senior software engineer with over 6 years of experience, specializing in building modern web and mobile applications.',

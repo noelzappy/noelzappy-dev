@@ -3,7 +3,7 @@ title: 'Love Nest Dating App'
 slug: 'lovenest-dating-app'
 excerpt: 'I built the backend infrastructure for Love Nest—a dating app designed exclusively for single parents. The platform features intelligent matching, real-time messaging, and a unique physical gifting system for authentic connections.'
 featured: true
-publishedAt: '2025-12-01T00:00:00.000Z'
+publishedAt: '2025-01-01T00:00:00.000Z'
 featuredImage: '/portfolio/lovenest/1.jpg'
 liveUrl: 'https://lovenest.now'
 iosUrl: 'https://apps.apple.com/us/app/love-nest-single-parents/id6747092702'
