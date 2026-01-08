@@ -25,7 +25,7 @@
 				return 'bg-emerald-500 text-white border-emerald-500/30';
 			case 'in progress':
 				return 'bg-orange-500 text-white border-orange-500/30';
-			case 'cancelled':
+			case 'Discontinued':
 				return 'bg-red-500 text-white border-red-500/30';
 			case 'archived':
 				return 'bg-neutral-500 text-white border-neutral-500/30';

@@ -22,7 +22,7 @@
 				return 'text-emerald-500';
 			case 'in progress':
 				return 'text-orange-500';
-			case 'cancelled':
+			case 'Discontinued':
 				return 'text-red-500';
 			case 'archived':
 				return 'text-neutral-500';
@@ -133,7 +133,7 @@
 							? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
 							: data.project.status.toLowerCase() === 'in progress'
 								? 'bg-orange-500/20 text-orange-400 border-orange-500/30'
-								: data.project.status.toLowerCase() === 'cancelled'
+								: data.project.status.toLowerCase() === 'Discontinued'
 									? 'bg-red-500/20 text-red-400 border-red-500/30'
 									: 'bg-neutral-500/20 text-neutral-400 border-neutral-500/30'}"
 					>

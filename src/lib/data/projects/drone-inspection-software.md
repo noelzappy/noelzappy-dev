@@ -7,7 +7,7 @@ publishedAt: '2023-07-06T00:00:00.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/mapthis.png'
 role: 'Solo Developer'
 team: '1 Member (Solo)'
-status: 'Cancelled'
+status: 'Discontinued'
 featuredStack:
   - 'React'
   - 'Node.js'

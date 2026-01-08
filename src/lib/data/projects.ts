@@ -16,7 +16,7 @@ export interface ProjectFrontmatter {
 	github?: string;
 	role: string;
 	team?: string; // 4 Members (1 PM, 2 Developers, 1 Designer, etc)
-	status: string; // Shipped, In Progress, Cancelled, Archived
+	status: string; // Shipped, In Progress, Discontinued, Archived
 	client?: string;
 	gallery?: string[];
 	featuredStack?: string[];

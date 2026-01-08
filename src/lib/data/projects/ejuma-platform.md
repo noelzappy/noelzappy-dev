@@ -6,7 +6,7 @@ featured: false
 publishedAt: '2023-04-04T00:00:00.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/ejuma.png'
 role: 'Full Stack Developer'
-status: 'Cancelled'
+status: 'Discontinued'
 client: 'Built Financial Technologies'
 featuredStack:
   - 'Flutter'
