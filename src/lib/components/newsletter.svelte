@@ -16,8 +16,10 @@
 
 			const script = document.createElement('script');
 			script.src = 'https://cdn.jsdelivr.net/ghost/signup-form@~0.3/umd/signup-form.min.js';
-			script.setAttribute('data-button-color', '#222526');
+			script.setAttribute('data-button-color', '#e8630a');
 			script.setAttribute('data-button-text-color', '#FFFFFF');
+			script.setAttribute('data-background-color', '#111111');
+			script.setAttribute('data-text-color', '#f5f5f5');
 			script.setAttribute('data-site', 'https://ghost.noelzappy.dev/');
 			script.setAttribute('data-locale', 'en');
 			script.async = true;
@@ -26,11 +28,11 @@
 	});
 </script>
 
-<div class="border border-neutral-800 rounded-lg p-6 bg-neutral-900/50 backdrop-blur-sm">
+<div style="background: var(--color-surface); border: 1px solid var(--color-border); border-radius: 12px; padding: 40px;">
 	<div class="flex flex-col gap-4 text-center">
 		<div class="flex flex-col gap-2">
-			<h3 class="text-lg font-semibold text-neutral-100">{title}</h3>
-			<p class="text-sm text-neutral-400">
+			<h3 class="text-lg font-semibold" style="color: var(--color-text-primary);">{title}</h3>
+			<p class="text-sm" style="color: var(--color-text-secondary);">
 				{description}
 			</p>
 		</div>

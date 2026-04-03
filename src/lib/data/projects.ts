@@ -27,6 +27,8 @@ export interface ProjectFrontmatter {
 		value: string;
 		description?: string;
 	}[];
+	problem?: string;
+	lessons?: string;
 }
 
 export interface ProjectData extends ProjectFrontmatter {

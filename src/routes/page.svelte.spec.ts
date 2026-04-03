@@ -7,9 +7,9 @@ describe('/+page.svelte', () => {
 	it('should render h1', async () => {
 		render(Page, {
 			data: {
+				projects: [],
 				streamed: {
-					posts: Promise.resolve([]),
-					notes: Promise.resolve([])
+					featuredNotes: Promise.resolve([])
 				}
 			}
 		});

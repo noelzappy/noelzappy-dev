@@ -2,7 +2,7 @@
 title: 'Brif Africa Platform'
 slug: 'brif-platform'
 excerpt: 'As Lead Full-Stack Engineer, I architected and built the digital platform for Brif Africa—a storytelling and media company amplifying African narratives. Improved Core Web Vitals by 35% and boosted user engagement by 18%.'
-featured: true
+featured: false
 publishedAt: '2025-03-01T00:00:00.000Z'
 featuredImage: '/portfolio/brif-website.png'
 liveUrl: 'https://brif.africa'

@@ -2,7 +2,7 @@ export const HomepageStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',
 	name: 'Emmanuel Noel Zappy Yeboah',
-	alternateName: 'Emmanuel Noel Zappy Yeboah',
+	alternateName: 'Noel Zappy',
 	url: 'https://noelzappy.dev',
 	image: 'https://noelzappy.dev/og-image.png',
 	sameAs: [
@@ -11,36 +11,34 @@ export const HomepageStructuredData = {
 		'https://x.com/noelzappy',
 		'https://linkedin.com/in/noelzappy'
 	],
-	jobTitle: 'Senior Software Engineer',
+	jobTitle: 'Backend Engineer',
 	worksFor: {
 		'@type': 'Organization',
-		name: 'Software Engineering',
-		url: 'https://noelzappy.dev'
+		name: 'SusuPaa',
+		url: 'https://susupaa.com'
 	},
 	description:
-		'Senior software engineer with over 6 years of experience, specializing in building modern web and mobile applications.',
+		'6+ years architecting reliable financial systems across Ghana and Africa. Co-founder of SusuPaa. Specialising in backend engineering, African fintech, and SaaS infrastructure.',
+	address: {
+		'@type': 'PostalAddress',
+		addressLocality: 'Accra',
+		addressCountry: 'GH'
+	},
 	knowsAbout: [
-		'Software Engineering',
-		'Web Development',
-		'Mobile Development',
+		'Backend Engineering',
+		'African Fintech',
+		'Mobile Money Integration',
 		'Python',
 		'TypeScript',
-		'JavaScript',
 		'Node.js',
-		'React',
-		'Svelte',
-		'Go',
-		'Java',
-		'AWS',
+		'PostgreSQL',
+		'Redis',
+		'NestJS',
+		'FastAPI',
 		'GCP',
-		'Azure',
 		'Docker',
-		'Kubernetes'
-	],
-	alumniOf: {
-		'@type': 'Organization',
-		name: 'Software Engineering'
-	}
+		'Microservices'
+	]
 };
 
 export const GITHUB_USERNAME = 'noelzappy';

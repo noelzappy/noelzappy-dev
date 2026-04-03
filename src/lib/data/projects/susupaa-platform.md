@@ -1,7 +1,7 @@
 ---
 title: 'SusuPaa Platform'
 slug: 'susupaa-platform'
-excerpt: 'As Co-founder & Lead Backend Engineer, I architected a multi-tenant fintech platform that digitizes traditional susu savings groups across Ghana. The system processes over ₵5M+ in transactions with API response times optimized from 1.2s to 150ms.'
+excerpt: 'As Co-founder & Lead Backend Engineer, I architected a multi-tenant fintech platform that digitizes traditional susu savings groups across Ghana. The system processes over ₵5M+ in transactions with API response times optimized from 1.2s to 700ms.'
 featured: true
 publishedAt: '2025-07-01T00:00:00.000Z'
 featuredImage: '/portfolio/susupaa-webapp.png'
@@ -25,7 +25,7 @@ categories:
   - 'Web App'
 stats:
   - key: 'Transactions'
-    value: '₵5M+'
+    value: '₵7M+'
     description: 'Total transaction volume processed'
   - key: 'Groups'
     value: '262+'
@@ -36,6 +36,8 @@ stats:
 gallery:
   - '/portfolio/susupaa-webapp.png'
   - '/portfolio/susupaa-website.png'
+problem: "Susu savings groups across Ghana were managing hundreds of members and millions of cedis through WhatsApp messages, paper ledgers, and phone calls. Missed contributions went unnoticed for weeks, disputes over payouts were common, and group leaders had no reliable way to prove transaction history. Digital alternatives either didn't exist for the Ghanaian market or required a formal bank account that most participants didn't have."
+lessons: "Starting with event sourcing from day one rather than retrofitting it later. Our transaction ledger needed audit trails that we had to rebuild after launch — designing the data model around immutable events from the start would have saved us two weeks of migration work. I'd also invest earlier in contract testing between services; we had integration bugs that only surfaced in staging because our unit tests mocked too aggressively."
 ---
 
 <p>Susu is a centuries-old savings tradition across Ghana and West Africa. Groups of people—family, friends, market traders, or colleagues—pool money together, with each member taking turns receiving the full pot. It's built on trust, community, and discipline. But managing it manually? That's where things get messy. Missed payments, unclear records, and disputes are common.</p>

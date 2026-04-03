@@ -9,21 +9,100 @@
 	font-display: swap;
 }
 
-body {
-	font-family:
-		'Inter',
-		ui-sans-serif,
-		system-ui,
-		-apple-system,
-		'Segoe UI',
-		Roboto,
-		'Helvetica Neue',
-		Arial,
-		'Noto Sans',
-		'Apple Color Emoji',
-		'Segoe UI Emoji',
-		'Segoe UI Symbol';
+@theme {
+	--font-syne: 'Syne', ui-sans-serif, system-ui, sans-serif;
+	--font-dm-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+	--font-jetbrains: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
 }
+
+/* ─── DESIGN TOKENS ─────────────────────────────────────────────────────── */
+:root {
+	--font-display: 'Syne', ui-sans-serif, system-ui, sans-serif;
+	--font-body: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+	--color-bg: #0a0a0a;
+	--color-surface: #111111;
+	--color-surface-hover: #1a1a1a;
+	--color-border: #222222;
+	--color-text-primary: #f5f5f5;
+	--color-text-secondary: #888888;
+	--color-accent: #e8630a;
+	--color-accent-hover: #ff7a1a;
+	--color-accent-muted: rgba(232, 99, 10, 0.1);
+	--color-success: #22c55e;
+}
+
+/* ─── BASE ──────────────────────────────────────────────────────────────── */
+html,
+body {
+	background-color: var(--color-bg);
+	color: var(--color-text-primary);
+}
+
+body {
+	font-family: var(--font-body);
+	font-size: 1rem;
+	line-height: 1.6;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── TYPOGRAPHY ────────────────────────────────────────────────────────── */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-display);
+	line-height: 1.1;
+}
+
+h1 {
+	font-weight: 800;
+}
+h2 {
+	font-weight: 700;
+}
+h3 {
+	font-weight: 600;
+}
+
+/* Hero headline — large commanding type for homepage h1 */
+.hero-headline {
+	font-family: var(--font-display);
+	font-size: clamp(2.75rem, 6vw, 5.5rem);
+	font-weight: 800;
+	line-height: 1.05;
+	letter-spacing: -0.02em;
+}
+
+/* Section heading — h2 across all pages */
+.section-headline {
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 4vw, 3rem);
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+/* ─── SECTION LABEL (// monospace labels) ───────────────────────────────── */
+.section-label {
+	font-family: var(--font-mono);
+	color: var(--color-accent);
+	font-size: 0.78rem;
+	letter-spacing: 0.12em;
+	text-transform: lowercase;
+	display: block;
+}
+
+/* ─── SECTION SPACING ───────────────────────────────────────────────────── */
+.section-pad {
+	padding-top: clamp(80px, 10vw, 140px);
+	padding-bottom: clamp(80px, 10vw, 140px);
+}
+
+/* ─── MATERIAL SYMBOLS ──────────────────────────────────────────────────── */
 .material-symbols-outlined {
 	font-variation-settings:
 		'FILL' 0,
@@ -32,15 +111,10 @@ body {
 		'opsz' 24;
 }
 
-html.dark,
-body {
-	background-color: #000000;
-	color: #d4d4d4;
-}
-
+/* ─── SCROLLBAR ─────────────────────────────────────────────────────────── */
 * {
 	scrollbar-width: thin;
-	scrollbar-color: #c55832 #000000;
+	scrollbar-color: var(--color-accent) var(--color-bg);
 }
 *::-webkit-scrollbar {
 	width: 5px;
@@ -49,35 +123,249 @@ body {
 *::-webkit-scrollbar-track {
 	background: transparent;
 }
-
 *::-webkit-scrollbar-thumb {
-	background-color: #a1a1aa;
-	background-image: linear-gradient(180deg, #bfd7ea 0%, #a1a1aa 100%);
+	background-color: var(--color-accent);
 	border-radius: 10px;
-	border: 2px solid transparent;
-	background-clip: content-box;
-	transition: background-color 0.3s ease-in-out;
 }
-
 *::-webkit-scrollbar-thumb:hover {
-	background-color: #71717a;
-	background-image: linear-gradient(180deg, #a1a1aa 0%, #bfd7ea 100%);
+	background-color: var(--color-accent-hover);
 }
 
-html.dark * {
-	scrollbar-color: #71717a #333;
+/* ─── BUTTONS ───────────────────────────────────────────────────────────── */
+
+/* Primary — filled orange, single most important action per section */
+.btn-primary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 12px 24px;
+	background-color: var(--color-accent);
+	color: #ffffff;
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.01em;
+	border-radius: 6px;
+	border: 2px solid var(--color-accent);
+	transition: all 0.2s ease;
+	cursor: pointer;
+	text-decoration: none;
+	min-height: 44px;
+}
+.btn-primary:hover {
+	background-color: var(--color-accent-hover);
+	border-color: var(--color-accent-hover);
+	transform: translateY(-1px);
 }
 
-html.dark *::-webkit-scrollbar-thumb {
-	background-color: #52525b;
-	background-image: linear-gradient(180deg, #71717a 0%, #52525b 100%);
+/* Secondary — ghost/outlined for supporting actions */
+.btn-secondary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 12px 24px;
+	background-color: transparent;
+	color: var(--color-accent);
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.01em;
+	border-radius: 6px;
+	border: 2px solid var(--color-accent);
+	transition: all 0.2s ease;
+	cursor: pointer;
+	text-decoration: none;
+	min-height: 44px;
+}
+.btn-secondary:hover {
+	background-color: var(--color-accent-muted);
+	transform: translateY(-1px);
 }
 
-html.dark *::-webkit-scrollbar-thumb:hover {
-	background-color: #71717a;
-	background-image: linear-gradient(180deg, #52525b 0%, #71717a 100%);
+/* Text link — for low-priority CTAs inside cards */
+.btn-text {
+	background: none;
+	border: none;
+	color: var(--color-accent);
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0;
+	text-decoration: none;
+	transition:
+		gap 0.2s ease,
+		color 0.2s ease;
+}
+.btn-text:hover {
+	gap: 10px;
+	color: var(--color-accent-hover);
 }
 
-html.dark *::-webkit-scrollbar-track {
-	background: transparent;
+/* ─── CARDS ─────────────────────────────────────────────────────────────── */
+.card {
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	transition: all 0.25s ease;
+}
+.card:hover {
+	border-color: rgba(232, 99, 10, 0.3);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.project-card {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	overflow: hidden;
+	transition: all 0.25s ease;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+}
+.project-card:hover {
+	border-color: rgba(232, 99, 10, 0.3);
+	transform: translateY(-3px);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-metric {
+	font-family: var(--font-display);
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--color-accent);
+	margin-bottom: 2px;
+	line-height: 1;
+}
+.card-metric-label {
+	font-family: var(--font-body);
+	font-size: 0.72rem;
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+/* ─── CASE STUDY — PROBLEM SECTION ─────────────────────────────────────── */
+.problem-section {
+	border-left: 3px solid var(--color-accent);
+	padding-left: 24px;
+	margin-bottom: 48px;
+}
+.problem-section h2 {
+	font-family: var(--font-mono);
+	color: var(--color-text-secondary);
+	font-size: 0.78rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-weight: 500;
+	margin-bottom: 12px;
+}
+.problem-section p {
+	color: var(--color-text-secondary);
+	line-height: 1.7;
+}
+
+/* ─── CASE STUDY — LESSONS SECTION ─────────────────────────────────────── */
+.lessons-section {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	padding: 32px;
+	margin-top: 48px;
+}
+.lessons-section h2 {
+	font-family: var(--font-mono);
+	color: var(--color-text-secondary);
+	font-size: 0.78rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-weight: 500;
+	margin-bottom: 12px;
+}
+.lessons-section h3 {
+	font-family: var(--font-display);
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: var(--color-text-primary);
+	margin-bottom: 12px;
+}
+.lessons-section p {
+	color: var(--color-text-secondary);
+	line-height: 1.7;
+}
+
+/* ─── SCROLL ANIMATIONS ─────────────────────────────────────────────────── */
+.fade-up {
+	opacity: 0;
+	transform: translateY(24px);
+	transition:
+		opacity 0.55s ease,
+		transform 0.55s ease;
+}
+.fade-up.in-view {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.stagger-children > * {
+	opacity: 0;
+	transform: translateY(20px);
+	transition:
+		opacity 0.45s ease,
+		transform 0.45s ease;
+}
+
+/* Reveal rules for staggered children.
+   Previously only the first five children were targeted which left any
+   subsequent children hidden when the parent gained the .in-view class.
+   Extend the selectors to cover more children so longer lists (like the
+   timeline) fully reveal. */
+.stagger-children.in-view > *:nth-child(1) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0s;
+}
+.stagger-children.in-view > *:nth-child(2) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.1s;
+}
+.stagger-children.in-view > *:nth-child(3) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.2s;
+}
+.stagger-children.in-view > *:nth-child(4) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.3s;
+}
+.stagger-children.in-view > *:nth-child(5) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.4s;
+}
+.stagger-children.in-view > *:nth-child(n + 6) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.5s;
+}
+
+/* If you need even longer lists, you can add more nth-child rules using the
+   same pattern, or replace this approach with a JS-driven class/inline-style
+   that sets per-element delays dynamically. */
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.fade-up,
+	.stagger-children > * {
+		transition: none;
+		opacity: 1;
+		transform: none;
+	}
 }
