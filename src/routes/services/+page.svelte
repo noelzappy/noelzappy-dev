@@ -1,9 +1,9 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import SectionLabel from '$lib/components/section-label.svelte';
-	import SessionCard from '$lib/components/session-card.svelte';
+	// import SessionCard from '$lib/components/session-card.svelte';
 	import CalButton from '$lib/components/CalButton.svelte';
-	import CTABand from '$lib/components/cta-band.svelte';
+	// import CTABand from '$lib/components/cta-band.svelte';
 	import { inView } from '$lib/actions/inView';
 	import { CAL_EVENTS } from '$lib/cal.js';
 
@@ -57,22 +57,22 @@
 		'BullMQ'
 	];
 
-	const sessions: {
-		title: string;
-		duration: string;
-		price: string;
-		eventSlug: string;
-		description: string;
-	}[] = [
-		// {
-		// 	title: 'Architecture Review',
-		// 	duration: '20 min',
-		// 	price: '$75',
-		// 	eventSlug: CAL_EVENTS.architecture,
-		// 	description:
-		// 		'Deep dive into your system design. Identify bottlenecks, risks, and opportunities. Walk away with a prioritized, actionable improvement plan — not a list of vague suggestions.'
-		// }
-	];
+	// const sessions: {
+	// 	title: string;
+	// 	duration: string;
+	// 	price: string;
+	// 	eventSlug: string;
+	// 	description: string;
+	// }[] = [
+	// 	// {
+	// 	// 	title: 'Architecture Review',
+	// 	// 	duration: '20 min',
+	// 	// 	price: '$75',
+	// 	// 	eventSlug: CAL_EVENTS.architecture,
+	// 	// 	description:
+	// 	// 		'Deep dive into your system design. Identify bottlenecks, risks, and opportunities. Walk away with a prioritized, actionable improvement plan — not a list of vague suggestions.'
+	// 	// }
+	// ];
 
 	const structuredData = {
 		'@context': 'https://schema.org',
@@ -91,7 +91,7 @@
 
 <SEOHead
 	title="Services"
-	description="Full-stack engineering and technical consulting specialising in African fintech, mobile apps, and payment infrastructure. 5+ years shipping products that handle real African money."
+	description="Full-stack engineering and technical consulting specialising in African fintech, mobile apps, and payment infrastructure. 6+ years shipping products that handle real African money."
 	canonical="https://noelzappy.dev/services"
 	ogType="website"
 	keywords="Full-Stack Engineering, Fintech Consulting, African Fintech, Mobile App Development, Mobile Money Integration, Technical Consulting"
@@ -106,8 +106,8 @@
 			What I offer.
 		</h1>
 		<p class="text-lg text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">
-			Two distinct ways to work with me. Both built on the same foundation: 5+ years shipping
-			full-stack products that handle real African money.
+			Two distinct ways to work with me. Both built on the same foundation: {new Date().getFullYear() -
+				2020}+ years shipping full-stack products that handle real African money.
 		</p>
 	</div>
 
@@ -241,7 +241,7 @@
 					come prepared with your content and leave you with a written follow-up summary.
 				</p>
 
-				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+				<!-- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 					{#each sessions as session (session.title)}
 						<SessionCard
 							title={session.title}
@@ -251,7 +251,7 @@
 							eventSlug={session.eventSlug}
 						/>
 					{/each}
-				</div>
+				</div> -->
 			</div>
 
 			<!-- Sidebar -->
