@@ -91,11 +91,9 @@
 	<div class="flex flex-col gap-4 pb-16 sm:pb-20 border-b border-[var(--color-border)]">
 		<SectionLabel text="// about" />
 		<h1 class="text-4xl sm:text-5xl font-bold text-[var(--color-text-primary)] mt-2">
-			I am Emmanuel Noel Zappy Yeboah
+			Emmanuel Noel Zappy Yeboah
 		</h1>
-			<p>
-			Yep, a very long name.
-			</p>
+		<p>Yep, a very long name.</p>
 	</div>
 
 	<!-- Opening narrative -->
