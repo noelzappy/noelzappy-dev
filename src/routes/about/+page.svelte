@@ -102,7 +102,7 @@
 		>
 			<p>
 				The journey started in 2018 with a Udemy course authored by Angela Yu. I got into University
-				of the Poeple in 2020 and earned a CS degree.
+				of the People in 2020 and earned a CS degree.
 			</p>
 			<p>
 				What drives me isn't just engineering — it's the fact that good financial infrastructure
