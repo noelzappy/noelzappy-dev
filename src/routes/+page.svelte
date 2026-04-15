@@ -56,7 +56,7 @@
 		class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center sm:divide-x sm:divide-[var(--color-border)]"
 	>
 		<div class="flex flex-col gap-1 sm:px-4">
-			<span class="card-metric">$45k+</span>
+			<span class="card-metric">$80k+</span>
 			<span class="card-metric-label">Monthly Volume</span>
 		</div>
 		<div class="flex flex-col gap-1 sm:px-4">
