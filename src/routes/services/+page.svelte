@@ -42,19 +42,20 @@
 
 	const techStack = [
 		'Python',
+		'Golang',
 		'TypeScript',
+		'PostgreSQL',
+		'Redis',
 		'Node.js',
 		'NestJS',
 		'FastAPI',
-		'PostgreSQL',
-		'Redis',
 		'React Native',
 		'React',
 		'Next.js',
 		'SvelteKit',
 		'Docker',
 		'GCP',
-		'BullMQ'
+		'AWS'
 	];
 
 	// const sessions: {

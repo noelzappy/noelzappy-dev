@@ -102,15 +102,16 @@
 			class="max-w-2xl flex flex-col gap-6 text-[var(--color-text-secondary)] leading-relaxed text-base"
 		>
 			<p>
-				The journey started in 2018 with a Udemy course authored by Angela Yu. I got into University
-				of the People in 2020 and earned a CS degree.
-			</p>
-			<p>
-				What drives me isn't just engineering — it's the fact that good financial infrastructure
-				changes what people can do with their money. When a savings group in Accra can track their
-				contributions in real time, when a small business in Kumasi can accept mobile payments
-				reliably, that's not a technical achievement. That's a real change in someone's life. That's
-				what I'm here to build.
+				I've been building software since 2018 — starting with a Udemy course, grinding through an
+				Bachelor's in Computer Science at University of the People, and eventually co-founding
+				SusuPaa, a fintech platform now processing over $80,000 (₵900,000) monthly across Ghana's
+				mobile money rails. Along the way I built Voltax, an open-source SDK that unifies African
+				payment gateways, and engineered core components of GHQR — Ghana's national QR payment
+				system — at Hubtel. What drives me isn't just engineering. It's the fact that good financial
+				infrastructure changes what people can do with their money. When a savings group in Accra
+				can track their contributions in real time, when a small business in Kumasi can accept
+				mobile payments reliably, that's not a technical achievement. That's a real change in
+				someone's life. That's what I'm here to build.
 			</p>
 		</div>
 	</section>

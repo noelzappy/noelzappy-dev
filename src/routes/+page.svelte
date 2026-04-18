@@ -16,7 +16,7 @@
 	description="6+ years architecting reliable financial systems across Ghana and Africa. Co-founder of SusuPaa. Builder of Voltax. Available for backend engineering and consulting."
 	canonical="https://noelzappy.dev"
 	ogType="website"
-	keywords="Emmanuel Yeboah, Noel Zappy, Backend Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Fintech Architecture, Mobile Money Integration"
+	keywords="Emmanuel Yeboah, Noel Zappy, Backend Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Fintech Architecture, Mobile Money Integration, React Native Developer"
 	structuredData={HomepageStructuredData}
 />
 
@@ -24,18 +24,18 @@
 <section class="min-h-screen flex flex-col justify-center py-12">
 	<div class="flex flex-col gap-8 max-w-4xl">
 		<h1 class="hero-headline text-[var(--color-text-primary)]">
-			I build the backend that<br class="hidden sm:block" />
-			<span class="text-[var(--color-accent)]">African fintech</span> runs on.
+			I build the software the<br class="hidden sm:block" />
+			<span class="text-[var(--color-accent)]">real world</span> runs on.
 		</h1>
 		<p
 			class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed"
 			style="font-family: var(--font-body);"
 		>
 			Full-stack engineer — backend, mobile, and web — with {new Date().getFullYear() - 2020}+ years
-			shipping products that handle real African money. <br />Co-founder of
+			shipping products that hold up in the real world. <br />Co-founder of
 			<a href="https://susupaa.com" class="text-white" rel="noopener noreferrer" target="_blank"
 				>SusuPaa</a
-			>. Builder of Voltax, the open-source African payments SDK.
+			>, a fintech processing $80k+ transactions per month.
 		</p>
 		<div class="flex flex-wrap gap-4 pt-2">
 			<a href="/services" class="btn-primary">
@@ -99,7 +99,7 @@
 			</div>
 			<p class="text-[var(--color-text-secondary)] leading-relaxed">
 				For companies building fintech products, SaaS platforms, or anything that needs to handle
-				real scale in African markets.
+				real scale.
 			</p>
 
 			<a href="/services" class="btn-text mt-auto">
@@ -337,7 +337,7 @@
 <section class="pb-24 pt-4">
 	<CTABand
 		heading="Building something that needs to actually work?"
-		subheading="Let's talk about your backend."
+		subheading="Let's talk."
 		primaryLabel="Book a Free Intro Call →"
 		primaryHref="/contact"
 		primaryCalLink="{CAL_USERNAME}/{CAL_EVENTS.intro}"

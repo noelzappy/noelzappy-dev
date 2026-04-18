@@ -24,14 +24,14 @@ stack:
 categories:
   - 'Web App'
 stats:
-  - key: 'Transactions'
-    value: '₵7M+'
+  - key: 'Monthly Transactions'
+    value: '$80k+'
     description: 'Total transaction volume processed'
   - key: 'Groups'
     value: '262+'
     description: 'Active savings groups on platform'
   - key: 'Members'
-    value: '1,726+'
+    value: '2000+'
     description: 'Users managing their savings'
 gallery:
   - '/portfolio/susupaa-webapp.png'
