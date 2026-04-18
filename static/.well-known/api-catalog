@@ -1,0 +1,22 @@
+{
+	"version": "1.0",
+	"name": "noelzappy.dev API catalog",
+	"apis": [
+		{
+			"name": "Selected GitHub repositories",
+			"url": "/api/github-repos",
+			"method": "GET"
+		},
+		{
+			"name": "Pinned repositories",
+			"url": "/api/pinned-repos",
+			"method": "GET"
+		},
+		{
+			"name": "GitHub contribution calendar",
+			"url": "/api/github-contributions",
+			"method": "GET"
+		}
+	],
+	"documentation": "/llm-full.txt"
+}

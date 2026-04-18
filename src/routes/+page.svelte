@@ -12,11 +12,11 @@
 </script>
 
 <SEOHead
-	title="Emmanuel Yeboah — Backend Engineer for African Fintech"
-	description="6+ years architecting reliable financial systems across Ghana and Africa. Co-founder of SusuPaa. Builder of Voltax. Available for backend engineering and consulting."
+	title="Emmanuel Yeboah — Full-Stack Engineer | African Fintech & Web"
+	description="Full-stack engineer with 6+ years shipping web platforms, mobile apps, and payment infrastructure across Africa. Co-founder of SusuPaa. Builder of Voltax. Available for engineering and consulting."
 	canonical="https://noelzappy.dev"
 	ogType="website"
-	keywords="Emmanuel Yeboah, Noel Zappy, Backend Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Fintech Architecture, Mobile Money Integration, React Native Developer"
+	keywords="Emmanuel Yeboah, Noel Zappy, Full-Stack Engineer, React Developer, TypeScript Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Next.js Developer, React Native Developer, Mobile Money Integration, Web Developer Ghana, Fintech Architecture, Voltax"
 	structuredData={HomepageStructuredData}
 />
 

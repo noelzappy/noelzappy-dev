@@ -1,14 +1,14 @@
 ---
-title: 'Built Mobile App'
+title: 'Built — SME Finance Platform (Web + Mobile)'
 slug: 'built-mobile-app'
-excerpt: 'I rewrote the mobile app for Built, a financial technology company, to enhance functionality and user experience. The revamped app, designed to simplify financial data management for small businesses, saw a significant increase in installs from 700 to 50,000+.'
+excerpt: "As Lead Mobile & Web Engineer at Built Financial Technologies, I built the web platform and two production mobile apps for Ghana's leading SME finance product — an all-in-one invoicing, accounting, POS, and payroll platform now serving businesses across 14+ African countries."
 featured: true
 publishedAt: '2022-12-01T21:38:00.000Z'
 featuredImage: '/portfolio/builtapp.png'
 liveUrl: 'https://built.africa'
 iosUrl: 'https://apps.apple.com/gh/app/built-accounting/id1547855525'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.builtaccounting.app'
-role: 'Lead Mobile Developer'
+role: 'Lead Mobile & Web Engineer'
 status: 'Shipped'
 client: 'Built Financial Technologies'
 featuredStack:
@@ -16,20 +16,37 @@ featuredStack:
   - 'Node.js'
 stack:
   - 'React Native'
+  - "TypeScript"
   - 'Node.js'
   - 'iOS'
   - 'Android'
+  - "NextJs"
   - 'In-App Wallet'
   - 'POS'
 categories:
   - 'Mobile App'
 stats:
-  - key: 'Installs'
+  - key: 'App Installs'
     value: '50,000+'
     description: 'Growth from 700 to 50,000+ installs'
+  - key: "Countries"
+    value: "14+"
+    description: "Used in over 14 countries worldwide"
 gallery:
   - '/portfolio/builtapp.png'
 ---
 
-<p>Small businesses keep the economy moving, but many founders across Africa still struggle with basic things like tracking cash flow or keeping clean records. Built exists to fix that. It gives small business owners simple digital tools to run and grow their businesses without the headache.</p><p>When I took over the Built mobile app, it was clear the product needed more than small improvements. It worked, but it wasn’t built to scale or feel intuitive for everyday users. So we rebuilt it from scratch, focusing on speed, clarity, and real-world business needs.</p><p>The new app became more than an accounting tool. It turned into a full financial hub for small businesses. Users can send and receive money with an in-app wallet, track inventory and sales, manage proper accounting records, run a built-in POS, and create invoices, bills, and quotations directly from their phones.</p><p>Throughout the rebuild, we spent time talking to actual business owners. Their feedback shaped the product. We simplified flows, cleaned up the UI, and removed friction so even non-technical users could manage their finances without stress.</p><p>The results spoke for themselves. Installs grew from about 700 to over 50,000, driven by a better experience and real value to users. More importantly, business owners finally had a tool they could rely on to understand their numbers and make smarter decisions.</p><p>Working on Built was personally rewarding. It was a reminder that good software, when built with real people in mind, can genuinely improve lives. And this still feels like just the beginning.
-</p>
+<p>
+
+
+<h6>The product</h6>
+<p>Built is Ghana's leading all-in-one finance platform for small and medium businesses — covering invoicing, POS, accounting, payroll, budgets, and business credit. It's trusted by businesses across Ghana, Nigeria, Kenya, South Africa, and 10+ other African markets.</p>
+<h6>What I built</h6>
+<strong>built.africa — Web Platform (Next.js)</strong><br/>
+Built and shipped the company's primary marketing and product web platform in React. The site serves a multinational audience across 14+ countries, each with localised product information, pricing, and regulatory context. Performance, clarity, and conversion were the primary design goals.<br/>
+<strong>Built Accounting — Mobile App (React Native)</strong><br/>
+Rebuilt and scaled the core accounting mobile app from 700 installs to over 50,000. Available on both the App Store and Google Play, the app gives SME owners a full accounting suite on their phones — invoicing, expense tracking, payroll, and business insights.<br/>
+<strong>Built Lite — Offline-First App (React Native + WatermelonDB)</strong><br/>
+Built Built Lite from the ground up as an offline-first mobile experience using WatermelonDB and SQLite. Designed for small business owners in low-connectivity environments who need to track transactions, manage inventory, and process sales without relying on a stable internet connection. Local-first architecture with sync when connectivity is available.<br/>
+<strong>The stack</strong><br/>
+React Native (Expo), Next.js, TypeScript, WatermelonDB, SQLite, with payment integrations across MTN MoMo, Vodafone Cash, and major Ghanaian banks.</p>

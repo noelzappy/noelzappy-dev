@@ -6,10 +6,10 @@
 	const timeline = [
 		{
 			company: 'SusuPaa',
-			title: 'Co-founder & Lead Backend Engineer',
+			title: 'Co-founder & Lead Engineer',
 			dates: 'Apr 2025 – Present',
 			impact:
-				'Architecting the backend infrastructure for a multi-tenant fintech platform digitizing traditional susu savings groups across Ghana. Built from first commit to $40k+ in monthly transaction volume with 99.9% transaction reliability.'
+				'Co-founded and built a fintech platform digitizing traditional susu savings groups across Ghana — from first commit to ₵900,000 ($81k USD) in monthly transaction volume with 99.9% transaction reliability. Responsible for the full product stack: backend microservices in Python and TypeScript, mobile money payment pipelines across MTN MoMo, Vodafone Cash, and AirtelTigo, and the React/TypeScript web dashboard for group administrators.'
 		},
 		{
 			company: 'Fetch Agent (Common Wealth)',
@@ -23,21 +23,21 @@
 			title: 'Lead Full-Stack Engineer',
 			dates: 'Apr 2024 – Oct 2025',
 			impact:
-				'Executed a zero-downtime migration of 170,000 users from PHP/MySQL to Node.js and PostgreSQL. Built the WebSocket messaging system now serving 200,000 monthly active users.'
+				'Executed a zero-downtime migration of 170,000 users from a legacy PHP/MySQL stack to Node.js and PostgreSQL. Built the WebSocket real-time messaging system now serving 200,000 monthly active users. Rebuilt the entire mobile application in React Native and delivered all React landing pages and marketing web surfaces for the platform.'
 		},
 		{
 			company: 'Hubtel',
 			title: 'Software Engineer',
 			dates: 'Feb 2024 – Oct 2024',
 			impact:
-				"Engineered core components of GHQR — Ghana's national interoperable QR payment platform. My first experience building financial infrastructure at national scale."
+				"Led frontend development of Hubtel for Hospitals — Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three distinct role-based React portals serving Patients, Caregivers, and Administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
 		},
 		{
 			company: 'Built Financial Technologies',
-			title: 'Lead Mobile Engineer',
+			title: 'Lead Mobile & Web Engineer',
 			dates: 'Sep 2021 – Oct 2024',
 			impact:
-				"Scaled a fintech mobile app from 700 to 50,000+ installs. Built offline-first local banking, POS, and automated accounting tools for Ghana's SME market."
+				"Built and shipped the company's full digital product suite — the built.africa Next.js web platform serving SMEs across 14+ African countries, two production React Native apps (Built Accounting, scaled from 700 to 50,000+ installs, and Built Lite, an offline-first app for low-connectivity environments), and the Ejuma HR platform. Delivered wallet, POS, invoicing, payroll, and automated accounting tools for Ghana's informal SME market."
 		},
 		{
 			company: 'Wordnox',
