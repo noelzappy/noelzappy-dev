@@ -184,8 +184,8 @@
 			<div class="card p-6 flex flex-col gap-3">
 				<h3 class="font-semibold text-[var(--color-text-primary)]">Open Source</h3>
 				<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-					I build and maintain open source tools including Voltax — a developer productivity
-					library. Available for use and contribution on GitHub.
+					I build and maintain open source tools including Voltax — an open-source SDK unifying
+					African payment gateway integrations. Available for use and contribution on GitHub.
 				</p>
 				<a href="/open-source" class="btn-text text-sm mt-auto"> View open source work → </a>
 			</div>

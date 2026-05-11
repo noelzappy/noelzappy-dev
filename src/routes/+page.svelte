@@ -24,8 +24,8 @@
 <section class="min-h-screen flex flex-col justify-center py-12">
 	<div class="flex flex-col gap-8 max-w-4xl">
 		<h1 class="hero-headline text-[var(--color-text-primary)]">
-			I build the software the<br class="hidden sm:block" />
-			<span class="text-[var(--color-accent)]">real world</span> runs on.
+			I build the systems <br class="hidden sm:block" />
+			<span class="text-[var(--color-accent)]">African fintech</span> runs on.
 		</h1>
 		<p
 			class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed"
