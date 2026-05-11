@@ -19,7 +19,6 @@ const GH_REPOS = [
 	'gptalks',
 	'chatgpt-whatsapp',
 	'chatalog',
-	'gptalks-api',
 	'vi-upper',
 	'gptalks-api',
 	'plant-chat-mobile'
