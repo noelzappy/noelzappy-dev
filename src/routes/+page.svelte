@@ -13,7 +13,7 @@
 
 <SEOHead
 	title="Emmanuel Yeboah — Full-Stack Engineer | African Fintech & Web"
-	description="Full-stack engineer with 6+ years shipping web platforms, mobile apps, and payment infrastructure across Africa. Co-founder of SusuPaa. Builder of Voltax. Available for engineering and consulting."
+	description="Backend engineer building fintech infrastructure for African markets. Co-founder of SusuPaa. Notes on payments, distributed systems, and shipping software that holds up in production."
 	canonical="https://noelzappy.dev"
 	ogType="website"
 	keywords="Emmanuel Yeboah, Noel Zappy, Full-Stack Engineer, React Developer, TypeScript Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Next.js Developer, React Native Developer, Mobile Money Integration, Web Developer Ghana, Fintech Architecture, Voltax"
@@ -31,11 +31,12 @@
 			class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed"
 			style="font-family: var(--font-body);"
 		>
-			Full-stack engineer — backend, mobile, and web — with {new Date().getFullYear() - 2020}+ years
-			shipping products that hold up in the real world. <br />Co-founder of
+			Backend engineer with {new Date().getFullYear() - 2020}+ years architecting payment
+			infrastructure, mobile money integrations, and multi-tenant financial platforms.
+			<br />Co-founder of
 			<a href="https://susupaa.com" class="text-white" rel="noopener noreferrer" target="_blank"
 				>SusuPaa</a
-			>, a fintech processing $80k+ transactions per month.
+			>, a fintech processing $80k+ monthly across Ghana's susu savings ecosystem.
 		</p>
 		<div class="flex flex-wrap gap-4 pt-2">
 			<a href="/services" class="btn-primary">

@@ -9,6 +9,10 @@
 			</h4>
 
 			<div class="flex flex-col gap-2">
+				<p class="text-sm text-[var(--color-accent)] leading-relaxed">
+					Currently open to senior backend and fintech engineering roles. Remote-first,
+					USD-preferred.
+				</p>
 				<a
 					href="mailto:noelzappy@gmail.com"
 					class="text-sm text-neutral-300 hover:text-[var(--color-accent)] transition-colors"

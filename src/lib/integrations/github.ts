@@ -18,15 +18,11 @@ const GH_REPOS = [
 	'voltax',
 	'gptalks',
 	'chatgpt-whatsapp',
-	'react-picture-annotation',
+	'chatalog',
 	'gptalks-api',
 	'vi-upper',
-	'noelzappy-dev',
-	'plant-chat-mobile',
-	'gama-lms-backend',
-	'remora-landing-website',
-	'Zappy.codes',
-	'vaporshop'
+	'gptalks-api',
+	'plant-chat-mobile'
 ];
 export const fetchSelectedGithubRepos = async (accessToken: string) => {
 	const headers = {
