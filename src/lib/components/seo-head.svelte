@@ -17,7 +17,7 @@
 		description,
 		canonical,
 		ogType = 'website',
-		ogImage = 'https://noelzappy.dev/emmanuel_yeboah.webp',
+		ogImage = 'https://noelzappy.dev/zappy-face.jpg',
 		publishedTime,
 		modifiedTime,
 		tags = [],

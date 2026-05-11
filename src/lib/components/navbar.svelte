@@ -4,7 +4,6 @@
 
 	const NavLinks = [
 		{ name: 'Work', href: '/work' },
-		{ name: 'Services', href: '/services' },
 		{ name: 'Notes', href: '/notes' },
 		{ name: 'About', href: '/about' }
 	];
@@ -106,7 +105,7 @@
 				class="btn-primary text-sm py-2 px-5"
 				data-sveltekit-preload-data
 			>
-				Book a Call →
+				Get in Touch →
 			</a>
 		</nav>
 
@@ -156,7 +155,7 @@
 				class="btn-primary text-sm justify-center mt-2"
 				onclick={() => (menuOpen = false)}
 			>
-				Book a Call →
+				Get in Touch →
 			</a>
 		</nav>
 	{/if}

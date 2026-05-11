@@ -6,14 +6,13 @@
 	import { inView } from '$lib/actions/inView';
 	import type { PageData } from './$types';
 	import { HomepageStructuredData } from '$lib/shared/constants';
-	import { CAL_USERNAME, CAL_EVENTS } from '$lib/cal.js';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
 <SEOHead
 	title="Emmanuel Yeboah — Full-Stack Engineer | African Fintech & Web"
-	description="Backend engineer building fintech infrastructure for African markets. Co-founder of SusuPaa. Notes on payments, distributed systems, and shipping software that holds up in production."
+	description="Backend engineer building fintech infrastructure for African markets. Co-founder of SusuPaa, processing $80k+ monthly. Creator of Voltax. Open to senior remote backend and fintech engineering roles."
 	canonical="https://noelzappy.dev"
 	ogType="website"
 	keywords="Emmanuel Yeboah, Noel Zappy, Full-Stack Engineer, React Developer, TypeScript Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Next.js Developer, React Native Developer, Mobile Money Integration, Web Developer Ghana, Fintech Architecture, Voltax"
@@ -39,10 +38,10 @@
 			>, a fintech processing $80k+ monthly across Ghana's susu savings ecosystem.
 		</p>
 		<div class="flex flex-wrap gap-4 pt-2">
-			<a href="/services" class="btn-primary">
-				Work With Me <ArrowRight class="w-4 h-4" />
+			<a href="/work" class="btn-primary">
+				See My Work <ArrowRight class="w-4 h-4" />
 			</a>
-			<a href="/work" class="btn-secondary">See My Work</a>
+			<a href="/contact" class="btn-secondary">Get in Touch</a>
 		</div>
 	</div>
 </section>
@@ -71,64 +70,6 @@
 		<div class="flex flex-col gap-1 sm:px-4">
 			<span class="card-metric">{new Date().getFullYear() - 2020}+</span>
 			<span class="card-metric-label">Years Experience</span>
-		</div>
-	</div>
-</section>
-
-<!-- ─── TWO WAYS TO WORK ─────────────────────────────────────────────────── -->
-<section class="section-pad border-t border-[var(--color-border)]">
-	<div class="flex flex-col gap-3 mb-12">
-		<SectionLabel text="// how we can work together" />
-		<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
-			Two ways to work with me.
-		</h2>
-	</div>
-
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children" use:inView>
-		<!-- Card 1: Build With Me -->
-		<div class="card p-8 flex flex-col gap-6">
-			<div class="flex flex-col gap-3">
-				<span class="text-3xl text-[var(--color-accent)]" style="font-family: var(--font-mono);"
-					>&#123; &#125;</span
-				>
-				<div>
-					<h3 class="text-2xl text-[var(--color-text-primary)]">Build With Me</h3>
-					<p class="text-sm text-[var(--color-accent)] mt-1 font-medium">
-						Your engineering partner.
-					</p>
-				</div>
-			</div>
-			<p class="text-[var(--color-text-secondary)] leading-relaxed">
-				For companies building fintech products, SaaS platforms, or anything that needs to handle
-				real scale.
-			</p>
-
-			<a href="/services" class="btn-text mt-auto">
-				Learn more <ArrowRight class="w-3.5 h-3.5" />
-			</a>
-		</div>
-
-		<!-- Card 2: Think With Me -->
-		<div class="card p-8 flex flex-col gap-6">
-			<div class="flex flex-col gap-3">
-				<span class="text-3xl text-[var(--color-accent)]" style="font-family: var(--font-mono);"
-					>&gt;_</span
-				>
-				<div>
-					<h3 class="text-2xl text-[var(--color-text-primary)]">Think With Me</h3>
-					<p class="text-sm text-[var(--color-accent)] mt-1 font-medium">
-						Focused consulting sessions.
-					</p>
-				</div>
-			</div>
-			<p class="text-[var(--color-text-secondary)] leading-relaxed">
-				For teams who need senior engineering eyes on their stack without a full hire. Architecture
-				reviews, code audits, technical strategy.
-			</p>
-
-			<a href="/contact" class="btn-text mt-auto">
-				Book a session <ArrowRight class="w-3.5 h-3.5" />
-			</a>
 		</div>
 	</div>
 </section>
@@ -337,10 +278,9 @@
 <!-- ─── CTA BAND ─────────────────────────────────────────────────────────── -->
 <section class="pb-24 pt-4">
 	<CTABand
-		heading="Building something that needs to actually work?"
+		heading="Working on payment infrastructure or African fintech?"
 		subheading="Let's talk."
-		primaryLabel="Book a Free Intro Call →"
+		primaryLabel="Get in Touch →"
 		primaryHref="/contact"
-		primaryCalLink="{CAL_USERNAME}/{CAL_EVENTS.intro}"
 	/>
 </section>

@@ -1,4 +1,7 @@
 <footer class="mt-20 border-t border-[var(--color-border)] pt-12 pb-8">
+	<p class="text-sm text-[var(--color-accent)] leading-relaxed mb-10">
+		Currently open to senior backend and fintech engineering roles. Remote-first.
+	</p>
 	<div class="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-8 mb-10">
 		<!-- Column 1: Contact -->
 		<div class="flex flex-col gap-4">
@@ -9,15 +12,11 @@
 			</h4>
 
 			<div class="flex flex-col gap-2">
-				<p class="text-sm text-[var(--color-accent)] leading-relaxed">
-					Currently open to senior backend and fintech engineering roles. Remote-first,
-					USD-preferred.
-				</p>
 				<a
 					href="mailto:noelzappy@gmail.com"
 					class="text-sm text-neutral-300 hover:text-[var(--color-accent)] transition-colors"
 				>
-					zap@noelzappy.dev
+					emmanuel@noelzappy.dev
 				</a>
 			</div>
 		</div>
@@ -36,11 +35,6 @@
 					data-sveltekit-preload-data>Work</a
 				>
 				<a
-					href="/services"
-					class="text-sm text-neutral-300 hover:text-[var(--color-accent)] transition-colors"
-					data-sveltekit-preload-data>Services</a
-				>
-				<a
 					href="/notes"
 					class="text-sm text-neutral-300 hover:text-[var(--color-accent)] transition-colors"
 					data-sveltekit-preload-data>Notes</a
@@ -51,9 +45,14 @@
 					data-sveltekit-preload-data>About</a
 				>
 				<a
+					href="/services"
+					class="text-sm text-neutral-300 hover:text-[var(--color-accent)] transition-colors"
+					data-sveltekit-preload-data>Services</a
+				>
+				<a
 					href="/contact"
 					class="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] font-medium transition-colors"
-					data-sveltekit-preload-data>Book a Call →</a
+					data-sveltekit-preload-data>Get in Touch →</a
 				>
 			</nav>
 		</div>

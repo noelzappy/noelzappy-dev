@@ -102,17 +102,40 @@
 			class="max-w-2xl flex flex-col gap-6 text-[var(--color-text-secondary)] leading-relaxed text-base"
 		>
 			<p>
-				I've been building software since 2018 — starting with a Udemy course, grinding through an
-				Bachelor's in Computer Science at University of the People, and eventually co-founding
-				SusuPaa, a fintech platform now processing over $80,000 (₵900,000) monthly across Ghana's
-				mobile money rails. Along the way I built Voltax, an open-source SDK that unifies African
-				payment gateways, and engineered core components of GHQR — Ghana's national QR payment
-				system — at Hubtel. What drives me isn't just engineering. It's the fact that good financial
-				infrastructure changes what people can do with their money. When a savings group in Accra
-				can track their contributions in real time, when a small business in Kumasi can accept
-				mobile payments reliably, that's not a technical achievement. That's a real change in
-				someone's life. That's what I'm here to build.
+				I've been building software since 2018 — starting with a Udemy course, enrolled at
+				University of the People in 2020 to complete my BSc in Computer Science, and eventually
+				co-founding SusuPaa, a fintech platform now processing over $80,000 (₵900,000) monthly
+				across Ghana's mobile money rails. Along the way I built Voltax, an open-source SDK that
+				unifies African payment gateways, and engineered core components of GHQR — Ghana's national
+				QR payment system — at Hubtel. What drives me isn't just engineering. It's the fact that
+				good financial infrastructure changes what people can do with their money. When a savings
+				group in Accra can track their contributions in real time, when a small business in Kumasi
+				can accept mobile payments reliably, that's not a technical achievement. That's a real
+				change in someone's life. That's what I'm here to build.
 			</p>
+		</div>
+	</section>
+
+	<!-- Open to roles -->
+	<section class="py-16 sm:py-20 border-b border-[var(--color-border)]">
+		<div class="flex flex-col gap-4 mb-8">
+			<SectionLabel text="// open to work" />
+			<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
+				Currently open to senior backend and fintech engineering roles.
+			</h2>
+		</div>
+		<div class="max-w-2xl flex flex-col gap-5">
+			<p class="text-[var(--color-text-secondary)] leading-relaxed">
+				Remote-first. Specifically interested in roles at companies building payment infrastructure,
+				or financial systems for emerging markets.
+			</p>
+			<a
+				href="mailto:zap@noelzappy.dev"
+				class="btn-text text-sm self-start"
+				aria-label="Email Emmanuel about engineering roles"
+			>
+				Get in touch →
+			</a>
 		</div>
 	</section>
 
