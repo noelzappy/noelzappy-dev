@@ -20,28 +20,45 @@
 />
 
 <!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
-<section class="min-h-screen flex flex-col justify-center py-12">
-	<div class="flex flex-col gap-8 max-w-4xl">
-		<h1 class="hero-headline text-[var(--color-text-primary)]">
-			I build the systems <br class="hidden sm:block" />
-			<span class="text-[var(--color-accent)]">African fintech</span> runs on.
-		</h1>
-		<p
-			class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed"
-			style="font-family: var(--font-body);"
-		>
-			Backend engineer with {new Date().getFullYear() - 2020}+ years architecting payment
-			infrastructure, mobile money integrations, and multi-tenant financial platforms.
-			<br />Co-founder of
-			<a href="https://susupaa.com" class="text-white" rel="noopener noreferrer" target="_blank"
-				>SusuPaa</a
-			>, a fintech processing $80k+ monthly across Ghana's susu savings ecosystem.
-		</p>
-		<div class="flex flex-wrap gap-4 pt-2">
-			<a href="/work" class="btn-primary">
-				See My Work <ArrowRight class="w-4 h-4" />
-			</a>
-			<a href="/contact" class="btn-secondary">Get in Touch</a>
+<section class="hero-section min-h-screen py-12 relative overflow-hidden">
+	<div
+		class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-8 lg:gap-12 items-center min-h-[calc(100vh-6rem)]"
+	>
+		<!-- Text column -->
+		<div class="flex flex-col gap-8 max-w-2xl">
+			<h1 class="hero-headline text-[var(--color-text-primary)]">
+				I build the systems <br class="hidden sm:block" />
+				<span class="text-[var(--color-accent)]">African fintech</span> runs on.
+			</h1>
+			<p
+				class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed"
+				style="font-family: var(--font-body);"
+			>
+				Backend engineer with {new Date().getFullYear() - 2020}+ years architecting payment
+				infrastructure, mobile money integrations, and multi-tenant financial platforms.
+				<br />Co-founder of
+				<a href="https://susupaa.com" class="text-white" rel="noopener noreferrer" target="_blank"
+					>SusuPaa</a
+				>, a fintech processing $80k+ monthly across Ghana's susu savings ecosystem.
+			</p>
+			<div class="flex flex-wrap gap-4 pt-2">
+				<a href="/work" class="btn-primary">
+					See My Work <ArrowRight class="w-4 h-4" />
+				</a>
+				<a href="/contact" class="btn-secondary">Get in Touch</a>
+			</div>
+		</div>
+
+		<!-- Photo column (desktop only) -->
+		<div class="hero-photo-col hidden lg:flex items-start justify-end relative overflow-hidden">
+			<img
+				src="/zappy-face.png"
+				alt="Emmanuel Yeboah"
+				class="hero-photo"
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+			/>
 		</div>
 	</div>
 </section>
@@ -284,3 +301,31 @@
 		primaryHref="/contact"
 	/>
 </section>
+
+<style>
+	.hero-photo-col {
+		height: 100%;
+		min-height: 600px;
+	}
+
+	.hero-photo {
+		width: auto;
+		height: 85vh;
+		max-height: 720px;
+		min-height: 500px;
+		object-fit: cover;
+		object-position: top center;
+		user-select: none;
+		pointer-events: none;
+		filter: brightness(0.82) contrast(1.05);
+
+		-webkit-mask-image:
+			linear-gradient(to bottom, black 30%, black 55%, transparent 95%),
+			linear-gradient(to right, transparent 0%, black 25%, black 100%);
+		-webkit-mask-composite: source-in;
+		mask-image:
+			linear-gradient(to bottom, black 30%, black 55%, transparent 95%),
+			linear-gradient(to right, transparent 0%, black 25%, black 100%);
+		mask-composite: intersect;
+	}
+</style>
