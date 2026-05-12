@@ -317,7 +317,7 @@
 		object-position: top center;
 		user-select: none;
 		pointer-events: none;
-		filter: brightness(0.82) contrast(1.05);
+		filter: brightness(0.72) contrast(1.05);
 
 		-webkit-mask-image:
 			linear-gradient(to bottom, black 30%, black 55%, transparent 95%),
