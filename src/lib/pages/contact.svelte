@@ -1,6 +1,6 @@
 <script lang="ts">
 	const contactLinks = [
-		{ text: 'noelzappy@gmail.com', href: 'mailto:noelzappy@gmail.com' },
+		{ text: 'me@noelzappy.dev', href: 'mailto:me@noelzappy.dev' },
 		{ text: 'LinkedIn', href: 'https://www.linkedin.com/in/noelzappy' },
 		{ text: 'GitHub', href: 'https://github.com/noelzappy' },
 		{ text: 'X (Twitter)', href: 'https://x.com/noelzappy' }

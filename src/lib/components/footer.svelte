@@ -13,10 +13,10 @@
 
 			<div class="flex flex-col gap-2">
 				<a
-					href="mailto:noelzappy@gmail.com"
+					href="mailto:me@noelzappy.dev"
 					class="text-sm text-neutral-300 hover:text-[var(--color-accent)] transition-colors"
 				>
-					emmanuel@noelzappy.dev
+					me@noelzappy.dev
 				</a>
 			</div>
 		</div>

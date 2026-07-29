@@ -1,12 +1,12 @@
 ---
 title: 'Brif Africa Platform'
 slug: 'brif-platform'
-excerpt: 'As Lead Full-Stack Engineer, I architected and built the digital platform for Brif Africa—a storytelling and media company amplifying African narratives. Improved Core Web Vitals by 35% and boosted user engagement by 18%.'
+excerpt: 'As Co-founder & Lead Full-Stack Engineer, I own the entire technical function at Brif Africa—a storytelling and media company amplifying African narratives. Improved Core Web Vitals by 35% and boosted user engagement by 18%.'
 featured: false
 publishedAt: '2025-03-01T00:00:00.000Z'
 featuredImage: '/portfolio/brif-website.png'
 liveUrl: 'https://brif.africa'
-role: 'Lead Full-Stack Engineer'
+role: 'Co-founder & Lead Full-Stack Engineer'
 status: 'Shipped'
 client: 'Brif Africa'
 featuredStack:
@@ -18,6 +18,8 @@ stack:
   - 'NestJS'
   - 'TypeScript'
   - 'PostgreSQL'
+  - 'Python'
+  - 'FastAPI'
   - 'GitHub Actions'
   - 'Vercel'
 categories:
@@ -39,7 +41,7 @@ gallery:
 
 <p>Africa's stories deserve to be told—and told well. Brif Africa is a media company on a mission to amplify African narratives through compelling journalism, video production, and community events. They describe themselves as "visual anthropologists," crafting content that helps African ideas travel clearly and confidently on the global stage.</p>
 
-<p>As Lead Full-Stack Engineer, I've been responsible for building and maintaining the digital infrastructure that powers Brif's storytelling. This includes the main content platform at brif.africa, the production studio site at about.brif.africa, and the backend services that tie everything together.</p>
+<p>I co-founded Brif and own its entire technical function—architecture, infrastructure, and delivery. That covers the main content platform at brif.africa, the production studio site at about.brif.africa, and the backend services that tie everything together.</p>
 
 <p>The tech stack reflects modern web architecture: Next.js and SvelteKit on the frontend for blazing-fast page loads, NestJS powering the backend APIs, all tied together with TypeScript for type safety across the entire codebase. The choice of SvelteKit for certain parts of the platform was deliberate—its compiled approach means less JavaScript shipped to users, which matters for readers across Africa with varying connection speeds.</p>
 
@@ -47,6 +49,8 @@ gallery:
 
 <p>I also set up the entire CI/CD pipeline using GitHub Actions. Every push to main triggers automated tests, builds, and deployments. The whole process takes about 7 minutes from commit to live—fast enough that the editorial team can publish updates and see them reflected almost immediately.</p>
 
+<p>More recently I built and deployed a standalone asynchronous text-to-speech microservice (FastAPI, kokoro-onnx) running CPU-only inference, which adds audio narration across the publication. Running inference on CPU rather than GPU keeps the service cheap enough to run continuously—a constraint worth designing around when the audience is African readers on mobile data and the budget is a media startup's.</p>
+
 <p>The platform now hosts articles covering everything from Ghana's tech ecosystem and fintech trends to remote work culture and career advice. It also powers their events section, where the community can discover and register for ecosystem gatherings, plus the production studio showcase featuring documentary work for clients like Spotify Africa and others.</p>
 
-<p>Working with Brif has been a unique blend of engineering and purpose. The content they create matters—it shapes how the world sees African innovation and culture. Building the technology that delivers those stories to readers across the continent and beyond feels meaningful in a way that pure technical work sometimes doesn't.</p>
+<p>Building Brif has been a unique blend of engineering and purpose. The content we create matters—it shapes how the world sees African innovation and culture. Building the technology that delivers those stories to readers across the continent and beyond feels meaningful in a way that pure technical work sometimes doesn't.</p>

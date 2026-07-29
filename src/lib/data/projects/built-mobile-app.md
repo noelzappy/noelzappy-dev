@@ -49,4 +49,4 @@ Rebuilt and scaled the core accounting mobile app from 700 installs to over 50,0
 <strong>Built Lite — Offline-First App (React Native + WatermelonDB)</strong><br/>
 Built Built Lite from the ground up as an offline-first mobile experience using WatermelonDB and SQLite. Designed for small business owners in low-connectivity environments who need to track transactions, manage inventory, and process sales without relying on a stable internet connection. Local-first architecture with sync when connectivity is available.<br/>
 <strong>The stack</strong><br/>
-React Native (Expo), Next.js, TypeScript, WatermelonDB, SQLite, with payment integrations across MTN MoMo, Vodafone Cash, and major Ghanaian banks.</p>
+React Native (Expo), Next.js, TypeScript, WatermelonDB, SQLite, with payments integrated through aggregator rails covering MTN MoMo, Telecel Cash, and major Ghanaian banks.</p>

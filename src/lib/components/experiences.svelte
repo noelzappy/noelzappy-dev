@@ -19,7 +19,7 @@
 			url: 'https://built.africa/'
 		},
 		{
-			name: 'Common Wealth (Fetch Agent)',
+			name: 'Commonwealth Media (Fetch Agent)',
 			logo: '/imgs/fetch-agent.png',
 			url: 'https://fetchagent.com/'
 		},

@@ -12,7 +12,7 @@
 			name: 'Emmanuel Noel Zappy Yeboah',
 			alternateName: 'Noel Zappy',
 			url: 'https://noelzappy.dev',
-			email: 'noelzappy@gmail.com',
+			email: 'me@noelzappy.dev',
 			jobTitle: 'Senior Software Engineer'
 		}
 	};
@@ -67,9 +67,9 @@
 			<h2 class="text-xl font-bold text-[var(--color-text-primary)]">Prefer email?</h2>
 		</div>
 		<a
-			href="mailto:zap@noelzappy.dev"
+			href="mailto:me@noelzappy.dev"
 			class="inline-flex items-center gap-3 text-[var(--color-accent)] hover:text-[var(--color-accent-hover)] text-lg font-medium transition-colors"
-			aria-label="Send email to noelzappy@gmail.com"
+			aria-label="Send email to me@noelzappy.dev"
 		>
 			<svg
 				width="20"
@@ -85,7 +85,7 @@
 				<rect x="2" y="4" width="20" height="16" rx="2" />
 				<path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
 			</svg>
-			emmanuel@noelzappy.dev
+			me@noelzappy.dev
 		</a>
 	</section>
 </div>

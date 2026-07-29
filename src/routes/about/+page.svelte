@@ -5,14 +5,21 @@
 
 	const timeline = [
 		{
-			company: 'SusuPaa',
+			company: 'SusuPaa (Pavex Technologies Ltd)',
 			title: 'Co-founder & Lead Engineer',
 			dates: 'Apr 2025 – Present',
 			impact:
-				'Co-founded and built a fintech platform digitizing traditional susu savings groups across Ghana — from first commit to ₵900,000 ($81k USD) in monthly transaction volume with 99.9% transaction reliability. Responsible for the full product stack: backend microservices in Python and TypeScript, mobile money payment pipelines across MTN MoMo, Vodafone Cash, and AirtelTigo, and the React/TypeScript web dashboard for group administrators.'
+				'Co-founded and built a fintech platform digitizing traditional susu savings groups across Ghana — from first commit to ₵900,000 ($81k USD) in monthly transaction volume with 99.9% transaction reliability. I designed and operate the custom double-entry ledger that is the system of record for every contribution, payout, and group balance, and built an atomic claim pattern over a PGBoss job queue to guarantee exactly-once processing of payment jobs under concurrent load. Mobile money collections and disbursements run through aggregator rails (Hubtel, Moolre), covering MTN MoMo, Telecel Cash, and AirtelTigo end users. Also responsible for the Python and TypeScript services, the React/TypeScript administrator dashboard, and the observability stack — Prometheus, Grafana, Loki, plus PostgreSQL WAL archiving to S3 for point-in-time recovery.'
 		},
 		{
-			company: 'Fetch Agent (Common Wealth)',
+			company: 'Brif Africa',
+			title: 'Co-founder & Lead Full-Stack Engineer',
+			dates: '2024 – Present',
+			impact:
+				'Co-founded the company and own its entire technical function — platform architecture, infrastructure, and delivery. Built the editorial platform on Next.js App Router, improving Core Web Vitals by 35% and user engagement by 18% through SSR/ISR strategy and image delivery work. Also built and deployed a standalone asynchronous text-to-speech microservice (FastAPI, kokoro-onnx) for CPU-only inference, adding audio narration across the publication.'
+		},
+		{
+			company: 'Fetch Agent (Commonwealth Media)',
 			title: 'Senior Backend Engineer',
 			dates: 'Sep 2024 – Dec 2025',
 			impact:
@@ -33,7 +40,7 @@
 				"Led frontend development of Hubtel for Hospitals — Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three distinct role-based React portals serving Patients, Caregivers, and Administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
 		},
 		{
-			company: 'Built Financial Technologies',
+			company: 'Built Financial Technologies (formerly Built Accounting Services Ltd)',
 			title: 'Lead Mobile & Web Engineer',
 			dates: 'Sep 2021 – Oct 2024',
 			impact:
@@ -102,11 +109,11 @@
 			class="max-w-2xl flex flex-col gap-6 text-[var(--color-text-secondary)] leading-relaxed text-base"
 		>
 			<p>
-				I've been building software since 2018 — starting with a Udemy course, enrolled at
-				University of the People in 2020 to complete my BSc in Computer Science, and eventually
-				co-founding SusuPaa, a fintech platform now processing over $80,000 (₵900,000) monthly
+				I've been building software since 2018 — starting with a Udemy course, earning my BSc in
+				Computer Science from University of the People in 2024, and eventually co-founding SusuPaa,
+				a fintech platform now processing over $80,000 (₵900,000) in monthly transaction volume
 				across Ghana's mobile money rails. Along the way I built Voltax, an open-source SDK that
-				unifies African payment gateways, and engineered core components of GHQR — Ghana's national
+				unifies African payment aggregator integrations, and contributed to GHQR — Ghana's national
 				QR payment system — at Hubtel. What drives me isn't just engineering. It's the fact that
 				good financial infrastructure changes what people can do with their money. When a savings
 				group in Accra can track their contributions in real time, when a small business in Kumasi
@@ -130,7 +137,7 @@
 				or financial systems for emerging markets.
 			</p>
 			<a
-				href="mailto:zap@noelzappy.dev"
+				href="mailto:me@noelzappy.dev"
 				class="btn-text text-sm self-start"
 				aria-label="Email Emmanuel about engineering roles"
 			>
@@ -208,7 +215,7 @@
 				<h3 class="font-semibold text-[var(--color-text-primary)]">Open Source</h3>
 				<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
 					I build and maintain open source tools including Voltax — an open-source SDK unifying
-					African payment gateway integrations. Available for use and contribution on GitHub.
+					African payment aggregator integrations. Available for use and contribution on GitHub.
 				</p>
 				<a href="/open-source" class="btn-text text-sm mt-auto"> View open source work → </a>
 			</div>
