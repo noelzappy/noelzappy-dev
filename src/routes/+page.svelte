@@ -3,7 +3,12 @@
 	import PostList from '$lib/components/post-list.svelte';
 	import ProjectList from '$lib/components/project-list.svelte';
 	import { TIMELINE } from '$lib/data/timeline';
-	import { HomepageStructuredData, SITE_DESCRIPTION, SITE_KEYWORDS, SITE_TITLE } from '$lib/shared/constants';
+	import {
+		HomepageStructuredData,
+		SITE_DESCRIPTION,
+		SITE_KEYWORDS,
+		SITE_TITLE
+	} from '$lib/shared/constants';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();

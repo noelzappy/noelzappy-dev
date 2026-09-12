@@ -8,10 +8,10 @@
 export const CAL_USERNAME = 'noelzappy';
 
 export const CAL_EVENTS = {
-	intro: '15min',                      // 15 min free intro
+	intro: '15min', // 15 min free intro
 	architecture: 'architecture-review', // 90 min - $225
 	fintech: 'african-fintech-strategy', // 60 min - $150
-	codeReview: 'code-review',           // 60 min - $150
-	general: 'general-consulting',       // 60 min - $150
-	quick: 'quick-consulting'            // 30 min - $75
+	codeReview: 'code-review', // 60 min - $150
+	general: 'general-consulting', // 60 min - $150
+	quick: 'quick-consulting' // 30 min - $75
 };

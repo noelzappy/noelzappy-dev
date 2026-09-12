@@ -6,7 +6,8 @@
 		tags: string[];
 		description?: string;
 	}
-	let { posts, showDescription = false }: { posts: PostItem[]; showDescription?: boolean } = $props();
+	let { posts, showDescription = false }: { posts: PostItem[]; showDescription?: boolean } =
+		$props();
 
 	const fmt = (d: string) =>
 		new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {

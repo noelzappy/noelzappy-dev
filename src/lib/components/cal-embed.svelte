@@ -26,5 +26,5 @@
 		};
 	})(window, 'https://app.cal.com/embed/embed.js', 'init');
 	Cal('init', { origin: 'https://cal.com' });
-	<\/script>`}
+	</${'script'}>`}
 </svelte:head>

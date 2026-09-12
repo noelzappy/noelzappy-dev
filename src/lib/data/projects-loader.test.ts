@@ -18,9 +18,17 @@ describe('projects content', () => {
 	});
 
 	it('features exactly the five homepage projects', () => {
-		expect(getFeaturedProjects().map((p) => p.slug).sort()).toEqual(
-			['fetch-agent-real-estate-platform', 'rbl-dating-app', 'remotepad', 'susupaa-platform', 'voltax']
-		);
+		expect(
+			getFeaturedProjects()
+				.map((p) => p.slug)
+				.sort()
+		).toEqual([
+			'fetch-agent-real-estate-platform',
+			'rbl-dating-app',
+			'remotepad',
+			'susupaa-platform',
+			'voltax'
+		]);
 	});
 
 	it('SusuPaa is tagged Go and PostgreSQL', () => {

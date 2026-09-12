@@ -1,7 +1,7 @@
 ---
 title: 'Brif Africa Platform'
 slug: 'brif-platform'
-excerpt: 'As Co-founder & Lead Full-Stack Engineer, I own the entire technical function at Brif Africa—a storytelling and media company amplifying African narratives. Improved Core Web Vitals by 35% and boosted user engagement by 18%.'
+excerpt: 'As Co-founder & Lead Engineer, I own the entire technical function at Brif Africa—a storytelling and media company amplifying African narratives. Improved Core Web Vitals by 35% and boosted user engagement by 18%.'
 featured: false
 publishedAt: '2025-03-01T00:00:00.000Z'
 featuredImage: '/portfolio/brif-website.png'

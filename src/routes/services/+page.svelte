@@ -85,8 +85,7 @@
 			name: 'Emmanuel Noel Zappy Yeboah',
 			url: 'https://noelzappy.dev'
 		},
-		description:
-			'Backend architecture, platform engineering, and code review consulting.',
+		description: 'Backend architecture, platform engineering, and code review consulting.',
 		url: 'https://noelzappy.dev/services'
 	};
 </script>
@@ -113,11 +112,10 @@
 			class="rounded-xl border border-[var(--color-accent)]/30 bg-[var(--color-accent-muted)] p-5 sm:p-6 max-w-2xl"
 		>
 			<p class="text-sm sm:text-base text-[var(--color-text-secondary)] leading-relaxed">
-				<span class="font-semibold text-[var(--color-text-primary)]">Note:</span> I'm primarily
-				focused on senior backend and fintech engineering roles right now. The options below are
-				available for companies that need focused, short-term technical work — architecture reviews,
-				payment infrastructure builds, or African market integrations — but my primary availability
-				is full-time employment.
+				<span class="font-semibold text-[var(--color-text-primary)]">Note:</span> I'm primarily focused
+				on senior backend and fintech engineering roles right now. The options below are available for
+				companies that need focused, short-term technical work — architecture reviews, payment infrastructure
+				builds, or African market integrations — but my primary availability is full-time employment.
 			</p>
 		</div>
 		<p class="text-lg text-[var(--color-text-secondary)] max-w-2xl leading-relaxed">

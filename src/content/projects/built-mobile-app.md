@@ -17,11 +17,11 @@ featuredStack:
   - 'Node.js'
 stack:
   - 'React Native'
-  - "TypeScript"
+  - 'TypeScript'
   - 'Node.js'
   - 'iOS'
   - 'Android'
-  - "NextJs"
+  - 'NextJs'
   - 'In-App Wallet'
   - 'POS'
 categories:
@@ -30,15 +30,14 @@ stats:
   - key: 'App Installs'
     value: '50,000+'
     description: 'Growth from 700 to 50,000+ installs'
-  - key: "Countries"
-    value: "14+"
-    description: "Used in over 14 countries worldwide"
+  - key: 'Countries'
+    value: '14+'
+    description: 'Used in over 14 countries worldwide'
 gallery:
   - '/portfolio/builtapp.png'
 ---
 
 <p>
-
 
 <h6>The product</h6>
 <p>Built is Ghana's leading all-in-one finance platform for small and medium businesses — covering invoicing, POS, accounting, payroll, budgets, and business credit. It's trusted by businesses across Ghana, Nigeria, Kenya, South Africa, and 10+ other African markets.</p>

@@ -1,7 +1,7 @@
 ---
 title: 'Givio Platform'
 slug: 'givio-platform'
-excerpt: 'As the solo full-stack developer, I built Givio from the ground up—a next-generation digital gifting platform that lets users gift asset-backed certificates tied to stocks and cryptocurrencies.'
+excerpt: 'As the solo developer, I built Givio from the ground up—a next-generation digital gifting platform that lets users gift asset-backed certificates tied to stocks and cryptocurrencies.'
 featured: false
 publishedAt: '2025-02-01T00:00:00.000Z'
 featuredImage: '/portfolio/givio-webapp.png'

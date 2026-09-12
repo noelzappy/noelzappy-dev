@@ -10,11 +10,16 @@ const TAGS = {
 	'are-we-now-just-bystanders-while-ai-takes-over': ['ai', 'opinion'],
 	'software-engineering-is-just-advanced-damage-control': ['engineering', 'opinion'],
 	'the-shipping-anxiety-of-ai-generated-code': ['ai', 'engineering'],
-	'how-i-migrated-170k-users-from-php-to-node-js-without-stopping-the-world': ['systems', 'migrations'],
+	'how-i-migrated-170k-users-from-php-to-node-js-without-stopping-the-world': [
+		'systems',
+		'migrations'
+	],
 	'why-i-built-voltax-unifying-the-african-payment-stack': ['open-source', 'api-design'],
 	'im-leaving-react-for-svelte': ['frontend', 'opinion'],
 	'why-developer-experience-is-now-a-product-priority': ['developer-experience'],
-	'why-every-ghanaian-tech-professional-should-take-the-2025-ghana-tech-ecosystem-survey': ['community'],
+	'why-every-ghanaian-tech-professional-should-take-the-2025-ghana-tech-ecosystem-survey': [
+		'community'
+	],
 	'estimating-project-timelines-as-a-freelancer-a-developers-guide': ['process']
 };
 
@@ -27,8 +32,14 @@ for (const p of posts) {
 	const slug = p.slug.trim();
 	const tags = TAGS[slug];
 	if (!tags) throw new Error(`no tags mapped for ${slug}`);
-	const body = nhm.translate(p.html || '').replace(/ /g, ' ').trim();
-	const description = (p.custom_excerpt || p.excerpt || '').replace(/\s+/g, ' ').trim().slice(0, 300);
+	const body = nhm
+		.translate(p.html || '')
+		.replace(/\u00a0/g, ' ')
+		.trim();
+	const description = (p.custom_excerpt || p.excerpt || '')
+		.replace(/\s+/g, ' ')
+		.trim()
+		.slice(0, 300);
 	const fm = [
 		'---',
 		`title: ${yamlStr(p.title)}`,

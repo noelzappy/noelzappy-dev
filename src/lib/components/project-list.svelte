@@ -17,7 +17,9 @@
 		<li class="project">
 			<div class="head">
 				{#if project.hasWriteup}
-					<a href="/projects/{project.slug}" class="title" data-sveltekit-preload-data>{project.title}</a>
+					<a href="/projects/{project.slug}" class="title" data-sveltekit-preload-data
+						>{project.title}</a
+					>
 				{:else if project.github}
 					<a href={project.github} class="title" rel="noopener noreferrer">{project.title}</a>
 				{:else}

@@ -8,7 +8,9 @@ describe('resolveRedirect', () => {
 		expect(resolveRedirect('/open-source')).toBe('/projects');
 	});
 	it('maps old detail routes and tolerates trailing slashes', () => {
-		expect(resolveRedirect('/notes/im-leaving-react-for-svelte/')).toBe('/writing/im-leaving-react-for-svelte');
+		expect(resolveRedirect('/notes/im-leaving-react-for-svelte/')).toBe(
+			'/writing/im-leaving-react-for-svelte'
+		);
 		expect(resolveRedirect('/work/susupaa-platform')).toBe('/projects/susupaa-platform');
 	});
 	it('leaves current routes alone', () => {

@@ -8,9 +8,7 @@ function acceptsMarkdown(acceptHeader: string | null): boolean {
 	if (!acceptHeader) return false;
 
 	return acceptHeader.split(',').some((entry) => {
-		const [type, ...params] = entry
-			.split(';')
-			.map((part) => part.trim().toLowerCase());
+		const [type, ...params] = entry.split(';').map((part) => part.trim().toLowerCase());
 
 		if (type !== 'text/markdown') return false;
 
@@ -29,9 +27,7 @@ function ensureVaryAccept(headers: Headers): void {
 		return;
 	}
 
-	const varyValues = vary
-		.split(',')
-		.map((value) => value.trim().toLowerCase());
+	const varyValues = vary.split(',').map((value) => value.trim().toLowerCase());
 
 	if (!varyValues.includes('accept')) {
 		headers.set('Vary', `${vary}, Accept`);

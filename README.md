@@ -14,12 +14,12 @@ Personal site of Emmanuel Yeboah — backend engineer. Content-first, static, de
 
 ## Content
 
-| What | Where | Notes |
-|---|---|---|
-| Posts | `src/content/writing/<slug>.md` | frontmatter: `title`, `date` (quoted `'YYYY-MM-DD'`), `tags`, `description`. Body is markdown; code blocks are highlighted at build time. |
-| Projects | `src/content/projects/<slug>.md` | frontmatter per `src/lib/data/projects.ts`; `kind: case-study` or `open-source`; `github` for the repo URL; a non-empty body gets a `/projects/<slug>` page. |
-| Timeline | `src/lib/data/timeline.ts` | homepage entries |
-| Site metadata | `src/lib/shared/constants.ts` | title, description, keywords, JSON-LD |
+| What          | Where                            | Notes                                                                                                                                                        |
+| ------------- | -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Posts         | `src/content/writing/<slug>.md`  | frontmatter: `title`, `date` (quoted `'YYYY-MM-DD'`), `tags`, `description`. Body is markdown; code blocks are highlighted at build time.                    |
+| Projects      | `src/content/projects/<slug>.md` | frontmatter per `src/lib/data/projects.ts`; `kind: case-study` or `open-source`; `github` for the repo URL; a non-empty body gets a `/projects/<slug>` page. |
+| Timeline      | `src/lib/data/timeline.ts`       | homepage entries                                                                                                                                             |
+| Site metadata | `src/lib/shared/constants.ts`    | title, description, keywords, JSON-LD                                                                                                                        |
 
 Adding a post: create the markdown file, commit, deploy. It appears on `/`, `/writing`, its tag pages, `/rss.xml`, and `/sitemap.xml` automatically.
 

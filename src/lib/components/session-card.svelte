@@ -21,7 +21,10 @@
 			>
 				{title}
 			</h3>
-			<p class="text-xs text-[var(--color-text-secondary)] mt-1" style="font-family: var(--font-mono);">
+			<p
+				class="text-xs text-[var(--color-text-secondary)] mt-1"
+				style="font-family: var(--font-mono);"
+			>
 				{duration}
 			</p>
 		</div>
@@ -34,8 +37,6 @@
 	{#if eventSlug}
 		<CalButton {eventSlug} label="Book →" variant="text" />
 	{:else}
-		<a href={bookHref} class="btn-text text-sm mt-auto">
-			Book →
-		</a>
+		<a href={bookHref} class="btn-text text-sm mt-auto"> Book → </a>
 	{/if}
 </div>

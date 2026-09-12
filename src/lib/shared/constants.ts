@@ -27,7 +27,11 @@ export const HomepageStructuredData = {
 	url: SITE_URL,
 	image: `${SITE_URL}/zappy-face.jpg`,
 	email: 'me@noelzappy.dev',
-	sameAs: ['https://github.com/noelzappy', 'https://x.com/noelzappy', 'https://linkedin.com/in/noelzappy'],
+	sameAs: [
+		'https://github.com/noelzappy',
+		'https://x.com/noelzappy',
+		'https://linkedin.com/in/noelzappy'
+	],
 	jobTitle: 'Backend Engineer',
 	description: SITE_DESCRIPTION,
 	address: { '@type': 'PostalAddress', addressLocality: 'Accra', addressCountry: 'GH' },

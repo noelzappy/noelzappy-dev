@@ -21,10 +21,12 @@
 ### Task 1: Writing content pipeline (mdsvex + Ghost export)
 
 **Files:**
+
 - Create: `scripts/export-ghost.mjs`, `src/content/writing/*.md` (9 files), `src/lib/content/writing.ts`, `src/lib/content/writing.test.ts`
 - Modify: `svelte.config.js` (mdsvex preprocess, `.md` extension), `package.json` (add mdsvex, shiki)
 
 **Interfaces:**
+
 - Produces: `getPosts(): Post[]` sorted newest first; `getPost(slug): Post | undefined`; `getTags(): {tag: string; count: number}[]`; `type Post = { slug; title; date; tags: string[]; description; component: Component }`.
 
 - [ ] Install `mdsvex` and `shiki`; configure `mdsvex({ extensions: ['.md'], highlight: shiki })` in `svelte.config.js` and add `.md` to `extensions`.
@@ -35,11 +37,13 @@
 ### Task 2: Projects content collection
 
 **Files:**
+
 - Move: `src/lib/data/projects/*.md` → `src/content/projects/`
 - Create: `src/content/projects/{voltax,remotepad,vaulx,chatalog,tts-generator,chatgpt-whatsapp,gptalks}.md`
 - Modify: `src/lib/data/projects.ts` (add `repo?`, `kind`), `src/lib/data/projects-loader.ts` (new glob path), role normalization and SusuPaa stack in frontmatter.
 
 **Interfaces:**
+
 - Produces: `getAllProjects()`, `getProjectBySlug()`, `getFeaturedProjects()` unchanged signatures; `ProjectFrontmatter.kind: 'case-study' | 'open-source'`, `repo?: string`.
 
 - [ ] Move files, update glob, add fields, add `kind: case-study` to all existing files.
@@ -50,6 +54,7 @@
 ### Task 3: Layout, typography, theme
 
 **Files:**
+
 - Modify: `src/routes/layout.css` (rewrite), `src/routes/+layout.svelte`, `src/app.html` (theme bootstrap script, drop Cal + Google Fonts), `src/lib/components/navbar.svelte` (rewrite), `src/lib/components/footer.svelte` (rewrite)
 - Create: `src/lib/components/theme-toggle.svelte`, `src/lib/components/cal-embed.svelte` (moved from app.html, used by `/contact` and `/services`)
 
@@ -62,6 +67,7 @@
 ### Task 4: Homepage
 
 **Files:**
+
 - Rewrite: `src/routes/+page.svelte`, `src/routes/+page.server.ts` → `+page.ts` with `prerender = true`
 - Create: `src/lib/data/timeline.ts` (approved entries), `src/lib/components/post-list.svelte`, `src/lib/components/project-list.svelte`
 - Modify: `src/routes/page.svelte.spec.ts`
@@ -73,6 +79,7 @@
 ### Task 5: Writing routes and RSS
 
 **Files:**
+
 - Create: `src/routes/writing/+page.ts|+page.svelte`, `src/routes/writing/[slug]/+page.ts|+page.svelte`, `src/routes/writing/tag/[tag]/+page.ts|+page.svelte`, `src/routes/rss.xml/+server.ts`
 - Delete: `src/routes/notes/**`, `src/lib/integrations/ghost.ts`, `src/lib/components/newsletter.svelte`, `src/lib/components/note-card.svelte`
 - Create: `src/routes/notes/+page.ts` and `src/routes/notes/[slug]/+page.ts` with `redirect(301, …)` and `prerender = false` is not needed: use `entries` + redirects in `hooks.server.ts` map instead (single place). Add `src/lib/redirects.ts` + test.
@@ -85,6 +92,7 @@
 ### Task 6: Projects routes
 
 **Files:**
+
 - Create: `src/routes/projects/+page.ts|+page.svelte` (plain list: title, one-line excerpt, links live / repo / writeup), `src/routes/projects/[slug]/+page.ts|+page.svelte` (simplified case study: header, links, stack, body, problem, lessons; no gallery hover, no CTA, no stats grid)
 - Delete: `src/routes/work/**`, old `src/routes/projects/**`, `src/routes/open-source/**`, `src/routes/api/**`, `src/lib/integrations/github.ts`, `src/lib/components/{gh-contributions,pinned-repos,experiences,expertise,cta-band,project-card}.svelte`, `static/.well-known/api-catalog`
 - Modify: `hooks.server.ts` (drop api-catalog Link header)
@@ -96,6 +104,7 @@
 ### Task 7: Metadata and SEO
 
 **Files:**
+
 - Modify: `src/lib/shared/constants.ts`, `src/lib/components/seo-head.svelte` (default title/description/og image = `/zappy-face.jpg`), `src/routes/sitemap.xml/+server.ts`, `static/llm-full.txt`, `README.md`, `src/routes/contact/+page.svelte` and `src/routes/services/+page.svelte` (meta only)
 
 - [ ] Apply spec strings verbatim. Sitemap: `/`, `/writing`, `/projects`, `/about`, posts, projects with bodies. Drop `/services`, `/contact`.

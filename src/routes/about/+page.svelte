@@ -56,7 +56,8 @@
 			engagement: 'Full-time',
 			title: 'Frontend Engineer',
 			dates: 'Jul 2019 – Aug 2021',
-			impact: 'First professional role. Where I learned what it means to build software that serves real users, not just passes tests.'
+			impact:
+				'First professional role. Where I learned what it means to build software that serves real users, not just passes tests.'
 		}
 	];
 
@@ -99,9 +100,9 @@
 		onboarded, 28 API modules in production, p99 latency cut from 1.6s to 500ms. At
 		<a href="/projects/rbl-dating-app">RBL Matchmaking</a> I moved 170,000 live users from PHP/MySQL
 		to Node.js/PostgreSQL with zero downtime. At
-		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I ran the backend for APIs
-		serving 50,000+ daily requests under 200ms. Earlier I was at Hubtel and at Built Financial
-		Technologies, where I led mobile and web engineering.
+		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I ran the backend for APIs serving
+		50,000+ daily requests under 200ms. Earlier I was at Hubtel and at Built Financial Technologies, where
+		I led mobile and web engineering.
 	</p>
 	<p>
 		I'm currently consulting on backend and platform work, and I'm open to senior remote backend and
@@ -113,18 +114,17 @@
 <section class="section prose-block">
 	<h2>How I work</h2>
 	<p>
-		<strong>Ship, then polish.</strong> Working software that ships beats perfect software that
-		doesn't. I care deeply about code quality, but I care more about systems that are actually in
-		production serving real users.
+		<strong>Ship, then polish.</strong> Working software that ships beats perfect software that doesn't.
+		I care deeply about code quality, but I care more about systems that are actually in production serving
+		real users.
 	</p>
 	<p>
-		<strong>Code is communication.</strong> The best codebase is the one your team can read,
-		understand, and confidently change six months later. I write for the next engineer, not just
-		the machine.
+		<strong>Code is communication.</strong> The best codebase is the one your team can read, understand,
+		and confidently change six months later. I write for the next engineer, not just the machine.
 	</p>
 	<p>
-		<strong>Design for the worst network.</strong> Many of the people using what I build are on slow
-		or intermittent connections. Building for that first makes everything more robust everywhere.
+		<strong>Design for the worst network.</strong> Many of the people using what I build are on slow or
+		intermittent connections. Building for that first makes everything more robust everywhere.
 	</p>
 </section>
 
@@ -148,8 +148,8 @@
 	<h2>Elsewhere</h2>
 	<p>
 		I write about systems in <a href="/writing">Writing</a>, and my open-source work is under
-		<a href="/projects">Projects</a>. I'm <a href="https://github.com/noelzappy">noelzappy</a> on
-		GitHub and X.
+		<a href="/projects">Projects</a>. I'm <a href="https://github.com/noelzappy">noelzappy</a> on GitHub
+		and X.
 	</p>
 </section>
 

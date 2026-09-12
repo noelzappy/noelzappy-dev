@@ -19,18 +19,18 @@ Non-goals: switching frameworks, adding sections that cannot be filled today, in
 
 ## Routes
 
-| Route | Content | Notes |
-|---|---|---|
-| `/` | intro, timeline, latest 5 posts, selected projects, footer | no hero, stats, or CTAs |
-| `/writing` | all posts, newest first, tags | |
-| `/writing/[slug]` | post | |
-| `/writing/tag/[tag]` | posts by tag | only if a tag has ≥1 post (always true by construction) |
-| `/projects` | case studies and open-source repos in one list | live, repo, writeup links per entry |
-| `/projects/[slug]` | case study | |
-| `/about` | rewritten, architecture-first | |
-| `/rss.xml` | feed of posts | |
-| `/sitemap.xml` | home, writing, projects, about, posts, projects | |
-| `/contact`, `/services` | kept, unlinked from nav and footer | |
+| Route                   | Content                                                    | Notes                                                   |
+| ----------------------- | ---------------------------------------------------------- | ------------------------------------------------------- |
+| `/`                     | intro, timeline, latest 5 posts, selected projects, footer | no hero, stats, or CTAs                                 |
+| `/writing`              | all posts, newest first, tags                              |                                                         |
+| `/writing/[slug]`       | post                                                       |                                                         |
+| `/writing/tag/[tag]`    | posts by tag                                               | only if a tag has ≥1 post (always true by construction) |
+| `/projects`             | case studies and open-source repos in one list             | live, repo, writeup links per entry                     |
+| `/projects/[slug]`      | case study                                                 |                                                         |
+| `/about`                | rewritten, architecture-first                              |                                                         |
+| `/rss.xml`              | feed of posts                                              |                                                         |
+| `/sitemap.xml`          | home, writing, projects, about, posts, projects            |                                                         |
+| `/contact`, `/services` | kept, unlinked from nav and footer                         |                                                         |
 
 Redirects (301): `/notes` → `/writing`, `/notes/[slug]` → `/writing/[slug]`, `/work` → `/projects`, `/work/[slug]` → `/projects/[slug]`, `/open-source` → `/projects`. Old `/projects/[slug]` slugs are the same as `/work/[slug]`, so no change.
 
@@ -50,6 +50,7 @@ description: string
 Body is markdown, compiled by mdsvex. The nine Ghost posts are exported once by a script (`scripts/export-ghost.ts`) using `node-html-markdown`, then committed. Slugs are preserved.
 
 Tags (approved as proposal, confirmed at diff review):
+
 - are-we-now-just-bystanders-while-ai-takes-over: ai, opinion
 - software-engineering-is-just-advanced-damage-control: engineering, opinion
 - the-shipping-anxiety-of-ai-generated-code: ai, engineering
@@ -71,10 +72,12 @@ Homepage selection (`featured: true` after normalization): susupaa-platform, rbl
 ## Homepage copy (approved)
 
 Intro:
+
 > Hey, I'm Emmanuel.
 > Backend engineer. I build systems that can't afford to be wrong.
 
 Timeline (dates from the existing about page; wording approved as draft, editable at diff review):
+
 - 2019–2021 Wordnox. Frontend engineer. First professional role.
 - 2021–2024 Built Financial Technologies. Lead mobile and web engineer. Shipped the web platform, two React Native apps, one offline-first, and an HR platform.
 - 2024 Hubtel. Software engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.

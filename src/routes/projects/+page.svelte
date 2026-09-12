@@ -29,12 +29,6 @@
 	</p>
 </section>
 
-<style>
-	.intro {
-		margin: 0;
-	}
-</style>
-
 {#if data.openSource.length}
 	<section class="section" aria-labelledby="oss-heading">
 		<h2 id="oss-heading">Open source</h2>
@@ -48,3 +42,9 @@
 		<ProjectList projects={data.caseStudies} />
 	</section>
 {/if}
+
+<style>
+	.intro {
+		margin: 0;
+	}
+</style>

@@ -3,10 +3,7 @@ interface InViewOptions {
 	once?: boolean;
 }
 
-export function inView(
-	node: Element,
-	{ threshold = 0.15, once = true }: InViewOptions = {}
-) {
+export function inView(node: Element, { threshold = 0.15, once = true }: InViewOptions = {}) {
 	let observer: IntersectionObserver;
 
 	function observe() {

@@ -5,7 +5,21 @@ import { createHighlighter } from 'shiki';
 
 const highlighter = await createHighlighter({
 	themes: ['github-light', 'github-dark'],
-	langs: ['javascript', 'typescript', 'go', 'sql', 'bash', 'json', 'yaml', 'html', 'css', 'svelte', 'python', 'php', 'text']
+	langs: [
+		'javascript',
+		'typescript',
+		'go',
+		'sql',
+		'bash',
+		'json',
+		'yaml',
+		'html',
+		'css',
+		'svelte',
+		'python',
+		'php',
+		'text'
+	]
 });
 
 /** @type {import('@sveltejs/kit').Config} */
