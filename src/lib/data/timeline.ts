@@ -21,17 +21,11 @@ export const TIMELINE: TimelineEntry[] = [
 		line: 'Co-founded and led the platform: custom append-only ledger with strict consistency guarantees, 339 organizations onboarded, 28 API modules in production. Cut p99 latency from 1.6s to 500ms.'
 	},
 	{
-		years: '2024–present',
-		org: 'Brif Africa',
-		url: 'https://brif.africa',
-		line: 'Co-founder. Editorial platform and a text-to-speech microservice.'
-	},
-	{
 		years: '2024–2025',
 		org: 'Fetch Agent',
 		url: 'https://fetchagent.com',
 		writeup: '/projects/fetch-agent-real-estate-platform',
-		line: 'Senior backend engineer. APIs at 50,000+ daily requests under 200ms.'
+		line: 'Senior backend engineer. Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.'
 	},
 	{
 		years: '2024–2025',

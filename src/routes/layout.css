@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@import './legacy.css';
 
 @font-face {
 	font-family: 'Inter';
@@ -33,20 +32,6 @@
 	--measure: 68ch;
 	--rhythm: 0.5rem;
 	color-scheme: light;
-
-	/* legacy aliases, removed once the old pages are gone */
-	--font-display: var(--font-sans);
-	--font-body: var(--font-sans);
-	--color-bg: var(--bg);
-	--color-surface: var(--code-bg);
-	--color-surface-hover: var(--border);
-	--color-border: var(--border);
-	--color-text-primary: var(--fg);
-	--color-text-secondary: var(--muted);
-	--color-accent: var(--accent);
-	--color-accent-hover: var(--accent);
-	--color-accent-muted: var(--accent-soft);
-	--color-success: #22c55e;
 }
 
 [data-theme='dark'] {
@@ -75,6 +60,7 @@
 
 /* ─── Base ───────────────────────────────────────────────────────────── */
 html {
+	scrollbar-color: color-mix(in srgb, var(--muted) 45%, transparent) transparent;
 	background: var(--bg);
 	color: var(--fg);
 	font-family: var(--font-sans);
@@ -89,6 +75,18 @@ body {
 	margin: 0;
 	background: var(--bg);
 	color: var(--fg);
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: color-mix(in srgb, var(--muted) 45%, transparent);
+	border-radius: 999px;
 }
 
 ::selection {

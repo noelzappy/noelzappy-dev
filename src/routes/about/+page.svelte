@@ -12,20 +12,12 @@
 				'Co-founded and led the platform: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 latency cut from 1.6s to 500ms. 339 organizations onboarded and 28 API modules in production. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
 		},
 		{
-			org: 'Brif Africa',
-			engagement: 'Founder',
-			title: 'Co-founder & Lead Engineer',
-			dates: '2024 – Present',
-			impact:
-				'Co-founded the company and own its entire technical function: platform architecture, infrastructure, and delivery. Built the editorial platform on Next.js App Router, improving Core Web Vitals by 35% and user engagement by 18% through SSR/ISR strategy and image delivery work. Also built and deployed a standalone asynchronous text-to-speech microservice (FastAPI, kokoro-onnx) for CPU-only inference.'
-		},
-		{
 			org: 'Fetch Agent (Commonwealth Media)',
 			engagement: 'Contract',
 			title: 'Senior Backend Engineer',
 			dates: 'Sep 2024 – Dec 2025',
 			impact:
-				'Led backend for a US real estate platform. Scaled APIs to 50,000+ daily requests at sub-200ms response times. Built the proprietary agent-ranking algorithm that improved user-to-agent conversion.'
+				'Led backend for a US real estate platform. Built the agent-ranking and filtering engine that matches buyers to agents by experience, commission model, contract terms, and availability, and the APIs behind the app and admin dashboard, held under 200ms.'
 		},
 		{
 			org: 'RBL Matchmaking LLC',
@@ -100,9 +92,9 @@
 		onboarded, 28 API modules in production, p99 latency cut from 1.6s to 500ms. At
 		<a href="/projects/rbl-dating-app">RBL Matchmaking</a> I moved 170,000 live users from PHP/MySQL
 		to Node.js/PostgreSQL with zero downtime. At
-		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I ran the backend for APIs serving
-		50,000+ daily requests under 200ms. Earlier I was at Hubtel and at Built Financial Technologies, where
-		I led mobile and web engineering.
+		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I built the agent-ranking and
+		filtering engine behind buyer-to-agent matching. Earlier I was at Hubtel and at Built Financial Technologies,
+		where I led mobile and web engineering.
 	</p>
 	<p>
 		I'm currently consulting on backend and platform work, and I'm open to senior remote backend and

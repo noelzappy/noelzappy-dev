@@ -2,6 +2,9 @@
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import PostList from '$lib/components/post-list.svelte';
 	import ProjectList from '$lib/components/project-list.svelte';
+	import CalButton from '$lib/components/CalButton.svelte';
+	import CalEmbed from '$lib/components/cal-embed.svelte';
+	import { CAL_EVENTS } from '$lib/cal.js';
 	import { TIMELINE } from '$lib/data/timeline';
 	import {
 		HomepageStructuredData,
@@ -14,6 +17,7 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
+<CalEmbed />
 <SEOHead
 	title={SITE_TITLE}
 	description={SITE_DESCRIPTION}
@@ -65,7 +69,18 @@
 	</section>
 {/if}
 
+<section class="section" aria-labelledby="contact-heading">
+	<h2 id="contact-heading">Contact</h2>
+	<p class="contact">
+		Email <a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a> or
+		<CalButton eventSlug={CAL_EVENTS.intro} label="book a 15-minute call" />.
+	</p>
+</section>
+
 <style>
+	.contact {
+		margin: 0;
+	}
 	.intro {
 		display: flex;
 		flex-direction: column;

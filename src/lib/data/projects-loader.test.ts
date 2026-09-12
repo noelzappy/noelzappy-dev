@@ -4,7 +4,7 @@ import { getAllProjects, getFeaturedProjects, getProjectBySlug } from './project
 describe('projects content', () => {
 	it('loads every project with a kind and a slug', () => {
 		const projects = getAllProjects();
-		expect(projects.length).toBe(34);
+		expect(projects.length).toBe(29);
 		for (const p of projects) {
 			expect(p.slug).toBeTruthy();
 			expect(['case-study', 'open-source']).toContain(p.kind);

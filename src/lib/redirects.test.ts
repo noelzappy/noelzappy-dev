@@ -6,6 +6,7 @@ describe('resolveRedirect', () => {
 		expect(resolveRedirect('/notes')).toBe('/writing');
 		expect(resolveRedirect('/work')).toBe('/projects');
 		expect(resolveRedirect('/open-source')).toBe('/projects');
+		expect(resolveRedirect('/services')).toBe('/contact');
 	});
 	it('maps old detail routes and tolerates trailing slashes', () => {
 		expect(resolveRedirect('/notes/im-leaving-react-for-svelte/')).toBe(

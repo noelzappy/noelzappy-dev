@@ -3,6 +3,7 @@ export function resolveRedirect(pathname: string): string | null {
 	const path = pathname.replace(/\/+$/, '') || '/';
 	if (path === '/notes') return '/writing';
 	if (path === '/work' || path === '/open-source') return '/projects';
+	if (path === '/services') return '/contact';
 	const note = path.match(/^\/notes\/([^/]+)$/);
 	if (note) return `/writing/${note[1]}`;
 	const work = path.match(/^\/work\/([^/]+)$/);
