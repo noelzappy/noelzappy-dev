@@ -217,7 +217,7 @@
 					I build and maintain open source tools including Voltax — an open-source SDK unifying
 					African payment aggregator integrations. Available for use and contribution on GitHub.
 				</p>
-				<a href="/open-source" class="btn-text text-sm mt-auto"> View open source work → </a>
+				<a href="/projects" class="btn-text text-sm mt-auto"> View projects → </a>
 			</div>
 			<div class="card p-6 flex flex-col gap-3">
 				<h3 class="font-semibold text-[var(--color-text-primary)]">Writing</h3>
@@ -225,7 +225,7 @@
 					I write about software architecture, African fintech, and the hard decisions that come
 					with building systems at scale. No fluff.
 				</p>
-				<a href="/notes" class="btn-text text-sm mt-auto"> Read the notes → </a>
+				<a href="/writing" class="btn-text text-sm mt-auto"> Read the notes → </a>
 			</div>
 			<div class="card p-6 flex flex-col gap-3">
 				<h3 class="font-semibold text-[var(--color-text-primary)]">Based in Accra</h3>
