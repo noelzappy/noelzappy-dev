@@ -79,14 +79,14 @@
 	const structuredData = {
 		'@context': 'https://schema.org',
 		'@type': 'Service',
-		name: 'Full-Stack Engineering & Consulting — Emmanuel Yeboah',
+		name: 'Engineering Consulting — Emmanuel Yeboah',
 		provider: {
 			'@type': 'Person',
 			name: 'Emmanuel Noel Zappy Yeboah',
 			url: 'https://noelzappy.dev'
 		},
 		description:
-			'Full-stack engineering and technical consulting services specialising in African fintech, mobile apps, and payment infrastructure.',
+			'Backend architecture, platform engineering, and code review consulting.',
 		url: 'https://noelzappy.dev/services'
 	};
 </script>
@@ -94,10 +94,10 @@
 <CalEmbed />
 <SEOHead
 	title="Services"
-	description="Full-stack engineering and technical consulting specialising in African fintech, mobile apps, and payment infrastructure. 6+ years shipping products that handle real African money."
+	description="Consulting from Emmanuel Yeboah: backend architecture reviews, platform and infrastructure work, and code audits."
 	canonical="https://noelzappy.dev/services"
 	ogType="website"
-	keywords="Full-Stack Engineering, Fintech Consulting, African Fintech, Mobile App Development, Mobile Money Integration, Technical Consulting"
+	keywords="Emmanuel Yeboah, consulting, backend architecture, platform engineering, code review"
 	{structuredData}
 />
 

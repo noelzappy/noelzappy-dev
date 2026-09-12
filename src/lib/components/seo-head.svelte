@@ -17,7 +17,7 @@
 		description,
 		canonical,
 		ogType = 'website',
-		ogImage = 'https://noelzappy.dev/zappy-face.jpg',
+		ogImage = 'https://noelzappy.dev/zappy-face.jpg' as string | undefined,
 		publishedTime,
 		modifiedTime,
 		tags = [],
@@ -40,8 +40,8 @@
 	<meta property="og:url" content={canonical} />
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
-	<meta property="og:image" content={ogImage} />
-	<meta property="og:site_name" content="Noel Zappy" />
+	<meta property="og:image" content={ogImage ?? 'https://noelzappy.dev/zappy-face.jpg'} />
+	<meta property="og:site_name" content="Emmanuel Yeboah" />
 	<meta property="og:locale" content="en_US" />
 	{#if publishedTime}
 		<meta property="article:published_time" content={publishedTime} />
@@ -58,7 +58,7 @@
 	<meta name="twitter:url" content={canonical} />
 	<meta name="twitter:title" content={title} />
 	<meta name="twitter:description" content={description} />
-	<meta name="twitter:image" content={ogImage} />
+	<meta name="twitter:image" content={ogImage ?? 'https://noelzappy.dev/zappy-face.jpg'} />
 	<meta name="twitter:creator" content="@noelzappy" />
 	<meta name="twitter:site" content="@noelzappy" />
 

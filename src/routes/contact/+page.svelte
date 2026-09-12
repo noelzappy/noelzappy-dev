@@ -14,7 +14,7 @@
 			alternateName: 'Noel Zappy',
 			url: 'https://noelzappy.dev',
 			email: 'me@noelzappy.dev',
-			jobTitle: 'Senior Software Engineer'
+			jobTitle: 'Backend Engineer'
 		}
 	};
 </script>
@@ -22,10 +22,10 @@
 <CalEmbed />
 <SEOHead
 	title="Contact"
-	description="Book a consulting session or intro call with Emmanuel Yeboah — backend engineer specialising in African fintech. Architecture reviews, code audits, fintech strategy."
+	description="Book an intro call or email Emmanuel Yeboah, backend engineer working on distributed systems and platform infrastructure."
 	canonical="https://noelzappy.dev/contact"
 	ogType="website"
-	keywords="Book a Call, Consulting Session, Emmanuel Yeboah, Fintech Consulting, Architecture Review"
+	keywords="Emmanuel Yeboah, contact, intro call, backend engineer, architecture review"
 	{structuredData}
 />
 
