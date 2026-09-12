@@ -28,7 +28,7 @@
 
 <svelte:head>
 	<!-- Primary Meta Tags -->
-	<title>{title} | Emmanuel Yeboah</title>
+	<title>{title.includes('Emmanuel Yeboah') ? title : `${title} | Emmanuel Yeboah`}</title>
 	<meta name="description" content={description} />
 	{#if keywords}
 		<meta name="keywords" content={keywords} />

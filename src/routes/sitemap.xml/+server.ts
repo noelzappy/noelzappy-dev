@@ -1,108 +1,41 @@
-import { fetchPosts } from '$lib/integrations/ghost';
+import { getPosts, getTags } from '$lib/content/writing';
 import { getAllProjects } from '$lib/data/projects-loader';
 import type { RequestHandler } from './$types';
 
+export const prerender = true;
+
+const SITE = 'https://noelzappy.dev';
+
+type Entry = { loc: string; lastmod?: string; priority: string };
+
+const url = ({ loc, lastmod, priority }: Entry) => `
+  <url>
+    <loc>${SITE}${loc}</loc>${lastmod ? `\n    <lastmod>${lastmod}</lastmod>` : ''}
+    <priority>${priority}</priority>
+  </url>`;
+
 export const GET: RequestHandler = async () => {
-	const baseUrl = 'https://noelzappy.dev';
+	const posts = getPosts();
+	const projects = getAllProjects().filter((p) => p.html.trim().length > 0);
+	const latestPost = posts[0]?.date;
 
-	try {
-		// Fetch all posts and projects (increased limit to get all)
-		const [notesData, projects] = await Promise.all([
-			fetchPosts(1, 100),
-			Promise.resolve(getAllProjects())
-		]);
+	const entries: Entry[] = [
+		{ loc: '/', lastmod: latestPost, priority: '1.0' },
+		{ loc: '/writing', lastmod: latestPost, priority: '0.9' },
+		{ loc: '/projects', priority: '0.9' },
+		{ loc: '/about', priority: '0.8' },
+		...posts.map((p) => ({ loc: `/writing/${p.slug}`, lastmod: p.date, priority: '0.8' })),
+		...getTags().map(({ tag }) => ({ loc: `/writing/tag/${tag}`, priority: '0.4' })),
+		...projects.map((p) => ({
+			loc: `/projects/${p.slug}`,
+			lastmod: p.publishedAt?.slice(0, 10),
+			priority: '0.7'
+		}))
+	];
 
-		const notes = notesData || [];
-
-		const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-	<!-- Homepage -->
-	<url>
-		<loc>${baseUrl}</loc>
-		<changefreq>weekly</changefreq>
-		<priority>1.0</priority>
-		<lastmod>${new Date().toISOString()}</lastmod>
-	</url>
-
-	<!-- Work Listing -->
-	<url>
-		<loc>${baseUrl}/work</loc>
-		<changefreq>weekly</changefreq>
-		<priority>0.9</priority>
-		<lastmod>${new Date().toISOString()}</lastmod>
-	</url>
-
-	<!-- Services -->
-	<url>
-		<loc>${baseUrl}/services</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.9</priority>
-		<lastmod>${new Date().toISOString()}</lastmod>
-	</url>
-
-	<!-- About -->
-	<url>
-		<loc>${baseUrl}/about</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.8</priority>
-		<lastmod>${new Date().toISOString()}</lastmod>
-	</url>
-
-	<!-- Notes Listing -->
-	<url>
-		<loc>${baseUrl}/notes</loc>
-		<changefreq>weekly</changefreq>
-		<priority>0.9</priority>
-		<lastmod>${new Date().toISOString()}</lastmod>
-	</url>
-
-	<!-- Contact -->
-	<url>
-		<loc>${baseUrl}/contact</loc>
-		<changefreq>monthly</changefreq>
-		<priority>0.7</priority>
-		<lastmod>${new Date().toISOString()}</lastmod>
-	</url>
-
-	<!-- Individual Projects (work) -->
-	${projects
-		.map(
-			(project) => `
-	<url>
-		<loc>${baseUrl}/work/${project.slug}</loc>
-		<lastmod>${new Date(project.publishedAt || new Date()).toISOString()}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.8</priority>
-	</url>`
-		)
-		.join('')}
-
-	<!-- Individual Notes -->
-	${notes
-		.map(
-			(note) => `
-	<url>
-		<loc>${baseUrl}/notes/${note.slug}</loc>
-		<lastmod>${new Date(note.updated_at || note.published_at || new Date()).toISOString()}</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.8</priority>
-	</url>`
-		)
-		.join('')}
+	const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${entries.map(url).join('')}
 </urlset>`;
 
-		return new Response(sitemap, {
-			headers: {
-				'Content-Type': 'application/xml',
-				'Cache-Control': 'max-age=0, s-maxage=3600'
-			}
-		});
-	} catch (error) {
-		console.error('Error generating sitemap:', error);
-		return new Response('Error generating sitemap', { status: 500 });
-	}
+	return new Response(xml, { headers: { 'Content-Type': 'application/xml' } });
 };

@@ -1,10 +1,8 @@
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
+import { resolveRedirect } from '$lib/redirects';
 import { NodeHtmlMarkdown } from 'node-html-markdown';
 
-const AGENT_DISCOVERY_LINKS = [
-	'</.well-known/api-catalog>; rel="api-catalog"',
-	'</llm-full.txt>; rel="service-doc"'
-];
+const AGENT_DISCOVERY_LINKS = ['</llm-full.txt>; rel="service-doc"'];
 
 function acceptsMarkdown(acceptHeader: string | null): boolean {
 	if (!acceptHeader) return false;
@@ -46,6 +44,9 @@ function estimateTokens(markdown: string): number {
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
+	const target = resolveRedirect(event.url.pathname);
+	if (target) redirect(301, target + event.url.search);
+
 	let response = await resolve(event);
 
 	if (event.url.pathname === '/') {

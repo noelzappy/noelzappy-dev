@@ -1,331 +1,112 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
-	import SectionLabel from '$lib/components/section-label.svelte';
-	import CTABand from '$lib/components/cta-band.svelte';
-	import { ArrowRight } from 'lucide-svelte';
-	import { inView } from '$lib/actions/inView';
+	import PostList from '$lib/components/post-list.svelte';
+	import ProjectList from '$lib/components/project-list.svelte';
+	import { TIMELINE } from '$lib/data/timeline';
+	import { HomepageStructuredData, SITE_DESCRIPTION, SITE_TITLE } from '$lib/shared/constants';
 	import type { PageData } from './$types';
-	import { HomepageStructuredData } from '$lib/shared/constants';
 
 	let { data }: { data: PageData } = $props();
 </script>
 
 <SEOHead
-	title="Emmanuel Yeboah — Full-Stack Engineer | African Fintech & Web"
-	description="Backend engineer building fintech infrastructure for African markets. Co-founder of SusuPaa, processing $80k+ monthly. Creator of Voltax. Open to senior remote backend and fintech engineering roles."
+	title={SITE_TITLE}
+	description={SITE_DESCRIPTION}
 	canonical="https://noelzappy.dev"
-	ogType="website"
-	keywords="Emmanuel Yeboah, Noel Zappy, Full-Stack Engineer, React Developer, TypeScript Engineer, African Fintech, SusuPaa, Ghana Software Engineer, Next.js Developer, React Native Developer, Mobile Money Integration, Web Developer Ghana, Fintech Architecture, Voltax"
 	structuredData={HomepageStructuredData}
 />
 
-<!-- ─── HERO ─────────────────────────────────────────────────────────────── -->
-<section class="hero-section min-h-screen py-12 relative overflow-hidden">
-	<div
-		class="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] gap-8 lg:gap-12 items-center min-h-[calc(100vh-6rem)]"
-	>
-		<!-- Text column -->
-		<div class="flex flex-col gap-8 max-w-2xl">
-			<h1 class="hero-headline text-[var(--color-text-primary)]">
-				I build the systems <br class="hidden sm:block" />
-				<span class="text-[var(--color-accent)]">African fintech</span> runs on.
-			</h1>
-			<p
-				class="text-lg sm:text-xl text-[var(--color-text-secondary)] max-w-2xl leading-relaxed"
-				style="font-family: var(--font-body);"
-			>
-				Backend engineer with {new Date().getFullYear() - 2020}+ years architecting payment
-				infrastructure, mobile money integrations, and multi-tenant financial platforms.
-				<br />Co-founder of
-				<a href="https://susupaa.com" class="text-white" rel="noopener noreferrer" target="_blank"
-					>SusuPaa</a
-				>, a fintech processing $80k+ monthly across Ghana's susu savings ecosystem.
-			</p>
-			<div class="flex flex-wrap gap-4 pt-2">
-				<a href="/work" class="btn-primary">
-					See My Work <ArrowRight class="w-4 h-4" />
-				</a>
-				<a href="/contact" class="btn-secondary">Get in Touch</a>
-			</div>
-		</div>
-
-		<!-- Photo column (desktop only) -->
-		<div class="hero-photo-col hidden lg:flex items-start justify-end relative overflow-hidden">
-			<img
-				src="/zappy-face.png"
-				alt="Emmanuel Yeboah"
-				class="hero-photo"
-				loading="eager"
-				fetchpriority="high"
-				decoding="async"
-			/>
-		</div>
-	</div>
+<section class="intro">
+	<h1>Hey, I'm Emmanuel.</h1>
+	<p>Backend engineer. I build systems that can't afford to be wrong.</p>
 </section>
 
-<!-- ─── SOCIAL PROOF BAR ─────────────────────────────────────────────────── -->
-<section
-	class="py-8 px-6 sm:px-10 border-t border-b border-[var(--color-border)] bg-[var(--color-surface)]"
-	use:inView
-	class:fade-up={true}
->
-	<div
-		class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center sm:divide-x sm:divide-[var(--color-border)]"
-	>
-		<div class="flex flex-col gap-1 sm:px-4">
-			<span class="card-metric">$80k+</span>
-			<span class="card-metric-label">Monthly Volume</span>
-		</div>
-		<div class="flex flex-col gap-1 sm:px-4">
-			<span class="card-metric">170k</span>
-			<span class="card-metric-label">Users Migrated</span>
-		</div>
-		<div class="flex flex-col gap-1 sm:px-4">
-			<span class="card-metric">15+</span>
-			<span class="card-metric-label">Shipped Products</span>
-		</div>
-		<div class="flex flex-col gap-1 sm:px-4">
-			<span class="card-metric">{new Date().getFullYear() - 2020}+</span>
-			<span class="card-metric-label">Years Experience</span>
-		</div>
-	</div>
-</section>
-
-<!-- ─── SELECTED WORK ────────────────────────────────────────────────────── -->
-<section class="section-pad border-t border-[var(--color-border)]">
-	<div class="flex items-end justify-between gap-4 mb-12">
-		<div class="flex flex-col gap-3">
-			<SectionLabel text="// selected work" />
-			<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
-				Work that moved the needle.
-			</h2>
-		</div>
-		<a href="/work" class="btn-text hidden sm:inline-flex shrink-0">
-			View all work <ArrowRight class="w-3.5 h-3.5" />
-		</a>
-	</div>
-
-	{#if data.projects.length > 0}
-		<div class="grid grid-cols-1 md:grid-cols-2 gap-6 stagger-children" use:inView>
-			{#each data.projects as project (project.slug)}
-				<a
-					href="/work/{project.slug}"
-					class="project-card group flex flex-col"
-					data-sveltekit-preload-data
-				>
-					<div class="aspect-video w-full overflow-hidden bg-[var(--color-surface)] relative">
-						{#if project.featuredImage}
-							<img
-								src={project.featuredImage}
-								alt={project.title}
-								class="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-								style="filter: brightness(0.85) contrast(1.05);"
-								loading="lazy"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none group-hover:opacity-50 transition-opacity duration-300"
-							></div>
-						{:else}
-							<div
-								class="w-full h-full bg-gradient-to-br from-[var(--color-surface)] to-[var(--color-surface-hover)]"
-							></div>
-						{/if}
-						{#if project.status}
-							<div class="absolute top-3 left-3">
-								<span
-									class="px-2.5 py-1 text-xs font-bold rounded-full {project.status.toLowerCase() ===
-									'shipped'
-										? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30'
-										: 'bg-orange-500/20 text-orange-400 border border-orange-500/30'}"
-								>
-									{project.status}
-								</span>
-							</div>
-						{/if}
-					</div>
-					<div class="p-6 flex flex-col gap-4 flex-1">
-						<div>
-							<h3
-								class="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors"
-								style="font-family: var(--font-display);"
-							>
-								{project.title}
-							</h3>
-							{#if project.role}
-								<p class="text-xs text-[var(--color-text-secondary)] mt-1 uppercase tracking-wider">
-									{project.role}{project.client ? ` · ${project.client}` : ''}
-								</p>
-							{/if}
-						</div>
-
-						{#if project.stats && project.stats.length > 0}
-							<div>
-								<p class="card-metric">{project.stats[0].value}</p>
-								<p class="card-metric-label">{project.stats[0].key}</p>
-							</div>
-						{/if}
-
-						{#if project.excerpt}
-							<p
-								class="text-sm text-[var(--color-text-secondary)] line-clamp-2 leading-relaxed flex-1"
-							>
-								{project.excerpt}
-							</p>
-						{/if}
-
-						{#if project.featuredStack?.length}
-							<div class="flex flex-wrap gap-1.5">
-								{#each project.featuredStack.slice(0, 4) as tech (tech)}
-									<span
-										class="px-2 py-0.5 text-xs rounded bg-[var(--color-surface-hover)] text-neutral-400 border border-[var(--color-border)]"
-									>
-										{tech}
-									</span>
-								{/each}
-							</div>
-						{/if}
-
-						<span class="btn-text mt-auto">
-							View Case Study <ArrowRight
-								class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
-							/>
-						</span>
-					</div>
-				</a>
-			{/each}
-		</div>
-	{/if}
-
-	<div class="mt-8 sm:hidden">
-		<a href="/work" class="btn-secondary w-full justify-center"> View all work → </a>
-	</div>
-</section>
-
-<!-- ─── FEATURED NOTE ────────────────────────────────────────────────────── -->
-<section class="section-pad border-t border-[var(--color-border)]">
-	<div class="flex flex-col gap-3 mb-10">
-		<SectionLabel text="// latest thinking" />
-	</div>
-
-	{#await data.streamed.featuredNotes}
-		<div class="flex flex-col gap-4">
-			{#each [1, 2, 3] as i (i)}
-				<div class="card p-6 animate-pulse">
-					<div class="h-3 bg-[var(--color-surface-hover)] rounded w-1/4 mb-4"></div>
-					<div class="h-5 bg-[var(--color-surface-hover)] rounded w-2/3 mb-3"></div>
-					<div class="h-4 bg-[var(--color-surface-hover)] rounded w-full mb-2"></div>
-					<div class="h-4 bg-[var(--color-surface-hover)] rounded w-4/5"></div>
-				</div>
-			{/each}
-		</div>
-	{:then notes}
-		{#if notes.length > 0}
-			<div class="flex flex-col gap-4 stagger-children" use:inView>
-				{#each notes as note (note.slug)}
-					<a
-						href="/notes/{note.slug}"
-						class="project-card group p-6 sm:p-8 flex flex-col gap-3"
-						data-sveltekit-preload-data
-					>
-						<div
-							class="flex items-center gap-3 text-xs"
-							style="color: var(--color-text-secondary); font-family: var(--font-mono);"
-						>
-							{#if note.published_at}
-								<time datetime={note.published_at}>
-									{new Date(note.published_at).toLocaleDateString('en-US', {
-										year: 'numeric',
-										month: 'long',
-										day: 'numeric'
-									})}
-								</time>
-							{/if}
-							{#if note.reading_time}
-								<span>·</span>
-								<span>{note.reading_time} min read</span>
-							{/if}
-						</div>
-						<h3
-							class="text-lg font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors leading-snug"
-							style="font-family: var(--font-display);"
-						>
-							{note.title}
-						</h3>
-						{#if note.excerpt}
-							<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed line-clamp-2">
-								{note.excerpt}
-							</p>
-						{/if}
-						<span class="btn-text mt-2">
-							Read more <ArrowRight
-								class="w-3.5 h-3.5 transition-transform group-hover:translate-x-1"
-							/>
-						</span>
-					</a>
-				{/each}
-			</div>
-			<div class="mt-6">
-				<a href="/notes" class="btn-text">
-					View all notes <ArrowRight class="w-3.5 h-3.5" />
-				</a>
-			</div>
-		{:else}
-			<a
-				href="/notes"
-				class="project-card group p-6 sm:p-8 flex flex-col gap-3"
-				data-sveltekit-preload-data
-			>
-				<h3
-					class="text-xl font-bold text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors"
-					style="font-family: var(--font-display);"
-				>
-					Thoughts on software, systems, and building for Africa.
-				</h3>
-				<p class="text-[var(--color-text-secondary)]">
-					Architecture decisions, fintech lessons, and the occasional opinion.
-				</p>
-				<span class="btn-text">
-					Read the notes <ArrowRight class="w-3.5 h-3.5" />
+<section class="section" aria-labelledby="timeline-heading">
+	<h2 id="timeline-heading">Timeline</h2>
+	<ol class="timeline">
+		{#each TIMELINE as entry (entry.years + entry.org)}
+			<li>
+				<span class="years muted mono">{entry.years}</span>
+				<span class="entry">
+					{#if entry.url}
+						<a href={entry.url} rel="noopener noreferrer" class="org">{entry.org}</a>
+					{:else}
+						<span class="org">{entry.org}</span>
+					{/if}
+					<span class="muted">{entry.line}</span>
+					{#if entry.writeup}
+						<a href={entry.writeup} class="small" data-sveltekit-preload-data>writeup</a>
+					{/if}
 				</span>
-			</a>
-		{/if}
-	{/await}
+			</li>
+		{/each}
+	</ol>
 </section>
 
-<!-- ─── CTA BAND ─────────────────────────────────────────────────────────── -->
-<section class="pb-24 pt-4">
-	<CTABand
-		heading="Working on payment infrastructure or African fintech?"
-		subheading="Let's talk."
-		primaryLabel="Get in Touch →"
-		primaryHref="/contact"
-	/>
-</section>
+{#if data.posts.length}
+	<section class="section" aria-labelledby="writing-heading">
+		<h2 id="writing-heading"><a href="/writing">Writing</a></h2>
+		<PostList posts={data.posts} />
+		<a href="/writing" class="small">All posts →</a>
+	</section>
+{/if}
+
+{#if data.projects.length}
+	<section class="section" aria-labelledby="projects-heading">
+		<h2 id="projects-heading"><a href="/projects">Projects</a></h2>
+		<ProjectList projects={data.projects} />
+		<a href="/projects" class="small">All projects →</a>
+	</section>
+{/if}
 
 <style>
-	.hero-photo-col {
-		height: 100%;
-		min-height: 600px;
+	.intro {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
 	}
-
-	.hero-photo {
-		width: auto;
-		height: 85vh;
-		max-height: 720px;
-		min-height: 500px;
-		object-fit: cover;
-		object-position: top center;
-		user-select: none;
-		pointer-events: none;
-		filter: brightness(0.72) contrast(1.05);
-
-		-webkit-mask-image:
-			linear-gradient(to bottom, black 30%, black 55%, transparent 95%),
-			linear-gradient(to right, transparent 0%, black 25%, black 100%);
-		-webkit-mask-composite: source-in;
-		mask-image:
-			linear-gradient(to bottom, black 30%, black 55%, transparent 95%),
-			linear-gradient(to right, transparent 0%, black 25%, black 100%);
-		mask-composite: intersect;
+	.intro h1 {
+		font-size: 2rem;
+	}
+	.intro p {
+		margin: 0;
+		font-size: 1.15rem;
+	}
+	.timeline {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+	.timeline li {
+		display: grid;
+		grid-template-columns: 7.5rem 1fr;
+		gap: 0.25rem 1rem;
+		align-items: baseline;
+	}
+	.years {
+		white-space: nowrap;
+	}
+	.org {
+		color: var(--fg);
+		font-weight: 550;
+		text-decoration: none;
+	}
+	a.org:hover {
+		color: var(--accent);
+	}
+	.entry {
+		display: inline;
+	}
+	.entry > * + * {
+		margin-left: 0.4em;
+	}
+	@media (max-width: 480px) {
+		.timeline li {
+			grid-template-columns: 1fr;
+			gap: 0.1rem;
+		}
 	}
 </style>

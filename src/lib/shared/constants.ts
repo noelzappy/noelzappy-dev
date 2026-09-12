@@ -1,3 +1,8 @@
+export const SITE_TITLE =
+	'Emmanuel Yeboah — Backend Engineer | Distributed Systems & Platform Infrastructure';
+export const SITE_DESCRIPTION =
+	'Backend engineer building high-reliability distributed systems. Six years on correctness-critical infrastructure: transactional datastores, multi-tenant platforms, and zero-downtime migrations at scale. Open to senior remote backend and platform roles.';
+
 export const HomepageStructuredData = {
 	'@context': 'https://schema.org',
 	'@type': 'Person',

@@ -4,6 +4,7 @@
 		<a href="https://github.com/noelzappy" rel="me noopener noreferrer">GitHub</a>
 		<a href="https://www.linkedin.com/in/noelzappy" rel="me noopener noreferrer">LinkedIn</a>
 		<a href="https://x.com/noelzappy" rel="me noopener noreferrer">X</a>
+		<a href="/rss.xml">RSS</a>
 	</nav>
 	<p class="muted small">© {new Date().getFullYear()} Emmanuel Yeboah</p>
 </footer>

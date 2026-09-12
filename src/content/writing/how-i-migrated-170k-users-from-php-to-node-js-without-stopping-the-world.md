@@ -55,7 +55,7 @@ A user on the old app could chat with a user on the new React Native app without
 
 Once adoption crossed a safe threshold, I finally shut down the PHP server.
 
-![](https://ghost.noelzappy.dev/content/images/2026/01/architecture-diagram_-1.webp)
+![](/writing/how-i-migrated-170k-users-from-php-to-node-js-without-stopping-the-world/architecture-diagram.webp)
 
 #### Post-Launch & The 6-Second API Call
 
