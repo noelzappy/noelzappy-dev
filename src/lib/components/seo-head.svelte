@@ -10,6 +10,7 @@
 		tags?: string[];
 		structuredData?: object;
 		keywords?: string;
+		noindex?: boolean;
 	}
 
 	let {
@@ -22,7 +23,8 @@
 		modifiedTime,
 		tags = [],
 		structuredData,
-		keywords
+		keywords,
+		noindex = false
 	}: SEOProps = $props();
 </script>
 
@@ -34,6 +36,9 @@
 		<meta name="keywords" content={keywords} />
 	{/if}
 	<link rel="canonical" href={canonical} />
+	{#if noindex}
+		<meta name="robots" content="noindex" />
+	{/if}
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content={ogType} />

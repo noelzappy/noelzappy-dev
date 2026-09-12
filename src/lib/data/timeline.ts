@@ -18,7 +18,7 @@ export const TIMELINE: TimelineEntry[] = [
 		org: 'SusuPaa',
 		url: 'https://susupaa.com',
 		writeup: '/projects/susupaa-platform',
-		line: 'Co-founded and led the platform: custom append-only ledger with strict consistency guarantees, 339 organizations, 28 API modules in production. Cut p99 latency from 1.6s to 500ms.'
+		line: 'Co-founded and led the platform: custom append-only ledger with strict consistency guarantees, 339 organizations onboarded, 28 API modules in production. Cut p99 latency from 1.6s to 500ms.'
 	},
 	{
 		years: '2024–present',

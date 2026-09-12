@@ -96,6 +96,7 @@
 	title="Services"
 	description="Consulting from Emmanuel Yeboah: backend architecture reviews, platform and infrastructure work, and code audits."
 	canonical="https://noelzappy.dev/services"
+	noindex
 	ogType="website"
 	keywords="Emmanuel Yeboah, consulting, backend architecture, platform engineering, code review"
 	{structuredData}

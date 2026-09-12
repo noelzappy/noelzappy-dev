@@ -1,7 +1,7 @@
 ---
 title: 'SusuPaa Platform'
 slug: 'susupaa-platform'
-excerpt: 'As Co-founder & Lead Engineer, I architected a multi-tenant fintech platform that digitizes traditional susu savings groups across Ghana. The system processes ₵900,000+ ($80k+) in monthly transaction volume on a custom double-entry ledger, with API response times optimized from 1.6s to 500ms.'
+excerpt: 'A multi-tenant platform built on a custom append-only ledger with strict consistency guarantees. 339 organizations onboarded, 28 API modules in production; p99 latency cut from 1.6s to 500ms.'
 featured: true
 publishedAt: '2025-07-01T00:00:00.000Z'
 featuredImage: '/portfolio/susupaa-webapp.png'
@@ -22,36 +22,34 @@ stack:
 categories:
   - 'Web App'
 stats:
-  - key: 'Monthly Volume'
-    value: '$80k+'
-    description: 'Transaction volume processed per month (₵900,000+)'
-  - key: 'Groups'
-    value: '262+'
-    description: 'Active savings groups on platform'
-  - key: 'Members'
-    value: '2000+'
-    description: 'Users managing their savings'
+  - key: 'Organizations onboarded'
+    value: '339'
+    description: 'Onboarded to the platform'
+  - key: 'API modules'
+    value: '28'
+    description: 'Modules in production'
+  - key: 'p99 latency'
+    value: '500ms'
+    description: 'Down from 1.6s'
 gallery:
   - '/portfolio/susupaa-webapp.png'
   - '/portfolio/susupaa-website.png'
-problem: "Susu savings groups across Ghana were managing hundreds of members and millions of cedis through WhatsApp messages, paper ledgers, and phone calls. Missed contributions went unnoticed for weeks, disputes over payouts were common, and group leaders had no reliable way to prove transaction history. Digital alternatives either didn't exist for the Ghanaian market or required a formal bank account that most participants didn't have."
+problem: "Savings groups were tracking hundreds of members and large sums through WhatsApp messages, paper ledgers, and phone calls. Any system replacing that had to be the single source of truth for money it never held: every contribution and payout provable after the fact, no double-credits under concurrent operations, and strict isolation between hundreds of independent organizations sharing one deployment."
 lessons: "Starting with event sourcing from day one rather than retrofitting it later. Our transaction ledger needed audit trails that we had to rebuild after launch — designing the data model around immutable events from the start would have saved us two weeks of migration work. I'd also invest earlier in contract testing between services; we had integration bugs that only surfaced in staging because our unit tests mocked too aggressively."
 ---
 
-<p>Susu is a centuries-old savings tradition across Ghana and West Africa. Groups of people—family, friends, market traders, or colleagues—pool money together, with each member taking turns receiving the full pot. It's built on trust, community, and discipline. But managing it manually? That's where things get messy. Missed payments, unclear records, and disputes are common.</p>
+<p>SusuPaa is a multi-tenant platform for rotating savings groups. Each organization runs its own cycles, members, contributions, and payouts on a shared deployment, and every one of those money movements has to be provable later. I co-founded the company and led the platform from the first commit.</p>
 
-<p>SusuPaa was created to bring this tradition into the digital age without losing what makes it work. As Co-founder & Lead Engineer, I've been responsible for architecting the entire backend infrastructure and leading a remote team of 5 engineers to build a platform that serves savings groups across Ghana.</p>
+<p>The core is an append-only ledger I designed and operate. Entries are never updated or deleted; balances are derived from the entry history, so any balance can be reproduced from the record that produced it. That is what gives the system its consistency guarantees: a contribution, a payout, and the group balance they affect are written as one unit or not at all, and there is no path that mutates a balance without a corresponding entry.</p>
 
-<p>The technical challenges were significant. We built a multi-tenant microservices architecture using Python and TypeScript that needed to handle financial transactions with absolute reliability. Every cedi passing through the system has to be tracked accurately—there's no room for error when people's savings are on the line.</p>
+<p>Concurrency was the second design problem. Settlement jobs run concurrently, and the failure mode in this kind of system is the same everywhere: a job processed twice credits someone twice. Jobs are claimed atomically from a Postgres-backed queue, so each payment or payout is processed exactly once under load, with no double-crediting and no orphaned settlements.</p>
 
-<p>At the centre of it is a custom double-entry accounting ledger I designed and operate. It governs every member contribution, payout, and group balance, and it is the system of record for the full monthly transaction volume moving through the platform. On top of it sits an atomic claim pattern over a PGBoss job queue, which guarantees exactly-once processing of payment and payout jobs under concurrent load—eliminating the double-crediting and orphaned settlements that plague naive queue consumers in payments work.</p>
+<p>Performance came next. p99 API latency was 1.6 seconds. Refactoring PostgreSQL query plans and adding a tiered Redis caching strategy brought it to 500ms.</p>
 
-<p>Reliability that people can audit also means reliability you can see. I stood up the observability stack—Prometheus metrics, Grafana dashboards, and Loki log aggregation—alongside PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump.</p>
+<p>Operating it means being able to see it and recover it. I stood up the observability stack (Prometheus metrics, Grafana dashboards, Loki log aggregation) and PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump. Today the platform runs 28 API modules in production, with 339 organizations onboarded.</p>
 
-<p>One of my key contributions was tackling performance. Median API responses were taking 1.6 seconds, which felt sluggish for users checking their contributions or making payments. By refactoring PostgreSQL query plans and implementing a tiered Redis caching strategy, I brought that down to 500ms. The app now feels instant.</p>
+<p>The domain is Ghanaian susu groups: members pool money and take turns receiving the pot. Contributions and payouts move over mobile-money aggregator rails and bank transfers, and user funds never sit with SusuPaa. On top of the ledger sit cycle management with fair slot distribution, WhatsApp and SMS reminders, and reporting for group leaders.</p>
 
-<p>The platform handles secure contributions and payouts through mobile money aggregator rails (Hubtel, Moolre), covering MTN MoMo, Telecel Cash, and AirtelTigo end users, plus bank account payouts—importantly, user funds never sit with SusuPaa. We built automated cycle management with fair slot distribution, WhatsApp and SMS reminders to keep members accountable, and real-time analytics dashboards so group leaders can see exactly where their savings stand.</p>
+<p>Beyond the code, I direct the technical roadmap, lead code reviews, and run sprint planning for a remote team of five engineers.</p>
 
-<p>Beyond the code, I direct the technical roadmap, lead code reviews, and run sprint planning for our engineering team. It's a balance of hands-on architecture work and making sure the team can ship features efficiently.</p>
-
-<p>Seeing the platform grow to over 262 groups and 2,000+ members since launch in July 2025 has been rewarding. We've been featured in Tech Labari and MyJoy Online, and the testimonials from group leaders who say we've "revolutionized how they manage savings" remind me why this work matters. We're modernizing a tradition that has helped communities build wealth for generations—just making it easier, faster, and more transparent.</p>
+<p>Coverage: <a href="https://techlabari.com/beyond-mobile-money-the-quiet-struggle-to-modernize-ghanas-ancient-susu-system/" rel="noopener noreferrer">Tech Labari</a>, <a href="https://www.myjoyonline.com/susupaa-wins-double-at-moolre-startup-cup/" rel="noopener noreferrer">MyJoyOnline</a>.</p>

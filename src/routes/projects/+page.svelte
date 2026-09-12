@@ -23,7 +23,17 @@
 
 <section class="section">
 	<h1>Projects</h1>
+	<p class="muted intro">
+		Open-source tools I maintain, and case studies of client and product work. Where the code is
+		private, the writeup covers what was built and why.
+	</p>
 </section>
+
+<style>
+	.intro {
+		margin: 0;
+	}
+</style>
 
 {#if data.openSource.length}
 	<section class="section" aria-labelledby="oss-heading">
