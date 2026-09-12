@@ -1,0 +1,283 @@
+.section-headline {
+	font-family: var(--font-display);
+	font-size: clamp(2rem, 4vw, 3rem);
+	font-weight: 700;
+	line-height: 1.1;
+}
+
+/* ─── SECTION LABEL (// monospace labels) ───────────────────────────────── */
+.section-label {
+	font-family: var(--font-mono);
+	color: var(--color-accent);
+	font-size: 0.78rem;
+	letter-spacing: 0.12em;
+	text-transform: lowercase;
+	display: block;
+}
+
+/* ─── SECTION SPACING ───────────────────────────────────────────────────── */
+.section-pad {
+	padding-top: clamp(80px, 10vw, 140px);
+	padding-bottom: clamp(80px, 10vw, 140px);
+}
+
+/* ─── MATERIAL SYMBOLS ──────────────────────────────────────────────────── */
+
+/* ─── SCROLLBAR ─────────────────────────────────────────────────────────── */
+* {
+	scrollbar-width: thin;
+	scrollbar-color: var(--color-accent) var(--color-bg);
+}
+*::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+}
+*::-webkit-scrollbar-track {
+	background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+	background-color: var(--color-accent);
+	border-radius: 10px;
+}
+*::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-accent-hover);
+}
+
+/* ─── BUTTONS ───────────────────────────────────────────────────────────── */
+
+/* Primary — filled orange, single most important action per section */
+.btn-primary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 12px 24px;
+	background-color: var(--color-accent);
+	color: #ffffff;
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.01em;
+	border-radius: 6px;
+	border: 2px solid var(--color-accent);
+	transition: all 0.2s ease;
+	cursor: pointer;
+	text-decoration: none;
+	min-height: 44px;
+}
+.btn-primary:hover {
+	background-color: var(--color-accent-hover);
+	border-color: var(--color-accent-hover);
+	transform: translateY(-1px);
+}
+
+/* Secondary — ghost/outlined for supporting actions */
+.btn-secondary {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 12px 24px;
+	background-color: transparent;
+	color: var(--color-accent);
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.01em;
+	border-radius: 6px;
+	border: 2px solid var(--color-accent);
+	transition: all 0.2s ease;
+	cursor: pointer;
+	text-decoration: none;
+	min-height: 44px;
+}
+.btn-secondary:hover {
+	background-color: var(--color-accent-muted);
+	transform: translateY(-1px);
+}
+
+/* Text link — for low-priority CTAs inside cards */
+.btn-text {
+	background: none;
+	border: none;
+	color: var(--color-accent);
+	font-family: var(--font-body);
+	font-weight: 600;
+	font-size: 0.9rem;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 0;
+	text-decoration: none;
+	transition:
+		gap 0.2s ease,
+		color 0.2s ease;
+}
+.btn-text:hover {
+	gap: 10px;
+	color: var(--color-accent-hover);
+}
+
+/* ─── CARDS ─────────────────────────────────────────────────────────────── */
+.card {
+	background-color: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	transition: all 0.25s ease;
+}
+.card:hover {
+	border-color: rgba(232, 99, 10, 0.3);
+	transform: translateY(-2px);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.project-card {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	overflow: hidden;
+	transition: all 0.25s ease;
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+}
+.project-card:hover {
+	border-color: rgba(232, 99, 10, 0.3);
+	transform: translateY(-3px);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-metric {
+	font-family: var(--font-display);
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--color-accent);
+	margin-bottom: 2px;
+	line-height: 1;
+}
+.card-metric-label {
+	font-family: var(--font-body);
+	font-size: 0.72rem;
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+}
+
+/* ─── CASE STUDY — PROBLEM SECTION ─────────────────────────────────────── */
+.problem-section {
+	border-left: 3px solid var(--color-accent);
+	padding-left: 24px;
+	margin-bottom: 48px;
+}
+.problem-section h2 {
+	font-family: var(--font-mono);
+	color: var(--color-text-secondary);
+	font-size: 0.78rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-weight: 500;
+	margin-bottom: 12px;
+}
+.problem-section p {
+	color: var(--color-text-secondary);
+	line-height: 1.7;
+}
+
+/* ─── CASE STUDY — LESSONS SECTION ─────────────────────────────────────── */
+.lessons-section {
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: 12px;
+	padding: 32px;
+	margin-top: 48px;
+}
+.lessons-section h2 {
+	font-family: var(--font-mono);
+	color: var(--color-text-secondary);
+	font-size: 0.78rem;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+	font-weight: 500;
+	margin-bottom: 12px;
+}
+.lessons-section h3 {
+	font-family: var(--font-display);
+	font-size: 1.2rem;
+	font-weight: 700;
+	color: var(--color-text-primary);
+	margin-bottom: 12px;
+}
+.lessons-section p {
+	color: var(--color-text-secondary);
+	line-height: 1.7;
+}
+
+/* ─── SCROLL ANIMATIONS ─────────────────────────────────────────────────── */
+.fade-up {
+	opacity: 0;
+	transform: translateY(24px);
+	transition:
+		opacity 0.55s ease,
+		transform 0.55s ease;
+}
+.fade-up.in-view {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.stagger-children > * {
+	opacity: 0;
+	transform: translateY(20px);
+	transition:
+		opacity 0.45s ease,
+		transform 0.45s ease;
+}
+
+/* Reveal rules for staggered children.
+   Previously only the first five children were targeted which left any
+   subsequent children hidden when the parent gained the .in-view class.
+   Extend the selectors to cover more children so longer lists (like the
+   timeline) fully reveal. */
+.stagger-children.in-view > *:nth-child(1) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0s;
+}
+.stagger-children.in-view > *:nth-child(2) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.1s;
+}
+.stagger-children.in-view > *:nth-child(3) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.2s;
+}
+.stagger-children.in-view > *:nth-child(4) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.3s;
+}
+.stagger-children.in-view > *:nth-child(5) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.4s;
+}
+.stagger-children.in-view > *:nth-child(n + 6) {
+	opacity: 1;
+	transform: translateY(0);
+	transition-delay: 0.5s;
+}
+
+/* If you need even longer lists, you can add more nth-child rules using the
+   same pattern, or replace this approach with a JS-driven class/inline-style
+   that sets per-element delays dynamically. */
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.fade-up,
+	.stagger-children > * {
+		transition: none;
+		opacity: 1;
+		transform: none;
+	}
+}

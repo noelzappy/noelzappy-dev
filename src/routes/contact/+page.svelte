@@ -2,6 +2,7 @@
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import SectionLabel from '$lib/components/section-label.svelte';
 	import CalButton from '$lib/components/CalButton.svelte';
+	import CalEmbed from '$lib/components/cal-embed.svelte';
 	import { CAL_EVENTS } from '$lib/cal.js';
 
 	const structuredData = {
@@ -18,6 +19,7 @@
 	};
 </script>
 
+<CalEmbed />
 <SEOHead
 	title="Contact"
 	description="Book a consulting session or intro call with Emmanuel Yeboah — backend engineer specialising in African fintech. Architecture reviews, code audits, fintech strategy."

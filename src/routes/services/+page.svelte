@@ -3,6 +3,7 @@
 	import SectionLabel from '$lib/components/section-label.svelte';
 	// import SessionCard from '$lib/components/session-card.svelte';
 	import CalButton from '$lib/components/CalButton.svelte';
+	import CalEmbed from '$lib/components/cal-embed.svelte';
 	// import CTABand from '$lib/components/cta-band.svelte';
 	import { inView } from '$lib/actions/inView';
 	import { CAL_EVENTS } from '$lib/cal.js';
@@ -90,6 +91,7 @@
 	};
 </script>
 
+<CalEmbed />
 <SEOHead
 	title="Services"
 	description="Full-stack engineering and technical consulting specialising in African fintech, mobile apps, and payment infrastructure. 6+ years shipping products that handle real African money."

@@ -9,7 +9,7 @@
 
 	let { eventSlug, label = 'Book →', variant = 'text' }: Props = $props();
 
-	const calConfig = JSON.stringify({ layout: 'month_view', theme: 'dark' });
+	const calConfig = JSON.stringify({ layout: 'month_view', theme: 'auto' });
 </script>
 
 <button
