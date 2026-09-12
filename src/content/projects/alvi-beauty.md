@@ -2,14 +2,15 @@
 title: 'Alvi Beauty'
 slug: 'alvi-beauty'
 excerpt: 'Alvi Beauty is a multi-platform beauty service booking product I worked on as a contracted developer for Romarianec Tech. It lets users book beauty services from home while giving service providers and admins the tools they need to manage everything smoothly.'
-featured: true
+featured: false
 publishedAt: '2022-04-06T00:00:00.000Z'
 featuredImage: '/portfolio/alvibeauty.png'
 liveUrl: 'https://alvibeauty.com/en-ua'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.beautypoisk.user'
 iosUrl: 'https://apps.apple.com/app/alvibeauty-client/id1640579339'
-role: 'Fullstack Developer & System Architect'
+role: 'Software Engineer & System Architect'
 team: '2 Developers, 1 Designer, 1 QA Engineer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Romarianec Tech'
 featuredStack:

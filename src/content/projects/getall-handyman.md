@@ -6,7 +6,8 @@ featured: false
 publishedAt: '2022-05-17T17:46:00.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/getall.png'
 github: 'https://github.com/noelzappy/getall_customerapp'
-role: 'Full Stack Developer'
+role: 'Software Engineer'
+kind: 'case-study'
 status: 'Discontinued'
 featuredStack:
   - 'Flutter'

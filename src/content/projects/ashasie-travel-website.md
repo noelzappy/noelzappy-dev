@@ -6,7 +6,8 @@ featured: false
 publishedAt: '2024-02-18T03:32:00.000Z'
 featuredImage: '/portfolio/ashasie/ashasie-tour.png'
 liveUrl: 'https://ashasietour.com/'
-role: 'Full Stack Developer'
+role: 'Software Engineer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Ashasie Travel & Tours'
 featuredStack:

@@ -2,10 +2,11 @@
 title: 'GrowingGift Platform'
 slug: 'growinggift-platform'
 excerpt: 'As the solo developer, I built GrowingGift—a fractional investment gifting platform that bundles stocks and crypto into digital gift certificates. In the first three months, users sent over 3,000 digital investment gifts.'
-featured: true
+featured: false
 publishedAt: '2024-06-01T00:00:00.000Z'
 featuredImage: '/portfolio/growing-gifts-webapp.png'
-role: 'Full-Stack Developer'
+role: 'Software Engineer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Lyqx Agency'
 featuredStack:

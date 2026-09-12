@@ -2,13 +2,14 @@
 title: 'Built — SME Finance Platform (Web + Mobile)'
 slug: 'built-mobile-app'
 excerpt: "As Lead Mobile & Web Engineer at Built Financial Technologies, I built the web platform and two production mobile apps for Ghana's leading SME finance product — an all-in-one invoicing, accounting, POS, and payroll platform now serving businesses across 14+ African countries."
-featured: true
+featured: false
 publishedAt: '2022-12-01T21:38:00.000Z'
 featuredImage: '/portfolio/builtapp.png'
 liveUrl: 'https://built.africa'
 iosUrl: 'https://apps.apple.com/gh/app/built-accounting/id1547855525'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.builtaccounting.app'
 role: 'Lead Mobile & Web Engineer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Built Financial Technologies'
 featuredStack:

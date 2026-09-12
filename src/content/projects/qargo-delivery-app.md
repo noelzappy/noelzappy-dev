@@ -2,13 +2,14 @@
 title: 'Qargo Delivery App'
 slug: 'qargo-delivery-app'
 excerpt: 'I contributed to building the Qargo mobile app, a fast and reliable delivery platform in Ghana. The app enables users to send packages, run errands, and schedule deliveries with real-time tracking, earning a 4.8-star rating and over 10,000 downloads.'
-featured: true
+featured: false
 publishedAt: '2023-09-06T00:00:00.000Z'
 featuredImage: '/portfolio/qargo-app.png'
 liveUrl: 'https://orderqargo.com'
 iosUrl: 'https://apps.apple.com/gh/app/qargo-request-a-delivery/id1637942622'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.orderqargo'
 role: 'Mobile Developer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Andre Dadson'
 featuredStack:

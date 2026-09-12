@@ -20,7 +20,7 @@ function parseFrontmatter(content: string): { data: Record<string, unknown>; con
 	}
 }
 
-const projectFiles = import.meta.glob('./projects/*.md', {
+const projectFiles = import.meta.glob('/src/content/projects/*.md', {
 	query: '?raw',
 	eager: true,
 	import: 'default'

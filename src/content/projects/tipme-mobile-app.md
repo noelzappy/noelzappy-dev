@@ -6,7 +6,8 @@ featured: false
 publishedAt: '2022-03-31T22:02:20.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/tipme.png'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.tipmeapp.tipme'
-role: 'Full Stack Developer'
+role: 'Software Engineer'
+kind: 'case-study'
 status: 'Shipped'
 featuredStack:
   - 'Node.js'

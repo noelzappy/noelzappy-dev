@@ -6,7 +6,8 @@ featured: false
 publishedAt: '2023-12-19T21:12:00.000Z'
 featuredImage: '/portfolio/reeno-group.png'
 liveUrl: 'https://reenogroup.com.gh/'
-role: 'Full Stack Developer & Designer'
+role: 'Software Engineer & Designer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Reeno Group'
 featuredStack:

@@ -7,6 +7,7 @@ publishedAt: '2022-04-06T00:00:00.000Z'
 featuredImage: '/portfolio/built-website.png'
 liveUrl: 'https://built.africa'
 role: 'Frontend Developer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Built Financial Technologies'
 featuredStack:

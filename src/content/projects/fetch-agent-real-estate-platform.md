@@ -7,6 +7,7 @@ publishedAt: '2025-04-06T15:20:30.000Z'
 featuredImage: '/portfolio/fetch-agent/fetch-agent.png'
 liveUrl: 'https://fetchagent.com'
 role: 'Senior Backend Developer'
+kind: 'case-study'
 status: 'Shipped'
 featuredStack:
   - 'Node.js'

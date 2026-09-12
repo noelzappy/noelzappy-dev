@@ -6,7 +6,8 @@ featured: false
 publishedAt: '2025-03-01T00:00:00.000Z'
 featuredImage: '/portfolio/owl-studio.png'
 liveUrl: 'https://owlstudioscreatives.com'
-role: 'Full Stack Developer & Designer'
+role: 'Software Engineer & Designer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Owl Studios'
 featuredStack:

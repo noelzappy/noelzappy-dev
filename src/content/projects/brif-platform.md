@@ -6,7 +6,8 @@ featured: false
 publishedAt: '2025-03-01T00:00:00.000Z'
 featuredImage: '/portfolio/brif-website.png'
 liveUrl: 'https://brif.africa'
-role: 'Co-founder & Lead Full-Stack Engineer'
+role: 'Co-founder & Lead Engineer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Brif Africa'
 featuredStack:

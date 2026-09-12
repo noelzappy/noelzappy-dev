@@ -5,7 +5,8 @@ excerpt: 'Ejuma is a finance and HR app for small and medium businesses that I w
 featured: false
 publishedAt: '2023-04-04T00:00:00.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/ejuma.png'
-role: 'Full Stack Developer'
+role: 'Software Engineer'
+kind: 'case-study'
 status: 'Discontinued'
 client: 'Built Financial Technologies'
 featuredStack:

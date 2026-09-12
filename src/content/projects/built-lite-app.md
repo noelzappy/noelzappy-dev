@@ -8,6 +8,7 @@ featuredImage: '/portfolio/builtliteapp.png'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.builtaccounting.lite'
 iosUrl: 'https://apps.apple.com/us/app/built-lite/id6453162139'
 role: 'Mobile Developer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Built Financial Technologies'
 featuredStack:

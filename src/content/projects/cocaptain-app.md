@@ -7,6 +7,7 @@ publishedAt: '2024-04-06T00:00:00.000Z'
 featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/cocaptain.webp'
 liveUrl: 'http://www.cocaptain.io'
 role: 'Mobile Developer'
+kind: 'case-study'
 status: 'Shipped'
 client: 'Cocaptain LLC'
 featuredStack:
