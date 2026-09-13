@@ -28,5 +28,8 @@ gallery:
   - '/portfolio/fetch-agent/2.png'
 ---
 
-<p>I worked on Fetch Agent as the senior backend developer, helping build a platform that makes it easier for homebuyers to find the <em>right</em> real estate agent — not just a random one from a listing site.</p><p>The idea was simple but powerful: instead of browsing agents blindly, buyers can filter by things that actually matter to them — experience level, commission model, contract terms, and availability. It felt like applying matchmaking logic to real estate.</p><p>On my end, I focused mostly on the backend. I built the APIs that power the web app and admin dashboard, worked on the agent filtering and ranking logic, and made sure the system could scale without getting fragile. Security, performance, and clean data flow were big priorities.</p><p>I also jumped in on some frontend and admin work where needed, mostly to smooth out workflows and close gaps between product and implementation.</p><p>What I liked about this project is that it solved a real problem without overcomplicating things. Buying a home is already stressful, the platform’s job was to remove uncertainty, not add more buttons.</p><p>Seeing it live and used by real people was a good reminder of why I enjoy building product-focused software.
-</p>
+<p>Fetch Agent is a US marketplace that matches homebuyers to real estate agents on the criteria that actually matter to a buyer: experience level, commission model, contract terms, and availability. I was the senior backend engineer.</p>
+
+<p>I built the APIs behind the web app and the admin dashboard on Node.js, Express and TypeScript with PostgreSQL and Redis, and the filtering and ranking engine that turns a buyer's criteria into an ordered set of agents. The priorities were a system that scales without becoming fragile, security, performance, and clean data flow between the product surfaces.</p>
+
+<p>Where product and implementation had gaps, I also picked up frontend and admin work to close them. The platform is live and in use.</p>

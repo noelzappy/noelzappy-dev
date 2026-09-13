@@ -32,18 +32,10 @@ gallery:
   - '/portfolio/growing-gifts-website.png'
 ---
 
-<p>Traditional gift cards are static—$50 today is still $50 next year. GrowingGift flips that model entirely. Instead of giving someone a fixed-value card, you gift them fractional investments in stocks and cryptocurrencies that can actually grow over time.</p>
+<p>GrowingGift bundles fractional shares and cryptocurrency into digital gift certificates whose value moves with the market until the recipient redeems. Lyqx Agency designed the product; I built all of it.</p>
 
-<p>The platform bundles real financial assets—fractional shares of companies like Apple, Tesla, or Amazon, plus cryptocurrencies like Bitcoin and Ethereum—into beautifully designed digital gift certificates. Recipients can track their gift's value in real-time through the platform and redeem when they're ready, at whatever the current market value happens to be.</p>
+<p>The technical scope was the integrations: brokerage APIs for stock trades, exchange APIs for crypto, and live market pricing so a gift shows an accurate value at the moment it is chosen. Order tracking follows each gift from purchase through delivery to redemption.</p>
 
-<p>I built GrowingGift as a solo developer, working hand-in-hand with Lyqx Agency on the design. The collaboration was tight—they handled the visual identity and user experience design while I took care of the entire technical implementation from concept to delivery.</p>
+<p>Each certificate is a generated PDF with the personal message, the asset details, and a unique redemption flow, which had to look right and carry everything the recipient needs to claim it. Because financial gifting touches securities rules, the architecture accounts for KYC requirements, transaction limits, and proper asset custody, with as much of that automated as possible so the experience stays simple.</p>
 
-<p>The technical scope was substantial. I built custom integrations with brokerage APIs for stock trading and crypto exchange APIs for digital assets. The system handles live market pricing, so users always see accurate values when selecting assets to gift. Order tracking follows each gift from purchase through delivery to redemption.</p>
-
-<p>One of the more complex pieces was the PDF generation system. Each gift certificate is dynamically generated with personalized messaging, asset details, and a unique redemption flow. The certificates needed to look beautiful while containing all the necessary information for recipients to understand and claim their gift.</p>
-
-<p>Every step was designed with compliance in mind. Financial gifting touches on securities regulations, so the platform architecture accounts for KYC requirements, transaction limits, and proper asset custody. Automation handles as much as possible to keep the user experience smooth while maintaining regulatory standards.</p>
-
-<p>The early results validated the concept. In just the first three months after completion, users sent over 3,000 digital investment gifts through the platform. That kind of traction showed real product-market fit—people genuinely want to give gifts that grow rather than depreciate.</p>
-
-<p>GrowingGift is positioned for both retail users and B2B opportunities. Companies can use it for employee rewards, customer appreciation, or promotional campaigns where the gift itself becomes a memorable experience. The platform is fully built and ready—it's just waiting for the right moment to go live.</p>
+<p>In the first three months after completion, users sent more than 3,000 gifts through the platform. It is built for both retail users and business uses such as employee rewards and customer appreciation.</p>

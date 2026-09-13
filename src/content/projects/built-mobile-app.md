@@ -37,16 +37,12 @@ gallery:
   - '/portfolio/builtapp.png'
 ---
 
-<p>
+<p>Built Financial Technologies makes an all-in-one finance product for small and medium businesses: invoicing, POS, accounting, payroll, budgets, and business credit, used across Ghana, Nigeria, Kenya, South Africa, and other African markets. I was Lead Mobile and Web Engineer there from 2021 to 2024 and shipped the company's digital product suite.</p>
 
-<h6>The product</h6>
-<p>Built is Ghana's leading all-in-one finance platform for small and medium businesses — covering invoicing, POS, accounting, payroll, budgets, and business credit. It's trusted by businesses across Ghana, Nigeria, Kenya, South Africa, and 10+ other African markets.</p>
-<h6>What I built</h6>
-<strong>built.africa — Web Platform (Next.js)</strong><br/>
-Built and shipped the company's primary marketing and product web platform in React. The site serves a multinational audience across 14+ countries, each with localised product information, pricing, and regulatory context. Performance, clarity, and conversion were the primary design goals.<br/>
-<strong>Built Accounting — Mobile App (React Native)</strong><br/>
-Rebuilt and scaled the core accounting mobile app from 700 installs to over 50,000. Available on both the App Store and Google Play, the app gives SME owners a full accounting suite on their phones — invoicing, expense tracking, payroll, and business insights.<br/>
-<strong>Built Lite — Offline-First App (React Native + WatermelonDB)</strong><br/>
-Built Built Lite from the ground up as an offline-first mobile experience using WatermelonDB and SQLite. Designed for small business owners in low-connectivity environments who need to track transactions, manage inventory, and process sales without relying on a stable internet connection. Local-first architecture with sync when connectivity is available.<br/>
-<strong>The stack</strong><br/>
-React Native (Expo), Next.js, TypeScript, WatermelonDB, SQLite, with payments integrated through aggregator rails covering MTN MoMo, Telecel Cash, and major Ghanaian banks.</p>
+<p>The built.africa web platform is a Next.js application serving a multinational audience across 14+ countries, each with localised product information, pricing, and regulatory context. Performance and clarity were the design goals.</p>
+
+<p>Built Accounting is the core React Native app. I rebuilt and scaled it from 700 installs to more than 50,000 on the App Store and Google Play, giving SME owners invoicing, expense tracking, payroll, and business insights on a phone.</p>
+
+<p>Built Lite is a separate offline-first app I built from the ground up on WatermelonDB and SQLite for owners in low-connectivity environments. Sales, expenses, customers, and suppliers are recorded locally and synced when a connection is available, so nothing is lost when the network is. When a business outgrows it, it upgrades to the full app.</p>
+
+<p>The stack across the suite is React Native with Expo, Next.js, TypeScript, WatermelonDB, and SQLite, with payments integrated through aggregator rails covering the Ghanaian mobile money networks and major banks.</p>
