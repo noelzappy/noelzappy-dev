@@ -31,11 +31,11 @@ stats:
 gallery:
   - '/portfolio/susupaa-webapp.png'
   - '/portfolio/susupaa-website.png'
-problem: 'Savings groups were tracking hundreds of members and large sums through WhatsApp messages, paper ledgers, and phone calls. Any system replacing that had to be the single source of truth for money it never held: every contribution and payout provable after the fact, no double-credits under concurrent operations, and strict isolation between hundreds of independent organizations sharing one deployment.'
+problem: 'Susu collectors, savings cooperatives, and microfinance institutions were running group savings, passbooks, and loans through WhatsApp messages, paper ledgers, and phone calls. Any system replacing that had to be the single source of truth for money it never held: every contribution, payout, and repayment provable after the fact, no double-credits under concurrent operations, and strict isolation between hundreds of independent organizations sharing one deployment.'
 lessons: "Starting with event sourcing from day one rather than retrofitting it later. Our transaction ledger needed audit trails that we had to rebuild after launch — designing the data model around immutable events from the start would have saved us two weeks of migration work. I'd also invest earlier in contract testing between services; we had integration bugs that only surfaced in staging because our unit tests mocked too aggressively."
 ---
 
-<p>SusuPaa is a multi-tenant platform for rotating savings groups. Each organization runs its own cycles, members, contributions, and payouts on a shared deployment, and every one of those money movements has to be provable later. I co-founded the company and led the platform from the first commit.</p>
+<p>SusuPaa is a multi-tenant platform for Ghana's informal savings sector: susu collectors, savings cooperatives, and microfinance institutions. Each organization runs its own groups, savings plans, loans, and accounting on a shared deployment, and every money movement has to be provable later. I co-founded the company and led the platform from the first commit.</p>
 
 <p>The core is an append-only ledger I designed and operate. Entries are never updated or deleted; balances are derived from the entry history, so any balance can be reproduced from the record that produced it. That is what gives the system its consistency guarantees: a contribution, a payout, and the group balance they affect are written as one unit or not at all, and there is no path that mutates a balance without a corresponding entry.</p>
 
@@ -45,7 +45,9 @@ lessons: "Starting with event sourcing from day one rather than retrofitting it 
 
 <p>Operating it means being able to see it and recover it. I stood up the observability stack (Prometheus metrics, Grafana dashboards, Loki log aggregation) and PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump. The platform has processed over $1M in transactions.</p>
 
-<p>The domain is Ghanaian susu groups: members pool money and take turns receiving the pot. Contributions and payouts move over mobile-money aggregator rails and bank transfers, and user funds never sit with SusuPaa. On top of the ledger sit cycle management with fair slot distribution, WhatsApp and SMS reminders, and reporting for group leaders.</p>
+<p>On top of the ledger sit the product modules: group susu from the first slot to the final payout, savings plans and digitised passbooks, lending from application to write-off with real-time portfolio-at-risk and automated provisioning, and accounting with a trial balance by account. Money movements are under dual control, staff roles are separated so no one person can do everything, and field payments can be recorded offline and synced when connectivity returns. Loan reporting maps to Bank of Ghana categories and GCSCA lines.</p>
+
+<p>Contributions and payouts move over mobile money on all three Ghanaian networks and bank transfers through Moolre, Hubtel, Paystack, and LibertePay; user funds never sit with SusuPaa. A read-only assistant, SusuPal, answers questions over an organization's own data and cannot modify anything.</p>
 
 <p>Beyond the code, I direct the technical roadmap, lead code reviews, and run sprint planning for a remote team of five engineers.</p>
 
