@@ -1,7 +1,7 @@
 ---
 title: 'RBL Dating Platform'
 slug: 'rbl-dating-app'
-excerpt: 'I rewrote the entire RBL platform, migrating the backend from PHP/MySQL to Node.js/PostgreSQL, rebuilding the mobile app in modern React Native, and refreshing the admin panel in React. I also handled migrating over 170,000 users with zero downtime.'
+excerpt: 'Rewrote a dating platform’s stack from PHP/MySQL to Node.js and PostgreSQL, with a new React Native app and React admin panel, migrating 170,000 users with zero downtime.'
 featured: true
 publishedAt: '2024-09-06T15:01:56.000Z'
 featuredImage: '/portfolio/rblapp.png'

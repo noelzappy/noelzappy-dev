@@ -4,12 +4,15 @@
 		title: string;
 		excerpt: string;
 		kind: 'case-study' | 'open-source';
+		status?: string;
 		liveUrl?: string;
 		github?: string;
 		hasWriteup: boolean;
 		featuredStack?: string[];
 	}
 	let { projects }: { projects: ProjectItem[] } = $props();
+	const LIVE = new Set(['shipped', 'active', '']);
+	const note = (p: ProjectItem) => (LIVE.has((p.status ?? '').toLowerCase()) ? '' : p.status);
 </script>
 
 <ul class="plain-list">
@@ -25,9 +28,13 @@
 				{:else}
 					<span class="title">{project.title}</span>
 				{/if}
-				{#if project.featuredStack?.length}
-					<span class="muted mono">{project.featuredStack.join(' · ')}</span>
-				{/if}
+				<span class="muted mono">
+					{#if note(project)}{note(
+							project
+						)}{#if project.featuredStack?.length}{' · '}{/if}{/if}{project.featuredStack?.join(
+						' · '
+					) ?? ''}
+				</span>
 			</div>
 			<p class="muted small">{project.excerpt}</p>
 			<div class="links small">

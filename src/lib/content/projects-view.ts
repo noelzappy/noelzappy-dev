@@ -7,6 +7,7 @@ export function toProjectItem(p: ProjectData) {
 		title: p.title,
 		excerpt: p.excerpt ?? '',
 		kind: p.kind,
+		status: p.status ?? '',
 		liveUrl: p.liveUrl,
 		github: p.github,
 		hasWriteup: p.html.trim().length > 0,

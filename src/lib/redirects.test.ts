@@ -14,6 +14,11 @@ describe('resolveRedirect', () => {
 		);
 		expect(resolveRedirect('/work/susupaa-platform')).toBe('/projects/susupaa-platform');
 	});
+	it('sends removed case studies to the projects list', () => {
+		expect(resolveRedirect('/work/owl-studios-website')).toBe('/projects');
+		expect(resolveRedirect('/projects/ejuma-platform')).toBe('/projects');
+		expect(resolveRedirect('/projects/rbl-dating-app')).toBeNull();
+	});
 	it('leaves current routes alone', () => {
 		expect(resolveRedirect('/')).toBeNull();
 		expect(resolveRedirect('/writing/x')).toBeNull();
