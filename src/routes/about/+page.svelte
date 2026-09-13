@@ -82,7 +82,7 @@
 	<p>
 		Most of my work has been on systems where a wrong answer costs someone money or trust: ledgers,
 		multi-tenant platforms, and migrations that had to happen while people were still using the
-		product. I work in Go, TypeScript and Python on PostgreSQL and whole load of tools, and I care
+		product. I work in Go, TypeScript and Python on PostgreSQL and a whole load of tools, and I care
 		about the unglamorous properties: consistency, idempotency, recoverability, and being able to
 		prove after the fact what the system did.
 	</p>

@@ -1,7 +1,7 @@
 ---
 title: 'SusuPaa Platform'
 slug: 'susupaa-platform'
-excerpt: 'A multi-tenant platform built on a custom append-only ledger with strict consistency guarantees. 339 organizations onboarded, 28 API modules in production; p99 latency cut from 1.6s to 500ms.'
+excerpt: 'A multi-tenant platform built on a custom append-only ledger with strict consistency guarantees. Over $1M in transactions processed; p99 latency cut from 1.6s to 500ms.'
 featured: true
 publishedAt: '2025-07-01T00:00:00.000Z'
 featuredImage: '/portfolio/susupaa-webapp.png'
@@ -22,12 +22,9 @@ stack:
 categories:
   - 'Web App'
 stats:
-  - key: 'Organizations onboarded'
-    value: '339'
-    description: 'Onboarded to the platform'
-  - key: 'API modules'
-    value: '28'
-    description: 'Modules in production'
+  - key: 'Transactions processed'
+    value: '$1M+'
+    description: 'Cumulative volume through the ledger'
   - key: 'p99 latency'
     value: '500ms'
     description: 'Down from 1.6s'
@@ -46,7 +43,7 @@ lessons: "Starting with event sourcing from day one rather than retrofitting it 
 
 <p>Performance came next. p99 API latency was 1.6 seconds. Refactoring PostgreSQL query plans and adding a tiered Redis caching strategy brought it to 500ms.</p>
 
-<p>Operating it means being able to see it and recover it. I stood up the observability stack (Prometheus metrics, Grafana dashboards, Loki log aggregation) and PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump. Today the platform runs 28 API modules in production, with 339 organizations onboarded.</p>
+<p>Operating it means being able to see it and recover it. I stood up the observability stack (Prometheus metrics, Grafana dashboards, Loki log aggregation) and PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump. The platform has processed over $1M in transactions.</p>
 
 <p>The domain is Ghanaian susu groups: members pool money and take turns receiving the pot. Contributions and payouts move over mobile-money aggregator rails and bank transfers, and user funds never sit with SusuPaa. On top of the ledger sit cycle management with fair slot distribution, WhatsApp and SMS reminders, and reporting for group leaders.</p>
 

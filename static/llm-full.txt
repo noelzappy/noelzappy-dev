@@ -9,7 +9,7 @@ Backend engineer building high-reliability distributed systems. Six years on cor
 ## Timeline
 
 - Now — Consulting on backend and platform work. Writing about systems.
-- 2025–present — SusuPaa. Co-founded and led the platform: custom append-only ledger with strict consistency guarantees, 339 organizations onboarded, 28 API modules in production. Cut p99 latency from 1.6s to 500ms.
+- 2025–present — SusuPaa. Co-founded and led the platform: custom append-only ledger with strict consistency guarantees, over $1M in transactions processed. Cut p99 latency from 1.6s to 500ms.
 - 2024–2025 — Fetch Agent. Senior backend engineer. Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
 - 2024–2025 — RBL Matchmaking. Lead engineer. Zero-downtime migration of 170,000 live users from PHP/MySQL to Node.js/PostgreSQL; real-time messaging for 200,000 monthly actives.
 - 2024 — Hubtel. Software engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.
