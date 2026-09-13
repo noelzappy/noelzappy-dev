@@ -11,7 +11,7 @@ export const TIMELINE: TimelineEntry[] = [
 	{
 		years: 'Now',
 		org: 'Consulting',
-		line: 'Backend and platform work for hire. Writing about systems.'
+		line: 'Backend and platform work for hire.'
 	},
 	{
 		years: '2025–present',

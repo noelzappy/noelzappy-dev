@@ -4,12 +4,12 @@
 
 	const history = [
 		{
-			org: 'SusuPaa (Pavex Technologies Ltd)',
+			org: 'SusuPaa (Pavex Ltd)',
 			engagement: 'Founder',
 			title: 'Co-founder & Lead Engineer',
 			dates: 'Apr 2025 – Present',
 			impact:
-				'Co-founded and led the platform: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 latency cut from 1.6s to 500ms. 339 organizations onboarded and 28 API modules in production. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
+				'Co-founded and led the platform: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 latency cut from 1.6s to 500ms. Over $1M transactions processed. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
 		},
 		{
 			org: 'Fetch Agent (Commonwealth Media)',
@@ -77,24 +77,24 @@
 	<h1>About</h1>
 	<p>
 		I'm Emmanuel Yeboah, a backend engineer based in Accra, Ghana. I've been writing software since
-		2018, and I finished a BSc in Computer Science at University of the People in 2024.
+		2018.
 	</p>
 	<p>
 		Most of my work has been on systems where a wrong answer costs someone money or trust: ledgers,
 		multi-tenant platforms, and migrations that had to happen while people were still using the
-		product. I work in Go and TypeScript on PostgreSQL and Redis, and I care about the unglamorous
-		properties: consistency, idempotency, recoverability, and being able to prove after the fact
-		what the system did.
+		product. I work in Go, TypeScript and Python on PostgreSQL and whole load of tools, and I care
+		about the unglamorous properties: consistency, idempotency, recoverability, and being able to
+		prove after the fact what the system did.
 	</p>
 	<p>
-		At <a href="/projects/susupaa-platform">SusuPaa</a> I co-founded the company and led the
-		platform: a custom append-only ledger with strict consistency guarantees, 339 organizations
-		onboarded, 28 API modules in production, p99 latency cut from 1.6s to 500ms. At
+		At <a href="/projects/susupaa-platform">SusuPaa (Pavex Ltd.)</a> I co-founded the company and
+		led the platform's engineering: built a custom append-only ledger with strict consistency
+		guarantees. At
 		<a href="/projects/rbl-dating-app">RBL Matchmaking</a> I moved 170,000 live users from PHP/MySQL
 		to Node.js/PostgreSQL with zero downtime. At
-		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I built the agent-ranking and
-		filtering engine behind buyer-to-agent matching. Earlier I was at Hubtel and at Built Financial Technologies,
-		where I led mobile and web engineering.
+		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I built the real estate agent-ranking
+		and filtering engine behind buyer-to-agent matching. Earlier I was at Hubtel and at Built Financial
+		Technologies, where I led mobile and web engineering.
 	</p>
 	<p>
 		I'm currently consulting on backend and platform work, and I'm open to senior remote backend and
@@ -141,7 +141,7 @@
 	<p>
 		I write about systems in <a href="/writing">Writing</a>, and my open-source work is under
 		<a href="/projects">Projects</a>. I'm <a href="https://github.com/noelzappy">noelzappy</a> on GitHub
-		and X.
+		and X and everywhere else.
 	</p>
 </section>
 
