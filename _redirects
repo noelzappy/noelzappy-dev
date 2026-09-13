@@ -1,0 +1,34 @@
+# Legacy URLs (Cloudflare Pages _redirects). Mirrors src/lib/redirects.ts for paths served
+# as static assets without reaching the worker. Keep both in sync (tested).
+/notes            /writing   301
+/notes/*          /writing/:splat  301
+/work             /projects  301
+/open-source      /projects  301
+/services         /contact   301
+/work/built-lite-app            /projects  301
+/work/built-africa-website      /projects  301
+/work/built-website             /projects  301
+/work/ejuma-platform            /projects  301
+/work/drone-inspection-software /projects  301
+/work/tipme-mobile-app          /projects  301
+/work/ashasie-travel-website    /projects  301
+/work/owl-studios-website       /projects  301
+/work/reeno-group-website       /projects  301
+/work/getall-handyman           /projects  301
+/work/brif-platform             /projects  301
+/work/qargo-delivery-app        /projects  301
+/work/cocaptain-app             /projects  301
+/work/*           /projects/:splat  301
+/projects/built-lite-app            /projects  301
+/projects/built-africa-website      /projects  301
+/projects/built-website             /projects  301
+/projects/ejuma-platform            /projects  301
+/projects/drone-inspection-software /projects  301
+/projects/tipme-mobile-app          /projects  301
+/projects/ashasie-travel-website    /projects  301
+/projects/owl-studios-website       /projects  301
+/projects/reeno-group-website       /projects  301
+/projects/getall-handyman           /projects  301
+/projects/brif-platform             /projects  301
+/projects/qargo-delivery-app        /projects  301
+/projects/cocaptain-app             /projects  301

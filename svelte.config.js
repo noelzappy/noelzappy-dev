@@ -42,7 +42,43 @@ const config = {
 			}
 		})
 	],
-	kit: { adapter: adapter() }
+	kit: {
+		adapter: adapter({
+			// Cloudflare caps _routes.json at 100 rules of 100 characters. The default
+			// lists every prerendered page and static file individually, which breaks
+			// as soon as a post slug is long or the post count grows. Use globs instead:
+			// everything below is served as a static asset; only unmatched paths reach
+			// the worker (legacy redirects in hooks.server.ts and the error page).
+			routes: {
+				include: ['/*'],
+				exclude: [
+					'<build>',
+					'/',
+					'/__data.json',
+					'/about',
+					'/contact',
+					'/writing',
+					'/writing/__data.json',
+					'/writing/*',
+					'/projects',
+					'/projects/__data.json',
+					'/projects/*',
+					'/rss.xml',
+					'/sitemap.xml',
+					'/robots.txt',
+					'/llm-full.txt',
+					'/favicon.svg',
+					'/favicon.png',
+					'/zappy-face.jpg',
+					'/zappy-face.png',
+					'/emmanuel_yeboah.webp',
+					'/fonts/*',
+					'/imgs/*',
+					'/portfolio/*'
+				]
+			}
+		})
+	}
 };
 
 export default config;

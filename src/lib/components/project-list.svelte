@@ -29,11 +29,7 @@
 					<span class="title">{project.title}</span>
 				{/if}
 				<span class="muted mono">
-					{#if note(project)}{note(
-							project
-						)}{#if project.featuredStack?.length}{' · '}{/if}{/if}{project.featuredStack?.join(
-						' · '
-					) ?? ''}
+					{[note(project), ...(project.featuredStack ?? [])].filter(Boolean).join(' · ')}
 				</span>
 			</div>
 			<p class="muted small">{project.excerpt}</p>
