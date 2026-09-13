@@ -1,7 +1,6 @@
 # Legacy URLs (Cloudflare Pages _redirects). Mirrors src/lib/redirects.ts for paths served
 # as static assets without reaching the worker. Keep both in sync (tested).
 /notes            /writing   301
-/notes/*          /writing/:splat  301
 /work             /projects  301
 /open-source      /projects  301
 /services         /contact   301
@@ -18,7 +17,6 @@
 /work/brif-platform             /projects  301
 /work/qargo-delivery-app        /projects  301
 /work/cocaptain-app             /projects  301
-/work/*           /projects/:splat  301
 /projects/built-lite-app            /projects  301
 /projects/built-africa-website      /projects  301
 /projects/built-website             /projects  301
@@ -32,3 +30,5 @@
 /projects/brif-platform             /projects  301
 /projects/qargo-delivery-app        /projects  301
 /projects/cocaptain-app             /projects  301
+/notes/*          /writing/:splat  301
+/work/*           /projects/:splat  301
