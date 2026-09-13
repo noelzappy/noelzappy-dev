@@ -1,4 +1,5 @@
 export type ProjectCategory = 'Mobile App' | 'Web App' | 'Website';
+export type ProjectKind = 'case-study' | 'open-source';
 
 export const PROJECT_CATEGORIES: ProjectCategory[] = ['Mobile App', 'Web App', 'Website'];
 
@@ -13,7 +14,8 @@ export interface ProjectFrontmatter {
 	liveUrl?: string;
 	iosUrl?: string;
 	androidUrl?: string;
-	github?: string;
+	github?: string; // repository URL
+	kind: ProjectKind;
 	role: string;
 	team?: string; // 4 Members (1 PM, 2 Developers, 1 Designer, etc)
 	status: string; // Shipped, In Progress, Discontinued, Archived

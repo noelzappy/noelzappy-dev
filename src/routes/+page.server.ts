@@ -1,36 +1,12 @@
+import { getPosts } from '$lib/content/writing';
+import { toPostItem } from '$lib/content/posts-view';
 import { getFeaturedProjects } from '$lib/data/projects-loader';
-import { getFeaturedNotes } from '$lib/integrations/ghost';
+import { toProjectItem } from '$lib/content/projects-view';
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = async () => {
-	try {
-		const featuredProjects = getFeaturedProjects(2);
-		const featuredNotes = getFeaturedNotes()
-			.then((notes) => notes.slice(0, 3))
-			.catch(() => []);
+export const prerender = true;
 
-		return {
-			projects: featuredProjects.map((p) => ({
-				slug: p.slug,
-				title: p.title,
-				excerpt: p.excerpt,
-				featuredImage: p.featuredImage || '',
-				status: p.status || '',
-				role: p.role || '',
-				client: p.client || '',
-				featuredStack: p.featuredStack || [],
-				stats: p.stats || []
-			})),
-			streamed: {
-				featuredNotes
-			}
-		};
-	} catch {
-		return {
-			projects: [],
-			streamed: {
-				featuredNotes: Promise.resolve([])
-			}
-		};
-	}
-};
+export const load: PageServerLoad = async () => ({
+	posts: getPosts().slice(0, 5).map(toPostItem),
+	projects: getFeaturedProjects(5).map(toProjectItem)
+});

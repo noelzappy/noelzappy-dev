@@ -1,72 +1,55 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
-	import SectionLabel from '$lib/components/section-label.svelte';
-	import { inView } from '$lib/actions/inView';
+	import { SITE_KEYWORDS } from '$lib/shared/constants';
 
-	const timeline = [
+	const history = [
 		{
-			company: 'SusuPaa (Pavex Technologies Ltd)',
+			org: 'SusuPaa (Pavex Ltd)',
+			engagement: 'Founder',
 			title: 'Co-founder & Lead Engineer',
 			dates: 'Apr 2025 – Present',
 			impact:
-				'Co-founded and built a fintech platform digitizing traditional susu savings groups across Ghana — from first commit to ₵900,000 ($81k USD) in monthly transaction volume with 99.9% transaction reliability. I designed and operate the custom double-entry ledger that is the system of record for every contribution, payout, and group balance, and built an atomic claim pattern over a PGBoss job queue to guarantee exactly-once processing of payment jobs under concurrent load. Mobile money collections and disbursements run through aggregator rails (Hubtel, Moolre), covering MTN MoMo, Telecel Cash, and AirtelTigo end users. Also responsible for the Python and TypeScript services, the React/TypeScript administrator dashboard, and the observability stack — Prometheus, Grafana, Loki, plus PostgreSQL WAL archiving to S3 for point-in-time recovery.'
+				'Co-founded and led the platform: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 latency cut from 1.6s to 500ms. Over $1M transactions processed. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
 		},
 		{
-			company: 'Brif Africa',
-			title: 'Co-founder & Lead Full-Stack Engineer',
-			dates: '2024 – Present',
-			impact:
-				'Co-founded the company and own its entire technical function — platform architecture, infrastructure, and delivery. Built the editorial platform on Next.js App Router, improving Core Web Vitals by 35% and user engagement by 18% through SSR/ISR strategy and image delivery work. Also built and deployed a standalone asynchronous text-to-speech microservice (FastAPI, kokoro-onnx) for CPU-only inference, adding audio narration across the publication.'
-		},
-		{
-			company: 'Fetch Agent (Commonwealth Media)',
+			org: 'Fetch Agent (Commonwealth Media)',
+			engagement: 'Contract',
 			title: 'Senior Backend Engineer',
 			dates: 'Sep 2024 – Dec 2025',
 			impact:
-				'Led backend for a US real estate platform. Scaled APIs to 50,000+ daily requests at sub-200ms response times. Built the proprietary agent-ranking algorithm that improved user-to-agent conversion.'
+				'Led backend for a US real estate platform. Built the agent-ranking and filtering engine that matches buyers to agents by experience, commission model, contract terms, and availability, and the APIs behind the app and admin dashboard, held under 200ms.'
 		},
 		{
-			company: 'RBL Matchmaking LLC',
-			title: 'Lead Full-Stack Engineer',
+			org: 'RBL Matchmaking LLC',
+			engagement: 'Contract',
+			title: 'Lead Engineer',
 			dates: 'Apr 2024 – Oct 2025',
 			impact:
-				'Executed a zero-downtime migration of 170,000 users from a legacy PHP/MySQL stack to Node.js and PostgreSQL. Built the WebSocket real-time messaging system now serving 200,000 monthly active users. Rebuilt the entire mobile application in React Native and delivered all React landing pages and marketing web surfaces for the platform.'
+				'Executed a zero-downtime migration of 170,000 users from a legacy PHP/MySQL stack to Node.js and PostgreSQL. Built the WebSocket real-time messaging system now serving 200,000 monthly active users. Rebuilt the mobile application in React Native and delivered the React web surfaces for the platform.'
 		},
 		{
-			company: 'Hubtel',
+			org: 'Hubtel',
+			engagement: 'Full-time',
 			title: 'Software Engineer',
 			dates: 'Feb 2024 – Oct 2024',
 			impact:
-				"Led frontend development of Hubtel for Hospitals — Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three distinct role-based React portals serving Patients, Caregivers, and Administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
+				"Led frontend development of Hubtel for Hospitals, Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three role-based React portals for patients, caregivers, and administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
 		},
 		{
-			company: 'Built Financial Technologies (formerly Built Accounting Services Ltd)',
+			org: 'Built Financial Technologies',
+			engagement: 'Full-time',
 			title: 'Lead Mobile & Web Engineer',
 			dates: 'Sep 2021 – Oct 2024',
 			impact:
-				"Built and shipped the company's full digital product suite — the built.africa Next.js web platform serving SMEs across 14+ African countries, two production React Native apps (Built Accounting, scaled from 700 to 50,000+ installs, and Built Lite, an offline-first app for low-connectivity environments), and the Ejuma HR platform. Delivered wallet, POS, invoicing, payroll, and automated accounting tools for Ghana's informal SME market."
+				"Built and shipped the company's full digital product suite: the built.africa Next.js web platform serving SMEs across 14+ African countries, two production React Native apps (Built Accounting, scaled from 700 to 50,000+ installs, and Built Lite, an offline-first app for low-connectivity environments), and the Ejuma HR platform."
 		},
 		{
-			company: 'Wordnox',
+			org: 'Wordnox',
+			engagement: 'Full-time',
 			title: 'Frontend Engineer',
 			dates: 'Jul 2019 – Aug 2021',
 			impact:
-				'My first professional role. Where I learned what it means to build software that serves real users — not just passes tests.'
-		}
-	];
-
-	const philosophy = [
-		{
-			title: 'Ship, Then Polish',
-			body: "Working software that ships beats perfect software that doesn't. I care deeply about code quality, but I care more about systems that are actually in production serving real users."
-		},
-		{
-			title: 'Code is Communication',
-			body: 'The best codebase is the one your team can read, understand, and confidently change six months later. I write for the next engineer, not just the machine.'
-		},
-		{
-			title: 'Africa First, World Ready',
-			body: 'I build for African markets first — mobile money, low-bandwidth, high-trust constraints. That discipline makes everything I build more robust everywhere.'
+				'First professional role. Where I learned what it means to build software that serves real users, not just passes tests.'
 		}
 	];
 
@@ -75,10 +58,8 @@
 		'@type': 'AboutPage',
 		mainEntity: {
 			'@type': 'Person',
-			name: 'Emmanuel Noel Zappy Yeboah',
+			name: 'Emmanuel Yeboah',
 			jobTitle: 'Backend Engineer',
-			description:
-				'6+ years architecting reliable financial systems across Ghana and Africa. Co-founder of SusuPaa.',
 			url: 'https://noelzappy.dev'
 		}
 	};
@@ -86,155 +67,115 @@
 
 <SEOHead
 	title="About"
-	description="The story behind Emmanuel Yeboah — 6+ years building fintech infrastructure for African markets. Co-founder of SusuPaa, builder of Voltax, backend engineer."
+	description="Emmanuel Yeboah, backend engineer in Accra. Six years on ledgers, multi-tenant platforms, and zero-downtime migrations."
 	canonical="https://noelzappy.dev/about"
-	ogType="website"
-	keywords="Emmanuel Yeboah, Noel Zappy, About, Backend Engineer, Ghana, African Fintech, SusuPaa"
+	keywords={SITE_KEYWORDS.join(', ')}
 	{structuredData}
 />
 
-<div class="flex flex-col gap-0 py-16 sm:py-24">
-	<!-- Page hero -->
-	<div class="flex flex-col gap-4 pb-16 sm:pb-20 border-b border-[var(--color-border)]">
-		<SectionLabel text="// about" />
-		<h1 class="text-4xl sm:text-5xl font-bold text-[var(--color-text-primary)] mt-2">
-			Emmanuel Noel Zappy Yeboah
-		</h1>
-		<p>Yep, a very long name.</p>
-	</div>
+<section class="section prose-block">
+	<h1>About</h1>
+	<p>
+		I'm Emmanuel Yeboah, a backend engineer based in Accra, Ghana. I've been writing software since
+		2018.
+	</p>
+	<p>
+		Most of my work has been on systems where a wrong answer costs someone money or trust: ledgers,
+		multi-tenant platforms, and migrations that had to happen while people were still using the
+		product. I work in Go, TypeScript and Python on PostgreSQL and a whole load of tools, and I care
+		about the unglamorous properties: consistency, idempotency, recoverability, and being able to
+		prove after the fact what the system did.
+	</p>
+	<p>
+		At <a href="/projects/susupaa-platform">SusuPaa (Pavex Ltd.)</a> I co-founded the company and
+		led the platform's engineering: built a custom append-only ledger with strict consistency
+		guarantees. At
+		<a href="/projects/rbl-dating-app">RBL Matchmaking</a> I moved 170,000 live users from PHP/MySQL
+		to Node.js/PostgreSQL with zero downtime. At
+		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I built the real estate agent-ranking
+		and filtering engine behind buyer-to-agent matching. Earlier I was at Hubtel and at Built Financial
+		Technologies, where I led mobile and web engineering.
+	</p>
+	<p>
+		I'm currently consulting on backend and platform work, and I'm open to senior remote backend and
+		platform roles. The fastest way to reach me is email:
+		<a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
+	</p>
+</section>
 
-	<!-- Opening narrative -->
-	<section class="py-16 sm:py-20 border-b border-[var(--color-border)]">
-		<div
-			class="max-w-2xl flex flex-col gap-6 text-[var(--color-text-secondary)] leading-relaxed text-base"
-		>
-			<p>
-				I've been building software since 2018 — starting with a Udemy course, earning my BSc in
-				Computer Science from University of the People in 2024, and eventually co-founding SusuPaa,
-				a fintech platform now processing over $80,000 (₵900,000) in monthly transaction volume
-				across Ghana's mobile money rails. Along the way I built Voltax, an open-source SDK that
-				unifies African payment aggregator integrations, and contributed to GHQR — Ghana's national
-				QR payment system — at Hubtel. What drives me isn't just engineering. It's the fact that
-				good financial infrastructure changes what people can do with their money. When a savings
-				group in Accra can track their contributions in real time, when a small business in Kumasi
-				can accept mobile payments reliably, that's not a technical achievement. That's a real
-				change in someone's life. That's what I'm here to build.
-			</p>
-		</div>
-	</section>
+<section class="section prose-block">
+	<h2>How I work</h2>
+	<p>
+		<strong>Ship, then polish.</strong> Working software that ships beats perfect software that doesn't.
+		I care deeply about code quality, but I care more about systems that are actually in production serving
+		real users.
+	</p>
+	<p>
+		<strong>Code is communication.</strong> The best codebase is the one your team can read, understand,
+		and confidently change six months later. I write for the next engineer, not just the machine.
+	</p>
+	<p>
+		<strong>Design for the worst network.</strong> Many of the people using what I build are on slow or
+		intermittent connections. Building for that first makes everything more robust everywhere.
+	</p>
+</section>
 
-	<!-- Open to roles -->
-	<section class="py-16 sm:py-20 border-b border-[var(--color-border)]">
-		<div class="flex flex-col gap-4 mb-8">
-			<SectionLabel text="// open to work" />
-			<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
-				Currently open to senior backend and fintech engineering roles.
-			</h2>
-		</div>
-		<div class="max-w-2xl flex flex-col gap-5">
-			<p class="text-[var(--color-text-secondary)] leading-relaxed">
-				Remote-first. Specifically interested in roles at companies building payment infrastructure,
-				or financial systems for emerging markets.
-			</p>
-			<a
-				href="mailto:me@noelzappy.dev"
-				class="btn-text text-sm self-start"
-				aria-label="Email Emmanuel about engineering roles"
-			>
-				Get in touch →
-			</a>
-		</div>
-	</section>
-
-	<!-- Timeline -->
-	<section class="py-16 sm:py-20 border-b border-[var(--color-border)]">
-		<div class="flex flex-col gap-4 mb-12">
-			<SectionLabel text="// the path here" />
-			<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
-				Where I've built.
-			</h2>
-		</div>
-		<div class="flex flex-col gap-0 stagger-children" use:inView>
-			{#each timeline as role, index (role.company)}
-				<div class="flex gap-6 sm:gap-8 {index < timeline.length - 1 ? 'pb-10' : ''}">
-					<div class="flex flex-col items-center">
-						<div class="w-3 h-3 rounded-full bg-[var(--color-accent)] shrink-0 mt-1.5"></div>
-						{#if index < timeline.length - 1}
-							<div class="w-px flex-1 bg-[var(--color-border)] mt-2"></div>
-						{/if}
-					</div>
-					<div class="flex flex-col gap-2 pb-2 flex-1">
-						<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-							<h3
-								class="text-lg font-bold text-[var(--color-text-primary)]"
-								style="font-family: var(--font-display);"
-							>
-								{role.company}
-							</h3>
-							<span
-								class="text-xs text-[var(--color-text-secondary)]"
-								style="font-family: var(--font-mono);">{role.dates}</span
-							>
-						</div>
-						<p class="text-sm text-[var(--color-accent)] font-medium">{role.title}</p>
-						<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{role.impact}</p>
-					</div>
+<section class="section">
+	<h2>Work history</h2>
+	<ol class="history">
+		{#each history as role (role.org)}
+			<li>
+				<div class="head">
+					<span class="org">{role.org}</span>
+					<span class="muted mono">{role.dates} · {role.engagement}</span>
 				</div>
-			{/each}
-		</div>
-	</section>
+				<p class="title small">{role.title}</p>
+				<p class="muted small">{role.impact}</p>
+			</li>
+		{/each}
+	</ol>
+</section>
 
-	<!-- Philosophy cards -->
-	<section class="py-16 sm:py-20 border-b border-[var(--color-border)]">
-		<div class="flex flex-col gap-4 mb-12">
-			<SectionLabel text="// what I believe" />
-			<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
-				How I think about building.
-			</h2>
-		</div>
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children" use:inView>
-			{#each philosophy as item (item.title)}
-				<div class="card p-6 flex flex-col gap-3">
-					<h3 class="font-bold text-[var(--color-text-primary)]">"{item.title}"</h3>
-					<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">{item.body}</p>
-				</div>
-			{/each}
-		</div>
-	</section>
+<section class="section prose-block">
+	<h2>Elsewhere</h2>
+	<p>
+		I write about systems in <a href="/writing">Writing</a>, and my open-source work is under
+		<a href="/projects">Projects</a>. I'm <a href="https://github.com/noelzappy">noelzappy</a> on GitHub
+		and X and everywhere else.
+	</p>
+</section>
 
-	<!-- Beyond the code -->
-	<section class="py-16 sm:py-20">
-		<div class="flex flex-col gap-4 mb-12">
-			<SectionLabel text="// beyond the code" />
-			<h2 class="section-headline text-[var(--color-text-primary)]" use:inView class:fade-up={true}>
-				Other things worth knowing.
-			</h2>
-		</div>
-		<div class="grid grid-cols-1 md:grid-cols-3 gap-6 stagger-children" use:inView>
-			<div class="card p-6 flex flex-col gap-3">
-				<h3 class="font-semibold text-[var(--color-text-primary)]">Open Source</h3>
-				<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-					I build and maintain open source tools including Voltax — an open-source SDK unifying
-					African payment aggregator integrations. Available for use and contribution on GitHub.
-				</p>
-				<a href="/open-source" class="btn-text text-sm mt-auto"> View open source work → </a>
-			</div>
-			<div class="card p-6 flex flex-col gap-3">
-				<h3 class="font-semibold text-[var(--color-text-primary)]">Writing</h3>
-				<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-					I write about software architecture, African fintech, and the hard decisions that come
-					with building systems at scale. No fluff.
-				</p>
-				<a href="/notes" class="btn-text text-sm mt-auto"> Read the notes → </a>
-			</div>
-			<div class="card p-6 flex flex-col gap-3">
-				<h3 class="font-semibold text-[var(--color-text-primary)]">Based in Accra</h3>
-				<p class="text-sm text-[var(--color-text-secondary)] leading-relaxed">
-					I work from Accra, Ghana — and serve clients across Africa and internationally.
-					Remote-first, async-friendly, and timezone-flexible.
-				</p>
-				<a href="/contact" class="btn-text text-sm mt-auto"> Let's work together → </a>
-			</div>
-		</div>
-	</section>
-</div>
+<style>
+	.prose-block p {
+		margin: 0;
+	}
+	.history {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: calc(var(--rhythm) * 4);
+	}
+	.history li {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+	.head {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.25rem 1rem;
+		align-items: baseline;
+	}
+	.org {
+		font-weight: 550;
+	}
+	.history p {
+		margin: 0;
+	}
+	.title {
+		color: var(--accent);
+	}
+</style>

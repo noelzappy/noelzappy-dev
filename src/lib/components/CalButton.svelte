@@ -1,21 +1,30 @@
 <script lang="ts">
 	import { CAL_USERNAME } from '$lib/cal.js';
 
-	interface Props {
-		eventSlug: string;
-		label?: string;
-		variant?: 'primary' | 'secondary' | 'text';
-	}
+	let { eventSlug, label = 'Book a call' }: { eventSlug: string; label?: string } = $props();
 
-	let { eventSlug, label = 'Book →', variant = 'text' }: Props = $props();
-
-	const calConfig = JSON.stringify({ layout: 'month_view', theme: 'dark' });
+	const calConfig = JSON.stringify({ layout: 'month_view', theme: 'auto' });
 </script>
 
 <button
-	class="btn-{variant}"
+	type="button"
+	class="cal-link"
 	data-cal-link="{CAL_USERNAME}/{eventSlug}"
 	data-cal-config={calConfig}
 >
 	{label}
 </button>
+
+<style>
+	.cal-link {
+		background: none;
+		border: 0;
+		padding: 0;
+		font: inherit;
+		color: var(--accent);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.18em;
+		cursor: pointer;
+	}
+</style>

@@ -1,18 +1,14 @@
-import type { Handle } from '@sveltejs/kit';
+import { redirect, type Handle } from '@sveltejs/kit';
+import { resolveRedirect } from '$lib/redirects';
 import { NodeHtmlMarkdown } from 'node-html-markdown';
 
-const AGENT_DISCOVERY_LINKS = [
-	'</.well-known/api-catalog>; rel="api-catalog"',
-	'</llm-full.txt>; rel="service-doc"'
-];
+const AGENT_DISCOVERY_LINKS = ['</llm-full.txt>; rel="service-doc"'];
 
 function acceptsMarkdown(acceptHeader: string | null): boolean {
 	if (!acceptHeader) return false;
 
 	return acceptHeader.split(',').some((entry) => {
-		const [type, ...params] = entry
-			.split(';')
-			.map((part) => part.trim().toLowerCase());
+		const [type, ...params] = entry.split(';').map((part) => part.trim().toLowerCase());
 
 		if (type !== 'text/markdown') return false;
 
@@ -31,9 +27,7 @@ function ensureVaryAccept(headers: Headers): void {
 		return;
 	}
 
-	const varyValues = vary
-		.split(',')
-		.map((value) => value.trim().toLowerCase());
+	const varyValues = vary.split(',').map((value) => value.trim().toLowerCase());
 
 	if (!varyValues.includes('accept')) {
 		headers.set('Vary', `${vary}, Accept`);
@@ -46,6 +40,9 @@ function estimateTokens(markdown: string): number {
 }
 
 export const handle: Handle = async ({ event, resolve }) => {
+	const target = resolveRedirect(event.url.pathname);
+	if (target) redirect(301, target + event.url.search);
+
 	let response = await resolve(event);
 
 	if (event.url.pathname === '/') {

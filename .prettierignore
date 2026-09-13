@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# authored content, keep as written
+src/content/writing/
