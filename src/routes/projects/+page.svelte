@@ -29,17 +29,17 @@
 	</p>
 </section>
 
-{#if data.openSource.length}
-	<section class="section" aria-labelledby="oss-heading">
-		<h2 id="oss-heading">Open source</h2>
-		<ProjectList projects={data.openSource} />
-	</section>
-{/if}
-
 {#if data.caseStudies.length}
 	<section class="section" aria-labelledby="work-heading">
 		<h2 id="work-heading">Client and product work</h2>
 		<ProjectList projects={data.caseStudies} />
+	</section>
+{/if}
+
+{#if data.openSource.length}
+	<section class="section" aria-labelledby="oss-heading">
+		<h2 id="oss-heading">Open source</h2>
+		<ProjectList projects={data.openSource} />
 	</section>
 {/if}
 
