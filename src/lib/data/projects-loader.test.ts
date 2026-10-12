@@ -31,7 +31,10 @@ describe('projects content', () => {
 		]);
 	});
 
-	it('SusuPaa is tagged Go and PostgreSQL', () => {
-		expect(getProjectBySlug('susupaa-platform')?.featuredStack).toEqual(['Go', 'PostgreSQL']);
+	it('SusuPaa is tagged TypeScript and PostgreSQL', () => {
+		expect(getProjectBySlug('susupaa-platform')?.featuredStack).toEqual([
+			'TypeScript',
+			'PostgreSQL'
+		]);
 	});
 });
