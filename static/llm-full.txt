@@ -13,6 +13,7 @@ Backend engineer building high-reliability distributed systems. Six years on cor
 - 2024–2025 — Fetch Agent. Web developer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
 - 2024–2025 — RBL Matchmaking. Lead engineer. Zero-downtime migration of 170,000 live users from PHP/MySQL to Node.js/PostgreSQL; real-time messaging for 200,000 monthly actives.
 - 2024 — Hubtel. Frontend engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.
+- 2023–present — The Brifcast Ltd. (Brif). Co-founder & Managing Partner. Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.
 - 2021–2024 — Built Financial Technologies. Mobile app developer. Shipped the web platform, two React Native apps, one offline-first, and an HR platform.
 - 2019–2021 — Wordnox. Founder (company closed). WordPress sites for clients.
 

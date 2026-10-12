@@ -36,6 +36,14 @@
 				"Led frontend development of Hubtel for Hospitals, Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three role-based React portals for patients, caregivers, and administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
 		},
 		{
+			org: 'The Brifcast Ltd. (Brif)',
+			engagement: 'Founder',
+			title: 'Co-founder & Managing Partner',
+			dates: '2023 – Present',
+			impact:
+				'Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.'
+		},
+		{
 			org: 'Built Financial Technologies',
 			engagement: 'Full-time',
 			title: 'Mobile App Developer',

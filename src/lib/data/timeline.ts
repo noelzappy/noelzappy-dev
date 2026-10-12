@@ -41,6 +41,11 @@ export const TIMELINE: TimelineEntry[] = [
 		line: 'Frontend engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.'
 	},
 	{
+		years: '2023–present',
+		org: 'The Brifcast Ltd. (Brif)',
+		line: 'Co-founder & Managing Partner. Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.'
+	},
+	{
 		years: '2021–2024',
 		org: 'Built Financial Technologies',
 		url: 'https://built.africa',
