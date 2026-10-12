@@ -18,14 +18,14 @@ export const TIMELINE: TimelineEntry[] = [
 		org: 'SusuPaa',
 		url: 'https://susupaa.com',
 		writeup: '/projects/susupaa-platform',
-		line: 'Co-founded and led the platform: custom append-only ledger with strict consistency guarantees, over $1M in transactions processed. Cut p99 latency from 1.6s to 500ms.'
+		line: 'Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for about ₵8M in deposits in Jan–Sep 2026. Cut p99 API latency from 1.6s to 500ms.'
 	},
 	{
 		years: '2024–2025',
 		org: 'Fetch Agent',
 		url: 'https://fetchagent.com',
 		writeup: '/projects/fetch-agent-real-estate-platform',
-		line: 'Senior backend engineer. Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.'
+		line: 'Web developer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.'
 	},
 	{
 		years: '2024–2025',
@@ -38,18 +38,18 @@ export const TIMELINE: TimelineEntry[] = [
 		years: '2024',
 		org: 'Hubtel',
 		url: 'https://hubtel.com',
-		line: 'Software engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.'
+		line: 'Frontend engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.'
 	},
 	{
 		years: '2021–2024',
 		org: 'Built Financial Technologies',
 		url: 'https://built.africa',
 		writeup: '/projects/built-mobile-app',
-		line: 'Lead mobile and web engineer. Shipped the web platform, two React Native apps, one offline-first, and an HR platform.'
+		line: 'Mobile app developer. Shipped the web platform, two React Native apps, one offline-first, and an HR platform.'
 	},
 	{
 		years: '2019–2021',
 		org: 'Wordnox',
-		line: 'Frontend engineer. First professional role.'
+		line: 'Founder (company closed). WordPress sites for clients.'
 	}
 ];

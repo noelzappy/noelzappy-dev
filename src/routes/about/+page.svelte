@@ -4,20 +4,20 @@
 
 	const history = [
 		{
-			org: 'SusuPaa (Pavex Ltd)',
+			org: 'SusuPaa (Pavex Technologies)',
 			engagement: 'Founder',
-			title: 'Co-founder & Lead Engineer',
-			dates: 'Apr 2025 – Present',
+			title: 'Co-founder & CTO',
+			dates: '2025 – Present',
 			impact:
-				'Co-founded and led the platform: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 latency cut from 1.6s to 500ms. Over $1M transactions processed. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
+				'Built the platform as co-founder and CTO: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 API latency cut from 1.6s to 500ms. The ledger is the system of record for about ₵8M in deposits in Jan–Sep 2026. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
 		},
 		{
 			org: 'Fetch Agent (Commonwealth Media)',
 			engagement: 'Contract',
-			title: 'Senior Backend Engineer',
+			title: 'Web Developer',
 			dates: 'Sep 2024 – Dec 2025',
 			impact:
-				'Led backend for a US real estate platform. Built the agent-ranking and filtering engine that matches buyers to agents by experience, commission model, contract terms, and availability, and the APIs behind the app and admin dashboard, held under 200ms.'
+				'Backend for a US real estate platform. Built the agent-ranking and filtering engine that matches buyers to agents by experience, commission model, contract terms, and availability, and the APIs behind the app and admin dashboard, held under 200ms.'
 		},
 		{
 			org: 'RBL Matchmaking LLC',
@@ -30,26 +30,26 @@
 		{
 			org: 'Hubtel',
 			engagement: 'Full-time',
-			title: 'Software Engineer',
-			dates: 'Feb 2024 – Oct 2024',
+			title: 'Frontend Engineer',
+			dates: 'Feb 2024 – Aug 2024',
 			impact:
 				"Led frontend development of Hubtel for Hospitals, Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three role-based React portals for patients, caregivers, and administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
 		},
 		{
 			org: 'Built Financial Technologies',
 			engagement: 'Full-time',
-			title: 'Lead Mobile & Web Engineer',
-			dates: 'Sep 2021 – Oct 2024',
+			title: 'Mobile App Developer',
+			dates: 'Sep 2021 – Sep 2024',
 			impact:
 				"Built and shipped the company's full digital product suite: the built.africa Next.js web platform serving SMEs across 14+ African countries, two production React Native apps (Built Accounting, scaled from 700 to 50,000+ installs, and Built Lite, an offline-first app for low-connectivity environments), and the Ejuma HR platform."
 		},
 		{
 			org: 'Wordnox',
-			engagement: 'Full-time',
-			title: 'Frontend Engineer',
+			engagement: 'Founder',
+			title: 'Founder (company closed)',
 			dates: 'Jul 2019 – Aug 2021',
 			impact:
-				'First professional role. Where I learned what it means to build software that serves real users, not just passes tests.'
+				'My own company, now closed. Built WordPress websites for small-business clients: where I learned what it means to build software that serves real users.'
 		}
 	];
 
@@ -87,14 +87,13 @@
 		prove after the fact what the system did.
 	</p>
 	<p>
-		At <a href="/projects/susupaa-platform">SusuPaa (Pavex Ltd.)</a> I co-founded the company and
-		led the platform's engineering: built a custom append-only ledger with strict consistency
-		guarantees. At
+		At <a href="/projects/susupaa-platform">SusuPaa (Pavex Technologies)</a> I'm co-founder and CTO,
+		and I built the platform's custom append-only ledger with strict consistency guarantees. At
 		<a href="/projects/rbl-dating-app">RBL Matchmaking</a> I moved 170,000 live users from PHP/MySQL
 		to Node.js/PostgreSQL with zero downtime. At
 		<a href="/projects/fetch-agent-real-estate-platform">Fetch Agent</a> I built the real estate agent-ranking
-		and filtering engine behind buyer-to-agent matching. Earlier I was at Hubtel and at Built Financial
-		Technologies, where I led mobile and web engineering.
+		and filtering engine behind buyer-to-agent matching. Earlier I was a frontend engineer at Hubtel and
+		a mobile app developer at Built Financial Technologies.
 	</p>
 	<p>
 		I'm currently consulting on backend and platform work, and I'm open to senior remote backend and
