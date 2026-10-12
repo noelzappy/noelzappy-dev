@@ -1,7 +1,7 @@
 ---
 title: 'SusuPaa Platform'
 slug: 'susupaa-platform'
-excerpt: 'A multi-tenant platform built on a custom append-only ledger with strict consistency guarantees. About ₵8M in deposits in Jan–Sep 2026; p99 latency cut from 1.6s to 500ms.'
+excerpt: 'A multi-tenant platform built on a custom append-only ledger with strict consistency guarantees. ₵12.5M+ in successful deposits; p99 latency cut from 1.6s to 500ms.'
 featured: true
 publishedAt: '2025-07-01T00:00:00.000Z'
 featuredImage: '/portfolio/susupaa-webapp.png'
@@ -24,9 +24,9 @@ stack:
 categories:
   - 'Web App'
 stats:
-  - key: 'Deposits, Jan–Sep 2026'
-    value: '~₵8M'
-    description: 'Recorded in the ledger'
+  - key: 'Successful deposits'
+    value: '₵12.5M+'
+    description: 'All time, across 76,000+ transactions'
   - key: 'p99 latency'
     value: '500ms'
     description: 'Down from 1.6s'
@@ -45,7 +45,7 @@ lessons: "Starting with event sourcing from day one rather than retrofitting it 
 
 <p>Performance came next. p99 API latency was 1.6 seconds. Refactoring PostgreSQL query plans and adding a tiered Redis caching strategy brought it to 500ms.</p>
 
-<p>Operating it means being able to see it and recover it. I stood up the observability stack (Prometheus metrics, Grafana dashboards, Loki log aggregation) and PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump. The ledger is the system of record for about ₵8M in deposits in Jan–Sep 2026.</p>
+<p>Operating it means being able to see it and recover it. I stood up the observability stack (Prometheus metrics, Grafana dashboards, Loki log aggregation) and PostgreSQL WAL archiving to S3 for point-in-time recovery, so a bad deploy or a corrupted write is recoverable to the second rather than to the last nightly dump. The ledger is the system of record for ₵12.5M+ in successful deposits.</p>
 
 <p>On top of the ledger sit the product modules: group susu from the first slot to the final payout, savings plans and digitised passbooks, lending from application to write-off with real-time portfolio-at-risk and automated provisioning, and accounting with a trial balance by account. Money movements are under dual control, staff roles are separated so no one person can do everything, and field payments can be recorded offline and synced when connectivity returns. Loan reporting maps to Bank of Ghana categories and GCSCA lines.</p>
 

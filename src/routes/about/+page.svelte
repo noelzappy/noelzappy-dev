@@ -9,7 +9,7 @@
 			title: 'Co-founder & CTO',
 			dates: '2025 – Present',
 			impact:
-				'Built the platform as co-founder and CTO: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 API latency cut from 1.6s to 500ms. The ledger is the system of record for about ₵8M in deposits in Jan–Sep 2026. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
+				'Built the platform as co-founder and CTO: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 API latency cut from 1.6s to 500ms. The ledger is the system of record for ₵12.5M+ in successful deposits. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
 		},
 		{
 			org: 'Fetch Agent (Commonwealth Media)',

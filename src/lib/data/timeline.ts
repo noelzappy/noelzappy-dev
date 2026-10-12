@@ -18,7 +18,7 @@ export const TIMELINE: TimelineEntry[] = [
 		org: 'SusuPaa',
 		url: 'https://susupaa.com',
 		writeup: '/projects/susupaa-platform',
-		line: 'Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for about ₵8M in deposits in Jan–Sep 2026. Cut p99 API latency from 1.6s to 500ms.'
+		line: 'Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for ₵12.5M+ in successful deposits. Cut p99 API latency from 1.6s to 500ms.'
 	},
 	{
 		years: '2024–2025',
