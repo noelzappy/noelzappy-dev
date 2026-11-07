@@ -19,7 +19,7 @@
 <style>
 	.time {
 		display: inline-block;
-		min-width: 5.5ch;
+		width: 9ch;
 		font-variant-numeric: tabular-nums;
 	}
 </style>

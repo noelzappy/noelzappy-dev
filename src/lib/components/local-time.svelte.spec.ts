@@ -10,4 +10,16 @@ describe('local-time.svelte', () => {
 			.toMatch(/^\d{1,2}:\d{2} (AM|PM)$/);
 		expect(container.textContent).toContain('Accra');
 	});
+
+	it('keeps the same <time> width before and after the time fills', async () => {
+		const { container } = render(LocalTime);
+		const el = container.querySelector('time') as HTMLElement;
+		const before = el.getBoundingClientRect().width;
+		await expect.poll(() => el.textContent?.trim()).toMatch(/^\d{1,2}:\d{2} (AM|PM)$/);
+		expect(el.getBoundingClientRect().width).toBe(before);
+		el.textContent = '';
+		expect(el.getBoundingClientRect().width).toBe(before);
+		el.textContent = '12:05 AM';
+		expect(el.getBoundingClientRect().width).toBe(before);
+	});
 });
