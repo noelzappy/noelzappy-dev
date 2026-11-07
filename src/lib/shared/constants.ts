@@ -8,7 +8,11 @@ export const SITE_DESCRIPTION =
 export const SITE_KEYWORDS = [
 	'Emmanuel Yeboah',
 	'Noel Zappy',
-	'backend engineer',
+	'product engineer',
+	'mobile app development',
+	'web app development',
+	'React Native',
+	'Expo',
 	'distributed systems',
 	'Go',
 	'platform engineering',
@@ -16,12 +20,10 @@ export const SITE_KEYWORDS = [
 	'event-driven architecture',
 	'database migrations',
 	'systems reliability',
-	'payments engineer',
 	'mobile money',
 	'Paystack',
 	'Flutterwave',
 	'Hubtel',
-	'fintech consultant',
 	'Ghana',
 	'Africa'
 ];

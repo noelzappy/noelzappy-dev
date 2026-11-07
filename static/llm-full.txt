@@ -8,7 +8,7 @@ I design and build software products end to end — mobile apps, web platforms a
 
 ## Timeline
 
-- Now — Independent consultant. Payments, ledgers and migrations for fintech teams. Writing about systems.
+- Now — Independent product engineer: mobile apps, web platforms and backends for startups and businesses. Co-founder & CTO at Pavex. Writing about systems.
 - 2025–present — SusuPaa. Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for ₵12.5M+ in successful deposits. Cut p99 API latency from 1.6s to 500ms.
 - 2024–2025 — Fetch Agent. Backend engineer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
 - 2024–2025 — RBL Matchmaking. Lead engineer. Zero-downtime migration of 170,000 live users from PHP/MySQL to Node.js/PostgreSQL; real-time messaging for 200,000 monthly actives.
@@ -19,7 +19,7 @@ I design and build software products end to end — mobile apps, web platforms a
 
 ## Focus
 
-payment integrations, mobile money, ledgers, Paystack, Flutterwave, Hubtel, MTN MoMo, Fineract, distributed systems, backend engineering, TypeScript/Node.js, Go, PostgreSQL, platform engineering, API design, event-driven architecture, database migrations, systems reliability.
+mobile apps, React Native, Expo, web apps, payment integrations, mobile money, ledgers, Paystack, Flutterwave, Hubtel, MTN MoMo, Fineract, distributed systems, backend engineering, TypeScript/Node.js, Go, PostgreSQL, platform engineering, API design, event-driven architecture, database migrations, systems reliability.
 
 ## Site map
 

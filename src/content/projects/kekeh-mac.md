@@ -53,10 +53,10 @@ Kekeh Mac is a ride-hailing and delivery platform for Freetown, Sierra Leone. It
 
 Give Freetown one platform for rides, deliveries and shared trips, and give its drivers the financial tools they rarely get.
 
-<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-block:2rem">
-<img style="margin:0" src="/portfolio/kekeh-mac/passenger-11-tracking-driver-on-the-way.png" alt="The passenger app tracking a driver on the way to the pickup point" loading="lazy" decoding="async" width="496" height="1080">
-<img style="margin:0" src="/portfolio/kekeh-mac/driver-11-wallet.png" alt="The driver app wallet screen" loading="lazy" decoding="async" width="496" height="1080">
-<img style="margin:0" src="/portfolio/kekeh-mac/passenger-12-trip-complete.png" alt="The passenger app trip complete screen" loading="lazy" decoding="async" width="496" height="1080">
+<div class="shots-row">
+<img src="/portfolio/kekeh-mac/driver-03-home-online.png" alt="The driver app home screen while online and ready for jobs" loading="lazy" decoding="async" width="496" height="1080">
+<img src="/portfolio/kekeh-mac/driver-11-wallet.png" alt="The driver app wallet screen" loading="lazy" decoding="async" width="496" height="1080">
+<img src="/portfolio/kekeh-mac/passenger-12-trip-complete.png" alt="The passenger app trip complete screen" loading="lazy" decoding="async" width="496" height="1080">
 </div>
 
 ## Real-time dispatch

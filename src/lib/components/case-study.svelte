@@ -273,6 +273,19 @@
 		height: auto;
 		margin-block: 2rem;
 	}
+	.prose :global(.shots-row) {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(0.5rem, 2.5vw, 1.25rem);
+		margin-block: 2rem;
+		container-type: inline-size;
+	}
+	.prose :global(.shots-row img) {
+		margin: 0;
+		/* DeviceFrame screen radius is 11% of the frame width; each image is about a third of the row. */
+		border-radius: 3.4cqw;
+		box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.18);
+	}
 
 	/* Impact */
 	.impact {

@@ -75,7 +75,7 @@
 
 <SEOHead
 	title="About"
-	description="Emmanuel Yeboah, backend engineer in Accra. Six years on ledgers, multi-tenant platforms, and zero-downtime migrations."
+	description="Emmanuel Yeboah, product engineer in Accra. I design and build mobile apps, web platforms and the systems behind them."
 	canonical="https://noelzappy.dev/about"
 	keywords={SITE_KEYWORDS.join(', ')}
 	{structuredData}
@@ -84,7 +84,7 @@
 <section class="section prose-block">
 	<h1>About</h1>
 	<p>
-		I'm Emmanuel Yeboah, a backend engineer based in Accra, Ghana. I've been writing software since
+		I'm Emmanuel Yeboah, a product engineer based in Accra, Ghana. I've been writing software since
 		2018.
 	</p>
 	<p>
