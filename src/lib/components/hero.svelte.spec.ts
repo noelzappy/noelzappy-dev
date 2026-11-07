@@ -147,7 +147,9 @@ describe('hero.svelte', () => {
 		[1280, 720],
 		[1366, 768],
 		[1024, 700],
-		[1440, 900]
+		[1440, 900],
+		[800, 556],
+		[1024, 600]
 	]) {
 		it(`fits one screen at ${w}x${h}`, async () => {
 			await page.viewport(w, h);
@@ -155,6 +157,10 @@ describe('hero.svelte', () => {
 			await expect.poll(() => root.getBoundingClientRect().height).toBeLessThanOrEqual(h);
 			const all = page.getByRole('link', { name: 'All work' }).element();
 			expect(all.getBoundingClientRect().bottom).toBeLessThanOrEqual(window.innerHeight);
+			const pillList = root.querySelector('.pills')!.getBoundingClientRect();
+			expect(root.querySelector('.headline')!.getBoundingClientRect().bottom).toBeLessThanOrEqual(
+				pillList.top + 2
+			);
 			// Intro and headline do not collide, in the default and an active state.
 			const intro = root.querySelector('.intro')!.getBoundingClientRect();
 			const headline = root.querySelector('.headline')!.getBoundingClientRect();

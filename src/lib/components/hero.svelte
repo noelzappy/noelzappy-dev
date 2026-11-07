@@ -173,8 +173,10 @@
 	.stage {
 		grid-area: 1 / 1 / 2 / 3;
 		display: grid;
+		position: relative;
+		--stage-pb: 1.25rem;
 		align-items: end;
-		padding-block: 1.5rem 1.25rem;
+		padding-block: 1.5rem var(--stage-pb);
 	}
 	.stage > * {
 		grid-area: 1 / 1;
@@ -189,8 +191,11 @@
 		letter-spacing: var(--tracking-display-xl);
 		font-weight: var(--weight-display-xl);
 	}
+	/* Out of flow, so the tallest layer never sets the stage's height; the headline does. */
 	.project {
-		align-self: end;
+		position: absolute;
+		left: 0;
+		bottom: var(--stage-pb);
 		max-width: min(46rem, 58%);
 		pointer-events: none;
 	}
@@ -332,6 +337,36 @@
 			transition:
 				background-color 150ms ease-out,
 				color 150ms ease-out;
+		}
+	}
+
+	/* Short desktop screens: the intro gets its own row above the stage so it can never overlap the
+	   headline, and the headline's height cap drops so the pills still fit. */
+	@media (min-width: 641px) and (max-height: 699px) {
+		.content {
+			grid-template-rows: auto 1fr auto;
+			grid-template-areas:
+				'. intro'
+				'stage stage'
+				'nav nav';
+			padding-top: 4.5rem;
+		}
+		.intro {
+			grid-area: intro;
+		}
+		.nav {
+			grid-area: nav;
+		}
+		.stage {
+			grid-area: stage;
+			--stage-pb: 0.75rem;
+			padding-block: 1rem var(--stage-pb);
+		}
+		.headline {
+			font-size: min(var(--step-display-xl), 9vh);
+		}
+		.title {
+			font-size: min(var(--step-display-l), 8vh);
 		}
 	}
 
