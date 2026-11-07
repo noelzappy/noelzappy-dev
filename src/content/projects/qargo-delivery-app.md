@@ -33,4 +33,18 @@ stats:
     description: 'Combined downloads on iOS and Android'
 gallery:
   - '/portfolio/qargo-app.png'
+oneLine: 'Customer app for an on-demand delivery service in Ghana.'
+built:
+  - 'Mobile app'
+  - 'Live tracking'
+  - 'Wallet'
+brandColor: '#111111'
+onBrand: 'light'
+deviceShots:
+  - src: '/portfolio/qargo-home.png'
+    alt: 'The Qargo home screen with a "Where to?" search, pickup and delivery shortcuts and a request-a-location card'
+    kind: 'phone'
+  - src: '/portfolio/qargo-account.png'
+    alt: 'The Qargo account screen with a wallet, loyalty points and saved locations'
+    kind: 'phone'
 ---

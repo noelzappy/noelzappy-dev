@@ -11,4 +11,7 @@ status: 'Active'
 featuredStack:
   - 'Python'
   - 'FastAPI'
+oneLine: 'Asynchronous text-to-speech microservice on FastAPI, built for CPU-only hosts.'
+categories:
+  - 'Backend'
 ---

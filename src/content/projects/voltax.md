@@ -11,4 +11,8 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'TypeScript'
+oneLine: 'An open-source payment SDK to unify African payment infrastructure.'
+categories:
+  - 'Backend'
+  - 'Fintech'
 ---

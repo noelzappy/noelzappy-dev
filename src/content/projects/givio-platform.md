@@ -26,6 +26,19 @@ categories:
   - 'Web App'
 gallery:
   - '/portfolio/givio-webapp.png'
+oneLine: 'A gifting platform where each gift is backed by fractional stocks or crypto.'
+built:
+  - 'Web app'
+  - 'Admin'
+  - 'Exchange integrations'
+  - 'Payments'
+engagement: 'full-build'
+brandColor: '#00cd6a'
+onBrand: 'dark'
+deviceShots:
+  - src: '/portfolio/givio-dashboard.png'
+    alt: 'The Givio dashboard with gift card totals, a list of stocks and ETFs to add, and a selection cart'
+    kind: 'browser'
 ---
 
 <p>Givio is a gifting platform where a gift certificate is backed by a real asset: a fractional share of a listed company or an amount of cryptocurrency. The recipient can hold it and watch it move, or redeem it at market value. I built the entire platform as the solo developer for Edromart Technologies.</p>

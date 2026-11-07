@@ -11,4 +11,7 @@ status: 'Active'
 featuredStack:
   - 'Python'
   - 'FastAPI'
+oneLine: 'FastAPI service that merges videos from S3 and uploads the result to YouTube.'
+categories:
+  - 'Backend'
 ---

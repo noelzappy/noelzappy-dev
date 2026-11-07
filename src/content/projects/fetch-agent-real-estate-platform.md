@@ -26,6 +26,21 @@ gallery:
   - '/portfolio/fetch-agent/fetch-agent.png'
   - '/portfolio/fetch-agent/1.png'
   - '/portfolio/fetch-agent/2.png'
+oneLine: 'Backend and matching engine for a US marketplace that pairs homebuyers with agents.'
+built:
+  - 'API'
+  - 'Matching engine'
+  - 'Admin'
+engagement: 'team'
+brandColor: '#025346'
+onBrand: 'light'
+deviceShots:
+  - src: '/portfolio/fetch-agent/2.png'
+    alt: 'The Fetch Agent search page with a map of agent locations and a list of matching agents with fee types'
+    kind: 'browser'
+  - src: '/portfolio/fetch-agent/service-areas.png'
+    alt: 'The Fetch Agent service area form where an agent sets fee types and pins a location on a map'
+    kind: 'browser'
 ---
 
 <p>Fetch Agent is a US marketplace that matches homebuyers to real estate agents on the criteria that actually matter to a buyer: experience level, commission model, contract terms, and availability. I was the senior backend engineer.</p>

@@ -11,4 +11,7 @@ status: 'Active'
 featuredStack:
   - 'React Native'
   - 'TypeScript'
+oneLine: 'An unofficial ChatGPT mobile app in React Native, with its own backend API.'
+categories:
+  - 'Mobile App'
 ---

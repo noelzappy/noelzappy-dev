@@ -69,6 +69,60 @@ describe('projects content', () => {
 		}
 	});
 
+	it('every project with a writeup uses the new case-study template', () => {
+		const writeups = getAllProjects().filter((p) => p.html.trim().length > 0);
+		expect(writeups.length).toBeGreaterThanOrEqual(9);
+		for (const p of writeups) {
+			expect(p.built?.length, `${p.slug} built`).toBeGreaterThanOrEqual(1);
+			expect(p.built!.length, `${p.slug} built`).toBeLessThanOrEqual(5);
+			expect(p.oneLine?.length, `${p.slug} oneLine`).toBeGreaterThan(0);
+			expect(p.oneLine!.length, `${p.slug} oneLine`).toBeLessThanOrEqual(90);
+			expect(p.brandColor, `${p.slug} brandColor`).toMatch(/^#[0-9a-f]{6}$/i);
+			expect(['light', 'dark'], `${p.slug} onBrand`).toContain(p.onBrand);
+		}
+	});
+
+	it('case-study rows without a writeup are ready for the work index too', () => {
+		for (const slug of ['qargo-delivery-app', 'cocaptain-app']) {
+			const p = getProjectBySlug(slug);
+			expect(p?.built?.length, slug).toBeGreaterThanOrEqual(1);
+			expect(p?.oneLine?.length, slug).toBeGreaterThan(0);
+			expect(p!.oneLine!.length, slug).toBeLessThanOrEqual(90);
+			expect(p?.brandColor, slug).toMatch(/^#[0-9a-f]{6}$/i);
+			expect(['light', 'dark'], slug).toContain(p?.onBrand);
+		}
+	});
+
+	it('every deviceShot exists on disk and has alt text', () => {
+		for (const p of getAllProjects()) {
+			for (const shot of p.deviceShots ?? []) {
+				expect(shot.alt.trim().length, `${p.slug} alt`).toBeGreaterThan(0);
+				expect(['phone', 'browser']).toContain(shot.kind);
+				expect(existsSync(join(process.cwd(), 'static', shot.src)), `${p.slug} ${shot.src}`).toBe(
+					true
+				);
+			}
+		}
+	});
+
+	it('local images only: no project points at a retired CMS host', () => {
+		for (const p of getAllProjects()) {
+			for (const src of [p.featuredImage, ...(p.gallery ?? [])]) {
+				if (!src) continue;
+				expect(src, p.slug).toMatch(/^\//);
+				expect(existsSync(join(process.cwd(), 'static', src)), `${p.slug} ${src}`).toBe(true);
+			}
+		}
+	});
+
+	it('every open-source entry has a one-liner and a category', () => {
+		for (const p of getAllProjects().filter((p) => p.kind === 'open-source')) {
+			expect(p.oneLine?.length, `${p.slug} oneLine`).toBeGreaterThan(0);
+			expect(p.oneLine!.length, `${p.slug} oneLine`).toBeLessThanOrEqual(90);
+			expect(p.categories?.length, `${p.slug} categories`).toBeGreaterThanOrEqual(1);
+		}
+	});
+
 	it('Kekeh Mac is a pilot case study that is not featured yet', () => {
 		const p = getProjectBySlug('kekeh-mac');
 		expect(p?.status).toBe('Pilot');

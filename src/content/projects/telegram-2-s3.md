@@ -10,4 +10,7 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'TypeScript'
+oneLine: 'Downloads videos from Telegram channels to S3 and notifies n8n by webhook.'
+categories:
+  - 'Backend'
 ---

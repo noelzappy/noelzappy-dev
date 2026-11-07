@@ -4,7 +4,7 @@ slug: 'cocaptain-app'
 excerpt: 'React Native app for sports clubs covering registrations, payments, teams and messaging, with GraphQL for data fetching and WebSockets for real-time updates.'
 featured: false
 publishedAt: '2024-04-06T00:00:00.000Z'
-featuredImage: 'https://ghost.noelzappy.dev/content/images/2025/12/cocaptain.webp'
+featuredImage: '/portfolio/cocaptain/cocaptain.webp'
 liveUrl: 'http://www.cocaptain.io'
 role: 'Mobile Developer'
 kind: 'case-study'
@@ -23,5 +23,12 @@ stack:
 categories:
   - 'Mobile App'
 gallery:
-  - 'https://ghost.noelzappy.dev/content/images/2025/12/cocaptain.webp'
+  - '/portfolio/cocaptain/cocaptain.webp'
+oneLine: 'React Native app for sports clubs: registrations, payments, teams and messaging.'
+built:
+  - 'Mobile app'
+  - 'Real-time messaging'
+  - 'Payments'
+brandColor: '#199bfd'
+onBrand: 'dark'
 ---

@@ -10,4 +10,7 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'Go'
+oneLine: 'Use your phone as a trackpad and keyboard for your desktop, through a PWA.'
+categories:
+  - 'Web App'
 ---

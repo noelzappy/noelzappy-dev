@@ -10,4 +10,7 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'TypeScript'
+oneLine: 'A WhatsApp bot that answers with ChatGPT and can send scheduled messages.'
+categories:
+  - 'Backend'
 ---

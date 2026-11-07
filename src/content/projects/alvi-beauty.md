@@ -33,6 +33,15 @@ categories:
 gallery:
   - '/portfolio/alvibeauty.png'
   - '/portfolio/alvibeauty-2.jpg'
+oneLine: 'Backend and architecture for a beauty booking product across four apps and the web.'
+built:
+  - 'Mobile apps'
+  - 'Web app'
+  - 'API'
+  - 'Admin'
+engagement: 'team'
+brandColor: '#e24f48'
+onBrand: 'dark'
 ---
 
 <p>Alvi Beauty is a booking product for at-home beauty services. Romarianec Tech contracted me for the backend and the parts of the system architecture that had to hold the whole thing together.</p>

@@ -30,6 +30,19 @@ stats:
 gallery:
   - '/portfolio/growing-gifts-webapp.png'
   - '/portfolio/growing-gifts-website.png'
+oneLine: 'Fractional stock and crypto gift certificates, built solo end to end.'
+built:
+  - 'Web app'
+  - 'Brokerage and exchange APIs'
+  - 'Order tracking'
+  - 'PDF certificates'
+engagement: 'full-build'
+brandColor: '#307cef'
+onBrand: 'dark'
+deviceShots:
+  - src: '/portfolio/growinggifts-landing.png'
+    alt: 'The GrowingGifts landing page with the headline "A Gift Card: The perfect gift for any occasion" and a three-step how-it-works section'
+    kind: 'browser'
 ---
 
 <p>GrowingGift bundles fractional shares and cryptocurrency into digital gift certificates whose value moves with the market until the recipient redeems. Lyqx Agency designed the product; I built all of it.</p>

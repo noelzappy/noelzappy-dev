@@ -10,4 +10,7 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'Go'
+oneLine: 'A digital asset marketplace for licensing images, with a Go backend.'
+categories:
+  - 'Backend'
 ---

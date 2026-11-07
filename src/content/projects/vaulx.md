@@ -10,4 +10,7 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'Go'
+oneLine: 'A private file asset platform with role-based access control.'
+categories:
+  - 'Web App'
 ---

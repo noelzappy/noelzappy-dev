@@ -32,6 +32,26 @@ gallery:
   - '/portfolio/lovenest/5.jpg'
   - '/portfolio/lovenest/6.jpg'
   - '/portfolio/lovenest/7.jpg'
+oneLine: 'The full backend for a dating app for single parents.'
+built:
+  - 'API'
+  - 'Real-time messaging'
+  - 'Matching'
+  - 'Gifting'
+  - 'Events'
+engagement: 'team'
+brandColor: '#9442ae'
+onBrand: 'light'
+deviceShots:
+  - src: '/portfolio/lovenest/discover.jpg'
+    alt: 'The Love Nest Discover screen showing a profile card with pass, message and like buttons'
+    kind: 'phone'
+  - src: '/portfolio/lovenest/welcome.jpg'
+    alt: 'The Love Nest welcome screen with the headline "Discover Your True Love Connection" and sign-in buttons'
+    kind: 'phone'
+  - src: '/portfolio/lovenest/chat.jpg'
+    alt: 'A Love Nest conversation with a match, with photos at the top and the keyboard open'
+    kind: 'phone'
 ---
 
 <p>Love Nest is a dating app for single parents. Lyqx Agency brought me in to build the entire backend; the iOS and Android apps were built separately on top of it.</p>

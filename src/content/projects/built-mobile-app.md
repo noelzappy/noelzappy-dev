@@ -35,6 +35,22 @@ stats:
     description: 'Used in over 14 countries worldwide'
 gallery:
   - '/portfolio/builtapp.png'
+oneLine: 'Web platform and two React Native apps for an SME finance product.'
+built:
+  - 'Mobile apps'
+  - 'Web app'
+  - 'Offline sync'
+  - 'Payments'
+engagement: 'team'
+brandColor: '#3d6ca5'
+onBrand: 'light'
+deviceShots:
+  - src: '/portfolio/built-wallet.png'
+    alt: 'The Built Accounting app home screen with an account balance, quick actions and recent transactions'
+    kind: 'phone'
+  - src: '/portfolio/built-invoices.png'
+    alt: 'The Built Accounting app invoice list with invoice numbers, due dates and amounts'
+    kind: 'phone'
 ---
 
 <p>Built Financial Technologies makes an all-in-one finance product for small and medium businesses: invoicing, POS, accounting, payroll, budgets, and business credit, used across Ghana, Nigeria, Kenya, South Africa, and other African markets. I was Lead Mobile and Web Engineer there from 2021 to 2024 and shipped the company's digital product suite.</p>

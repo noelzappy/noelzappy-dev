@@ -10,4 +10,7 @@ kind: 'open-source'
 status: 'Active'
 featuredStack:
   - 'Python'
+oneLine: 'AI-powered WhatsApp order management for Ghanaian SMEs.'
+categories:
+  - 'Backend'
 ---
