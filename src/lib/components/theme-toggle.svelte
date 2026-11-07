@@ -72,12 +72,13 @@
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 2rem;
-		height: 2rem;
-		border: 1px solid var(--border);
+		width: 1.9rem;
+		height: 1.9rem;
+		padding: 0;
+		border: 1px solid color-mix(in srgb, var(--fg) 35%, transparent);
 		border-radius: 999px;
 		background: transparent;
-		color: var(--muted);
+		color: var(--fg);
 		cursor: pointer;
 	}
 	.theme-toggle:hover {

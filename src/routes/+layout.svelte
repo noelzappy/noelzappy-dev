@@ -3,7 +3,13 @@
 	import SiteHeader from '$lib/components/site-header.svelte';
 	import Footer from '$lib/components/footer.svelte';
 
-	let { children } = $props();
+	import { page } from '$app/state';
+
+	let { children, data } = $props();
+
+	// Studio pages are full-bleed, so the header overlays the hero; classic pages keep it in flow.
+	// Decided from the route group in the matched route id, e.g. '/(studio)/projects/[slug]'.
+	const studio = $derived(page.route.id?.startsWith('/(studio)') ?? false);
 </script>
 
 <svelte:head>
@@ -25,6 +31,6 @@
 	/>
 </svelte:head>
 
-<SiteHeader />
+<SiteHeader overlay={studio} pills={data.pills} posts={data.posts} />
 {@render children()}
-<Footer />
+<Footer wide={studio} />

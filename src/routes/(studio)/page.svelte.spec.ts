@@ -5,7 +5,7 @@ import Page from './+page.svelte';
 
 describe('/+page.svelte', () => {
 	it('renders the intro and hides list sections that have no content', async () => {
-		render(Page, { data: { posts: [], projects: [] } });
+		render(Page, { data: { pills: [], posts: [], projects: [] } });
 		await expect
 			.element(page.getByRole('heading', { level: 1 }))
 			.toHaveTextContent("Hey, I'm Emmanuel.");
@@ -17,6 +17,7 @@ describe('/+page.svelte', () => {
 	it('lists posts with tags and projects with their links', async () => {
 		render(Page, {
 			data: {
+				pills: [],
 				posts: [
 					{ slug: 'a', title: 'Post A', date: '2026-01-07', tags: ['systems'], description: '' }
 				],
