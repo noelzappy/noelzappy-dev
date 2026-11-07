@@ -73,7 +73,7 @@
 
 <article class="case-study">
 	<header class="top">
-		<h1>{title}</h1>
+		<h1 class="page-title">{title}</h1>
 		{#if meta.length}
 			<dl class="meta">
 				{#each meta as item (item.label)}

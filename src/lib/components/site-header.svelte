@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { tick } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 	import LocalTime from './local-time.svelte';
 	import ThemeToggle from './theme-toggle.svelte';
 	import SiteMenu, { type MenuPill, type MenuPost } from './site-menu.svelte';
@@ -24,6 +25,12 @@
 		await tick();
 		button?.focus();
 	}
+
+	// Any completed navigation (menu link, wordmark, in-page link) dismisses the menu. No focus
+	// move here: the new page owns focus.
+	afterNavigate(() => {
+		open = false;
+	});
 </script>
 
 <header class="site-header" class:overlay>

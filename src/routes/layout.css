@@ -305,6 +305,78 @@ pre {
 	background-color: var(--code-bg) !important;
 }
 
+/* Page reveal (see $lib/transitions/page-reveal.ts).
+   Mechanism: a fixed ink panel (.reveal-panel in the root layout) is hidden normally. JS adds
+   html.reveal-active just before the view transition captures the old state, so the panel is
+   painted (and named) in the old snapshot only. The panel's old snapshot is a flat ink rectangle
+   above both page snapshots; it translates off the top of the screen, uncovering the already
+   live new page. Flat colour, hard edge, no blur or gradient. The page title rises into place. */
+.reveal-panel {
+	position: fixed;
+	inset: 0;
+	z-index: 100;
+	background: var(--bg);
+	pointer-events: none;
+	visibility: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+	.page-title {
+		view-transition-name: page-title;
+	}
+	html.reveal-active .reveal-panel {
+		visibility: visible;
+		view-transition-name: reveal-panel;
+	}
+
+	/* Page snapshots swap instantly beneath the panel. */
+	::view-transition-old(root),
+	::view-transition-new(root) {
+		animation: none;
+		mix-blend-mode: normal;
+	}
+	::view-transition-old(root) {
+		display: none;
+	}
+
+	/* Panel: hold fully ink, then slide up and out. */
+	::view-transition-group(reveal-panel) {
+		animation: none;
+	}
+	::view-transition-old(reveal-panel) {
+		animation: reveal-wipe 650ms cubic-bezier(0.65, 0, 0.35, 1) both;
+	}
+
+	/* Title: no morph; the new heading rises 24px and fades in as the panel clears. */
+	::view-transition-group(page-title) {
+		animation: none;
+	}
+	::view-transition-old(page-title) {
+		display: none;
+	}
+	::view-transition-new(page-title) {
+		animation: title-rise 650ms cubic-bezier(0.22, 0.8, 0.2, 1) 250ms both;
+	}
+
+	@keyframes reveal-wipe {
+		from {
+			transform: translateY(0);
+		}
+		to {
+			transform: translateY(-100%);
+		}
+	}
+	@keyframes title-rise {
+		from {
+			opacity: 0;
+			transform: translateY(24px);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,

@@ -73,7 +73,7 @@
 		<p class="intro layer" class:off={!!active}>{intro}</p>
 
 		<div class="stage">
-			<h1 class="headline layer" class:off={!!active}>
+			<h1 class="headline layer page-title" class:off={!!active}>
 				{#if typeof headline === 'string'}{headline}{:else}{@render headline()}{/if}
 			</h1>
 			{#each pills as pill (pill.slug)}

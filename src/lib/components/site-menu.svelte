@@ -93,7 +93,7 @@
 				<nav aria-label="Primary">
 					<ul class="nav">
 						{#each NAV as item (item.href)}
-							<li><a href={item.href} onclick={onclose}>{item.label}</a></li>
+							<li><a href={item.href}>{item.label}</a></li>
 						{/each}
 					</ul>
 				</nav>
@@ -102,7 +102,7 @@
 						<p class="label">Projects</p>
 						<ul class="pills">
 							{#each pills as pill (pill.slug)}
-								<li><a href="/projects/{pill.slug}" onclick={onclose}>{pill.title}</a></li>
+								<li><a href="/projects/{pill.slug}">{pill.title}</a></li>
 							{/each}
 						</ul>
 					</div>
@@ -114,7 +114,7 @@
 					<ul class="cards">
 						{#each posts as post (post.slug)}
 							<li>
-								<a href="/writing/{post.slug}" onclick={onclose}>
+								<a href="/writing/{post.slug}">
 									<span class="card-title">{post.title}</span>
 									<time datetime={post.date}>{formatDate(post.date)}</time>
 								</a>
