@@ -66,7 +66,11 @@ export function getFeaturedProjects(limit: number = 6): ProjectData[] {
 	const allProjects = getAllProjects();
 	return allProjects
 		.filter((project) => project.featured)
-		.sort((a, b) => (a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity))
+		.sort(
+			(a, b) =>
+				(a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity) ||
+				a.slug.localeCompare(b.slug)
+		)
 		.slice(0, limit);
 }
 

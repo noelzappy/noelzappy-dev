@@ -59,13 +59,21 @@
 		text-decoration: none;
 	}
 	/* The whole tile is the target; the heading link covers it. */
+	.tile:has(.stretch:focus-visible) {
+		outline: 2px solid var(--accent);
+		outline-offset: 0.5rem;
+		border-radius: 0.5rem;
+	}
+	.stretch:focus-visible {
+		outline: none;
+	}
 	.stretch::after {
 		content: '';
 		position: absolute;
 		inset: 0;
 	}
 	.tile:hover .name a,
-	.name a:focus-visible {
+	.tile:focus-within .name a {
 		color: var(--accent);
 	}
 	.line {

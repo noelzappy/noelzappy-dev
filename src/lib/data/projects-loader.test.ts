@@ -36,6 +36,13 @@ describe('projects content', () => {
 		]);
 	});
 
+	it('Voltax carries a real docs screen on its brand field', () => {
+		const p = getProjectBySlug('voltax');
+		expect(p?.deviceShots?.[0]?.src).toBe('/portfolio/voltax/voltax-docs.png');
+		expect(p?.brandColor).toBe('#3d50f5');
+		expect(p?.onBrand).toBe('light');
+	});
+
 	it('SusuPaa is tagged TypeScript and PostgreSQL', () => {
 		expect(getProjectBySlug('susupaa-platform')?.featuredStack).toEqual([
 			'TypeScript',

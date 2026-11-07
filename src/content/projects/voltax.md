@@ -13,6 +13,12 @@ status: 'Active'
 featuredStack:
   - 'TypeScript'
 oneLine: 'An open-source payment SDK to unify African payment infrastructure.'
+brandColor: '#3d50f5'
+onBrand: 'light'
+deviceShots:
+  - src: '/portfolio/voltax/voltax-docs.png'
+    alt: 'The Voltax docs home page: the Voltax Payment SDK headline, Get Started and View on GitHub buttons, the mascot, and the npm install command'
+    kind: 'browser'
 categories:
   - 'Backend'
   - 'Fintech'
