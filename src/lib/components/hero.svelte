@@ -104,8 +104,12 @@
 					</li>
 				{/each}
 				<li>
-					<a href="/projects" class="pill all" data-sveltekit-preload-data
-						>All work <span aria-hidden="true">→</span></a
+					<a
+						href="/projects"
+						class="pill all"
+						data-sveltekit-preload-data
+						onmouseenter={reset}
+						onfocus={reset}>All work <span aria-hidden="true">→</span></a
 					>
 				</li>
 			</ul>
@@ -146,29 +150,31 @@
 		flex: 1;
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
-		grid-template-rows: auto 1fr auto;
+		grid-template-rows: 1fr auto;
 		grid-template-areas:
-			'. intro'
-			'stage stage'
+			'stage intro'
 			'nav nav';
 		column-gap: var(--pad);
 		/* Top padding clears the overlay header (~4rem tall). */
 		padding: 5.5rem var(--pad) var(--pad);
 	}
 	.intro {
-		grid-area: intro;
+		grid-area: 1 / 2;
+		z-index: 1;
 		margin: 0;
-		font-size: var(--step-heading);
+		/* Sits top-right beside the headline's row, not in a row of its own. */
+		font-size: min(var(--step-heading), 3vh);
 		line-height: 1.35;
 		letter-spacing: var(--tracking-heading);
-		max-width: 26rem;
+		max-width: 24rem;
 		justify-self: end;
+		align-self: start;
 	}
 	.stage {
-		grid-area: stage;
+		grid-area: 1 / 1 / 2 / 3;
 		display: grid;
 		align-items: end;
-		padding-block: 3rem 2rem;
+		padding-block: 1.5rem 1.25rem;
 	}
 	.stage > * {
 		grid-area: 1 / 1;
@@ -177,7 +183,8 @@
 		margin: 0;
 		max-width: 11.5em;
 		font-family: var(--font-display);
-		font-size: var(--step-display-xl);
+		/* Capped by viewport height too, so headline + pills always fit one screen. */
+		font-size: min(var(--step-display-xl), 13vh);
 		line-height: var(--lh-display-xl);
 		letter-spacing: var(--tracking-display-xl);
 		font-weight: var(--weight-display-xl);
@@ -190,7 +197,7 @@
 	.title {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: var(--step-display-l);
+		font-size: min(var(--step-display-l), 9vh);
 		line-height: var(--lh-display-l);
 		letter-spacing: var(--tracking-display-l);
 		font-weight: var(--weight-display-l);
@@ -211,7 +218,7 @@
 	}
 
 	.nav {
-		grid-area: nav;
+		grid-area: 2 / 1 / 3 / 3;
 	}
 	.pills {
 		list-style: none;
@@ -249,6 +256,14 @@
 	.pill.all {
 		border-style: dashed;
 	}
+	@media (max-height: 820px) {
+		.pills {
+			gap: 0.4rem;
+		}
+		.pill {
+			padding: 0.4rem 1.1rem;
+		}
+	}
 
 	/* Device screens rise from the bottom-right. */
 	.shots {
@@ -270,7 +285,7 @@
 		transform: none;
 	}
 	.shot {
-		width: clamp(9rem, 15.5vw, 17rem);
+		width: min(clamp(9rem, 15.5vw, 17rem), 27vh);
 		margin-bottom: -9%;
 	}
 	.shot.second {
@@ -282,7 +297,7 @@
 		margin-right: 0;
 	}
 	.shot-set.browser .shot {
-		width: clamp(22rem, 47vw, 50rem);
+		width: min(clamp(22rem, 47vw, 50rem), 80vh);
 		margin-bottom: -7%;
 	}
 
@@ -334,10 +349,12 @@
 			padding-top: 5.5rem;
 		}
 		.stage {
+			grid-area: stage;
 			align-items: start;
 			padding-block: 1.5rem 1.5rem;
 		}
 		.intro {
+			grid-area: intro;
 			justify-self: start;
 			font-size: 1.05rem;
 			padding-bottom: 1.75rem;
@@ -347,6 +364,7 @@
 			display: none;
 		}
 		.nav {
+			grid-area: nav;
 			margin-inline: calc(var(--pad) * -1);
 		}
 		.pills {

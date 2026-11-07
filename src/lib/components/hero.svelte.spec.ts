@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import type { PillProject } from '$lib/data/projects';
+import '../../routes/layout.css';
 import Hero from './hero.svelte';
 
 const HEADLINE = 'I design and build software products, end to end.';
@@ -108,9 +109,66 @@ describe('hero.svelte', () => {
 		const { root } = setup();
 		await page.getByRole('link', { name: 'RBL Dating Platform' }).hover();
 		await expect.poll(() => root.dataset.active).toBe('rbl-dating-app');
-		await page.getByRole('heading', { level: 1 }).hover();
+		// A neutral spot in the hero's padding, not a layer that may be hidden.
+		await page.elementLocator(root).hover({ position: { x: 8, y: 8 } });
 		await expect.poll(() => root.dataset.active).toBe('');
 	});
+
+	it('focusing All work resets the preview to the default state', async () => {
+		const { root } = setup();
+		(page.getByRole('link', { name: 'SusuPaa' }).element() as HTMLElement).focus();
+		await expect.poll(() => root.dataset.active).toBe('susupaa-platform');
+		(page.getByRole('link', { name: 'All work' }).element() as HTMLElement).focus();
+		await expect.poll(() => root.dataset.active).toBe('');
+	});
+
+	it('switching pill to pill shows exactly one project layer and hides the rest', async () => {
+		const { root } = setup();
+		for (const pill of pills) {
+			await page.getByRole('link', { name: pill.title }).hover();
+			await expect.poll(() => root.dataset.active).toBe(pill.slug);
+			const on = root.querySelectorAll('.project.on');
+			expect(on.length).toBe(1);
+			expect(on[0].querySelector('.title')?.textContent).toBe(pill.title);
+			document.getAnimations().forEach((a) => a.finish());
+			const visible = [...root.querySelectorAll('.project')]
+				.filter((el) => getComputedStyle(el).visibility === 'visible')
+				.map((el) => el.querySelector('.title')?.textContent);
+			expect(visible).toEqual([pill.title]);
+			const shots = [...root.querySelectorAll('.shot-set')].filter(
+				(el) => getComputedStyle(el).visibility === 'visible'
+			);
+			expect(shots.length).toBe(1);
+			expect(getComputedStyle(root.querySelector('.headline')!).visibility).toBe('hidden');
+		}
+	});
+
+	for (const [w, h] of [
+		[1280, 720],
+		[1366, 768],
+		[1024, 700],
+		[1440, 900]
+	]) {
+		it(`fits one screen at ${w}x${h}`, async () => {
+			await page.viewport(w, h);
+			const { root } = setup();
+			await expect.poll(() => root.getBoundingClientRect().height).toBeLessThanOrEqual(h);
+			const all = page.getByRole('link', { name: 'All work' }).element();
+			expect(all.getBoundingClientRect().bottom).toBeLessThanOrEqual(window.innerHeight);
+			// Intro and headline do not collide, in the default and an active state.
+			const intro = root.querySelector('.intro')!.getBoundingClientRect();
+			const headline = root.querySelector('.headline')!.getBoundingClientRect();
+			expect(intro.bottom).toBeLessThanOrEqual(headline.top + 2);
+			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
+			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
+			document.getAnimations().forEach((a) => a.finish());
+			for (const shot of root.querySelectorAll('.shot-set.on .shot')) {
+				const r = shot.getBoundingClientRect();
+				expect(r.top).toBeGreaterThanOrEqual(0);
+				expect(r.top).toBeLessThan(window.innerHeight);
+			}
+		});
+	}
 
 	it('on a phone the pills scroll sideways and hovering does nothing', async () => {
 		await page.viewport(375, 812);
