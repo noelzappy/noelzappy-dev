@@ -43,9 +43,9 @@ Patterns taken:
 1. One-screen hero: large display headline, short intro paragraph, a vertical list of project
    pills. Hovering a pill turns the hero into that project (name, one line, what was built, image).
 2. Minimal chrome: "Menu" button left, wordmark centre, local time + theme toggle right.
-3. Full-screen menu overlay: serif nav links, project pills, and recent items (writing, news).
+3. Full-screen menu overlay: large display nav links, project pills, and recent items (writing, news).
 4. Work index as rows: name, one line, deliverables, image, with type filters.
-5. Case study: huge serif title, a meta row, a full-bleed hero image, narrative sections, an
+5. Case study: huge display title, a meta row, a full-bleed hero image, narrative sections, an
    impact row of 2–3 numbers, "next case study".
 6. "What I do" page: four offer statements, capability groups, numbered principles, testimonials.
 
@@ -147,7 +147,7 @@ removed from both redirect lists, so old links land on content again. Tests upda
 
 ### 5.2 Work index (`/projects`)
 
-Serif headline; filter chips (All, Mobile, Web, Backend, Fintech, Websites, Open source); rows
+Display headline; filter chips (All, Mobile, Web, Backend, Fintech, Websites, Open source); rows
 (name, one line, deliverables, thumbnail, "View case study"). Open-source projects appear as a
 compact second list (name, one line, stars/npm, repo link).
 
