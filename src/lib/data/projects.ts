@@ -25,6 +25,7 @@ export interface ProjectFrontmatter {
 	iosUrl?: string;
 	androidUrl?: string;
 	github?: string; // repository URL
+	stars?: number; // GitHub stars, shown on open-source entries
 	kind: ProjectKind;
 	role: string;
 	team?: string; // 4 Members (1 PM, 2 Developers, 1 Designer, etc)
