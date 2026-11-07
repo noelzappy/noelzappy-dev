@@ -93,7 +93,12 @@ Personalised:
 ### 3.4 Motion
 
 - Hero pill hover: cross-fade background + content (~350–450ms ease-out), image rises slightly.
-- Menu overlay: fade/slide. Page transitions: none or a simple fade.
+- Menu overlay: fade/slide.
+- **Page reveal (Emmanuel, 2026-11-07):** every client-side navigation shows a reveal: an ink
+  panel wipes up off the screen (~600–700ms, ease-in-out) uncovering the new page, whose first
+  heading rises ~24px into place. Built on the View Transitions API (`onNavigate` +
+  `document.startViewTransition`), no dependency; browsers without it navigate instantly.
+  Disabled under `prefers-reduced-motion`. Never delays navigation beyond the animation.
 - No scroll-jacking, no custom cursor. Everything respects `prefers-reduced-motion`.
 
 ### 3.5 Mobile
@@ -221,6 +226,11 @@ title/description, and the `/work-with-me` content (restructured per §5.4).
 - Nothing deployed without Emmanuel's approval.
 
 ## 9. Phases
+
+Update 2026-11-07: Emmanuel approved the slice's look and directed that every page be
+redesigned now; phases 3–4 run as one plan (`plans/2026-11-07-redesign-phase2-all-pages.md`).
+New case studies (Tripli, PayLTE, Hakanow, Brif, Edromart, Websites) remain a separate content
+plan.
 
 1. **Vertical slice (approval gate):** design tokens, fonts, header/menu, homepage hero with
    working pills (3 projects), and the full Kekeh Mac case study with studio device shots and
