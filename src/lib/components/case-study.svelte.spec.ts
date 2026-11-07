@@ -16,8 +16,16 @@ const base = {
 	onBrand: 'dark' as const,
 	heroImage: '',
 	deviceShots: [
-		{ src: '/portfolio/kekeh-mac/a.png', alt: 'Passenger tracking', kind: 'phone' as const },
-		{ src: '/portfolio/kekeh-mac/b.png', alt: 'Driver heading to pickup', kind: 'phone' as const }
+		{
+			src: '/portfolio/kekeh-mac/passenger-03-home.png',
+			alt: 'Passenger tracking',
+			kind: 'phone' as const
+		},
+		{
+			src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.png',
+			alt: 'Driver heading to pickup',
+			kind: 'phone' as const
+		}
 	],
 	impact: [] as { value: string; label: string }[],
 	stack: ['Flutter'],
@@ -50,7 +58,11 @@ describe('CaseStudy', () => {
 	});
 
 	it('uses the hero image when set and omits absent links', async () => {
-		render(CaseStudy, { ...base, heroImage: '/portfolio/x/hero.png', liveUrl: 'https://x.test' });
+		render(CaseStudy, {
+			...base,
+			heroImage: '/portfolio/fetch-agent/fetch-agent.png',
+			liveUrl: 'https://x.test'
+		});
 		await expect.element(page.getByRole('link', { name: 'App Store' })).not.toBeInTheDocument();
 		await expect.element(page.getByRole('link', { name: 'Live site' })).toBeInTheDocument();
 	});
