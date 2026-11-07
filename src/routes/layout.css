@@ -305,19 +305,29 @@ pre {
 	background-color: var(--code-bg) !important;
 }
 
-/* Page reveal (see $lib/transitions/page-reveal.ts).
-   Mechanism: a fixed ink panel (.reveal-panel in the root layout) is hidden normally. JS adds
-   html.reveal-active just before the view transition captures the old state, so the panel is
-   painted (and named) in the old snapshot only. The panel's old snapshot is a flat ink rectangle
-   above both page snapshots; it translates off the top of the screen, uncovering the already
-   live new page. Flat colour, hard edge, no blur or gradient. The page title rises into place. */
+/* Page reveal (see $lib/transitions/page-reveal.ts): a two-phase ink curtain, 800ms total.
+   A fixed .reveal-panel (end of the root layout) is hidden normally. JS adds html.reveal-active
+   before the transition, so the panel is painted and named `reveal-panel` in both the old and new
+   states, and its group runs one keyframe animation: it rises from the bottom over the still
+   visible old page (0-350ms), holds covering the screen (to 400ms), then continues off the top
+   (400-800ms). The new root snapshot sits hidden until the hold, so the swap happens while fully
+   covered. Flat ink, hard edge, no blur or gradient. The page title rises as the panel clears.
+   The panel is near-black on dark (distinct from the #0e0e0d page) and ink on light. */
 .reveal-panel {
 	position: fixed;
 	inset: 0;
 	z-index: 100;
-	background: var(--bg);
+	background: #050505;
 	pointer-events: none;
 	visibility: hidden;
+}
+[data-theme='light'] .reveal-panel {
+	background: #0e0e0d;
+}
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme='dark']) .reveal-panel {
+		background: #0e0e0d;
+	}
 }
 @media (prefers-reduced-motion: no-preference) {
 	.page-title {
@@ -328,25 +338,25 @@ pre {
 		view-transition-name: reveal-panel;
 	}
 
-	/* Page snapshots swap instantly beneath the panel. */
-	::view-transition-old(root),
+	/* Old page stays put; new page stays hidden until the screen is fully covered. */
+	::view-transition-old(root) {
+		animation: none;
+	}
 	::view-transition-new(root) {
+		animation: reveal-swap 800ms step-end both;
+		mix-blend-mode: normal;
+	}
+
+	::view-transition-group(reveal-panel) {
+		animation: reveal-curtain 800ms both;
+	}
+	::view-transition-old(reveal-panel),
+	::view-transition-new(reveal-panel) {
 		animation: none;
 		mix-blend-mode: normal;
 	}
-	::view-transition-old(root) {
-		display: none;
-	}
 
-	/* Panel: hold fully ink, then slide up and out. */
-	::view-transition-group(reveal-panel) {
-		animation: none;
-	}
-	::view-transition-old(reveal-panel) {
-		animation: reveal-wipe 650ms cubic-bezier(0.65, 0, 0.35, 1) both;
-	}
-
-	/* Title: no morph; the new heading rises 24px and fades in as the panel clears. */
+	/* Title: no morph; the new heading rises 24px and fades in as the panel starts to clear. */
 	::view-transition-group(page-title) {
 		animation: none;
 	}
@@ -354,15 +364,34 @@ pre {
 		display: none;
 	}
 	::view-transition-new(page-title) {
-		animation: title-rise 650ms cubic-bezier(0.22, 0.8, 0.2, 1) 250ms both;
+		animation: title-rise 600ms cubic-bezier(0.22, 0.8, 0.2, 1) 450ms both;
 	}
 
-	@keyframes reveal-wipe {
-		from {
+	@keyframes reveal-curtain {
+		0% {
+			transform: translateY(100%);
+			animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+		}
+		43.75% {
 			transform: translateY(0);
 		}
-		to {
+		50% {
+			transform: translateY(0);
+			animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+		}
+		100% {
 			transform: translateY(-100%);
+		}
+	}
+	@keyframes reveal-swap {
+		from {
+			opacity: 0;
+		}
+		50% {
+			opacity: 1;
+		}
+		to {
+			opacity: 1;
 		}
 	}
 	@keyframes title-rise {

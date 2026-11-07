@@ -9,7 +9,8 @@ const REVEAL_CLASS = 'reveal-active';
 export function shouldReveal(from: URL | null, to: URL | null, type: string): boolean {
 	if (!from || !to) return false;
 	if (type === 'popstate') return false;
-	if (from.pathname === to.pathname && from.search === to.search) return false;
+	// Same path means a hash-only or query-only change on the same page: no curtain.
+	if (from.pathname === to.pathname) return false;
 	if (typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches) {
 		return false;
 	}
@@ -34,11 +35,12 @@ export function setupPageReveal(): void {
 
 		return new Promise<void>((resolve) => {
 			const transition = document.startViewTransition(async () => {
-				root.classList.remove(REVEAL_CLASS);
 				resolve();
 				await navigation.complete;
 			});
-			transition.finished.finally(() => root.classList.remove(REVEAL_CLASS));
+			// `finished` rejects if the navigation fails or is aborted; swallow it so cleanup always runs
+			// and nothing is reported as an unhandled rejection.
+			transition.finished.catch(() => {}).finally(() => root.classList.remove(REVEAL_CLASS));
 		});
 	});
 }

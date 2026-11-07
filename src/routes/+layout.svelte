@@ -8,10 +8,10 @@
 
 	let { children, data } = $props();
 
-	// Studio pages are full-bleed, so the header overlays the hero; classic pages keep it in flow.
-	// Decided from the route group in the matched route id, e.g. '/(studio)/projects/[slug]'.
 	setupPageReveal();
 
+	// Studio pages are full-bleed, so the header overlays the hero; classic pages keep it in flow.
+	// Decided from the route group in the matched route id, e.g. '/(studio)/projects/[slug]'.
 	const studio = $derived(page.route.id?.startsWith('/(studio)') ?? false);
 </script>
 
@@ -34,7 +34,7 @@
 	/>
 </svelte:head>
 
-<div class="reveal-panel" aria-hidden="true"></div>
 <SiteHeader overlay={studio} pills={data.pills} posts={data.posts} />
 {@render children()}
 <Footer wide={studio} />
+<div class="reveal-panel" aria-hidden="true"></div>
