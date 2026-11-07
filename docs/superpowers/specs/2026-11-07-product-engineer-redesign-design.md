@@ -39,6 +39,7 @@ Modelled on **Metalab's structure** (metalab.com), personalised. We take the pat
 content: no copied copy, art, logos or brand marks.
 
 Patterns taken:
+
 1. One-screen hero: large display-serif headline, short intro paragraph, a vertical list of project
    pills. Hovering a pill turns the hero into that project (name, one line, what was built, image).
 2. Minimal chrome: "Menu" button left, wordmark centre, local time + theme toggle right.
@@ -49,6 +50,7 @@ Patterns taken:
 6. "What I do" page: four offer statements, capability groups, numbered principles, testimonials.
 
 Personalised:
+
 - Wordmark is "Emmanuel Yeboah". Header right shows **Accra local time · availability**
   (e.g. "Booking Q1 projects"), driven by one config value.
 - First-person copy throughout.
@@ -60,6 +62,7 @@ Personalised:
   case-study hero.
 
 ### 3.1 Type
+
 - **Display serif** for headlines, project names and large statements. Shortlist, chosen in the
   vertical slice by setting real headlines at real sizes: Instrument Serif (free), Fraunces
   (free, variable, optical sizes), PP Editorial New (paid licence; only if the free options fail).
@@ -69,6 +72,7 @@ Personalised:
 - No monospace decoration except for code in writing.
 
 ### 3.2 Colour
+
 - Dark-first: ink background (~#0E0E0D), warm off-white text (~#F3EFE6), muted (~#9A988F).
 - Light theme and the menu overlay: warm paper (~#F3EFE6) with ink text (Metalab's light overlay).
 - One accent, warm gold (~#E9C98F on dark; a darker, AA-contrast variant on light), used for
@@ -77,6 +81,7 @@ Personalised:
 - Exact values set in the slice and checked for WCAG AA contrast.
 
 ### 3.3 Imagery
+
 - **Launch: studio device shots.** Real app screens from Emmanuel's repos placed in clean,
   consistent device frames (phone, laptop/browser) on a flat project-colour background. One
   pipeline, same lighting and angles for every project, so the set looks like one body of work.
@@ -88,11 +93,13 @@ Personalised:
 - Images exported as AVIF/WebP with responsive sizes; every image has alt text.
 
 ### 3.4 Motion
+
 - Hero pill hover: cross-fade background + content (~350–450ms ease-out), image rises slightly.
 - Menu overlay: fade/slide. Page transitions: none or a simple fade.
 - No scroll-jacking, no custom cursor. Everything respects `prefers-reduced-motion`.
 
 ### 3.5 Mobile
+
 - Hero: headline + intro + pills as a horizontal scroller; tapping a pill opens the case study
   (no hover on touch).
 - Work rows stack: image, name, line, deliverables.
@@ -100,16 +107,16 @@ Personalised:
 
 ## 4. Information architecture
 
-| Route | Purpose | Status |
-|---|---|---|
-| `/` | Hero with project pills; selected work; offers summary; writing; contact | redesigned |
-| `/projects` | Work index (all projects as rows, filters); nav label "Work" | redesigned |
-| `/projects/[slug]` | Case study | redesigned |
-| `/work-with-me` | "What I do": offers, capabilities, principles, testimonials, call | redesigned |
-| `/about` | Story, portrait, timeline, how I work | redesigned |
-| `/writing`, `/writing/[slug]`, tags | Writing | restyled, unchanged URLs |
-| `/contact` | Booking + email | restyled |
-| `/rss.xml`, `/sitemap.xml`, `llm-full.txt` | Feeds | updated |
+| Route                                      | Purpose                                                                  | Status                   |
+| ------------------------------------------ | ------------------------------------------------------------------------ | ------------------------ |
+| `/`                                        | Hero with project pills; selected work; offers summary; writing; contact | redesigned               |
+| `/projects`                                | Work index (all projects as rows, filters); nav label "Work"             | redesigned               |
+| `/projects/[slug]`                         | Case study                                                               | redesigned               |
+| `/work-with-me`                            | "What I do": offers, capabilities, principles, testimonials, call        | redesigned               |
+| `/about`                                   | Story, portrait, timeline, how I work                                    | redesigned               |
+| `/writing`, `/writing/[slug]`, tags        | Writing                                                                  | restyled, unchanged URLs |
+| `/contact`                                 | Booking + email                                                          | restyled                 |
+| `/rss.xml`, `/sitemap.xml`, `llm-full.txt` | Feeds                                                                    | updated                  |
 
 URLs: `/projects` stays canonical (it became canonical in September; moving it again would cost
 search ranking for no gain). The nav simply labels it "Work". Existing `/work…` → `/projects…`
@@ -129,6 +136,7 @@ removed from both redirect lists, so old links land on content again. Tests upda
 ## 5. Pages
 
 ### 5.1 Home
+
 1. **Hero** (one screen): headline, intro paragraph (first person), project pills (7–8 products +
    "All work"), header with time/availability. Pills, in order (editable): Kekeh Mac, PayLTE,
    SusuPaa, Tripli, Hakanow, RBL, Alvi Beauty.
@@ -140,11 +148,13 @@ removed from both redirect lists, so old links land on content again. Tests upda
 6. **Contact block:** "Have something to build?" + book a call + email.
 
 ### 5.2 Work index (`/projects`)
+
 Serif headline; filter chips (All, Mobile, Web, Backend, Fintech, Websites, Open source); rows
 (name, one line, deliverables, thumbnail, "View case study"). Open-source projects appear as a
 compact second list (name, one line, stars/npm, repo link).
 
 ### 5.3 Case study (`/projects/[slug]`)
+
 Title; meta row **Engagement** (Full build / Team augment / Rescue / Website) · **Stage**
 (Startup / Business / NGO / Own venture) · **What I built** (e.g. Driver app, Passenger app, API,
 Admin); full-bleed hero image; sections: Introduction, The goal (one large line), 2–4 narrative
@@ -152,6 +162,7 @@ sections with images, **Impact** (2–3 confirmed numbers, or omitted), Stack, l
 repo); Next case study. Existing case-study bodies are kept and restyled; new ones are written.
 
 ### 5.4 What I do (`/work-with-me`)
+
 1. Headline in Emmanuel's voice.
 2. Four offers (statement + "usually when…" + proof links):
    **Build the whole product** · **Lead or join your team** · **Fix, rescue or migrate** ·
@@ -167,6 +178,7 @@ repo); Next case study. Existing case-study bodies are kept and restyled; new on
 7. Call to action: book a call (existing Cal.com `noelzappy/15min`) or email.
 
 ### 5.5 About
+
 Portrait (`static/zappy-face.jpg` or new photo), short story, timeline (Now: independent +
 Pavex CTO; past roles), how I work. Existing "How I work" text kept unless Emmanuel changes it.
 

@@ -49,6 +49,7 @@
 Split pages so redesigned ones can be full-bleed while the rest keep the narrow column.
 
 **Files:**
+
 - Modify: `src/routes/+layout.svelte` — keep `<svelte:head>` and CSS import; render `<SiteHeader />`, `{@render children()}`, `<Footer />` with no width constraint.
 - Create: `src/routes/(classic)/+layout.svelte` — wraps children in `<div class="classic">` (the old `.site` column: `max-width: var(--measure)`, inline padding, vertical rhythm).
 - Create: `src/routes/(studio)/+layout.svelte` — renders children full-bleed.
@@ -57,6 +58,7 @@ Split pages so redesigned ones can be full-bleed while the rest keep the narrow 
 - Delete: `src/lib/components/navbar.svelte` (replaced in Task 4; until then `+layout.svelte` imports a temporary minimal `SiteHeader` stub that renders the wordmark link only).
 
 **Interfaces:**
+
 - Produces: route groups `(classic)` and `(studio)`; `SiteHeader` component path `src/lib/components/site-header.svelte` (stub now, real in Task 4).
 
 - [ ] **Step 1:** Make the moves and layouts.
@@ -68,6 +70,7 @@ Split pages so redesigned ones can be full-bleed while the rest keep the narrow 
 ### Task 2: Design tokens and display serif
 
 **Files:**
+
 - Modify: `src/routes/layout.css` — replace token block with the new palette (Global Constraints), add `--font-display`, add a type scale as custom properties: `--step-display-xl`, `--step-display-l`, `--step-display-m`, `--step-heading`, `--step-body`, `--step-small`, `--step-caption` (each with a clamp() size and a matching `--lh-*` and `--tracking-*`). Dark is default (`:root`), light under `[data-theme='light']` and `prefers-color-scheme: light` without explicit theme. Keep variable names the classic pages already use (`--bg`, `--fg`, `--muted`, `--border`, `--accent`, `--accent-soft`, `--code-bg`).
 - Create: `static/fonts/<chosen-serif>.woff2` (+ italic) and an `@font-face` with `font-display: swap`; preload it in `src/routes/+layout.svelte`.
 - Create (temporary, deleted in Step 4): `static/specimen.html` — the two candidate serifs setting the real hero headline candidates (Task 5 Step 1) at 120px/72px/40px on the ink background, plus "Kekeh Mac" at display-xl.
@@ -83,12 +86,14 @@ Split pages so redesigned ones can be full-bleed while the rest keep the narrow 
 ### Task 3: Site config and Accra clock
 
 **Files:**
+
 - Create: `src/lib/shared/site.ts` — `export const SITE_TZ = 'Africa/Accra'`, `export const SITE_CITY = 'Accra'`, `export const AVAILABILITY = 'Booking Q1 projects'`.
 - Create: `src/lib/shared/time.ts` — `formatLocalTime(date: Date, timeZone: string): string` using `Intl.DateTimeFormat('en-US', { hour: 'numeric', minute: '2-digit', timeZone })`.
 - Create: `src/lib/components/local-time.svelte` — renders `{SITE_CITY} <time>…</time>`; time string is `''` until `onMount`, then updates every 30s (clear interval on destroy). Fixed min-width so nothing shifts.
 - Test: `src/lib/shared/time.test.ts`, `src/lib/components/local-time.svelte.spec.ts`
 
 **Interfaces:**
+
 - Produces: `formatLocalTime`, `SITE_TZ`, `SITE_CITY`, `AVAILABILITY`, `<LocalTime />`.
 
 - [ ] **Step 1: Failing tests**
@@ -98,9 +103,11 @@ Split pages so redesigned ones can be full-bleed while the rest keep the narrow 
 expect(formatLocalTime(new Date('2026-11-07T16:54:00Z'), 'Africa/Accra')).toBe('4:54 PM');
 expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('12:05 AM');
 ```
+
 ```ts
 // local-time.svelte.spec.ts — after render, a <time> element exists and its text matches /^\d{1,2}:\d{2} (AM|PM)$/
 ```
+
 - [ ] **Step 2:** Run `bun run test -- time local-time` → FAIL (modules missing).
 - [ ] **Step 3:** Implement.
 - [ ] **Step 4:** Run → PASS. Also `bun run build` and confirm the prerendered `index.html` contains no `AM`/`PM` time string inside the header (`grep -c 'AM</time>\|PM</time>'` → 0).
@@ -111,6 +118,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 ### Task 4: Site header and menu overlay
 
 **Files:**
+
 - Modify: `src/lib/components/site-header.svelte` — left: "Menu" pill button (`aria-expanded`, `aria-controls="site-menu"`); centre: wordmark "Emmanuel Yeboah" (display serif) linking `/`; right: `<LocalTime />` · `AVAILABILITY` (accent colour) · `<ThemeToggle />`. Transparent over full-bleed pages, sits in normal flow on classic pages (prop `overlay: boolean`, set by the `(studio)` layout via context or a page-level flag — implementer's choice, documented in the component).
 - Create: `src/lib/components/site-menu.svelte` — full-screen paper-coloured overlay (`id="site-menu"`, `role="dialog"`, `aria-modal="true"`, labelled "Menu"). Left column: serif links **Work** `/projects` · **What I do** `/work-with-me` · **About** `/about` · **Writing** `/writing` · **Get in touch** `/contact`; under them a "Projects" label and the pill list (same data as Task 5). Right column: latest 3 writing posts as small cards (title + date) from `getPosts()`.
 - Modify: `src/lib/components/theme-toggle.svelte` — styling only, to match the header.
@@ -118,6 +126,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 - Test: `src/lib/components/site-menu.svelte.spec.ts`
 
 **Interfaces:**
+
 - Consumes: `LocalTime`, `AVAILABILITY` (Task 3); `getPillProjects()` (Task 5 — until Task 5 lands, pass `pills` as a prop; the header passes them in).
 - Produces: `<SiteHeader overlay={boolean} />`, `<SiteMenu open={boolean} onclose={() => void} pills={PillProject[]} posts={PostMeta[]} />`.
 
@@ -136,6 +145,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 ### Task 5: Project v2 fields, Kekeh Mac content, and the homepage hero
 
 **Files:**
+
 - Modify: `src/lib/data/projects.ts` — add optional fields to `ProjectFrontmatter`:
   `engagement?: 'full-build' | 'team' | 'rescue' | 'website' | 'open-source'`,
   `stage?: 'startup' | 'business' | 'ngo' | 'own-venture'`, `built?: string[]`, `oneLine?: string`,
@@ -154,6 +164,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 - Test: `src/lib/data/projects-loader.test.ts`, `src/lib/components/hero.svelte.spec.ts`
 
 **Interfaces:**
+
 - Consumes: tokens (Task 2), `SiteHeader overlay` (Task 4).
 - Produces: `getPillProjects()`, `PillProject`, `<DeviceFrame kind src alt width? />`, `<Hero pills headline intro />`, project slug `kekeh-mac`.
 
@@ -171,6 +182,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 ### Task 6: Case-study template
 
 **Files:**
+
 - Create: `src/lib/components/case-study.svelte` — props: the case-study data below. Layout: title in display-xl; meta row with labels **Engagement** · **Stage** · **What I built** (human labels: full-build→"Full build", team→"Team augmentation", rescue→"Fix & rescue", website→"Website", startup→"Startup", business→"Business", ngo→"Non-profit", own-venture→"Own venture"); full-bleed hero (`heroImage` if set, else a `brandColor` field with 2–3 `DeviceFrame`s); body HTML in a ~68ch column with the display serif for `h2`; inline images full-width-of-column; **Impact** row only when `impact.length > 0`; Stack; links (live / App Store / Google Play / repo, each only if present); "Next case study" with title link.
 - Modify: `src/routes/(studio)/projects/[slug]/+page.server.ts` — also return `engagement`, `stage`, `built`, `brandColor`, `onBrand`, `heroImage`, `deviceShots`, `impact` (defaults `''`/`[]`), and `next: { slug, title } | null`.
 - Modify: `src/lib/data/projects-loader.ts` — `getNextCaseStudy(slug: string): { slug: string; title: string } | null`: next among case studies that have a writeup, ordered as `getAllProjects()`, wrapping to the first; `null` if fewer than two.
@@ -178,6 +190,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 - Test: `src/lib/components/case-study.svelte.spec.ts`, `src/lib/data/projects-loader.test.ts` (extend)
 
 **Interfaces:**
+
 - Consumes: `DeviceFrame` (Task 5), v2 fields (Task 5).
 - Produces: `<CaseStudy {...data} />`, `getNextCaseStudy`.
 
@@ -195,6 +208,7 @@ expect(formatLocalTime(new Date('2026-11-07T00:05:00Z'), 'Africa/Accra')).toBe('
 ### Task 7: Kekeh Mac case-study copy
 
 **Files:**
+
 - Modify: `src/content/projects/kekeh-mac.md` (body + `excerpt` + `oneLine`), sources: `~/workspace/kekehmac/README.md`, `docs/deployment/production-do-app-platform.md`, `docs/superpowers/specs/2026-06-24-driver-financial-services-design.md`, and Emmanuel's answers.
 
 - [ ] **Step 1:** Draft sections: Introduction · The goal (one line) · Real-time dispatch (Socket.IO + Redis geo, corridor trips) · Two apps, one platform (driver + passenger Expo apps, admin, shared packages) · Money for drivers (wallet, savings, loans, insurance, Monime) · Built for Freetown (Krio, safety features) · Stack. Plain, specific, first person, no superlatives, no unconfirmed numbers. Inline images: passenger tracking, driver wallet, trip complete (DeviceFrame-styled via markdown image class or component — implementer's choice, consistent with Task 6).
