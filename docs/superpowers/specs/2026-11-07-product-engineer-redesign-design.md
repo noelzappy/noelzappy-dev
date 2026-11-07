@@ -40,7 +40,7 @@ content: no copied copy, art, logos or brand marks.
 
 Patterns taken:
 
-1. One-screen hero: large display-serif headline, short intro paragraph, a vertical list of project
+1. One-screen hero: large display headline, short intro paragraph, a vertical list of project
    pills. Hovering a pill turns the hero into that project (name, one line, what was built, image).
 2. Minimal chrome: "Menu" button left, wordmark centre, local time + theme toggle right.
 3. Full-screen menu overlay: serif nav links, project pills, and recent items (writing, news).
@@ -63,9 +63,7 @@ Personalised:
 
 ### 3.1 Type
 
-- **Display serif** for headlines, project names and large statements. Shortlist, chosen in the
-  vertical slice by setting real headlines at real sizes: Instrument Serif (free), Fraunces
-  (free, variable, optical sizes), PP Editorial New (paid licence; only if the free options fail).
+- Display: Inter (light weights, tight tracking) — Emmanuel chose a sans over the serif shortlist on 2026-11-07.
 - **Sans** for UI and body: keep self-hosted Inter (already in `static/fonts`).
 - Defined scale (display XL/L/M, heading, body, small, caption) with tracking and line-height per
   step, max line length ~68ch for body. Tested at 375px and 1440px.
