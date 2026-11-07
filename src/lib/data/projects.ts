@@ -52,6 +52,7 @@ export interface ProjectFrontmatter {
 	deviceShots?: DeviceShot[];
 	pill?: boolean; // listed as a pill on the homepage hero
 	pillOrder?: number;
+	featuredOrder?: number; // position in the homepage Selected work (featured projects only)
 	impact?: { value: string; label: string }[];
 }
 

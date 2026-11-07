@@ -25,16 +25,13 @@ describe('projects content', () => {
 		}
 	});
 
-	it('features exactly the five homepage projects', () => {
-		expect(
-			getFeaturedProjects()
-				.map((p) => p.slug)
-				.sort()
-		).toEqual([
-			'fetch-agent-real-estate-platform',
-			'rbl-dating-app',
-			'remotepad',
+	it('features the six homepage projects in display order', () => {
+		expect(getFeaturedProjects().map((p) => p.slug)).toEqual([
+			'kekeh-mac',
 			'susupaa-platform',
+			'rbl-dating-app',
+			'alvi-beauty',
+			'built-mobile-app',
 			'voltax'
 		]);
 	});
@@ -123,10 +120,9 @@ describe('projects content', () => {
 		}
 	});
 
-	it('Kekeh Mac is a pilot case study that is not featured yet', () => {
+	it('Kekeh Mac is a pilot case study', () => {
 		const p = getProjectBySlug('kekeh-mac');
 		expect(p?.status).toBe('Pilot');
-		expect(p?.featured).toBe(false);
 		expect(p?.kind).toBe('case-study');
 		expect(p?.html.trim().length).toBeGreaterThan(0);
 	});

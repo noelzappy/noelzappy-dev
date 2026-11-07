@@ -1,5 +1,6 @@
 <script lang="ts">
-	import DeviceFrame from './device-frame.svelte';
+	import WorkThumb from './work-thumb.svelte';
+	import { workCta } from '$lib/content/work-cta';
 	import type { DeviceShot } from '$lib/data/projects';
 
 	interface WorkRowProject {
@@ -18,16 +19,7 @@
 
 	let { project }: { project: WorkRowProject } = $props();
 
-	const shot = $derived(project.deviceShots?.[0]);
-	const initial = $derived(project.title.trim().charAt(0).toUpperCase());
-	const cta = $derived.by(() => {
-		if (project.hasWriteup) {
-			return { href: `/projects/${project.slug}`, label: 'View case study', external: false };
-		}
-		if (project.liveUrl) return { href: project.liveUrl, label: 'Visit live site', external: true };
-		if (project.github) return { href: project.github, label: 'View repository', external: true };
-		return null;
-	});
+	const cta = $derived(workCta(project));
 </script>
 
 <article class="row">
@@ -50,23 +42,7 @@
 			>
 		{/if}
 	</div>
-	<div
-		class="thumb"
-		class:on-dark={project.onBrand === 'light'}
-		style:background={project.brandColor ?? 'var(--border)'}
-	>
-		{#if shot?.kind === 'phone'}
-			<div class="phone"><DeviceFrame kind="phone" src={shot.src} alt={shot.alt} /></div>
-		{:else if shot}
-			<div class="browser"><DeviceFrame kind="browser" src={shot.src} alt={shot.alt} /></div>
-		{:else if project.featuredImage}
-			<div class="browser">
-				<DeviceFrame kind="browser" src={project.featuredImage} alt={project.title} />
-			</div>
-		{:else}
-			<span class="initial" aria-hidden="true">{initial}</span>
-		{/if}
-	</div>
+	<WorkThumb {project} />
 </article>
 
 <style>
@@ -132,33 +108,6 @@
 		.cta:hover span {
 			transform: none;
 		}
-	}
-
-	.thumb {
-		position: relative;
-		overflow: hidden;
-		aspect-ratio: 16 / 10;
-		display: grid;
-		place-items: center;
-		border-radius: 0.5rem;
-	}
-	.phone {
-		width: 30%;
-		align-self: start;
-		margin-top: 9%;
-	}
-	.browser {
-		width: 78%;
-	}
-	.initial {
-		font-family: var(--font-display);
-		font-size: clamp(4rem, 12vw, 9rem);
-		font-weight: 300;
-		line-height: 1;
-		color: var(--muted);
-	}
-	.on-dark .initial {
-		color: rgba(255, 255, 255, 0.85);
 	}
 
 	@media (min-width: 48rem) {

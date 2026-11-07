@@ -2,7 +2,8 @@
 title: 'Kekeh Mac'
 slug: 'kekeh-mac'
 excerpt: 'Rides and deliveries for Freetown, with driver wallets, savings and loans built in.'
-featured: false
+featured: true
+featuredOrder: 1
 publishedAt: '2026-10-26T00:00:00.000Z'
 kind: 'case-study'
 role: 'Lead engineer'

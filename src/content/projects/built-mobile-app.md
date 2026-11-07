@@ -2,7 +2,8 @@
 title: 'Built'
 slug: 'built-mobile-app'
 excerpt: 'Web platform and two production React Native apps for an SME finance product used in 14+ countries; the accounting app grew from 700 to 50,000+ installs.'
-featured: false
+featured: true
+featuredOrder: 5
 publishedAt: '2022-12-01T21:38:00.000Z'
 featuredImage: '/portfolio/builtapp.png'
 liveUrl: 'https://built.africa'

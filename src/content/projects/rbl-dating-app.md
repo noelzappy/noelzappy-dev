@@ -3,6 +3,7 @@ title: 'RBL Dating Platform'
 slug: 'rbl-dating-app'
 excerpt: 'Rewrote a dating platform’s stack from PHP/MySQL to Node.js and PostgreSQL, with a new React Native app and React admin panel, migrating 170,000 users with zero downtime.'
 featured: true
+featuredOrder: 3
 publishedAt: '2024-09-06T15:01:56.000Z'
 featuredImage: '/portfolio/rblapp.png'
 iosUrl: 'https://apps.apple.com/us/app/real-black-love-dating-app/id961016844'

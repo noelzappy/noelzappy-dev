@@ -3,6 +3,7 @@ title: 'SusuPaa Platform'
 slug: 'susupaa-platform'
 excerpt: 'A multi-tenant platform built on a custom append-only ledger with strict consistency guarantees. ₵12.5M+ in successful deposits; p99 latency cut from 1.6s to 500ms.'
 featured: true
+featuredOrder: 2
 publishedAt: '2025-07-01T00:00:00.000Z'
 featuredImage: '/portfolio/susupaa-webapp.png'
 liveUrl: 'https://susupaa.com'

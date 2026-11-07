@@ -1,12 +1,9 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
-	import PostList from '$lib/components/post-list.svelte';
-	import ProjectList from '$lib/components/project-list.svelte';
-	import CalButton from '$lib/components/CalButton.svelte';
 	import CalEmbed from '$lib/components/cal-embed.svelte';
 	import Hero from '$lib/components/hero.svelte';
-	import { CAL_EVENTS } from '$lib/cal.js';
-	import { TIMELINE } from '$lib/data/timeline';
+	import Section from '$lib/components/section.svelte';
+	import WorkTile from '$lib/components/work-tile.svelte';
 	import {
 		HomepageStructuredData,
 		SITE_DESCRIPTION,
@@ -16,6 +13,33 @@
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+
+	const OFFERS = [
+		{
+			title: 'Build the whole product',
+			line: 'From first screen to app-store release: mobile, web, backend and admin.'
+		},
+		{
+			title: 'Lead or join your team',
+			line: 'Senior, lead or fractional-CTO contracts with teams that need to ship.'
+		},
+		{
+			title: 'Fix, rescue or migrate',
+			line: 'Payments, ledgers, reliability and re-platforming without downtime.'
+		},
+		{
+			title: 'Websites with a real admin',
+			line: 'Fast custom sites your team can edit, off WordPress for good.'
+		}
+	];
+
+	const fmt = (d: string) =>
+		new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
+			day: 'numeric',
+			month: 'short',
+			year: 'numeric',
+			timeZone: 'UTC'
+		});
 </script>
 
 <CalEmbed />
@@ -33,136 +57,163 @@
 	intro="I'm an independent product engineer. I design and build mobile apps, web platforms and the systems behind them — and ship them to production for startups and businesses."
 />
 
-<!-- Legacy sections, replaced in phase 3. -->
-<div class="classic">
-	<section class="intro">
-		<p class="pitch">
-			I help fintechs and companies moving money in Africa get their payment integrations, ledgers
-			and migrations right — MoMo, Paystack, Flutterwave, Hubtel.
-		</p>
-		<p class="cta-row">
-			<a href="/work-with-me" class="primary-cta" data-sveltekit-preload-data>Work with me →</a>
-			<span class="muted cta-sep" aria-hidden="true">·</span>
-			<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" />
-		</p>
-	</section>
+{#if data.projects.length}
+	<Section label="Selected work" id="work">
+		<div class="tiles">
+			{#each data.projects as project (project.slug)}
+				<WorkTile {project} />
+			{/each}
+		</div>
+		<a class="more" href="/projects" data-sveltekit-preload-data>See all projects →</a>
+	</Section>
+{/if}
 
-	<section class="section" aria-labelledby="timeline-heading">
-		<h2 id="timeline-heading">Timeline</h2>
-		<ol class="timeline">
-			{#each TIMELINE as entry (entry.years + entry.org)}
+<Section label="What I do" id="what-i-do">
+	<ul class="offers">
+		{#each OFFERS as offer (offer.title)}
+			<li>
+				<h3 class="offer">{offer.title}</h3>
+				<p class="line">{offer.line}</p>
+			</li>
+		{/each}
+	</ul>
+	<a class="more" href="/work-with-me" data-sveltekit-preload-data>How I work with teams →</a>
+</Section>
+
+<Section label="Track record" id="track-record">
+	<p class="record">Co-founder &amp; CTO, Pavex</p>
+	<p class="before">Before: Hubtel · Built Financial Technologies · Fetch Agent · RBL</p>
+</Section>
+
+{#if data.posts.length}
+	<Section label="Writing" id="writing">
+		<ul class="posts">
+			{#each data.posts as post (post.slug)}
 				<li>
-					<span class="years muted mono">{entry.years}</span>
-					<span class="entry">
-						{#if entry.url}
-							<a href={entry.url} rel="noopener noreferrer" class="org">{entry.org}</a>
-						{:else}
-							<span class="org">{entry.org}</span>
-						{/if}
-						<span class="muted">{entry.line}</span>
-						{#if entry.cta}
-							<a href={entry.cta.href} class="small" data-sveltekit-preload-data
-								>{entry.cta.label}</a
-							>
-						{/if}
-						{#if entry.writeup}
-							<a href={entry.writeup} class="small" data-sveltekit-preload-data>writeup</a>
-						{/if}
-					</span>
+					<a href="/writing/{post.slug}" class="post" data-sveltekit-preload-data>
+						<span class="title">{post.title}</span>
+						<time datetime={post.date}>{fmt(post.date)}</time>
+					</a>
 				</li>
 			{/each}
-		</ol>
-	</section>
-
-	{#if data.posts.length}
-		<section class="section" aria-labelledby="writing-heading">
-			<h2 id="writing-heading"><a href="/writing">Writing</a></h2>
-			<PostList posts={data.posts} />
-			<a href="/writing" class="small">All posts →</a>
-		</section>
-	{/if}
-
-	{#if data.projects.length}
-		<section class="section" aria-labelledby="projects-heading">
-			<h2 id="projects-heading"><a href="/projects">Projects</a></h2>
-			<ProjectList projects={data.projects} />
-			<a href="/projects" class="small">All projects →</a>
-		</section>
-	{/if}
-
-	<section class="section" aria-labelledby="contact-heading">
-		<h2 id="contact-heading">Contact</h2>
-		<p class="contact">
-			Building something that moves money?
-			<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" /> or email
-			<a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
-		</p>
-	</section>
-</div>
+		</ul>
+		<a class="more" href="/writing" data-sveltekit-preload-data>All posts →</a>
+	</Section>
+{/if}
 
 <style>
-	.contact {
-		margin: 0;
+	.tiles {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: clamp(2rem, 5vw, 3.5rem) var(--page-gutter);
 	}
-	.intro {
-		display: flex;
-		flex-direction: column;
-		gap: 0.5rem;
+	@media (min-width: 48rem) {
+		.tiles {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
-	.intro p {
-		margin: 0;
-		font-size: 1.15rem;
+
+	.more {
+		display: inline-block;
+		margin-top: 2rem;
+		color: var(--fg);
+		font-size: var(--step-small);
+		text-decoration: underline;
+		text-underline-offset: 0.25em;
+		text-decoration-color: var(--border);
 	}
-	.intro .cta-row {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: baseline;
-		gap: 0.25rem 0.6rem;
-		margin-top: 0.25rem;
-	}
-	.primary-cta {
-		font-size: 1.25rem;
-		font-weight: 650;
+	.more:hover {
 		color: var(--accent);
+		text-decoration-color: currentColor;
 	}
-	.timeline {
+
+	.offers {
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		display: flex;
-		flex-direction: column;
-		gap: 0.75rem;
-	}
-	.timeline li {
 		display: grid;
-		grid-template-columns: 7.5rem 1fr;
-		gap: 0.25rem 1rem;
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.offers li {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 0.5rem 2rem;
+		padding-block: 1.25rem;
+		border-top: 1px solid var(--border);
+	}
+	.offers li:first-child {
+		border-top: 0;
+		padding-top: 0;
+	}
+	.offer {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: var(--step-heading);
+		line-height: var(--lh-heading);
+		letter-spacing: var(--tracking-heading);
+		font-weight: var(--weight-display-m);
+	}
+	.line {
+		margin: 0;
+		max-width: 44ch;
+		color: var(--muted);
+		font-size: var(--step-body);
+		line-height: 1.5;
+	}
+	@media (min-width: 48rem) {
+		.offers li {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+			align-items: baseline;
+		}
+	}
+
+	.record {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: var(--step-display-m);
+		line-height: var(--lh-display-m);
+		letter-spacing: var(--tracking-display-m);
+		font-weight: var(--weight-display-m);
+	}
+	.before {
+		margin: 0;
+		color: var(--muted);
+		font-size: var(--step-body);
+		line-height: 1.5;
+	}
+
+	.posts {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.posts li + li {
+		border-top: 1px solid var(--border);
+	}
+	.post {
+		display: flex;
+		flex-wrap: wrap;
 		align-items: baseline;
-	}
-	.years {
-		white-space: nowrap;
-	}
-	.org {
+		justify-content: space-between;
+		gap: 0.25rem 2rem;
+		padding-block: 1rem;
 		color: var(--fg);
-		font-weight: 550;
 		text-decoration: none;
 	}
-	a.org:hover {
+	.posts li:first-child .post {
+		padding-top: 0;
+	}
+	.title {
+		font-size: var(--step-heading);
+		line-height: var(--lh-heading);
+		letter-spacing: var(--tracking-heading);
+	}
+	.post:hover .title {
 		color: var(--accent);
 	}
-	.entry {
-		display: inline;
-	}
-	.entry > * + * {
-		margin-left: 0.4em;
-	}
-	@media (max-width: 480px) {
-		.cta-sep {
-			display: none;
-		}
-		.timeline li {
-			grid-template-columns: 1fr;
-			gap: 0.1rem;
-		}
+	time {
+		color: var(--muted);
+		font-size: var(--step-small);
+		white-space: nowrap;
 	}
 </style>

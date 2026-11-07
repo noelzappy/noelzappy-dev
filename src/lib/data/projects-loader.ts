@@ -64,7 +64,10 @@ export function getProjectBySlug(slug: string): ProjectData | null {
 
 export function getFeaturedProjects(limit: number = 6): ProjectData[] {
 	const allProjects = getAllProjects();
-	return allProjects.filter((project) => project.featured).slice(0, limit);
+	return allProjects
+		.filter((project) => project.featured)
+		.sort((a, b) => (a.featuredOrder ?? Infinity) - (b.featuredOrder ?? Infinity))
+		.slice(0, limit);
 }
 
 export function getPillProjects(): PillProject[] {

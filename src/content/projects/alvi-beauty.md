@@ -2,7 +2,8 @@
 title: 'Alvi Beauty'
 slug: 'alvi-beauty'
 excerpt: 'Backend and system architecture for a beauty booking product spanning four React Native apps, a web booking flow, and provider and admin dashboards, on Node.js and MongoDB.'
-featured: false
+featured: true
+featuredOrder: 4
 publishedAt: '2022-04-06T00:00:00.000Z'
 featuredImage: '/portfolio/alvibeauty.png'
 liveUrl: 'https://alvibeauty.com/en-ua'
