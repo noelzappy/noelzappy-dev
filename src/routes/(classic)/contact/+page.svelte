@@ -12,7 +12,7 @@
 			name: 'Emmanuel Yeboah',
 			url: 'https://noelzappy.dev',
 			email: 'me@noelzappy.dev',
-			jobTitle: 'Backend & Payments Engineer'
+			jobTitle: 'Product Engineer'
 		}
 	};
 </script>

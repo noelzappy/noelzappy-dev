@@ -1,10 +1,10 @@
-# Emmanuel Yeboah — Backend & Payments Engineer for African Fintech
+# Emmanuel Yeboah — Product Engineer · Mobile, Web & Backend
 
-> Independent backend and payments engineer. https://noelzappy.dev · @noelzappy · me@noelzappy.dev
+> Independent product engineer — mobile, web and backend. https://noelzappy.dev · @noelzappy · me@noelzappy.dev
 
 ## Summary
 
-Independent backend engineer for companies moving money in Africa. I build and fix payment integrations, ledgers and zero-downtime migrations — MoMo, Paystack, Flutterwave, Hubtel. Six years on correctness-critical systems. Based in Accra, Ghana; works remotely (GMT, with overlap for European and US East Coast hours).
+I design and build software products end to end — mobile apps, web platforms and the backends behind them — and ship them to production. Best at products that move money. Six years on correctness-critical systems. Based in Accra, Ghana; works remotely (GMT, with overlap for European and US East Coast hours).
 
 ## Timeline
 

@@ -1,9 +1,9 @@
 export const SITE_URL = 'https://noelzappy.dev';
 
-export const SITE_TITLE = 'Emmanuel Yeboah — Backend & Payments Engineer for African Fintech';
+export const SITE_TITLE = 'Emmanuel Yeboah — Product Engineer · Mobile, Web & Backend';
 
 export const SITE_DESCRIPTION =
-	'Independent backend engineer for companies moving money in Africa. I build and fix payment integrations, ledgers and zero-downtime migrations — MoMo, Paystack, Flutterwave, Hubtel.';
+	'I design and build software products end to end — mobile apps, web platforms and the backends behind them — and ship them to production. Best at products that move money.';
 
 export const SITE_KEYWORDS = [
 	'Emmanuel Yeboah',
@@ -39,7 +39,7 @@ export const HomepageStructuredData = {
 		'https://x.com/noelzappy',
 		'https://linkedin.com/in/noelzappy'
 	],
-	jobTitle: 'Backend & Payments Engineer',
+	jobTitle: 'Product Engineer',
 	description: SITE_DESCRIPTION,
 	address: { '@type': 'PostalAddress', addressLocality: 'Accra', addressCountry: 'GH' },
 	knowsAbout: [

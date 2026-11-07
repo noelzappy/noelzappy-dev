@@ -67,7 +67,7 @@
 		mainEntity: {
 			'@type': 'Person',
 			name: 'Emmanuel Yeboah',
-			jobTitle: 'Backend & Payments Engineer',
+			jobTitle: 'Product Engineer',
 			url: 'https://noelzappy.dev'
 		}
 	};
