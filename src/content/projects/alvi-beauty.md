@@ -35,10 +35,8 @@ gallery:
   - '/portfolio/alvibeauty-2.jpg'
 oneLine: 'Backend and architecture for a beauty booking product across four apps and the web.'
 built:
-  - 'Mobile apps'
-  - 'Web app'
   - 'API'
-  - 'Admin'
+  - 'Backend architecture'
 engagement: 'team'
 brandColor: '#e24f48'
 onBrand: 'dark'
