@@ -1,5 +1,5 @@
 import yaml from 'js-yaml';
-import type { ProjectData } from './projects';
+import type { PillProject, ProjectData } from './projects';
 
 function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
 	const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
@@ -65,4 +65,19 @@ export function getProjectBySlug(slug: string): ProjectData | null {
 export function getFeaturedProjects(limit: number = 6): ProjectData[] {
 	const allProjects = getAllProjects();
 	return allProjects.filter((project) => project.featured).slice(0, limit);
+}
+
+export function getPillProjects(): PillProject[] {
+	return getAllProjects()
+		.filter((project) => project.pill === true)
+		.sort((a, b) => (a.pillOrder ?? Infinity) - (b.pillOrder ?? Infinity))
+		.map(({ slug, title, oneLine, built, brandColor, onBrand, deviceShots }) => ({
+			slug,
+			title,
+			oneLine,
+			built,
+			brandColor,
+			onBrand,
+			deviceShots
+		}));
 }

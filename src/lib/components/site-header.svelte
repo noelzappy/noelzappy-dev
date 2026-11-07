@@ -62,6 +62,20 @@
 		z-index: 20;
 		background: transparent;
 	}
+	/* The hero paints a flat brand colour while a project pill is active and sets data-hero-tone on
+	   <html>; re-point the header's tokens so it reads on that field. */
+	:global(html[data-hero-tone='dark']) .site-header.overlay {
+		--fg: #0e0e0d;
+		--bg: var(--hero-field);
+		--muted: #0e0e0d;
+		--accent: #0e0e0d;
+	}
+	:global(html[data-hero-tone='light']) .site-header.overlay {
+		--fg: #f3efe6;
+		--bg: var(--hero-field);
+		--muted: #f3efe6;
+		--accent: #f3efe6;
+	}
 	.left {
 		justify-self: start;
 	}

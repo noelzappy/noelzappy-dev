@@ -1,4 +1,5 @@
 import { getPosts } from '$lib/content/writing';
+import { getPillProjects } from '$lib/data/projects-loader';
 import type { MenuPost } from '$lib/components/site-menu.svelte';
 
 export function load() {
@@ -6,7 +7,5 @@ export function load() {
 	const posts: MenuPost[] = getPosts()
 		.slice(0, 3)
 		.map(({ slug, title, date, tags, description }) => ({ slug, title, date, tags, description }));
-	// Task 5 swaps this for getPillProjects().
-	const pills: { slug: string; title: string }[] = [];
-	return { pills, posts };
+	return { pills: getPillProjects(), posts };
 }

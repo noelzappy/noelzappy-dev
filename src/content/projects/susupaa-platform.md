@@ -35,6 +35,21 @@ gallery:
   - '/portfolio/susupaa-website.png'
 problem: 'Susu collectors, savings cooperatives, and microfinance institutions were running group savings, passbooks, and loans through WhatsApp messages, paper ledgers, and phone calls. Any system replacing that had to be the single source of truth for money it never held: every contribution, payout, and repayment provable after the fact, no double-credits under concurrent operations, and strict isolation between hundreds of independent organizations sharing one deployment.'
 lessons: "Starting with event sourcing from day one rather than retrofitting it later. Our transaction ledger needed audit trails that we had to rebuild after launch — designing the data model around immutable events from the start would have saved us two weeks of migration work. I'd also invest earlier in contract testing between services; we had integration bugs that only surfaced in staging because our unit tests mocked too aggressively."
+oneLine: 'Savings and lending software for susu collectors, cooperatives and microfinance.'
+built:
+  - 'Web app'
+  - 'API'
+  - 'Ledger'
+  - 'Admin'
+  - 'WhatsApp bot'
+brandColor: '#ffb61e'
+onBrand: 'dark'
+deviceShots:
+  - src: '/portfolio/susupaa-dashboard.png'
+    alt: 'The SusuPaa admin dashboard showing contributions, disbursements, fees and payment flow charts'
+    kind: 'browser'
+pill: true
+pillOrder: 2
 ---
 
 <p>SusuPaa is a multi-tenant platform for Ghana's informal savings sector: susu collectors, savings cooperatives, and microfinance institutions. Each organization runs its own groups, savings plans, loans, and accounting on a shared deployment, and every money movement has to be provable later. I co-founded the company and, as CTO, have led the platform from the first commit.</p>

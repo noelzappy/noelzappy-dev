@@ -1,10 +1,17 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { getAllProjects, getFeaturedProjects, getProjectBySlug } from './projects-loader';
+import {
+	getAllProjects,
+	getFeaturedProjects,
+	getPillProjects,
+	getProjectBySlug
+} from './projects-loader';
 
 describe('projects content', () => {
 	it('loads every project with a kind and a slug', () => {
 		const projects = getAllProjects();
-		expect(projects.length).toBe(20);
+		expect(projects.length).toBe(21);
 		for (const p of projects) {
 			expect(p.slug).toBeTruthy();
 			expect(['case-study', 'open-source']).toContain(p.kind);
@@ -36,5 +43,36 @@ describe('projects content', () => {
 			'TypeScript',
 			'PostgreSQL'
 		]);
+	});
+
+	it('the homepage pills are Kekeh Mac, SusuPaa and RBL, in order', () => {
+		expect(getPillProjects().map((p) => p.slug)).toEqual([
+			'kekeh-mac',
+			'susupaa-platform',
+			'rbl-dating-app'
+		]);
+	});
+
+	it('every pill project carries what the hero needs', () => {
+		for (const p of getPillProjects()) {
+			expect(p.brandColor).toMatch(/^#[0-9a-f]{6}$/i);
+			expect(['light', 'dark']).toContain(p.onBrand);
+			expect(p.oneLine?.length).toBeGreaterThan(0);
+			expect(p.oneLine!.length).toBeLessThanOrEqual(90);
+			expect(p.built?.length).toBeGreaterThanOrEqual(1);
+			expect(p.deviceShots?.length).toBeGreaterThanOrEqual(1);
+			for (const shot of p.deviceShots ?? []) {
+				expect(shot.alt.trim().length).toBeGreaterThan(0);
+				expect(existsSync(join(process.cwd(), 'static', shot.src))).toBe(true);
+			}
+		}
+	});
+
+	it('Kekeh Mac is a pilot case study that is not featured yet', () => {
+		const p = getProjectBySlug('kekeh-mac');
+		expect(p?.status).toBe('Pilot');
+		expect(p?.featured).toBe(false);
+		expect(p?.kind).toBe('case-study');
+		expect(p?.html.trim().length).toBeGreaterThan(0);
 	});
 });

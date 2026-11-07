@@ -36,6 +36,23 @@ stats:
     description: 'Growing user base'
 gallery:
   - '/portfolio/rblapp.png'
+oneLine: 'A dating platform I moved to a new stack — 170,000 live users, zero downtime.'
+built:
+  - 'Mobile app'
+  - 'Web app'
+  - 'API'
+  - 'Data migration'
+brandColor: '#6e2e5e'
+onBrand: 'light'
+deviceShots:
+  - src: '/portfolio/rbl-quick-match.png'
+    alt: 'The Real Black Love app showing a Quick Match profile card'
+    kind: 'phone'
+  - src: '/portfolio/rbl-messages.png'
+    alt: 'The Real Black Love app showing a list of recent conversations'
+    kind: 'phone'
+pill: true
+pillOrder: 3
 ---
 
 <p>RBL is a dating platform that had been running since 2015 on PHP and MySQL, with 170,000 users, when I was brought in early in 2024 to add features. Two of them were not possible on the existing system. Location matching compared city names inferred from IP addresses, so "people within 50 km" could not be expressed. And the schema was normalised to the point that reading one profile joined several tables. I made the case that this was a rewrite, not a refactor, and got it.</p>

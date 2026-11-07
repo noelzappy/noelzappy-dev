@@ -1,8 +1,9 @@
 <script lang="ts" module>
 	import type { PostMeta } from '$lib/content/writing';
+	import type { PillProject } from '$lib/data/projects';
 
 	export type MenuPost = PostMeta & { slug: string };
-	export type MenuPill = { slug: string; title: string };
+	export type MenuPill = PillProject;
 </script>
 
 <script lang="ts">

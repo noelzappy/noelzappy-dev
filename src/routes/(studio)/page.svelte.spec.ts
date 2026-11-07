@@ -4,11 +4,17 @@ import { render } from 'vitest-browser-svelte';
 import Page from './+page.svelte';
 
 describe('/+page.svelte', () => {
-	it('renders the intro and hides list sections that have no content', async () => {
+	it('renders the hero, the legacy intro, and hides list sections that have no content', async () => {
 		render(Page, { data: { pills: [], posts: [], projects: [] } });
 		await expect
 			.element(page.getByRole('heading', { level: 1 }))
-			.toHaveTextContent("Hey, I'm Emmanuel.");
+			.toHaveTextContent('I design and build software products, end to end.');
+		await expect
+			.element(page.getByRole('link', { name: 'All work' }))
+			.toHaveAttribute('href', '/projects');
+		await expect
+			.element(page.getByRole('link', { name: 'Work with me →' }))
+			.toHaveAttribute('href', '/work-with-me');
 		await expect.element(page.getByRole('heading', { name: 'Timeline' })).toBeInTheDocument();
 		expect(page.getByRole('heading', { name: 'Writing' }).query()).toBeNull();
 		expect(page.getByRole('heading', { name: 'Projects' }).query()).toBeNull();
@@ -27,6 +33,7 @@ describe('/+page.svelte', () => {
 						title: 'Proj',
 						excerpt: 'x',
 						kind: 'open-source',
+						status: '',
 						liveUrl: undefined,
 						github: 'https://github.com/noelzappy/p',
 						hasWriteup: false,
