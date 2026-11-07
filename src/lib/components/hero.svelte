@@ -156,7 +156,7 @@
 			'nav nav';
 		column-gap: var(--pad);
 		/* Top padding clears the overlay header (~4rem tall). */
-		padding: 5.5rem var(--pad) var(--pad);
+		padding: calc(var(--header-h) + 1rem) var(--pad) var(--pad);
 	}
 	.intro {
 		grid-area: 1 / 2;
@@ -349,7 +349,7 @@
 				'. intro'
 				'stage stage'
 				'nav nav';
-			padding-top: 4.5rem;
+			padding-top: var(--header-h);
 		}
 		.intro {
 			grid-area: intro;
@@ -381,7 +381,7 @@
 				'stage'
 				'intro'
 				'nav';
-			padding-top: 5.5rem;
+			padding-top: calc(var(--header-h) + 1rem);
 		}
 		.stage {
 			grid-area: stage;

@@ -4,7 +4,7 @@
 	let { label, id, children }: { label?: string; id?: string; children: Snippet } = $props();
 </script>
 
-<section {id} class="section">
+<section {id} class="sec">
 	<div class="inner">
 		{#if label}<h2 class="label">{label}</h2>{/if}
 		<div class="body">{@render children()}</div>
@@ -12,7 +12,7 @@
 </section>
 
 <style>
-	.section {
+	.sec {
 		max-width: var(--page-max);
 		margin-inline: auto;
 		padding-inline: var(--page-gutter);
@@ -29,7 +29,7 @@
 		margin: 0;
 		font-size: var(--step-caption);
 		line-height: var(--lh-caption);
-		letter-spacing: 0.12em;
+		letter-spacing: var(--tracking-caption);
 		text-transform: uppercase;
 		font-weight: 500;
 		color: var(--muted);

@@ -146,8 +146,10 @@
 
 	{#if next}
 		<nav class="next" aria-label="Next case study">
-			<p>Next case study</p>
-			<a href="/projects/{next.slug}">{next.title}</a>
+			<div class="next-inner">
+				<p>Next case study</p>
+				<a href="/projects/{next.slug}">{next.title}</a>
+			</div>
 		</nav>
 	{/if}
 </article>
@@ -164,6 +166,9 @@
 	}
 
 	.top {
+		width: 100%;
+		max-width: var(--page-max);
+		margin-inline: auto;
 		padding-inline: var(--gutter);
 		display: flex;
 		flex-direction: column;
@@ -353,7 +358,12 @@
 
 	/* Next */
 	.next {
+		width: 100%;
+		max-width: var(--page-max);
+		margin-inline: auto;
 		padding-inline: var(--gutter);
+	}
+	.next-inner {
 		border-top: 1px solid var(--border);
 		padding-top: 1.5rem;
 	}

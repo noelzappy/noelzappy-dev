@@ -19,6 +19,7 @@ describe('page-header.svelte', () => {
 	});
 
 	it('renders eyebrow and intro when given', async () => {
+		// `intro` is also a Svelte mount option, so props must go via `target` + `props`.
 		render(PageHeader, {
 			target: document.body,
 			props: { title: 'About', eyebrow: 'Studio', intro: 'Independent engineer.' }

@@ -19,7 +19,7 @@
 		margin: 0 0 1.25rem;
 		font-size: var(--step-caption);
 		line-height: var(--lh-caption);
-		letter-spacing: 0.12em;
+		letter-spacing: var(--tracking-caption);
 		text-transform: uppercase;
 		color: var(--muted);
 	}
