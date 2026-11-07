@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CaseStudy from '$lib/components/case-study.svelte';
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import type { PageData } from './$types';
 
@@ -32,56 +33,66 @@
 	{structuredData}
 />
 
-<article class="project">
-	<header>
-		<h1>{data.title}</h1>
-		{#if meta}<p class="muted mono">{meta}</p>{/if}
-		<p class="links small">
-			{#if data.liveUrl}<a href={data.liveUrl} rel="noopener noreferrer">live</a>{/if}
-			{#if data.github}<a href={data.github} rel="noopener noreferrer">repo</a>{/if}
-			{#if data.iosUrl}<a href={data.iosUrl} rel="noopener noreferrer">iOS</a>{/if}
-			{#if data.androidUrl}<a href={data.androidUrl} rel="noopener noreferrer">Android</a>{/if}
-		</p>
-		{#if data.stack.length}
-			<p class="stack">
-				{#each data.stack as item (item)}<span class="tag">{item}</span>{/each}
-			</p>
-		{/if}
-	</header>
+{#if data.built.length > 0}
+	<CaseStudy {...data} />
+{:else}
+	<div class="classic legacy">
+		<article class="project">
+			<header>
+				<h1>{data.title}</h1>
+				{#if meta}<p class="muted mono">{meta}</p>{/if}
+				<p class="links small">
+					{#if data.liveUrl}<a href={data.liveUrl} rel="noopener noreferrer">live</a>{/if}
+					{#if data.github}<a href={data.github} rel="noopener noreferrer">repo</a>{/if}
+					{#if data.iosUrl}<a href={data.iosUrl} rel="noopener noreferrer">iOS</a>{/if}
+					{#if data.androidUrl}<a href={data.androidUrl} rel="noopener noreferrer">Android</a>{/if}
+				</p>
+				{#if data.stack.length}
+					<p class="stack">
+						{#each data.stack as item (item)}<span class="tag">{item}</span>{/each}
+					</p>
+				{/if}
+			</header>
 
-	{#if data.problem}
-		<section class="section">
-			<h2>The problem</h2>
-			<p>{data.problem}</p>
-		</section>
-	{/if}
+			{#if data.problem}
+				<section class="section">
+					<h2>The problem</h2>
+					<p>{data.problem}</p>
+				</section>
+			{/if}
 
-	<div class="prose">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- project bodies are authored HTML in the repo -->
-		{@html data.html}
+			<div class="prose">
+				<!-- eslint-disable-next-line svelte/no-at-html-tags -- project bodies are authored HTML in the repo -->
+				{@html data.html}
+			</div>
+
+			{#if data.lessons}
+				<section class="section">
+					<h2>What I'd do differently</h2>
+					<p>{data.lessons}</p>
+				</section>
+			{/if}
+
+			{#if data.gallery.length}
+				<section class="section gallery">
+					{#each data.gallery as src, i (src)}
+						<img {src} alt="{data.title} screenshot {i + 1}" loading="lazy" />
+					{/each}
+				</section>
+			{/if}
+
+			<footer class="small">
+				<a href="/projects">← All projects</a>
+			</footer>
+		</article>
 	</div>
-
-	{#if data.lessons}
-		<section class="section">
-			<h2>What I'd do differently</h2>
-			<p>{data.lessons}</p>
-		</section>
-	{/if}
-
-	{#if data.gallery.length}
-		<section class="section gallery">
-			{#each data.gallery as src, i (src)}
-				<img {src} alt="{data.title} screenshot {i + 1}" loading="lazy" />
-			{/each}
-		</section>
-	{/if}
-
-	<footer class="small">
-		<a href="/projects">← All projects</a>
-	</footer>
-</article>
+{/if}
 
 <style>
+	/* The studio header overlays the page, so the narrow column starts below it. */
+	.legacy {
+		padding-top: 6rem;
+	}
 	.project {
 		display: flex;
 		flex-direction: column;

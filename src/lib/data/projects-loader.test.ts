@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	getAllProjects,
 	getFeaturedProjects,
+	getNextCaseStudy,
 	getPillProjects,
 	getProjectBySlug
 } from './projects-loader';
@@ -74,5 +75,29 @@ describe('projects content', () => {
 		expect(p?.featured).toBe(false);
 		expect(p?.kind).toBe('case-study');
 		expect(p?.html.trim().length).toBeGreaterThan(0);
+	});
+});
+
+describe('getNextCaseStudy', () => {
+	const slugs = getAllProjects()
+		.filter((p) => p.html.trim().length > 0)
+		.map((p) => p.slug);
+
+	it('returns the following case study, never the input', () => {
+		for (const slug of slugs) {
+			const next = getNextCaseStudy(slug);
+			expect(next).not.toBeNull();
+			expect(next?.slug).not.toBe(slug);
+			expect(next?.title).toBeTruthy();
+		}
+	});
+
+	it('wraps from the last case study to the first', () => {
+		expect(getNextCaseStudy(slugs[slugs.length - 1])?.slug).toBe(slugs[0]);
+		expect(getNextCaseStudy(slugs[0])?.slug).toBe(slugs[1]);
+	});
+
+	it('returns null for an unknown slug', () => {
+		expect(getNextCaseStudy('does-not-exist')).toBeNull();
 	});
 });

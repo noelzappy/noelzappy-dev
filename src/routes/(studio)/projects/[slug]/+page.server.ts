@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import { getAllProjects, getProjectBySlug } from '$lib/data/projects-loader';
+import { getAllProjects, getNextCaseStudy, getProjectBySlug } from '$lib/data/projects-loader';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
 export const prerender = true;
@@ -29,6 +29,15 @@ export const load: PageServerLoad = async ({ params }) => {
 		featuredImage: project.featuredImage ?? '',
 		gallery: project.gallery ?? [],
 		problem: project.problem ?? '',
-		lessons: project.lessons ?? ''
+		lessons: project.lessons ?? '',
+		engagement: project.engagement ?? '',
+		stage: project.stage ?? '',
+		built: project.built ?? [],
+		brandColor: project.brandColor ?? '',
+		onBrand: project.onBrand ?? '',
+		heroImage: project.heroImage ?? '',
+		deviceShots: project.deviceShots ?? [],
+		impact: project.impact ?? [],
+		next: getNextCaseStudy(project.slug)
 	};
 };

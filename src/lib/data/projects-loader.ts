@@ -81,3 +81,15 @@ export function getPillProjects(): PillProject[] {
 			deviceShots
 		}));
 }
+
+/**
+ * The case study after `slug`, in `getAllProjects()` order, wrapping to the first. Only projects
+ * with a writeup have a page to link to. `null` when there are fewer than two, or `slug` has none.
+ */
+export function getNextCaseStudy(slug: string): { slug: string; title: string } | null {
+	const studies = getAllProjects().filter((project) => project.html.trim().length > 0);
+	const index = studies.findIndex((project) => project.slug === slug);
+	if (studies.length < 2 || index === -1) return null;
+	const { slug: nextSlug, title } = studies[(index + 1) % studies.length];
+	return { slug: nextSlug, title };
+}
