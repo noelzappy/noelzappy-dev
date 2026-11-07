@@ -8,8 +8,10 @@
 	import { CAL_EVENTS } from '$lib/cal.js';
 	import { TESTIMONIALS } from '$lib/data/testimonials';
 
+	const intro =
+		"I design and build software products end to end — mobile apps, web platforms and the backends behind them — and I'm best at the ones that move money. I work with startups and businesses, usually when one of these is true:";
 	const description =
-		"I'm a backend engineer who has spent six years on systems where a bug costs someone money. I work with fintechs, startups and companies building in Africa, usually when one of these is true:";
+		"I design and build software products end to end — mobile apps, web platforms and the backends behind them — and I'm best at the ones that move money. I work with startups and businesses.";
 
 	type Proof = { label: string; href: string };
 	const OFFERS: { title: string; when: string; proof: Proof[]; note?: string; clients?: string }[] =
@@ -92,7 +94,7 @@
 	canonical="https://noelzappy.dev/work-with-me"
 />
 
-<PageHeader title="Work with me" intro={description} />
+<PageHeader title="Work with me" {intro} />
 
 <Section label="What I do">
 	<ol class="offers">

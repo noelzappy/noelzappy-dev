@@ -20,6 +20,13 @@ describe('/work-with-me', () => {
 			.toBeInTheDocument();
 	});
 
+	it('introduces me as a product engineer, not a backend engineer', async () => {
+		const { container } = render(Page);
+		const intro = container.querySelector('.intro')!.textContent!;
+		expect(intro).not.toContain('backend engineer');
+		expect(intro).toContain('software products end to end');
+	});
+
 	it('lists the four offers in order', async () => {
 		const { container } = render(Page);
 		const titles = [...container.querySelectorAll('.offer h3')].map((h) => h.textContent?.trim());
