@@ -311,7 +311,7 @@ pre {
    states, and its group runs one keyframe animation: it rises from the bottom over the still
    visible old page (0-350ms), holds covering the screen (to 400ms), then continues off the top
    (400-800ms). The new root snapshot sits hidden until the hold, so the swap happens while fully
-   covered. Flat ink, hard edge, no blur or gradient. The page title rises as the panel clears.
+   covered. Flat ink, hard edge, no blur or gradient. The old heading stays under the curtain; the new title rises as the panel clears.
    The panel is near-black on dark (distinct from the #0e0e0d page) and ink on light. */
 .reveal-panel {
 	position: fixed;
@@ -356,15 +356,20 @@ pre {
 		mix-blend-mode: normal;
 	}
 
-	/* Title: no morph; the new heading rises 24px and fades in as the panel starts to clear. */
+	/* Title: no morph. The old heading is excluded from the root snapshot, so keep it visible
+	   under the curtain until full cover (400ms), then drop it. Its group holds the old geometry
+	   and jumps (step-end, not slides) to the new geometry at the same instant. The new heading
+	   then rises 24px and fades in as the panel clears, ending with the curtain at 800ms. */
 	::view-transition-group(page-title) {
-		animation: none;
+		animation-duration: 400ms;
+		animation-timing-function: step-end;
+		animation-fill-mode: both;
 	}
 	::view-transition-old(page-title) {
-		display: none;
+		animation: title-old-hold 400ms step-end both;
 	}
 	::view-transition-new(page-title) {
-		animation: title-rise 600ms cubic-bezier(0.22, 0.8, 0.2, 1) 450ms both;
+		animation: title-rise 400ms cubic-bezier(0.22, 0.8, 0.2, 1) 400ms both;
 	}
 
 	@keyframes reveal-curtain {
@@ -392,6 +397,14 @@ pre {
 		}
 		to {
 			opacity: 1;
+		}
+	}
+	@keyframes title-old-hold {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
 		}
 	}
 	@keyframes title-rise {
