@@ -1,6 +1,6 @@
 <script lang="ts">
 	import './layout.css';
-	import Navbar from '$lib/components/navbar.svelte';
+	import SiteHeader from '$lib/components/site-header.svelte';
 	import Footer from '$lib/components/footer.svelte';
 
 	let { children } = $props();
@@ -25,10 +25,6 @@
 	/>
 </svelte:head>
 
-<div class="site">
-	<Navbar />
-	<main>
-		{@render children()}
-	</main>
-	<Footer />
-</div>
+<SiteHeader />
+{@render children()}
+<Footer />
