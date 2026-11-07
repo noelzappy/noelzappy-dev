@@ -314,7 +314,7 @@
 		color: var(--muted);
 	}
 	.where {
-		margin-top: 1rem !important;
+		padding-top: 1rem;
 		color: var(--muted);
 		font-size: var(--step-small);
 		line-height: var(--lh-small);
