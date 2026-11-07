@@ -29,6 +29,15 @@
 <section class="intro">
 	<h1>Hey, I'm Emmanuel.</h1>
 	<p>Backend engineer. I build systems that can't afford to be wrong.</p>
+	<p class="pitch">
+		I help fintechs and companies moving money in Africa get their payment integrations, ledgers and
+		migrations right — MoMo, Paystack, Flutterwave, Hubtel.
+	</p>
+	<p class="cta-row">
+		<a href="/work-with-me" class="primary-cta" data-sveltekit-preload-data>Work with me →</a>
+		<span class="muted cta-sep" aria-hidden="true">·</span>
+		<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" />
+	</p>
 </section>
 
 <section class="section" aria-labelledby="timeline-heading">
@@ -44,6 +53,9 @@
 						<span class="org">{entry.org}</span>
 					{/if}
 					<span class="muted">{entry.line}</span>
+					{#if entry.cta}
+						<a href={entry.cta.href} class="small" data-sveltekit-preload-data>{entry.cta.label}</a>
+					{/if}
 					{#if entry.writeup}
 						<a href={entry.writeup} class="small" data-sveltekit-preload-data>writeup</a>
 					{/if}
@@ -72,8 +84,9 @@
 <section class="section" aria-labelledby="contact-heading">
 	<h2 id="contact-heading">Contact</h2>
 	<p class="contact">
-		Email <a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a> or
-		<CalButton eventSlug={CAL_EVENTS.intro} label="book a 15-minute call" />.
+		Building something that moves money?
+		<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" /> or email
+		<a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
 	</p>
 </section>
 
@@ -92,6 +105,18 @@
 	.intro p {
 		margin: 0;
 		font-size: 1.15rem;
+	}
+	.intro .cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.25rem 0.6rem;
+		margin-top: 0.25rem;
+	}
+	.primary-cta {
+		font-size: 1.25rem;
+		font-weight: 650;
+		color: var(--accent);
 	}
 	.timeline {
 		list-style: none;
@@ -125,6 +150,9 @@
 		margin-left: 0.4em;
 	}
 	@media (max-width: 480px) {
+		.cta-sep {
+			display: none;
+		}
 		.timeline li {
 			grid-template-columns: 1fr;
 			gap: 0.1rem;

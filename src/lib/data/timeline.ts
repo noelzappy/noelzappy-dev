@@ -4,14 +4,16 @@ export interface TimelineEntry {
 	url?: string;
 	writeup?: string;
 	line: string;
+	cta?: { label: string; href: string };
 }
 
 /** Dates are from the previous about page; wording approved in the 2026-09-12 design spec. */
 export const TIMELINE: TimelineEntry[] = [
 	{
 		years: 'Now',
-		org: 'Consulting',
-		line: 'Backend and platform work for hire.'
+		org: 'Independent consultant',
+		line: 'Payments, ledgers and migrations for fintech teams.',
+		cta: { label: 'Work with me', href: '/work-with-me' }
 	},
 	{
 		years: '2025–present',
@@ -25,7 +27,7 @@ export const TIMELINE: TimelineEntry[] = [
 		org: 'Fetch Agent',
 		url: 'https://fetchagent.com',
 		writeup: '/projects/fetch-agent-real-estate-platform',
-		line: 'Web developer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.'
+		line: 'Backend engineer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.'
 	},
 	{
 		years: '2024–2025',

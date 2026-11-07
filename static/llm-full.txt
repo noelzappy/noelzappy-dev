@@ -1,16 +1,16 @@
-# Emmanuel Yeboah — Backend Engineer
+# Emmanuel Yeboah — Backend & Payments Engineer for African Fintech
 
-> Distributed systems and platform infrastructure. https://noelzappy.dev · @noelzappy · me@noelzappy.dev
+> Independent backend and payments engineer. https://noelzappy.dev · @noelzappy · me@noelzappy.dev
 
 ## Summary
 
-Backend engineer building high-reliability distributed systems. Six years on correctness-critical infrastructure: transactional datastores, multi-tenant platforms, and zero-downtime migrations at scale. Open to senior remote backend and platform roles. Based in Accra, Ghana; works remote-first.
+Independent backend engineer for companies moving money in Africa. I build and fix payment integrations, ledgers and zero-downtime migrations — MoMo, Paystack, Flutterwave, Hubtel. Six years on correctness-critical systems. Based in Accra, Ghana; works remotely (GMT, with overlap for European and US East Coast hours).
 
 ## Timeline
 
-- Now — Consulting on backend and platform work. Writing about systems.
+- Now — Independent consultant. Payments, ledgers and migrations for fintech teams. Writing about systems.
 - 2025–present — SusuPaa. Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for ₵12.5M+ in successful deposits. Cut p99 API latency from 1.6s to 500ms.
-- 2024–2025 — Fetch Agent. Web developer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
+- 2024–2025 — Fetch Agent. Backend engineer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
 - 2024–2025 — RBL Matchmaking. Lead engineer. Zero-downtime migration of 170,000 live users from PHP/MySQL to Node.js/PostgreSQL; real-time messaging for 200,000 monthly actives.
 - 2024 — Hubtel. Frontend engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.
 - 2023–present — The Brifcast Ltd. (Brif). Co-founder & Managing Partner. Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.
@@ -19,13 +19,14 @@ Backend engineer building high-reliability distributed systems. Six years on cor
 
 ## Focus
 
-distributed systems, backend engineering, TypeScript/Node.js, Go, PostgreSQL, platform engineering, API design, event-driven architecture, database migrations, systems reliability.
+payment integrations, mobile money, ledgers, Paystack, Flutterwave, Hubtel, MTN MoMo, Fineract, distributed systems, backend engineering, TypeScript/Node.js, Go, PostgreSQL, platform engineering, API design, event-driven architecture, database migrations, systems reliability.
 
 ## Site map
 
 - / — intro, timeline, latest writing, selected projects
 - /writing — all posts, with per-tag pages at /writing/tag/<tag>; RSS at /rss.xml
 - /projects — open-source repositories and client/product case studies
+- /work-with-me — consulting: payment integrations, ledgers, zero-downtime migrations; engagement types; book a 15-minute call
 - /about — background
 - /sitemap.xml
 

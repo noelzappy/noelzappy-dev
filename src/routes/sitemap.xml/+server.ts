@@ -21,6 +21,7 @@ export const GET: RequestHandler = async () => {
 
 	const entries: Entry[] = [
 		{ loc: '/', lastmod: latestPost, priority: '1.0' },
+		{ loc: '/work-with-me', priority: '0.9' },
 		{ loc: '/writing', lastmod: latestPost, priority: '0.9' },
 		{ loc: '/projects', priority: '0.9' },
 		{ loc: '/about', priority: '0.8' },

@@ -3,6 +3,7 @@
 	import ThemeToggle from './theme-toggle.svelte';
 
 	const links = [
+		{ name: 'Work with me', href: '/work-with-me' },
 		{ name: 'Writing', href: '/writing' },
 		{ name: 'Projects', href: '/projects' },
 		{ name: 'About', href: '/about' }
@@ -45,13 +46,15 @@
 	}
 	nav {
 		display: flex;
+		flex-wrap: wrap;
 		align-items: center;
-		gap: 1.25rem;
+		gap: 0.5rem 1.25rem;
 	}
 	nav a {
 		color: var(--muted);
 		text-decoration: none;
 		font-size: 0.95rem;
+		white-space: nowrap;
 	}
 	nav a:hover,
 	nav a.active {

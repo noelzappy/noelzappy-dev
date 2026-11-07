@@ -1,4 +1,8 @@
 <footer class="footer">
+	<p class="cta">
+		Building something that moves money? <a href="/work-with-me#call">Book a 15-minute call</a> or
+		email <a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
+	</p>
 	<nav class="links" aria-label="Contact and profiles">
 		<a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>
 		<a href="https://github.com/noelzappy" rel="me noopener noreferrer">GitHub</a>
@@ -32,5 +36,8 @@
 	}
 	p {
 		margin: 0;
+	}
+	.cta {
+		font-size: 0.95rem;
 	}
 </style>

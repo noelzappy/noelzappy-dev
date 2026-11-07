@@ -10,3 +10,6 @@ bun.lockb
 
 # authored content, keep as written
 src/content/writing/
+
+# project briefs, keep verbatim
+docs/briefs/

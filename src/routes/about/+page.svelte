@@ -14,7 +14,7 @@
 		{
 			org: 'Fetch Agent (Commonwealth Media)',
 			engagement: 'Contract',
-			title: 'Web Developer',
+			title: 'Backend Engineer',
 			dates: 'Sep 2024 – Dec 2025',
 			impact:
 				'Backend for a US real estate platform. Built the agent-ranking and filtering engine that matches buyers to agents by experience, commission model, contract terms, and availability, and the APIs behind the app and admin dashboard, held under 200ms.'
@@ -67,7 +67,7 @@
 		mainEntity: {
 			'@type': 'Person',
 			name: 'Emmanuel Yeboah',
-			jobTitle: 'Backend Engineer',
+			jobTitle: 'Backend & Payments Engineer',
 			url: 'https://noelzappy.dev'
 		}
 	};
@@ -104,9 +104,9 @@
 		a mobile app developer at Built Financial Technologies.
 	</p>
 	<p>
-		I'm currently consulting on backend and platform work, and I'm open to senior remote backend and
-		platform roles. The fastest way to reach me is email:
-		<a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
+		I work independently with fintech and payments teams. If that's you,
+		<a href="/work-with-me">here's how we can work together</a>. The fastest way to reach me is
+		email: <a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
 	</p>
 </section>
 

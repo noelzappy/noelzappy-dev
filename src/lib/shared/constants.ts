@@ -1,10 +1,9 @@
 export const SITE_URL = 'https://noelzappy.dev';
 
-export const SITE_TITLE =
-	'Emmanuel Yeboah — Backend Engineer | Distributed Systems & Platform Infrastructure';
+export const SITE_TITLE = 'Emmanuel Yeboah — Backend & Payments Engineer for African Fintech';
 
 export const SITE_DESCRIPTION =
-	'Backend engineer building high-reliability distributed systems. Six years on correctness-critical infrastructure: transactional datastores, multi-tenant platforms, and zero-downtime migrations at scale. Open to senior remote backend and platform roles.';
+	'Independent backend engineer for companies moving money in Africa. I build and fix payment integrations, ledgers and zero-downtime migrations — MoMo, Paystack, Flutterwave, Hubtel.';
 
 export const SITE_KEYWORDS = [
 	'Emmanuel Yeboah',
@@ -16,7 +15,15 @@ export const SITE_KEYWORDS = [
 	'API design',
 	'event-driven architecture',
 	'database migrations',
-	'systems reliability'
+	'systems reliability',
+	'payments engineer',
+	'mobile money',
+	'Paystack',
+	'Flutterwave',
+	'Hubtel',
+	'fintech consultant',
+	'Ghana',
+	'Africa'
 ];
 
 export const HomepageStructuredData = {
@@ -32,19 +39,15 @@ export const HomepageStructuredData = {
 		'https://x.com/noelzappy',
 		'https://linkedin.com/in/noelzappy'
 	],
-	jobTitle: 'Backend Engineer',
+	jobTitle: 'Backend & Payments Engineer',
 	description: SITE_DESCRIPTION,
 	address: { '@type': 'PostalAddress', addressLocality: 'Accra', addressCountry: 'GH' },
 	knowsAbout: [
-		'distributed systems',
-		'platform engineering',
-		'API design',
-		'event-driven architecture',
-		'database migrations',
-		'systems reliability',
+		'Payment integrations',
+		'Mobile money',
+		'Ledgers',
+		'Database migrations',
 		'Go',
-		'PostgreSQL',
-		'TypeScript',
-		'Node.js'
+		'TypeScript'
 	]
 };

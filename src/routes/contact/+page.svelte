@@ -12,7 +12,7 @@
 			name: 'Emmanuel Yeboah',
 			url: 'https://noelzappy.dev',
 			email: 'me@noelzappy.dev',
-			jobTitle: 'Backend Engineer'
+			jobTitle: 'Backend & Payments Engineer'
 		}
 	};
 </script>
@@ -20,7 +20,7 @@
 <CalEmbed />
 <SEOHead
 	title="Contact"
-	description="Email Emmanuel Yeboah or book a 15-minute intro call."
+	description="Building something that moves money? Email Emmanuel Yeboah or book a 15-minute call."
 	canonical="https://noelzappy.dev/contact"
 	{structuredData}
 />
