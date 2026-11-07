@@ -1,0 +1,43 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+
+	let { label, id, children }: { label?: string; id?: string; children: Snippet } = $props();
+</script>
+
+<section {id} class="section">
+	<div class="inner">
+		{#if label}<h2 class="label">{label}</h2>{/if}
+		<div class="body">{@render children()}</div>
+	</div>
+</section>
+
+<style>
+	.section {
+		max-width: var(--page-max);
+		margin-inline: auto;
+		padding-inline: var(--page-gutter);
+		scroll-margin-top: var(--header-h);
+	}
+	.inner {
+		border-top: 1px solid var(--border);
+		padding-block: clamp(2rem, 5vw, 4.5rem);
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1.5rem;
+	}
+	.label {
+		margin: 0;
+		font-size: var(--step-caption);
+		line-height: var(--lh-caption);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		font-weight: 500;
+		color: var(--muted);
+	}
+	@media (min-width: 48rem) {
+		.inner {
+			grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+			gap: var(--page-gutter);
+		}
+	}
+</style>

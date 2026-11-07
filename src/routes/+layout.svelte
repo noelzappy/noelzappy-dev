@@ -36,5 +36,5 @@
 
 <SiteHeader overlay={studio} pills={data.pills} posts={data.posts} />
 {@render children()}
-<Footer wide={studio} />
+<Footer />
 <div class="reveal-panel" aria-hidden="true"></div>

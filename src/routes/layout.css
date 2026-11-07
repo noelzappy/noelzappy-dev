@@ -33,6 +33,9 @@
 	--code-bg: #1a1a18;
 
 	--measure: 68ch;
+	--header-h: 4.5rem; /* measured: site-header is ~75.6px (4.45rem) tall */
+	--page-gutter: clamp(1rem, 0.4rem + 2.6vw, 3rem);
+	--page-max: 1440px;
 	--rhythm: 0.5rem;
 
 	/* Type scale: size / line-height / tracking per step */

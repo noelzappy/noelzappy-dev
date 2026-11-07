@@ -91,7 +91,7 @@
 <style>
 	/* The studio header overlays the page, so the narrow column starts below it. */
 	.legacy {
-		padding-top: 6rem;
+		padding-top: calc(var(--header-h) + 2rem);
 	}
 	.project {
 		display: flex;

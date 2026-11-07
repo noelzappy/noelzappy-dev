@@ -154,11 +154,11 @@
 
 <style>
 	.case-study {
-		--gutter: clamp(1.25rem, 3vw, 2.5rem);
+		--gutter: var(--page-gutter);
 		display: flex;
 		flex-direction: column;
-		/* Clears the overlay header (one line, ~3.5rem) with room to breathe. */
-		padding-top: clamp(6rem, 12vw, 9rem);
+		/* Clears the overlay header with room to breathe. */
+		padding-top: calc(var(--header-h) + clamp(2rem, 6vw, 5rem));
 		padding-bottom: calc(var(--rhythm) * 8);
 		gap: clamp(3rem, 7vw, 6rem);
 	}
