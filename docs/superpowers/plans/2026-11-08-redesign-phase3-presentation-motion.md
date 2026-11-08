@@ -143,6 +143,13 @@ Emmanuel (2026-11-08): the site's email becomes `emmanuel@noelzappy.com` everywh
 
 ### Task 7: Gate and sign-off package
 
+**Mobile pass (Emmanuel asked 2026-11-08 — required, not optional):**
+
+- Widths 360×780, 375×812, 414×896, 430×932 (portrait), 844×390 (landscape), 768×1024 and 1024×1366 (tablet): every page, dark + light — no horizontal scroll, no clipped text or screens, no header overlap, comfortable reading measure.
+- Tap targets ≥ 44×44 CSS px for pills, Menu, theme toggle, filter chips, footer links, form fields and buttons (automated check in a spec that measures every interactive element at 375px).
+- Real WebKit: run the site in Mobile Safari on the iOS Simulator (Xcode simulator on this Mac) against the dev/preview server — hero (svh units, strip animation, tap on pill navigates), menu overlay (scroll lock, focus), page reveal + morph (View Transitions in Safari; graceful fallback if unsupported), inquiry form (keyboard, Turnstile, autofill), case-study scroll and fade-up. Screenshots into the plan workspace; fix issues in owning files.
+- Reduced motion on iOS (Settings → Accessibility → Reduce Motion) → no animation.
+
 - [ ] Step 1: Headless screenshots of every page at 375×812, 1280×720, 1440×900, 2000×1200, 2560×1440, dark + light → `.superpowers/sdd/<this plan>/screens/`. Review each for exposed dead space, clipped screens, misalignment, header overlap; fix in owning files (own commits).
 - [ ] Step 2: Lighthouse mobile on `bun run preview` for `/`, `/projects`, `/projects/kekeh-mac`, `/work-with-me`, `/about`, `/writing` — targets Perf ≥ 90, A11y ≥ 95, SEO 100, LCP < 2.5s; table in report.
 - [ ] Step 3: Motion check in headless Chromium: curtain on normal links; morph on pill/row → case study; none on back/forward and reduced motion; strip pauses on hover.
