@@ -23,11 +23,11 @@ mobile apps, React Native, Expo, web apps, payment integrations, mobile money, l
 
 ## Site map
 
-- / — intro, timeline, latest writing, selected projects
+- / — homepage: hero with selected work
 - /writing — all posts, with per-tag pages at /writing/tag/<tag>; RSS at /rss.xml
 - /projects — open-source repositories and client/product case studies
-- /work-with-me — consulting: payment integrations, ledgers, zero-downtime migrations; engagement types; book a 15-minute call
-- /about — background
+- /work-with-me — how I work with teams: whole-product builds, team augmentation, rescues and migrations, websites; book a 15-minute call
+- /about — story and timeline
 - /sitemap.xml
 
 ## Links

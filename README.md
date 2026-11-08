@@ -1,6 +1,6 @@
 # noelzappy.dev
 
-Personal site of Emmanuel Yeboah — backend engineer. Content-first, static, deployed to Cloudflare Pages.
+Personal site of Emmanuel Yeboah — product engineer. Content-first, static, deployed to Cloudflare Pages.
 
 **Live:** https://noelzappy.dev
 

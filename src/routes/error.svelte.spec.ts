@@ -57,4 +57,13 @@ describe('+error', () => {
 		render(ErrorPage);
 		expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
 	});
+
+	it('wraps the content in a single main landmark targeted by the skip link', async () => {
+		current.status = 404;
+		const { container } = render(ErrorPage);
+		const mains = container.querySelectorAll('main');
+		expect(mains.length).toBe(1);
+		expect(mains[0].id).toBe('main');
+		await expect.element(page.getByRole('main')).toBeInTheDocument();
+	});
 });

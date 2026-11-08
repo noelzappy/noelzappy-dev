@@ -21,8 +21,8 @@
 				when: 'Usually when you have an idea, or a prototype that has outgrown its author, and no engineering team yet. I take it from the first screen to the app-store release: the mobile app, the web app, the backend and the admin your team will run it from.',
 				proof: [
 					{ label: 'Kekeh Mac', href: '/projects/kekeh-mac' },
-					{ label: 'Alvi Beauty', href: '/projects/alvi-beauty' },
-					{ label: 'Built', href: '/projects/built-mobile-app' }
+					{ label: 'Givio', href: '/projects/givio-platform' },
+					{ label: 'GrowingGift', href: '/projects/growinggift-platform' }
 				]
 			},
 			{

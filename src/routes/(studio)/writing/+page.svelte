@@ -10,13 +10,13 @@
 
 <SEOHead
 	title="Writing"
-	description="Notes on backend engineering, distributed systems, migrations, and the decisions behind them."
+	description="Notes on building software products: engineering, AI, tools and freelancing."
 	canonical="https://noelzappy.dev/writing"
 />
 
 <PageHeader
 	title="Writing"
-	intro="Notes on backend engineering, distributed systems and migrations, and the decisions behind them."
+	intro="Notes on building software products: engineering, AI, tools and freelancing."
 />
 
 {#if data.tags.length}

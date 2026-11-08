@@ -28,6 +28,7 @@ stack:
 categories:
   - 'Mobile App'
   - 'Web App'
+  - 'Backend'
 stats:
   - key: 'Users Migrated'
     value: '170,000+'

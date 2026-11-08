@@ -55,7 +55,7 @@ A user on the old app could chat with a user on the new React Native app without
 
 Once adoption crossed a safe threshold, I finally shut down the PHP server.
 
-![](/writing/how-i-migrated-170k-users-from-php-to-node-js-without-stopping-the-world/architecture-diagram.webp)
+![Architecture diagram of the migration: old PHP server and new Node.js backend running side by side behind one API while users moved across](/writing/how-i-migrated-170k-users-from-php-to-node-js-without-stopping-the-world/architecture-diagram.webp)
 
 #### Post-Launch & The 6-Second API Call
 
@@ -79,8 +79,6 @@ Instead of computing matches in real time:
 - The API simply reads from cache
 
 Response times dropped from seconds to **milliseconds**.
-
-### 
 
 #### The Result
 

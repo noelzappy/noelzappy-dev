@@ -36,7 +36,7 @@ describe('site menu', () => {
 		const dialog = page.getByRole('dialog', { name: 'Menu' });
 		const links: [string, string][] = [
 			['Work', '/projects'],
-			['What I do', '/work-with-me'],
+			['Work with me', '/work-with-me'],
 			['About', '/about'],
 			['Writing', '/writing'],
 			['Get in touch', '/contact']

@@ -49,6 +49,25 @@ describe('/work-with-me', () => {
 		}
 	});
 
+	it('proves "Build the whole product" with full-build writeups only', async () => {
+		const { container } = render(Page);
+		const offer = container.querySelectorAll('.offer')[0];
+		const hrefs = [...offer.querySelectorAll<HTMLAnchorElement>('a')].map((a) =>
+			a.getAttribute('href')
+		);
+		expect(hrefs).toEqual([
+			'/projects/kekeh-mac',
+			'/projects/givio-platform',
+			'/projects/growinggift-platform'
+		]);
+		const all = getAllProjects();
+		for (const h of hrefs) {
+			const project = all.find((p) => p.slug === h!.replace('/projects/', ''));
+			expect(project?.engagement).toBe('full-build');
+			expect(project?.html.trim().length).toBeGreaterThan(0);
+		}
+	});
+
 	it('links Voltax to its live site, since it has no writeup', async () => {
 		render(Page);
 		const voltax = getAllProjects().find((p) => p.slug === 'voltax');

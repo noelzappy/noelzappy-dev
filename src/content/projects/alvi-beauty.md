@@ -31,6 +31,7 @@ stack:
 categories:
   - 'Mobile App'
   - 'Web App'
+  - 'Backend'
 gallery:
   - '/portfolio/alvibeauty.webp'
   - '/portfolio/alvibeauty-2.jpg'

@@ -1,14 +1,18 @@
 <script lang="ts">
 	import Section from './section.svelte';
+	import { dev } from '$app/environment';
 	import type { Testimonial } from '$lib/data/testimonials';
 
 	let { items }: { items: Testimonial[] } = $props();
+
+	// Placeholder quotes are for local design work only; they never ship.
+	const shown = $derived(items.filter((t) => dev || !t.placeholder));
 </script>
 
-{#if items.length > 0}
+{#if shown.length > 0}
 	<Section label="Testimonials">
 		<ul class="quotes">
-			{#each items as t, i (i)}
+			{#each shown as t, i (i)}
 				<li class="quote">
 					<blockquote>{t.quote}</blockquote>
 					<p class="who">

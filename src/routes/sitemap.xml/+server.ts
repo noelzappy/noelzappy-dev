@@ -25,6 +25,7 @@ export const GET: RequestHandler = async () => {
 		{ loc: '/writing', lastmod: latestPost, priority: '0.9' },
 		{ loc: '/projects', priority: '0.9' },
 		{ loc: '/about', priority: '0.8' },
+		{ loc: '/contact', priority: '0.7' },
 		...posts.map((p) => ({ loc: `/writing/${p.slug}`, lastmod: p.date, priority: '0.8' })),
 		...getTags().map(({ tag }) => ({ loc: `/writing/tag/${tag}`, priority: '0.4' })),
 		...projects.map((p) => ({

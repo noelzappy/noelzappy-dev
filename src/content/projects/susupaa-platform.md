@@ -24,6 +24,8 @@ stack:
   - 'Append-only Ledger'
 categories:
   - 'Web App'
+  - 'Backend'
+  - 'Fintech'
 stats:
   - key: 'Successful deposits'
     value: '₵12.5M+'

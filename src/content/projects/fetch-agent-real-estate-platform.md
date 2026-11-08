@@ -22,6 +22,7 @@ stack:
   - 'Redis'
 categories:
   - 'Web App'
+  - 'Backend'
 gallery:
   - '/portfolio/fetch-agent/fetch-agent.webp'
   - '/portfolio/fetch-agent/1.webp'

@@ -29,6 +29,7 @@
 	/>
 </svelte:head>
 
+<a class="skip-link" href="#main">Skip to content</a>
 <SiteHeader pills={data.pills} posts={data.posts} />
 {@render children()}
 <Footer />

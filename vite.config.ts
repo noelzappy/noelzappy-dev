@@ -10,6 +10,8 @@ export default defineConfig({
 		projects: [
 			{
 				extends: './vite.config.ts',
+				// Pre-bundle up front so the first spec to import js-yaml doesn't trigger a reload mid-run.
+				optimizeDeps: { include: ['js-yaml'] },
 				test: {
 					name: 'client',
 					browser: {

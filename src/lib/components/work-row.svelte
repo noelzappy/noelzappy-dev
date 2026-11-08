@@ -38,7 +38,8 @@
 				class="cta"
 				href={cta.href}
 				{...cta.external ? { rel: 'noopener noreferrer' } : { 'data-sveltekit-preload-data': '' }}
-				>{cta.label} <span aria-hidden="true">→</span></a
+				>{cta.label}<span class="sr-only"> {project.title}</span>
+				<span aria-hidden="true">→</span></a
 			>
 		{/if}
 	</div>

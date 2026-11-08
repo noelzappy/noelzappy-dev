@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import type { PillProject } from '$lib/data/projects';
@@ -61,7 +61,17 @@ function setup() {
 	return { root };
 }
 
+// Transitions and animations are switched off so layout and visibility settle immediately.
+let noMotion: HTMLStyleElement;
+beforeEach(() => {
+	noMotion = document.createElement('style');
+	noMotion.textContent =
+		'*, *::before, *::after { transition: none !important; animation: none !important; }';
+	document.head.append(noMotion);
+});
+
 afterEach(async () => {
+	noMotion.remove();
 	await page.viewport(1280, 720);
 });
 
@@ -130,16 +140,24 @@ describe('hero.svelte', () => {
 			const on = root.querySelectorAll('.project.on');
 			expect(on.length).toBe(1);
 			expect(on[0].querySelector('.title')?.textContent).toBe(pill.title);
-			document.getAnimations().forEach((a) => a.finish());
-			const visible = [...root.querySelectorAll('.project')]
-				.filter((el) => getComputedStyle(el).visibility === 'visible')
-				.map((el) => el.querySelector('.title')?.textContent);
-			expect(visible).toEqual([pill.title]);
-			const shots = [...root.querySelectorAll('.shot-set')].filter(
-				(el) => getComputedStyle(el).visibility === 'visible'
-			);
-			expect(shots.length).toBe(1);
-			expect(getComputedStyle(root.querySelector('.headline')!).visibility).toBe('hidden');
+			await expect
+				.poll(() =>
+					[...root.querySelectorAll('.project')]
+						.filter((el) => getComputedStyle(el).visibility === 'visible')
+						.map((el) => el.querySelector('.title')?.textContent)
+				)
+				.toEqual([pill.title]);
+			await expect
+				.poll(
+					() =>
+						[...root.querySelectorAll('.shot-set')].filter(
+							(el) => getComputedStyle(el).visibility === 'visible'
+						).length
+				)
+				.toBe(1);
+			await expect
+				.poll(() => getComputedStyle(root.querySelector('.headline')!).visibility)
+				.toBe('hidden');
 		}
 	});
 
@@ -167,11 +185,9 @@ describe('hero.svelte', () => {
 			expect(intro.bottom).toBeLessThanOrEqual(headline.top + 2);
 			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
 			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
-			document.getAnimations().forEach((a) => a.finish());
 			for (const shot of root.querySelectorAll('.shot-set.on .shot')) {
-				const r = shot.getBoundingClientRect();
-				expect(r.top).toBeGreaterThanOrEqual(0);
-				expect(r.top).toBeLessThan(window.innerHeight);
+				await expect.poll(() => shot.getBoundingClientRect().top).toBeGreaterThanOrEqual(0);
+				await expect.poll(() => shot.getBoundingClientRect().top).toBeLessThan(window.innerHeight);
 			}
 		});
 	}

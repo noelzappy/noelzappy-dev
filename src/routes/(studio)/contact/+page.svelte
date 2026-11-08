@@ -22,7 +22,7 @@
 <CalEmbed />
 <SEOHead
 	title="Contact"
-	description="Building something that moves money? Email Emmanuel Yeboah or book a 15-minute call."
+	description="Get in touch about a product you need built, a team that needs a senior engineer, or a system that needs fixing."
 	canonical="https://noelzappy.dev/contact"
 	{structuredData}
 />

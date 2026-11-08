@@ -21,14 +21,16 @@
 	noindex
 />
 
-<PageHeader eyebrow={String(status)} title={message} />
+<main id="main">
+	<PageHeader eyebrow={String(status)} title={message} />
 
-<Section>
-	<nav class="links" aria-label="Where to next">
-		<a href="/">Home</a>
-		<a href="/projects">Work</a>
-	</nav>
-</Section>
+	<Section>
+		<nav class="links" aria-label="Where to next">
+			<a href="/">Home</a>
+			<a href="/projects">Work</a>
+		</nav>
+	</Section>
+</main>
 
 <style>
 	.links {

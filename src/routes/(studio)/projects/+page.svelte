@@ -32,6 +32,15 @@
 		active = parse(page.url.searchParams.get('type'));
 	});
 
+	// Chips with nothing behind them are hidden, computed from the data.
+	const visibleFilters = $derived(
+		FILTERS.filter((f) => {
+			if (f.key === 'all') return true;
+			if (f.key === 'open-source') return data.openSource.length > 0;
+			return data.caseStudies.some((p) => (p.categories as string[]).includes(f.category!));
+		})
+	);
+
 	const activeFilter = $derived(FILTERS.find((f) => f.key === active)!);
 	const rows = $derived(
 		active === 'open-source'
@@ -80,7 +89,7 @@
 
 <div class="filters-wrap">
 	<div class="filters" role="group" aria-label="Filter work">
-		{#each FILTERS as f (f.key)}
+		{#each visibleFilters as f (f.key)}
 			<button
 				type="button"
 				class="chip"
@@ -92,6 +101,7 @@
 </div>
 
 <div class="rows">
+	<h2 class="sr-only">Case studies</h2>
 	{#each rows as project (project.slug)}
 		<WorkRow {project} />
 	{/each}
