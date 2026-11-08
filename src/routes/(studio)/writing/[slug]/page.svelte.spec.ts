@@ -69,4 +69,19 @@ describe('/writing/[slug]', () => {
 		expect(ld.headline).toBe(posts[0].title);
 		expect(ld.url).toBe(`https://noelzappy.dev/writing/${posts[0].slug}`);
 	});
+
+	it('puts the prose in the second column of the site grid, not flush left', async () => {
+		const data = await loadSlug(posts[0].slug);
+		const { container } = render(Page, { data });
+		const prose = container.querySelector<HTMLElement>('.prose')!;
+		const meta = container.querySelector<HTMLElement>('.meta')!;
+		const wide = window.innerWidth >= 768;
+		if (wide) {
+			expect(prose.getBoundingClientRect().left).toBeGreaterThan(
+				meta.getBoundingClientRect().right
+			);
+		}
+		expect(container.querySelectorAll('time')).toHaveLength(1);
+		expect(container.querySelectorAll('.sec')).toHaveLength(2);
+	});
 });

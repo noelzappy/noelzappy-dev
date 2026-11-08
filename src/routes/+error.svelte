@@ -17,7 +17,6 @@
 <SEOHead
 	title={status === 404 ? 'Page not found' : `Error ${status}`}
 	description={message}
-	canonical="https://noelzappy.dev"
 	ogType="website"
 	noindex
 />

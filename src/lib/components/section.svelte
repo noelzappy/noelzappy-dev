@@ -1,12 +1,19 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 
-	let { label, id, children }: { label?: string; id?: string; children: Snippet } = $props();
+	let {
+		label,
+		id,
+		aside,
+		children
+	}: { label?: string; id?: string; aside?: Snippet; children: Snippet } = $props();
 </script>
 
 <section {id} class="sec">
 	<div class="inner">
-		{#if label}<h2 class="label">{label}</h2>{/if}
+		{#if aside}<div class="aside">{@render aside()}</div>{:else if label}<h2 class="label">
+				{label}
+			</h2>{/if}
 		<div class="body">{@render children()}</div>
 	</div>
 </section>

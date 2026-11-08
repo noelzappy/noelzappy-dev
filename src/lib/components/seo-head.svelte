@@ -2,7 +2,7 @@
 	interface SEOProps {
 		title: string;
 		description: string;
-		canonical: string;
+		canonical?: string;
 		ogType?: 'website' | 'article';
 		ogImage?: string;
 		publishedTime?: string;
@@ -35,14 +35,18 @@
 	{#if keywords}
 		<meta name="keywords" content={keywords} />
 	{/if}
-	<link rel="canonical" href={canonical} />
+	{#if canonical}
+		<link rel="canonical" href={canonical} />
+	{/if}
 	{#if noindex}
 		<meta name="robots" content="noindex" />
 	{/if}
 
 	<!-- Open Graph / Facebook -->
 	<meta property="og:type" content={ogType} />
-	<meta property="og:url" content={canonical} />
+	{#if canonical}
+		<meta property="og:url" content={canonical} />
+	{/if}
 	<meta property="og:title" content={title} />
 	<meta property="og:description" content={description} />
 	<meta property="og:image" content={ogImage ?? 'https://noelzappy.dev/zappy-face.jpg'} />

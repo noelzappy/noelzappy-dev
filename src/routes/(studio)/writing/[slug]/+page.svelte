@@ -1,5 +1,6 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
+	import Section from '$lib/components/section.svelte';
 	import { formatDate } from '$lib/shared/date';
 	import type { PageData } from './$types';
 
@@ -30,44 +31,50 @@
 <article class="post">
 	<header class="head">
 		<h1 class="page-title">{data.title}</h1>
-		<p class="meta">
-			<time datetime={data.date}>{formatDate(data.date, 'long')}</time>
-			{#each data.tags as tag (tag)}
-				<a href="/writing/tag/{tag}">{tag}</a>
-			{/each}
-		</p>
 	</header>
 
-	<div class="body">
+	<Section>
+		{#snippet aside()}
+			<p class="meta">
+				<time datetime={data.date}>{formatDate(data.date, 'long')}</time>
+				{#if data.tags.length}
+					<span class="tags">
+						{#each data.tags as tag (tag)}
+							<a href="/writing/tag/{tag}">{tag}</a>
+						{/each}
+					</span>
+				{/if}
+			</p>
+		{/snippet}
 		<div class="prose">
 			<data.component />
 		</div>
-	</div>
+	</Section>
 
-	<nav class="adjacent" aria-label="More writing">
-		{#if data.older}
-			<a class="prev" rel="prev" href="/writing/{data.older.slug}" data-sveltekit-preload-data>
-				<span class="dir">Previous</span>
-				<span class="name">{data.older.title}</span>
-			</a>
-		{/if}
-		{#if data.newer}
-			<a class="next" rel="next" href="/writing/{data.newer.slug}" data-sveltekit-preload-data>
-				<span class="dir">Next</span>
-				<span class="name">{data.newer.title}</span>
-			</a>
-		{/if}
-		<a class="all" href="/writing">← All writing</a>
-	</nav>
+	<Section>
+		<nav class="adjacent" aria-label="More writing">
+			{#if data.older}
+				<a class="prev" rel="prev" href="/writing/{data.older.slug}" data-sveltekit-preload-data>
+					<span class="dir">Previous</span>
+					<span class="name">{data.older.title}</span>
+				</a>
+			{/if}
+			{#if data.newer}
+				<a class="next" rel="next" href="/writing/{data.newer.slug}" data-sveltekit-preload-data>
+					<span class="dir">Next</span>
+					<span class="name">{data.newer.title}</span>
+				</a>
+			{/if}
+			<a class="all" href="/writing">← All writing</a>
+		</nav>
+	</Section>
 </article>
 
 <style>
-	.post {
+	.head {
 		max-width: var(--page-max);
 		margin-inline: auto;
 		padding-inline: var(--page-gutter);
-	}
-	.head {
 		padding-top: calc(var(--header-h) + clamp(2rem, 6vw, 5rem));
 		padding-bottom: clamp(2rem, 5vw, 4rem);
 	}
@@ -83,12 +90,27 @@
 		text-wrap: balance;
 	}
 	.meta {
+		display: grid;
+		gap: 0.5rem;
+		margin: 0;
+		font-size: var(--step-small);
+		line-height: var(--lh-small);
+		color: var(--muted);
+	}
+	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem 1.25rem;
-		margin: clamp(1.25rem, 2.5vw, 2rem) 0 0;
-		font-size: var(--step-small);
+	}
+	.tags a + a::before {
+		content: '·';
+		margin-inline: 0.5em;
 		color: var(--muted);
+	}
+	@media (min-width: 48rem) {
+		.meta {
+			position: sticky;
+			top: calc(var(--header-h) + 1rem);
+		}
 	}
 	.meta a {
 		color: var(--muted);
@@ -96,10 +118,6 @@
 	}
 	.meta a:hover {
 		color: var(--accent);
-	}
-	.body {
-		border-top: 1px solid var(--border);
-		padding-block: clamp(2rem, 5vw, 4rem);
 	}
 	.prose {
 		max-width: var(--measure);
@@ -128,8 +146,6 @@
 		margin-bottom: 0.6em;
 	}
 	.adjacent {
-		border-top: 1px solid var(--border);
-		padding-block: clamp(2rem, 4vw, 3.5rem) clamp(3rem, 6vw, 6rem);
 		display: grid;
 		gap: 2rem;
 		grid-template-columns: minmax(0, 1fr);

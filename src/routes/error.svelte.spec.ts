@@ -51,4 +51,10 @@ describe('+error', () => {
 			'noindex'
 		);
 	});
+
+	it('has no canonical link', async () => {
+		current.status = 404;
+		render(ErrorPage);
+		expect(document.head.querySelector('link[rel="canonical"]')).toBeNull();
+	});
 });
