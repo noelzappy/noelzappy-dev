@@ -2,6 +2,7 @@
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import CalButton from '$lib/components/CalButton.svelte';
 	import CalEmbed from '$lib/components/cal-embed.svelte';
+	import InquiryForm from '$lib/components/inquiry-form.svelte';
 	import PageHeader from '$lib/components/page-header.svelte';
 	import Section from '$lib/components/section.svelte';
 	import Testimonials from '$lib/components/testimonials.svelte';
@@ -187,9 +188,13 @@
 			<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" />
 		</p>
 		<p>
-			Or email <a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a> with a few lines about what you
-			need built or what is breaking.
+			Or email <a href="mailto:emmanuel@noelzappy.com">emmanuel@noelzappy.com</a> with a few lines about
+			what you need built or what is breaking.
 		</p>
+		<p class="write">
+			Prefer to write it down? Tell me what's breaking and I'll reply within one working day.
+		</p>
+		<InquiryForm />
 	</div>
 </Section>
 
@@ -324,6 +329,11 @@
 	.call {
 		display: grid;
 		gap: 1rem;
+	}
+	.write {
+		margin-top: 1rem;
+		color: var(--muted);
+		max-width: 56ch;
 	}
 	.call-line :global(.cal-link) {
 		font-size: var(--step-display-m);

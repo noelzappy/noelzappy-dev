@@ -31,7 +31,7 @@ export const HomepageStructuredData = {
 	alternateName: 'Noel Zappy',
 	url: SITE_URL,
 	image: `${SITE_URL}/zappy-face.jpg`,
-	email: 'me@noelzappy.dev',
+	email: 'emmanuel@noelzappy.com',
 	sameAs: [
 		'https://github.com/noelzappy',
 		'https://x.com/noelzappy',

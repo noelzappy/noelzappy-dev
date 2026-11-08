@@ -13,7 +13,7 @@
 			'@type': 'Person',
 			name: 'Emmanuel Yeboah',
 			url: 'https://noelzappy.dev',
-			email: 'me@noelzappy.dev',
+			email: 'emmanuel@noelzappy.com',
 			jobTitle: 'Product Engineer'
 		}
 	};
@@ -33,7 +33,7 @@
 />
 
 <Section label="Email">
-	<p class="big"><a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a></p>
+	<p class="big"><a href="mailto:emmanuel@noelzappy.com">emmanuel@noelzappy.com</a></p>
 </Section>
 
 <Section label="Book a call">

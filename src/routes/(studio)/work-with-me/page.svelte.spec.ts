@@ -1,7 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import '../../layout.css';
+vi.mock('$env/dynamic/public', () => ({ env: {} }));
+
 import Page from './+page.svelte';
 import { getAllProjects } from '$lib/data/projects-loader';
 
@@ -96,6 +98,15 @@ describe('/work-with-me', () => {
 		const call = container.querySelector('#call');
 		expect(call).not.toBeNull();
 		expect(call!.querySelector('[data-cal-link]')).not.toBeNull();
-		expect(call!.querySelector('a[href="mailto:me@noelzappy.dev"]')).not.toBeNull();
+		expect(call!.querySelector('a[href="mailto:emmanuel@noelzappy.com"]')).not.toBeNull();
+	});
+
+	it('puts the inquiry form under the booking button in #call', async () => {
+		const { container } = render(Page);
+		const call = container.querySelector('#call')!;
+		expect(call.textContent).toContain('Prefer to write it down?');
+		const button = call.querySelector('[data-cal-link]')!;
+		const form = call.querySelector('form')!;
+		expect(button.compareDocumentPosition(form) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 	});
 });

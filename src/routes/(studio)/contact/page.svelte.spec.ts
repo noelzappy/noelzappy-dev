@@ -15,7 +15,7 @@ describe('/contact', () => {
 
 	it('offers the email address and the booking button', async () => {
 		const { container } = render(Page);
-		expect(container.querySelector('a[href="mailto:me@noelzappy.dev"]')).not.toBeNull();
+		expect(container.querySelector('a[href="mailto:emmanuel@noelzappy.com"]')).not.toBeNull();
 		expect(container.querySelector('button')!.textContent).toContain('15-minute');
 	});
 
@@ -24,6 +24,6 @@ describe('/contact', () => {
 		const ld = [...document.head.querySelectorAll('script[type="application/ld+json"]')]
 			.map((s) => JSON.parse(s.textContent!))
 			.find((d) => d['@type'] === 'ContactPage');
-		expect(ld.mainEntity.email).toBe('me@noelzappy.dev');
+		expect(ld.mainEntity.email).toBe('emmanuel@noelzappy.com');
 	});
 });

@@ -63,7 +63,7 @@
 				I work independently with startups and businesses, and I'm best at products that move money.
 				If that's you,
 				<a href="/work-with-me">here's how we can work together</a>. The fastest way to reach me is
-				email: <a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>.
+				email: <a href="mailto:emmanuel@noelzappy.com">emmanuel@noelzappy.com</a>.
 			</p>
 		</div>
 	</div>

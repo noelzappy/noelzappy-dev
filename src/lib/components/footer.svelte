@@ -7,7 +7,7 @@
 		<h2 class="display">Have something to build?</h2>
 		<div class="big-links">
 			<a href="/work-with-me#call">Book a 15-minute call</a>
-			<a href="mailto:me@noelzappy.dev">me@noelzappy.dev</a>
+			<a href="mailto:emmanuel@noelzappy.com">emmanuel@noelzappy.com</a>
 		</div>
 		<div class="meta">
 			<nav class="links" aria-label="Profiles and feeds">
