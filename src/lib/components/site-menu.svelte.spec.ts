@@ -11,6 +11,8 @@ vi.mock('$app/navigation', () => ({
 	}
 }));
 
+vi.mock('$app/state', () => ({ page: { url: new URL('http://localhost/') } }));
+
 const posts = [
 	{ slug: 'a', title: 'Post A', date: '2026-01-02', tags: [], description: '' },
 	{ slug: 'b', title: 'Post B', date: '2026-01-01', tags: [], description: '' }
