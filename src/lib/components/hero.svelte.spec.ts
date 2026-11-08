@@ -43,7 +43,7 @@ const pills: PillProject[] = [
 	{
 		slug: 'rbl-dating-app',
 		title: 'RBL Dating Platform',
-		oneLine: 'A dating platform I moved to a new stack — 170,000 live users, zero downtime.',
+		oneLine: 'A dating platform I moved to a new stack, with 170,000 live users and zero downtime.',
 		built: ['Mobile app', 'Web app', 'API', 'Data migration'],
 		brandColor: '#6e2e5e',
 		onBrand: 'light',

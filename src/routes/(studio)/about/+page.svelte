@@ -6,7 +6,7 @@
 	import { SITE_KEYWORDS } from '$lib/shared/constants';
 
 	const intro =
-		"I'm Emmanuel Yeboah, a product engineer based in Accra, Ghana. I've been writing software since 2018.";
+		"I'm Emmanuel Noel Zappy Yeboah, a product engineer based in Accra, Ghana. I've been writing software since 2018.";
 
 	const structuredData = {
 		'@context': 'https://schema.org',

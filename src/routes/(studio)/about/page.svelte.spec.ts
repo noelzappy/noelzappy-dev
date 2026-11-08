@@ -48,6 +48,13 @@ describe('/about', () => {
 		expect(container.querySelector('.intro')!.textContent).toContain('product engineer');
 	});
 
+	it('introduces me by full name', async () => {
+		const { container } = render(Page);
+		expect(container.querySelector('.intro')!.textContent).toContain(
+			"I'm Emmanuel Noel Zappy Yeboah, a product engineer based in Accra, Ghana."
+		);
+	});
+
 	it('emits Person structured data with the product engineer title', async () => {
 		render(Page);
 		const ld = [...document.head.querySelectorAll('script[type="application/ld+json"]')]

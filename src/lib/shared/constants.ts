@@ -1,9 +1,9 @@
 export const SITE_URL = 'https://noelzappy.dev';
 
-export const SITE_TITLE = 'Emmanuel Yeboah — Product Engineer · Mobile, Web & Backend';
+export const SITE_TITLE = 'Emmanuel Yeboah · Product Engineer · Mobile, Web & Backend';
 
 export const SITE_DESCRIPTION =
-	'I design and build software products end to end — mobile apps, web platforms and the backends behind them — and ship them to production. Best at products that move money.';
+	"I design and build software products end to end: mobile apps, web platforms and the backends behind them. I ship them to production and I'm best at products that move money.";
 
 export const SITE_KEYWORDS = [
 	'Emmanuel Yeboah',

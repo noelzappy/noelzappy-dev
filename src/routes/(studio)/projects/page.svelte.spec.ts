@@ -55,7 +55,7 @@ describe('/projects +page.svelte', () => {
 		render(Page, { data } as never);
 		await expect
 			.element(page.getByRole('heading', { level: 1 }))
-			.toHaveTextContent('Selected work — from first app to production.');
+			.toHaveTextContent('Selected work: from first app to production.');
 		await expect
 			.element(page.getByRole('link', { name: 'Phone App', exact: true }))
 			.toBeInTheDocument();
