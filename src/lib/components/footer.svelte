@@ -89,14 +89,16 @@
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0 1rem;
-		margin-inline-end: auto;
+		gap: 0;
+		margin-inline: -0.5rem auto;
 	}
 	.links a {
 		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		min-width: var(--tap-min);
 		min-height: var(--tap-min);
+		padding-inline: 0.5rem;
 		color: var(--muted);
 		text-decoration: none;
 	}
