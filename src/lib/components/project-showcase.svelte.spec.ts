@@ -10,6 +10,10 @@ const phone1 = { src: '/portfolio/rbl-quick-match.webp', alt: 'RBL quick match' 
 const phone2 = { src: '/portfolio/rbl-messages.webp', alt: 'RBL messages' };
 const phone3 = { src: '/portfolio/built-wallet.webp', alt: 'Built wallet' };
 
+/** Images that are actually laid out (the compact/full twin that is swapped out is display:none). */
+const visibleImgs = (root: HTMLElement) =>
+	[...root.querySelectorAll('img')].filter((img) => img.getClientRects().length > 0);
+
 beforeEach(async () => {
 	// Wide field: the full composition. Narrow (compact) fields are covered at the end.
 	await page.viewport(1200, 900);
@@ -128,7 +132,7 @@ describe('project-showcase.svelte', () => {
 					await settle();
 					const field = root.getBoundingClientRect();
 					expect(field.width).toBeCloseTo(width, 0);
-					const imgs = [...root.querySelectorAll('img')];
+					const imgs = visibleImgs(root);
 					expect(imgs.length).toBeGreaterThan(0);
 					for (const img of imgs) {
 						const r = img.getBoundingClientRect();
@@ -205,19 +209,64 @@ describe('ProjectShowcase on a narrow field', () => {
 		await page.viewport(375, 812);
 	});
 
-	it('draws at most two phones, each at least 140px wide', async () => {
+	it('case: draws at most two phones, each at least 140px wide', () => {
 		const { container } = render(ProjectShowcase, { showcase: compositions.phones, size: 'case' });
-		await expect.poll(() => container.querySelectorAll('img').length).toBe(2);
-		for (const img of container.querySelectorAll('img'))
-			expect(img.getBoundingClientRect().width).toBeGreaterThanOrEqual(140);
+		const imgs = visibleImgs(container);
+		expect(imgs).toHaveLength(2);
+		for (const img of imgs) expect(img.getBoundingClientRect().width).toBeGreaterThanOrEqual(140);
 	});
 
-	it('draws a web-phones composition as its web screen alone', async () => {
+	it('case: draws a web-phones composition as its web screen alone', () => {
 		const { container } = render(ProjectShowcase, {
 			showcase: compositions['web-phones'],
 			size: 'case'
 		});
-		await expect.poll(() => container.querySelectorAll('img').length).toBe(1);
-		expect(container.querySelector('.showcase')?.getAttribute('data-layout')).toBe('web');
+		expect(visibleImgs(container)).toHaveLength(1);
+	});
+
+	it('case: the initial markup already shows the compact composition, and the field never resizes', async () => {
+		const ratio = 1080 / 496;
+		const shot = (n: string) => ({ src: `/portfolio/kekeh-mac/${n}.webp`, alt: n, ratio });
+		const { container } = render(ProjectShowcase, {
+			showcase: {
+				layout: 'phones',
+				phones: [
+					shot('passenger-11-tracking-driver-on-the-way'),
+					shot('driver-05-heading-to-pickup'),
+					shot('passenger-03-home')
+				]
+			},
+			size: 'case'
+		});
+		const field = container.querySelector('.showcase') as HTMLElement;
+		// Synchronously after render: nothing has loaded, no measuring has happened.
+		expect(visibleImgs(container)).toHaveLength(2);
+		const before = field.getBoundingClientRect().height;
+		await Promise.all(
+			[...container.querySelectorAll('img')].map((i) =>
+				i.complete ? 0 : new Promise((r) => i.addEventListener('load', r))
+			)
+		);
+		await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+		expect(field.getBoundingClientRect().height).toBeCloseTo(before, 0);
+		expect(visibleImgs(container)).toHaveLength(2);
+	});
+
+	it('row: keeps its full composition at narrow widths', () => {
+		const { container } = render(ProjectShowcase, {
+			showcase: compositions.phones,
+			size: 'row'
+		});
+		expect(container.querySelectorAll('img')).toHaveLength(3);
+		expect(visibleImgs(container)).toHaveLength(3);
+	});
+
+	it('hero: keeps its full composition at narrow widths', () => {
+		const { container } = render(ProjectShowcase, {
+			showcase: compositions['web-phones'],
+			size: 'hero'
+		});
+		expect(container.querySelectorAll('img')).toHaveLength(3);
+		expect(container.querySelector('.showcase')?.getAttribute('data-layout')).toBe('web-phones');
 	});
 });

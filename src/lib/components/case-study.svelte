@@ -270,7 +270,7 @@
 		margin-block: 2rem;
 		container-type: inline-size;
 	}
-	/* Narrow screens: two phones' worth of width each (>= ~140px), the row scrolls and snaps. */
+	/* Narrow screens: ~2.2 phones show (each >= ~140px) so the third is seen to be there; the row snaps. */
 	@media (max-width: 40rem) {
 		.prose :global(.shots-row) {
 			display: flex;
@@ -280,8 +280,8 @@
 			padding-bottom: 0.5rem;
 		}
 		.prose :global(.shots-row img) {
-			flex: 0 0 calc((100cqw - clamp(0.5rem, 2.5vw, 1.25rem)) / 2);
-			width: calc((100cqw - clamp(0.5rem, 2.5vw, 1.25rem)) / 2);
+			flex: 0 0 calc((100cqw - 2 * clamp(0.5rem, 2.5vw, 1.25rem)) / 2.2);
+			width: calc((100cqw - 2 * clamp(0.5rem, 2.5vw, 1.25rem)) / 2.2);
 			scroll-snap-align: start;
 		}
 	}

@@ -52,25 +52,23 @@
 	type Placed = { src: string; alt: string; x: number; y: number; ratio: number };
 	type Plan = { width: number; height: number; web?: Placed; phones: Placed[]; cap: number };
 
-	/** The field's own width, 0 until measured (prerender), so SSR draws the full composition. */
-	let width = $state(0);
-	/** At or under this the composition is trimmed so each phone stays legible (>= ~140px). */
-	const COMPACT_PX = 640;
-	const compact = $derived(width > 0 && width <= COMPACT_PX);
+	const resolved = $derived(resolveShowcase(showcase));
 
 	/**
-	 * On a narrow field: at most 2 phones, and a web screen goes without its phones (beside one it
-	 * would leave the phone ~80px wide). Decided in the plan, not hidden by CSS, so the field's height
-	 * and the morph target always match what is drawn.
+	 * The narrow-field composition (case study only): at most 2 phones, and a web screen goes without
+	 * its phones (beside one it would leave the phone ~80px wide). It is a second plan drawn beside
+	 * the full one and swapped by a container query, so prerendered HTML and no-JS pages already show
+	 * the right one and nothing reflows on hydration. `null` when it would equal the full plan.
 	 */
-	const resolved = $derived.by(() => {
-		const full = resolveShowcase(showcase);
-		if (!full || !compact) return full;
-		if (full.layout === 'web-phones') return { layout: 'web' as const, web: full.web };
-		return { ...full, phones: full.phones?.slice(0, 2) };
+	const compactResolved = $derived.by<Showcase | null>(() => {
+		if (size !== 'case' || !resolved) return null;
+		if (resolved.layout === 'web-phones') return { layout: 'web', web: resolved.web };
+		if ((resolved.phones?.length ?? 0) > 2)
+			return { ...resolved, phones: resolved.phones?.slice(0, 2) };
+		return null;
 	});
 
-	const plan = $derived.by<Plan | null>(() => {
+	function buildPlan(resolved: Showcase | null): Plan | null {
 		if (!resolved) return null;
 		const phones = (resolved.phones ?? []).map((p) => ({
 			...p,
@@ -125,15 +123,56 @@
 			phones: [],
 			cap: MAX_WEB_PX
 		};
-	});
+	}
+	const plan = $derived(buildPlan(resolved));
+	const compactPlan = $derived(buildPlan(compactResolved));
 
 	const loading = $derived(size === 'row' || deferred ? 'lazy' : 'eager');
 	const priority = $derived(deferred ? 'low' : undefined);
 </script>
 
+{#snippet composition(plan: Plan, compact: boolean)}
+	<div
+		class="composition"
+		class:comp-full={!compact}
+		class:comp-compact={compact}
+		style:--wc={plan.width}
+		style:--ar={plan.width / plan.height}
+		style:--cap="{plan.cap}px"
+	>
+		{#if plan.web}
+			<div class="web" style:--x={plan.web.x} style:--y={plan.web.y}>
+				<img
+					use:measure={plan.web.src}
+					src={plan.web.src}
+					alt={plan.web.alt}
+					{loading}
+					fetchpriority={priority}
+					decoding="async"
+					draggable="false"
+					style:aspect-ratio={1 / plan.web.ratio}
+				/>
+			</div>
+		{/if}
+		{#each plan.phones as phone, i (i)}
+			<div class="phone" style:--x={phone.x} style:--y={phone.y} style:--i={i}>
+				<img
+					use:measure={phone.src}
+					src={phone.src}
+					alt={phone.alt}
+					{loading}
+					fetchpriority={priority}
+					decoding="async"
+					draggable="false"
+					style:aspect-ratio={1 / phone.ratio}
+				/>
+			</div>
+		{/each}
+	</div>
+{/snippet}
+
 <div
 	class="showcase {size}"
-	bind:clientWidth={width}
 	style:background={brandColor}
 	style:view-transition-name={name}
 	data-showcase-name={name}
@@ -141,41 +180,8 @@
 >
 	{#if plan}
 		<div class="stage">
-			<div
-				class="composition"
-				style:--wc={plan.width}
-				style:--ar={plan.width / plan.height}
-				style:--cap="{plan.cap}px"
-			>
-				{#if plan.web}
-					<div class="web" style:--x={plan.web.x} style:--y={plan.web.y}>
-						<img
-							use:measure={plan.web.src}
-							src={plan.web.src}
-							alt={plan.web.alt}
-							{loading}
-							fetchpriority={priority}
-							decoding="async"
-							draggable="false"
-							style:aspect-ratio={1 / plan.web.ratio}
-						/>
-					</div>
-				{/if}
-				{#each plan.phones as phone, i (i)}
-					<div class="phone" style:--x={phone.x} style:--y={phone.y} style:--i={i}>
-						<img
-							use:measure={phone.src}
-							src={phone.src}
-							alt={phone.alt}
-							{loading}
-							fetchpriority={priority}
-							decoding="async"
-							draggable="false"
-							style:aspect-ratio={1 / phone.ratio}
-						/>
-					</div>
-				{/each}
-			</div>
+			{@render composition(plan, false)}
+			{#if compactPlan}{@render composition(compactPlan, true)}{/if}
 		</div>
 	{/if}
 </div>
@@ -190,12 +196,25 @@
 	}
 	/* Sized by its composition, so it is a container for the composition's cqw. */
 	.showcase.case {
-		container-type: inline-size;
+		container: showcase / inline-size;
 		--padx: 6cqw;
 		--pady: 3.5cqw;
 	}
 	.showcase.hero {
 		height: 100%;
+	}
+
+	/* The compact composition only exists to be shown on a narrow case field. */
+	.comp-compact {
+		display: none;
+	}
+	@container showcase (max-width: 640px) {
+		.comp-full:not(:only-child) {
+			display: none;
+		}
+		.comp-compact {
+			display: block;
+		}
 	}
 
 	/* The field's padding: the composition never touches its edge. Percentages resolve per axis. */

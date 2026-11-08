@@ -136,9 +136,10 @@ describe('CaseStudy', () => {
 			]
 		});
 		const field = container.querySelector('.showcase') as HTMLElement;
-		await expect.poll(() => field.querySelectorAll('img').length).toBe(2);
+		const shown = [...field.querySelectorAll('img')].filter((i) => i.getClientRects().length > 0);
+		expect(shown).toHaveLength(2);
 		const f = field.getBoundingClientRect();
-		for (const img of field.querySelectorAll('img')) {
+		for (const img of shown) {
 			const r = img.getBoundingClientRect();
 			expect(r.width).toBeGreaterThanOrEqual(140);
 			expect(r.left).toBeGreaterThanOrEqual(f.left);
