@@ -34,7 +34,7 @@
 	<div class="story-grid">
 		<img
 			class="portrait"
-			src="/zappy-face.jpg"
+			src="/emmanuel_yeboah.webp"
 			width="605"
 			height="607"
 			alt="Emmanuel Yeboah"

@@ -20,7 +20,7 @@
 			when: 'You have an idea, or a prototype that has outgrown its first version, and no engineering team yet. I take it from the first screen to a release in the app stores: the mobile app, the web app, the backend and the admin your team will run it from.',
 			proof: [
 				{ label: 'Kekeh Mac', href: '/projects/kekeh-mac' },
-				{ label: 'Givio', href: '/projects/givio-platform' },
+				{ label: 'PayLte', href: '/projects/paylte' },
 				{ label: 'GrowingGift', href: '/projects/growinggift-platform' }
 			]
 		},
@@ -46,10 +46,10 @@
 
 	const CAPABILITIES = [
 		{ group: 'Mobile', items: 'Expo / React Native' },
-		{ group: 'Web', items: 'Next.js, SvelteKit, TanStack' },
-		{ group: 'Backend', items: 'Go, NestJS, Node' },
-		{ group: 'Payments & fintech', items: 'Ledgers, MoMo, Paystack, Hubtel, KYC' },
-		{ group: 'Infra', items: 'Dokploy, Cloudflare, DigitalOcean' },
+		{ group: 'Web', items: 'React, Next.js, SvelteKit, TanStack' },
+		{ group: 'Backend', items: 'Go, NestJS, Node, FastAPI' },
+		{ group: 'Payments & fintech', items: 'Ledgers, MoMo, KYC' },
+		{ group: 'Infra', items: 'AWS, GCP, Docker' },
 		{ group: 'AI', items: 'Agents, LLM guardrails' }
 	];
 
