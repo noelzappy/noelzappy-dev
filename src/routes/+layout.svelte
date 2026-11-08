@@ -4,10 +4,13 @@
 	import Footer from '$lib/components/footer.svelte';
 
 	import { setupPageReveal } from '$lib/transitions/page-reveal';
+	import { scheduleCalEmbed } from '$lib/cal.js';
+	import { onMount } from 'svelte';
 
 	let { children, data } = $props();
 
 	setupPageReveal(() => new Set(data.writeups));
+	onMount(scheduleCalEmbed);
 </script>
 
 <svelte:head>

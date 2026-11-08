@@ -284,3 +284,24 @@ describe('getStripScreens', () => {
 		expect(screens.some((s) => s.kind === 'phone')).toBe(true);
 	});
 });
+
+describe('getStripScreens links', () => {
+	const shot = (n: number) => ({ src: `/p${n}.webp`, alt: '' });
+	const phones = { layout: 'phones' as const, phones: [shot(1)] };
+	it('links a screen to its case study, else the live site, else the work index', () => {
+		const screens = getStripScreens([
+			{ slug: 'a', html: '<p>x</p>', showcase: { layout: 'phones', phones: [shot(1)] } },
+			{
+				slug: 'b',
+				html: '  ',
+				liveUrl: 'https://b.test',
+				showcase: { layout: 'phones', phones: [shot(2)] }
+			},
+			{ slug: 'c', html: '', showcase: { layout: 'phones', phones: [shot(3)] } }
+		]);
+		expect(screens.map((s) => s.href)).toEqual(['/projects/a', 'https://b.test', '/projects']);
+	});
+	it('leaves href off when the project has no slug', () => {
+		expect(getStripScreens([{ showcase: phones }])[0].href).toBeUndefined();
+	});
+});

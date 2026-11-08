@@ -2,8 +2,10 @@
 	import type { StripScreen } from '$lib/data/showcase';
 
 	/**
-	 * A calm band of real product screens drifting left in one seamless loop. Purely decorative:
-	 * aria-hidden and inert, so it never takes focus or reaches a screen reader.
+	 * A calm band of real product screens drifting left in one seamless loop. Decorative for assistive
+	 * tech: aria-hidden, and its links are tabindex -1, so it never takes focus or reaches a screen
+	 * reader (the hero pills give the same navigation). Pointer and touch users can click a screen to
+	 * open its project, so the strip is not inert; the drift pauses while it is hovered.
 	 *
 	 * The track holds two identical copies of the screens and slides by exactly one copy's width, so
 	 * the loop has no seam. Each screen has one shared height; its width follows its image's real
@@ -37,7 +39,19 @@
 	const copy = $derived(Array.from({ length: reps }, () => screens).flat());
 </script>
 
-<div class="strip" class:hidden aria-hidden="true" inert>
+{#snippet shot(src: string, eager: boolean, priority: 'high' | 'low' | undefined)}
+	<img
+		use:measure={src}
+		{src}
+		alt=""
+		loading={eager ? 'eager' : 'lazy'}
+		fetchpriority={priority}
+		decoding="async"
+		draggable="false"
+	/>
+{/snippet}
+
+<div class="strip" class:hidden aria-hidden="true">
 	<div class="track" class:paused>
 		{#each [0, 1] as c (c)}
 			<div class="copy" data-copy={c}>
@@ -48,17 +62,24 @@
 						(screen.kind === 'phone' ? PHONE_NOMINAL : WEB_NOMINAL)}
 					{@const eager = c === 0 && i < EAGER}
 					{@const priority = eager ? (i === 0 ? 'high' : undefined) : 'low'}
-					<div class="screen {screen.kind}" style:aspect-ratio={1 / ratio}>
-						<img
-							use:measure={screen.src}
-							src={screen.src}
-							alt=""
-							loading={eager ? 'eager' : 'lazy'}
-							fetchpriority={priority}
-							decoding="async"
-							draggable="false"
-						/>
-					</div>
+					{#if screen.href}
+						<a
+							class="screen {screen.kind}"
+							style:aspect-ratio={1 / ratio}
+							href={screen.href}
+							tabindex="-1"
+							aria-hidden="true"
+							{...screen.href.startsWith('/')
+								? { 'data-sveltekit-preload-data': 'hover' }
+								: { target: '_blank', rel: 'noopener noreferrer' }}
+						>
+							{@render shot(screen.src, eager, priority)}
+						</a>
+					{:else}
+						<div class="screen {screen.kind}" style:aspect-ratio={1 / ratio}>
+							{@render shot(screen.src, eager, priority)}
+						</div>
+					{/if}
 				{/each}
 			</div>
 		{/each}
@@ -91,6 +112,11 @@
 	.track.paused {
 		animation-play-state: paused;
 	}
+	@media (hover: hover) {
+		.strip:hover .track {
+			animation-play-state: paused;
+		}
+	}
 	.copy {
 		display: flex;
 		flex: none;
@@ -111,6 +137,10 @@
 		height: var(--h);
 		box-shadow: var(--shadow-screen);
 		line-height: 0;
+	}
+	a.screen {
+		display: block;
+		cursor: pointer;
 	}
 	img {
 		display: block;

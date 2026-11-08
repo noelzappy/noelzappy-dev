@@ -4,6 +4,7 @@ import { page } from 'vitest/browser';
 import '../../routes/layout.css';
 import CaseStudy from './case-study.svelte';
 import { showcaseName } from '$lib/motion/shared';
+import { morphSlug } from '$lib/transitions/page-reveal';
 
 const base = {
 	title: 'Kekeh Mac',
@@ -171,5 +172,70 @@ describe('CaseStudy', () => {
 			expect(r.left).toBeGreaterThanOrEqual(rr.left - 1);
 			expect(r.right).toBeLessThanOrEqual(rr.right + 1);
 		}
+	});
+
+	describe('Next block', () => {
+		const next = {
+			slug: 'susupaa-platform',
+			title: 'SusuPaa Platform',
+			brandColor: '#1d4ed8',
+			onBrand: 'light' as const,
+			showcase: {
+				layout: 'phones' as const,
+				phones: [{ src: '/portfolio/kekeh-mac/driver-11-wallet.webp', alt: 'Wallet' }]
+			}
+		};
+
+		it('is one link carrying the next project showcase, named for its slug', () => {
+			const { container } = render(CaseStudy, { ...base, next });
+			const links = container.querySelectorAll('.next a');
+			expect(links).toHaveLength(1);
+			const link = links[0] as HTMLAnchorElement;
+			expect(link.getAttribute('href')).toBe('/projects/susupaa-platform');
+			const named = link.querySelector('[data-showcase-name]');
+			expect(named?.getAttribute('data-showcase-name')).toBe(showcaseName('susupaa-platform'));
+			expect(link.textContent).toContain('SusuPaa Platform');
+		});
+
+		it('keeps every view-transition-name unique: the top and the next differ', () => {
+			const { container } = render(CaseStudy, { ...base, next });
+			const names = [...container.querySelectorAll('[data-showcase-name]')].map((el) =>
+				el.getAttribute('data-showcase-name')
+			);
+			expect(names).toEqual([showcaseName('kekeh-mac'), showcaseName('susupaa-platform')]);
+			const computed = [...container.querySelectorAll('*')]
+				.map((el) => getComputedStyle(el).viewTransitionName)
+				.filter((n) => n && n !== 'none');
+			expect(new Set(computed).size).toBe(computed.length);
+		});
+
+		it('makes the morph the chosen transition for that navigation', () => {
+			const { container } = render(CaseStudy, { ...base, next });
+			const slug = morphSlug(
+				new URL('https://x/projects/susupaa-platform'),
+				new Set(['susupaa-platform']),
+				container
+			);
+			expect(slug).toBe('susupaa-platform');
+		});
+
+		it('shows the brand field and an initial when the next project has no screens', () => {
+			const { container } = render(CaseStudy, {
+				...base,
+				next: { slug: 'susupaa-platform', title: 'SusuPaa Platform', brandColor: '#1d4ed8' }
+			});
+			const link = container.querySelector('.next a') as HTMLElement;
+			expect(link.querySelector('[data-showcase-name]')).toBeNull();
+			expect(link.querySelector('.initial')?.textContent).toBe('S');
+		});
+
+		it('is just the title link when the next project has no brand field', () => {
+			const { container } = render(CaseStudy, {
+				...base,
+				next: { slug: 'susupaa-platform', title: 'SusuPaa Platform' }
+			});
+			expect(container.querySelectorAll('.next a')).toHaveLength(1);
+			expect(container.querySelector('.next [data-showcase-name]')).toBeNull();
+		});
 	});
 });

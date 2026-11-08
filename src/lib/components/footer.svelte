@@ -1,12 +1,14 @@
 <script lang="ts">
 	import LocalTime from './local-time.svelte';
+	import CalButton from './CalButton.svelte';
+	import { CAL_EVENTS } from '$lib/cal.js';
 </script>
 
 <footer class="footer">
 	<div class="inner">
 		<h2 class="display">Have something to build?</h2>
 		<div class="big-links">
-			<a href="/work-with-me#call">Book a 15-minute call</a>
+			<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" plain />
 			<a href="mailto:emmanuel@noelzappy.com">emmanuel@noelzappy.com</a>
 		</div>
 		<div class="meta">
@@ -50,7 +52,8 @@
 		flex-direction: column;
 		gap: 0.25rem;
 	}
-	.big-links a {
+	.big-links a,
+	.big-links :global(.cal-link) {
 		width: fit-content;
 		max-width: 100%;
 		overflow-wrap: anywhere;
@@ -63,7 +66,9 @@
 		transition: color 0.2s ease;
 	}
 	.big-links a:hover,
-	.big-links a:focus-visible {
+	.big-links a:focus-visible,
+	.big-links :global(.cal-link:hover),
+	.big-links :global(.cal-link:focus-visible) {
 		color: var(--fg);
 	}
 	.meta {
@@ -93,7 +98,8 @@
 		margin: 0;
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.big-links a {
+		.big-links a,
+		.big-links :global(.cal-link) {
 			transition: none;
 		}
 	}

@@ -16,7 +16,7 @@ describe('/contact', () => {
 	it('offers the email address and the booking button', async () => {
 		const { container } = render(Page);
 		expect(container.querySelector('a[href="mailto:emmanuel@noelzappy.com"]')).not.toBeNull();
-		expect(container.querySelector('button')!.textContent).toContain('15-minute');
+		expect(container.querySelector('[data-cal-link]')!.textContent).toContain('15-minute');
 	});
 
 	it('emits ContactPage structured data', async () => {

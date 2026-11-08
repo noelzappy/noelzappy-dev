@@ -1,7 +1,6 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import CalButton from '$lib/components/CalButton.svelte';
-	import CalEmbed from '$lib/components/cal-embed.svelte';
 	import InquiryForm from '$lib/components/inquiry-form.svelte';
 	import PageHeader from '$lib/components/page-header.svelte';
 	import Section from '$lib/components/section.svelte';
@@ -80,7 +79,6 @@
 	const n = (i: number) => String(i + 1).padStart(2, '0');
 </script>
 
-<CalEmbed />
 <SEOHead
 	title="Work with me | Emmanuel Yeboah"
 	{description}

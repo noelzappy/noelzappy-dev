@@ -44,7 +44,24 @@ export function getShowcase(project: {
 
 /** One screen in the homepage's drifting work strip. */
 /** `ratio` is height / width when known, so the strip can size a screen before its image loads. */
-export type StripScreen = { src: string; kind: 'phone' | 'web'; ratio?: number };
+export type StripScreen = {
+	src: string;
+	kind: 'phone' | 'web';
+	ratio?: number;
+	/** Where a click on the screen leads; absent when the project has nowhere to send it. */
+	href?: string;
+};
+
+/** The case study when there is a writeup, else the live site, else the work index. */
+function stripHref(project: {
+	slug?: string;
+	html?: string;
+	liveUrl?: string;
+}): string | undefined {
+	if (!project.slug) return undefined;
+	if (project.html?.trim()) return `/projects/${project.slug}`;
+	return project.liveUrl || '/projects';
+}
 
 /**
  * The screens for the drifting strip, interleaved across projects so web screens and phones
@@ -53,13 +70,21 @@ export type StripScreen = { src: string; kind: 'phone' | 'web'; ratio?: number }
  * sources are dropped.
  */
 export function getStripScreens(
-	projects: { showcase?: Showcase; deviceShots?: DeviceShot[] }[]
+	projects: {
+		slug?: string;
+		html?: string;
+		liveUrl?: string;
+		showcase?: Showcase;
+		deviceShots?: DeviceShot[];
+	}[]
 ): StripScreen[] {
 	const lanes = projects.map((project) => {
 		const showcase = getShowcase(project);
+		const href = stripHref(project);
 		const screens: StripScreen[] = [];
-		if (showcase?.web) screens.push({ src: showcase.web.src, kind: 'web' });
-		for (const phone of showcase?.phones ?? []) screens.push({ src: phone.src, kind: 'phone' });
+		if (showcase?.web) screens.push({ src: showcase.web.src, kind: 'web', ...(href && { href }) });
+		for (const phone of showcase?.phones ?? [])
+			screens.push({ src: phone.src, kind: 'phone', ...(href && { href }) });
 		return screens;
 	});
 	const out: StripScreen[] = [];

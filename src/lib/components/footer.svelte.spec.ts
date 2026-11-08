@@ -15,10 +15,9 @@ describe('footer.svelte', () => {
 			.toBeInTheDocument();
 	});
 
-	it('has the booking and email links', async () => {
+	it('has the booking button and email link', async () => {
 		render(Footer);
 		await expect.element(page.getByRole('link', { name: 'Book a 15-minute call' })).toBeVisible();
-		expect(href('Book a 15-minute call')).toBe('/work-with-me#call');
 		expect(href('emmanuel@noelzappy.com')).toBe('mailto:emmanuel@noelzappy.com');
 	});
 

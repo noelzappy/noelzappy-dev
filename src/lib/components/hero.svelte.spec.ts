@@ -239,15 +239,23 @@ describe('hero.svelte', () => {
 				(el) => rectOf(el).right > 0 && rectOf(el).left < window.innerWidth
 			);
 
-		it('is aria-hidden, inert, non-empty and holds nothing focusable', async () => {
+		it('is aria-hidden, not inert (so it can be clicked), non-empty and never takes focus', async () => {
 			const { root } = setup();
 			const strip = root.querySelector('.strip') as HTMLElement;
 			expect(strip.getAttribute('aria-hidden')).toBe('true');
-			expect(strip.inert).toBe(true);
+			expect(strip.inert).toBe(false);
 			expect(strip.querySelectorAll('img').length).toBeGreaterThan(0);
-			expect(strip.querySelectorAll('a, button, input, select, textarea, [tabindex]').length).toBe(
-				0
-			);
+			expect(strip.querySelectorAll('button, input, select, textarea').length).toBe(0);
+			// Pointer-only links: out of the tab order and the accessibility tree.
+			for (const link of strip.querySelectorAll('a')) {
+				expect(link.getAttribute('tabindex')).toBe('-1');
+				expect(link.getAttribute('aria-hidden')).toBe('true');
+			}
+			expect(
+				[...strip.querySelectorAll('[tabindex]')].every(
+					(el) => el.getAttribute('tabindex') === '-1'
+				)
+			).toBe(true);
 			// Decorative: every image has an empty alt.
 			for (const img of strip.querySelectorAll('img')) expect(img.getAttribute('alt')).toBe('');
 		});
