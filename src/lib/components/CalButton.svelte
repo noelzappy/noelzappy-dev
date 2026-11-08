@@ -15,6 +15,9 @@
 	// Without JS, before hydration, or when the embed cannot load, the link simply opens cal.com.
 	function bookOnClick(node: HTMLAnchorElement) {
 		const onClick = (event: MouseEvent) => {
+			// Modified or non-primary clicks keep normal link behaviour (open cal.com in a new tab).
+			if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+				return;
 			if (!openCal(calLink, config)) return;
 			event.preventDefault();
 			event.stopPropagation();
