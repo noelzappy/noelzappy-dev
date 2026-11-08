@@ -41,3 +41,36 @@ export function getShowcase(project: {
 	if (phones.length) return { layout: 'phones', phones };
 	return null;
 }
+
+/** One screen in the homepage's drifting work strip. */
+export type StripScreen = { src: string; kind: 'phone' | 'web' };
+
+/**
+ * The screens for the drifting strip, interleaved across projects so web screens and phones
+ * alternate and no project clumps together: every project's first screen (web first, then its
+ * phones), then the second screens, and so on, in the order the projects are given. Duplicate
+ * sources are dropped.
+ */
+export function getStripScreens(
+	projects: { showcase?: Showcase; deviceShots?: DeviceShot[] }[]
+): StripScreen[] {
+	const lanes = projects.map((project) => {
+		const showcase = getShowcase(project);
+		const screens: StripScreen[] = [];
+		if (showcase?.web) screens.push({ src: showcase.web.src, kind: 'web' });
+		for (const phone of showcase?.phones ?? []) screens.push({ src: phone.src, kind: 'phone' });
+		return screens;
+	});
+	const out: StripScreen[] = [];
+	const seen = new Set<string>();
+	for (let round = 0; lanes.some((lane) => round < lane.length); round++) {
+		for (const lane of lanes) {
+			const screen = lane[round];
+			if (screen && !seen.has(screen.src)) {
+				seen.add(screen.src);
+				out.push(screen);
+			}
+		}
+	}
+	return out;
+}

@@ -1,27 +1,36 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import type { PillProject } from '$lib/data/projects';
-	import { getShowcase } from '$lib/data/showcase';
+	import { getShowcase, getStripScreens, type StripScreen } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
+	import WorkStrip from './work-strip.svelte';
 
 	/**
-	 * One-screen homepage hero. Default: a huge light headline, a short intro and a column of project
-	 * pills. Hovering or focusing a pill turns the whole hero into that project: a flat brand-colour
-	 * field, the project name, one line, what was built, and device screens rising from the bottom.
-	 * On phones the pills become a horizontal scroll row and the active state is switched off, so a
-	 * tap simply navigates.
+	 * One-screen homepage hero with no dead space. Default: a band of real product screens drifting
+	 * under the header, then a huge light headline (scaled with the viewport) with the intro beside
+	 * it, then the project pills. Hovering or focusing a pill turns the whole hero into that project:
+	 * a flat brand-colour field, the project's composition large and centred in the right half, and
+	 * its name, one line and what was built on the left above the pills. On phones the pills become a
+	 * horizontal scroll row and the active state is switched off, so a tap simply navigates.
 	 */
 	let {
 		pills,
 		headline,
-		intro
-	}: { pills: PillProject[]; headline: string | Snippet; intro: string } = $props();
+		intro,
+		screens
+	}: { pills: PillProject[]; headline: string | Snippet; intro: string; screens?: StripScreen[] } =
+		$props();
+
+	const stripScreens = $derived(screens?.length ? screens : getStripScreens(pills));
 
 	// Text colours for `onBrand`. Contrast against the brand fields is checked in the task report.
 	const ON_BRAND = { dark: '#0e0e0d', light: '#f3efe6' } as const;
 
 	let activeSlug = $state('');
 	let phone = $state(false);
+	/** The pointer or focus is in the pill list: the strip holds still. */
+	let engaged = $state(false);
+	let tabHidden = $state(false);
 
 	const active = $derived(pills.find((p) => p.slug === activeSlug && p.brandColor && p.onBrand));
 
@@ -33,7 +42,13 @@
 		};
 		sync();
 		query.addEventListener('change', sync);
-		return () => query.removeEventListener('change', sync);
+		const visibility = () => (tabHidden = document.hidden);
+		visibility();
+		document.addEventListener('visibilitychange', visibility);
+		return () => {
+			query.removeEventListener('change', sync);
+			document.removeEventListener('visibilitychange', visibility);
+		};
 	});
 
 	// The overlay header sits outside the hero; tell it which tone reads on the current field.
@@ -60,7 +75,14 @@
 	}
 	function leaveList(event: FocusEvent & { currentTarget: HTMLElement }) {
 		const next = event.relatedTarget as Node | null;
-		if (!next || !event.currentTarget.contains(next)) reset();
+		if (!next || !event.currentTarget.contains(next)) {
+			engaged = false;
+			reset();
+		}
+	}
+	function leavePointer() {
+		engaged = false;
+		reset();
 	}
 </script>
 
@@ -70,52 +92,57 @@
 	style:--hero-bg={active?.brandColor}
 	style:--hero-fg={active?.onBrand ? ON_BRAND[active.onBrand] : undefined}
 >
-	<div class="content">
+	<WorkStrip screens={stripScreens} paused={engaged || tabHidden || !!active} hidden={!!active} />
+
+	<div class="main">
+		<h1 class="headline layer page-title" class:off={!!active}>
+			{#if typeof headline === 'string'}{headline}{:else}{@render headline()}{/if}
+		</h1>
 		<p class="intro layer" class:off={!!active}>{intro}</p>
+		{#each pills as pill (pill.slug)}
+			{@const on = active?.slug === pill.slug}
+			<div class="project layer" class:on aria-hidden="true" inert={!on}>
+				<p class="title">{pill.title}</p>
+				<p class="one-line" id="hero-desc-{pill.slug}">{pill.oneLine}</p>
+				{#if pill.built?.length}
+					<p class="built">{pill.built.join(' · ')}</p>
+				{/if}
+			</div>
+		{/each}
+	</div>
 
-		<div class="stage">
-			<h1 class="headline layer page-title" class:off={!!active}>
-				{#if typeof headline === 'string'}{headline}{:else}{@render headline()}{/if}
-			</h1>
+	<nav class="nav" aria-label="Selected work">
+		<ul
+			class="pills"
+			onmouseenter={() => (engaged = true)}
+			onmouseleave={leavePointer}
+			onfocusin={() => (engaged = true)}
+			onfocusout={leaveList}
+		>
 			{#each pills as pill (pill.slug)}
-				{@const on = active?.slug === pill.slug}
-				<div class="project layer" class:on aria-hidden="true" inert={!on}>
-					<p class="title">{pill.title}</p>
-					<p class="one-line" id="hero-desc-{pill.slug}">{pill.oneLine}</p>
-					{#if pill.built?.length}
-						<p class="built">{pill.built.join(' · ')}</p>
-					{/if}
-				</div>
-			{/each}
-		</div>
-
-		<nav class="nav" aria-label="Selected work">
-			<ul class="pills" onmouseleave={reset} onfocusout={leaveList}>
-				{#each pills as pill (pill.slug)}
-					<li>
-						<a
-							href="/projects/{pill.slug}"
-							class="pill"
-							class:current={active?.slug === pill.slug}
-							aria-describedby="hero-desc-{pill.slug}"
-							data-sveltekit-preload-data
-							onmouseenter={() => activate(pill.slug)}
-							onfocus={() => activate(pill.slug)}>{pill.title}</a
-						>
-					</li>
-				{/each}
 				<li>
 					<a
-						href="/projects"
-						class="pill all"
+						href="/projects/{pill.slug}"
+						class="pill"
+						class:current={active?.slug === pill.slug}
+						aria-describedby="hero-desc-{pill.slug}"
 						data-sveltekit-preload-data
-						onmouseenter={reset}
-						onfocus={reset}>All work <span aria-hidden="true">→</span></a
+						onmouseenter={() => activate(pill.slug)}
+						onfocus={() => activate(pill.slug)}>{pill.title}</a
 					>
 				</li>
-			</ul>
-		</nav>
-	</div>
+			{/each}
+			<li>
+				<a
+					href="/projects"
+					class="pill all"
+					data-sveltekit-preload-data
+					onmouseenter={reset}
+					onfocus={reset}>All work <span aria-hidden="true">→</span></a
+				>
+			</li>
+		</ul>
+	</nav>
 
 	<div class="shots" aria-hidden="true">
 		{#each pills as pill (pill.slug)}
@@ -130,6 +157,7 @@
 							phones: showcase.phones?.map((p) => ({ ...p, alt: '' }))
 						}}
 						size="hero"
+						deferred
 					/>
 				</div>
 			{/if}
@@ -140,80 +168,72 @@
 <style>
 	.hero {
 		--pad: clamp(1.25rem, 3vw, 2.5rem);
+		/* Headline scales with the viewport so it fills most of the content width at any size, and is
+		   capped by height so headline + pills always fit one screen. */
+		--hl: min(clamp(var(--step-display-l), 7.8vw, 14rem), 16vh);
+		--intro-w: clamp(17rem, 22vw, 34rem);
 		position: relative;
 		isolation: isolate;
 		overflow: clip;
 		min-height: 100svh;
-		display: flex;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		/* The strip takes whatever height the headline and pills leave, so nothing is left over. */
+		grid-template-rows: minmax(4.5rem, 1fr) auto auto;
+		/* Top padding clears the overlay header. */
+		padding: var(--header-h) 0 var(--pad);
 		background: var(--hero-bg, var(--bg));
 		color: var(--hero-fg, var(--fg));
 	}
-	.content {
-		position: relative;
+	.main,
+	.nav {
 		z-index: 2;
-		flex: 1;
+		padding-inline: var(--pad);
+	}
+	.main {
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
-		grid-template-rows: 1fr auto;
-		grid-template-areas:
-			'stage intro'
-			'nav nav';
+		grid-template-columns: minmax(0, 1fr) var(--intro-w);
 		column-gap: var(--pad);
-		/* Top padding clears the overlay header (~4rem tall). */
-		padding: calc(var(--header-h) + 1rem) var(--pad) var(--pad);
-	}
-	.intro {
-		grid-area: 1 / 2;
-		z-index: 1;
-		margin: 0;
-		/* Sits top-right beside the headline's row, not in a row of its own. */
-		font-size: min(var(--step-heading), 3vh);
-		line-height: 1.35;
-		letter-spacing: var(--tracking-heading);
-		max-width: 24rem;
-		justify-self: end;
-		align-self: start;
-	}
-	.stage {
-		grid-area: 1 / 1 / 2 / 3;
-		display: grid;
-		position: relative;
-		--stage-pb: 1.25rem;
-		align-items: end;
-		padding-block: 1.5rem var(--stage-pb);
-	}
-	.stage > * {
-		grid-area: 1 / 1;
+		align-items: start;
+		padding-top: 0.5rem;
 	}
 	.headline {
+		grid-area: 1 / 1;
 		margin: 0;
-		max-width: 11.5em;
 		font-family: var(--font-display);
-		/* Capped by viewport height too, so headline + pills always fit one screen. */
-		font-size: min(var(--step-display-xl), 13vh);
+		font-size: var(--hl);
 		line-height: var(--lh-display-xl);
 		letter-spacing: var(--tracking-display-xl);
 		font-weight: var(--weight-display-xl);
 	}
-	/* Out of flow, so the tallest layer never sets the stage's height; the headline does. */
+	.intro {
+		grid-area: 1 / 2;
+		margin: calc(var(--hl) * 0.2) 0 0;
+		font-size: clamp(1.05rem, 1.35vw, 1.7rem);
+		line-height: 1.35;
+		letter-spacing: var(--tracking-heading);
+	}
+	/* Out of flow, so the tallest layer never sets the row's height; the headline does. Centred on
+	   the same line as the composition (the box between the header and the bottom padding). */
 	.project {
 		position: absolute;
-		left: 0;
-		bottom: var(--stage-pb);
-		max-width: min(46rem, 58%);
+		left: var(--pad);
+		top: calc((var(--header-h) + 100% - var(--pad)) / 2);
+		transform: translateY(-50%);
+		width: calc(50% - var(--pad) * 1.5);
 		pointer-events: none;
 	}
 	.title {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: min(var(--step-display-l), 9vh);
+		font-size: min(clamp(var(--step-display-l), 8vw, 13rem), 15vh);
 		line-height: var(--lh-display-l);
 		letter-spacing: var(--tracking-display-l);
 		font-weight: var(--weight-display-l);
 	}
 	.one-line {
 		margin: 1.25rem 0 0;
-		max-width: 30rem;
+		max-width: 32rem;
 		font-size: var(--step-heading);
 		line-height: 1.35;
 		letter-spacing: var(--tracking-heading);
@@ -227,15 +247,15 @@
 	}
 
 	.nav {
-		grid-area: 2 / 1 / 3 / 3;
+		padding-top: 1.5rem;
 	}
 	.pills {
 		list-style: none;
 		margin: 0;
 		padding: 0;
 		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
+		flex-wrap: wrap;
+		align-items: center;
 		gap: 0.55rem;
 	}
 	.pill {
@@ -266,29 +286,28 @@
 		border-style: dashed;
 	}
 	@media (max-height: 820px) {
-		.pills {
-			gap: 0.4rem;
+		.nav {
+			padding-top: 1rem;
 		}
 		.pill {
 			padding: 0.4rem 1.1rem;
 		}
 	}
 
-	/* Device screens rise from the bottom-right. */
+	/* The active composition: the right half, header to bottom padding, centred inside. The
+	   composition fits itself whole inside this box by whichever axis binds first. */
 	.shots {
 		position: absolute;
-		inset: 0;
 		z-index: 1;
+		top: var(--header-h);
+		bottom: var(--pad);
+		left: 50%;
+		right: var(--pad);
 		pointer-events: none;
 	}
-	/* The composition fills this box and fits itself inside it whole. Sized by height as well as
-	   width so it never runs under the headline column or off the bottom of the screen. */
 	.shot-set {
 		position: absolute;
-		right: var(--pad);
-		bottom: var(--pad);
-		width: min(54vw, 120vh);
-		aspect-ratio: 16 / 10;
+		inset: 0;
 	}
 
 	/* One layer fades out as the next fades in. The destination state's transition wins, so hiding
@@ -325,72 +344,36 @@
 		}
 	}
 
-	/* Short desktop screens: the intro gets its own row above the stage so it can never overlap the
-	   headline, and the headline's height cap drops so the pills still fit. */
-	@media (min-width: 641px) and (max-height: 699px) {
-		.content {
-			grid-template-rows: auto 1fr auto;
-			grid-template-areas:
-				'. intro'
-				'stage stage'
-				'nav nav';
-			padding-top: var(--header-h);
+	/* Narrower than a wide desktop: the intro drops under the headline instead of beside it. */
+	@media (max-width: 1000px) {
+		.main {
+			grid-template-columns: minmax(0, 1fr);
 		}
 		.intro {
-			grid-area: intro;
-		}
-		.nav {
-			grid-area: nav;
-		}
-		.stage {
-			grid-area: stage;
-			--stage-pb: 0.75rem;
-			padding-block: 1rem var(--stage-pb);
-		}
-		.headline {
-			font-size: min(var(--step-display-xl), 9vh);
-		}
-		.title {
-			font-size: min(var(--step-display-l), 8vh);
+			grid-area: 2 / 1;
+			margin-top: 1.25rem;
+			max-width: 36rem;
 		}
 	}
 
 	@media (max-width: 640px) {
 		.hero {
-			min-height: 100svh;
-		}
-		.content {
-			grid-template-columns: minmax(0, 1fr);
-			grid-template-rows: auto 1fr auto;
-			grid-template-areas:
-				'stage'
-				'intro'
-				'nav';
-			padding-top: calc(var(--header-h) + 1rem);
-		}
-		.stage {
-			grid-area: stage;
-			align-items: start;
-			padding-block: 1.5rem 1.5rem;
+			--hl: clamp(2.4rem, 11.5vw, 3.5rem);
 		}
 		.intro {
-			grid-area: intro;
-			justify-self: start;
 			font-size: 1.05rem;
-			padding-bottom: 1.75rem;
+			padding-bottom: 1.5rem;
 		}
 		.project,
 		.shots {
 			display: none;
 		}
 		.nav {
-			grid-area: nav;
-			margin-inline: calc(var(--pad) * -1);
+			padding-inline: 0;
+			padding-top: 0;
 		}
 		.pills {
-			flex-direction: row;
-			align-items: center;
-			gap: 0.5rem;
+			flex-wrap: nowrap;
 			overflow-x: auto;
 			padding-inline: var(--pad);
 			padding-bottom: 0.25rem;

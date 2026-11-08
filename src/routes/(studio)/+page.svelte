@@ -24,6 +24,7 @@
 
 <Hero
 	pills={data.pills}
+	screens={data.screens}
 	headline="I design and build software products, end to end."
 	intro="I'm an independent product engineer. I design and build mobile apps, web platforms and the systems behind them — and ship them to production for startups and businesses."
 />

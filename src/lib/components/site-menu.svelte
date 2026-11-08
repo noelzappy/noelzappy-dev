@@ -3,7 +3,7 @@
 	import type { PillProject } from '$lib/data/projects';
 
 	export type MenuPost = PostMeta & { slug: string };
-	export type MenuPill = PillProject;
+	export type MenuPill = Pick<PillProject, 'slug' | 'title'>;
 </script>
 
 <script lang="ts">

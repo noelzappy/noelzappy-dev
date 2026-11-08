@@ -23,8 +23,10 @@
 		size: 'hero' | 'row' | 'case';
 		/** view-transition-name for the morph between hero, row and case study. */
 		name?: string;
+		/** Defer loading and fetch at low priority: for compositions that start out hidden. */
+		deferred?: boolean;
 	};
-	let { showcase, brandColor, size, name }: Props = $props();
+	let { showcase, brandColor, size, name, deferred = false }: Props = $props();
 
 	const WEB = 82;
 	const PHONE = 23;
@@ -108,7 +110,8 @@
 		};
 	});
 
-	const loading = $derived(size === 'row' ? 'lazy' : 'eager');
+	const loading = $derived(size === 'row' || deferred ? 'lazy' : 'eager');
+	const priority = $derived(deferred ? 'low' : undefined);
 </script>
 
 <div
@@ -132,6 +135,7 @@
 							src={plan.web.src}
 							alt={plan.web.alt}
 							{loading}
+							fetchpriority={priority}
 							decoding="async"
 							draggable="false"
 							style:aspect-ratio={1 / plan.web.ratio}
@@ -145,6 +149,7 @@
 							src={phone.src}
 							alt={phone.alt}
 							{loading}
+							fetchpriority={priority}
 							decoding="async"
 							draggable="false"
 							style:aspect-ratio={1 / phone.ratio}
@@ -184,6 +189,11 @@
 	}
 	.hero .stage {
 		inset: 0;
+	}
+	/* The hero is the one place a source may be drawn a little larger than its native width: it is
+	   the product at full size, and a slightly soft screen beats a big empty field. */
+	.hero .composition {
+		width: min(100cqw, calc(100cqh * var(--ar)), calc(var(--cap) * 1.4));
 	}
 	.case .stage {
 		position: static;

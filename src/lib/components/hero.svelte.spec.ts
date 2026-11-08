@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { page } from 'vitest/browser';
+import { cdp, page } from 'vitest/browser';
 import type { PillProject } from '$lib/data/projects';
 import '../../routes/layout.css';
 import Hero from './hero.svelte';
@@ -73,7 +73,16 @@ beforeEach(() => {
 afterEach(async () => {
 	noMotion.remove();
 	await page.viewport(1280, 720);
+	await emulateMotion('no-preference');
 });
+
+async function emulateMotion(value: 'reduce' | 'no-preference') {
+	await cdp().send('Emulation.setEmulatedMedia', {
+		features: [{ name: 'prefers-reduced-motion', value }]
+	});
+}
+
+const rectOf = (el: Element) => el.getBoundingClientRect();
 
 describe('hero.svelte', () => {
 	it('renders the headline as the h1, the intro, and the pill links', async () => {
@@ -180,9 +189,14 @@ describe('hero.svelte', () => {
 				pillList.top + 2
 			);
 			// Intro and headline do not collide, in the default and an active state.
-			const intro = root.querySelector('.intro')!.getBoundingClientRect();
-			const headline = root.querySelector('.headline')!.getBoundingClientRect();
-			expect(intro.bottom).toBeLessThanOrEqual(headline.top + 2);
+			const intro = rectOf(root.querySelector('.intro')!);
+			const headline = rectOf(root.querySelector('.headline')!);
+			const apart =
+				intro.bottom <= headline.top + 2 ||
+				intro.top >= headline.bottom - 2 ||
+				intro.left >= headline.right - 2 ||
+				intro.right <= headline.left + 2;
+			expect(apart).toBe(true);
 			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
 			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
 			for (const shot of root.querySelectorAll('.shot-set.on img')) {
@@ -201,4 +215,144 @@ describe('hero.svelte', () => {
 		expect(list.scrollWidth).toBeGreaterThanOrEqual(list.clientWidth);
 		expect(document.documentElement.scrollWidth).toBe(375);
 	});
+
+	describe('ambient work strip', () => {
+		const visibleShots = (root: HTMLElement) =>
+			[...root.querySelectorAll<HTMLElement>('.strip .track [data-copy="0"] .screen')].filter(
+				(el) => rectOf(el).right > 0 && rectOf(el).left < window.innerWidth
+			);
+
+		it('is aria-hidden, inert, non-empty and holds nothing focusable', async () => {
+			const { root } = setup();
+			const strip = root.querySelector('.strip') as HTMLElement;
+			expect(strip.getAttribute('aria-hidden')).toBe('true');
+			expect(strip.inert).toBe(true);
+			expect(strip.querySelectorAll('img').length).toBeGreaterThan(0);
+			expect(strip.querySelectorAll('a, button, input, select, textarea, [tabindex]').length).toBe(
+				0
+			);
+			// Decorative: every image has an empty alt.
+			for (const img of strip.querySelectorAll('img')) expect(img.getAttribute('alt')).toBe('');
+		});
+
+		it('only the first screens load eagerly; the rest are lazy and low priority', async () => {
+			const { root } = setup();
+			const imgs = [...root.querySelectorAll<HTMLImageElement>('.strip img')];
+			const eager = imgs.filter((i) => i.loading === 'eager');
+			expect(eager.length).toBeGreaterThan(0);
+			expect(eager.length).toBeLessThanOrEqual(3);
+			for (const img of imgs.filter((i) => i.loading === 'lazy'))
+				expect(img.getAttribute('fetchpriority')).toBe('low');
+		});
+
+		for (const [w, h] of [
+			[2560, 1440],
+			[1440, 900]
+		]) {
+			it(`leaves no dead band between header, strip and headline at ${w}x${h}`, async () => {
+				await page.viewport(w, h);
+				const { root } = setup();
+				await expect
+					.poll(() => visibleShots(root).length, { message: 'strip shows screens' })
+					.toBeGreaterThan(1);
+				const shots = visibleShots(root);
+				const bottom = Math.max(...shots.map((el) => rectOf(el).bottom));
+				const top = Math.min(...shots.map((el) => rectOf(el).top));
+				const headline = rectOf(root.querySelector('.headline')!);
+				const header = parseFloat(getComputedStyle(root).paddingTop);
+				expect(headline.top - bottom).toBeLessThanOrEqual(h * 0.12);
+				expect(top - (rectOf(root).top + header)).toBeLessThanOrEqual(h * 0.12);
+				// The headline is the dominant element: at least 60% of the content width.
+				const content =
+					root.clientWidth -
+					2 * parseFloat(getComputedStyle(root.querySelector('.main')!).paddingInline);
+				expect(headline.width / content).toBeGreaterThanOrEqual(0.6);
+			});
+		}
+
+		it('hides while a pill is active and pauses when the pill list is engaged', async () => {
+			// Needs real animations: the blanket reset would also reset the play state.
+			noMotion.remove();
+			const { root } = setup();
+			const strip = root.querySelector('.strip') as HTMLElement;
+			const track = strip.querySelector('.track') as HTMLElement;
+			await expect.poll(() => getComputedStyle(strip).visibility).toBe('visible');
+			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
+			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
+			await expect.poll(() => getComputedStyle(strip).visibility).toBe('hidden');
+			await expect.poll(() => getComputedStyle(track).animationPlayState).toBe('paused');
+		});
+
+		it('is static under reduced motion and animates otherwise', async () => {
+			noMotion.remove();
+			const { root } = setup();
+			const track = root.querySelector('.strip .track') as HTMLElement;
+			expect(getComputedStyle(track).animationName).not.toBe('none');
+			expect(parseFloat(getComputedStyle(track).animationDuration)).toBeGreaterThanOrEqual(60);
+			expect(parseFloat(getComputedStyle(track).animationDuration)).toBeLessThanOrEqual(90);
+			await emulateMotion('reduce');
+			await expect.poll(() => getComputedStyle(track).animationName).toBe('none');
+		});
+	});
+
+	for (const [w, h] of [
+		[1280, 600],
+		[375, 812]
+	]) {
+		it(`keeps every pill reachable at ${w}x${h}`, async () => {
+			await page.viewport(w, h);
+			const { root } = setup();
+			const list = root.querySelector('.pills') as HTMLElement;
+			expect(document.documentElement.scrollWidth).toBe(w);
+			const links = [...list.querySelectorAll('a')];
+			expect(links.length).toBe(pills.length + 1);
+			if (w <= 640) {
+				expect(list.scrollWidth).toBeGreaterThan(list.clientWidth);
+				for (const a of links) expect(rectOf(a).bottom).toBeLessThanOrEqual(h);
+			} else {
+				for (const a of links) {
+					expect(rectOf(a).bottom).toBeLessThanOrEqual(h);
+					expect(rectOf(a).right).toBeLessThanOrEqual(w);
+				}
+			}
+		});
+	}
+
+	for (const [w, h] of [
+		[1440, 900],
+		[2560, 1440]
+	]) {
+		it(`active state shows the composition whole and centred in the right half at ${w}x${h}`, async () => {
+			await page.viewport(w, h);
+			const { root } = setup();
+			for (const pill of pills) {
+				await page.getByRole('link', { name: pill.title }).hover();
+				await expect.poll(() => root.dataset.active).toBe(pill.slug);
+				const set = root.querySelector('.shot-set.on') as HTMLElement;
+				const showcase = set.querySelector('.showcase') as HTMLElement;
+				const box = rectOf(root);
+				const sc = rectOf(showcase);
+				expect(sc.left).toBeGreaterThanOrEqual(box.left + box.width * 0.45);
+				expect(sc.right).toBeLessThanOrEqual(box.right);
+				expect(sc.top).toBeGreaterThanOrEqual(box.top);
+				expect(sc.bottom).toBeLessThanOrEqual(box.bottom);
+				const comp = rectOf(showcase.querySelector('.composition')!);
+				expect(
+					Math.abs((comp.top + comp.bottom) / 2 - (sc.top + sc.bottom) / 2)
+				).toBeLessThanOrEqual(2);
+				// Fills a real share of the field on whichever axis binds, instead of floating small in it.
+				expect(Math.max(comp.width / sc.width, comp.height / sc.height)).toBeGreaterThanOrEqual(
+					0.55
+				);
+				// Text sits left of the composition and above the pills.
+				const text = rectOf(root.querySelector('.project.on')!);
+				expect(text.right).toBeLessThanOrEqual(comp.left + 2);
+				expect(text.bottom).toBeLessThanOrEqual(rectOf(root.querySelector('.pills')!).top + 2);
+				for (const img of root.querySelectorAll<HTMLImageElement>('.shot-set img')) {
+					expect(img.loading).toBe('lazy');
+					expect(img.getAttribute('fetchpriority')).toBe('low');
+				}
+			}
+		});
+	}
 });

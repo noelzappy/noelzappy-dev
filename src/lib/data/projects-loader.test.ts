@@ -5,6 +5,7 @@ import {
 	getAllProjects,
 	getFeaturedProjects,
 	getShowcase,
+	getStripScreens,
 	resolveShowcase,
 	getNextCaseStudy,
 	getPillProjects,
@@ -256,5 +257,30 @@ describe('getShowcase', () => {
 		expect(
 			resolveShowcase({ layout: 'phones', phones: [shot, shot, shot, shot] })?.phones
 		).toHaveLength(3);
+	});
+});
+
+describe('getStripScreens', () => {
+	const phone = (n: number) => ({ src: `/p${n}.webp`, alt: '' });
+	it('interleaves projects so web screens and phones alternate, without duplicates', () => {
+		const screens = getStripScreens([
+			{ showcase: { layout: 'phones', phones: [phone(1), phone(2)] } },
+			{ showcase: { layout: 'web', web: { src: '/w1.webp', alt: '' } } },
+			{ showcase: { layout: 'phones', phones: [phone(1), phone(3)] } }
+		]);
+		expect(screens).toEqual([
+			{ src: '/p1.webp', kind: 'phone' },
+			{ src: '/w1.webp', kind: 'web' },
+			{ src: '/p2.webp', kind: 'phone' },
+			{ src: '/p3.webp', kind: 'phone' }
+		]);
+	});
+	it('skips projects with nothing to show', () => {
+		expect(getStripScreens([{}, { deviceShots: [] }])).toEqual([]);
+	});
+	it('covers the real pill projects', () => {
+		const screens = getStripScreens(getPillProjects());
+		expect(screens.some((s) => s.kind === 'web')).toBe(true);
+		expect(screens.some((s) => s.kind === 'phone')).toBe(true);
 	});
 });
