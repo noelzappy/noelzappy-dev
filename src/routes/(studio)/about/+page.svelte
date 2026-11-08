@@ -8,65 +8,6 @@
 	const intro =
 		"I'm Emmanuel Yeboah, a product engineer based in Accra, Ghana. I've been writing software since 2018.";
 
-	const history = [
-		{
-			org: 'SusuPaa (Pavex Technologies)',
-			engagement: 'Founder',
-			title: 'Co-founder & CTO',
-			dates: '2025 – Present',
-			impact:
-				'Built the platform as co-founder and CTO: a custom append-only ledger with strict consistency guarantees, exactly-once settlement processing over a Postgres-backed queue, and p99 API latency cut from 1.6s to 500ms. The ledger is the system of record for ₵12.5M+ in successful deposits. Also responsible for the administrator dashboard and the observability stack: Prometheus, Grafana, Loki, and PostgreSQL WAL archiving to S3 for point-in-time recovery.'
-		},
-		{
-			org: 'Fetch Agent (Commonwealth Media)',
-			engagement: 'Contract',
-			title: 'Backend Engineer',
-			dates: 'Sep 2024 – Dec 2025',
-			impact:
-				'Backend for a US real estate platform. Built the agent-ranking and filtering engine that matches buyers to agents by experience, commission model, contract terms, and availability, and the APIs behind the app and admin dashboard, held under 200ms.'
-		},
-		{
-			org: 'RBL Matchmaking LLC',
-			engagement: 'Contract',
-			title: 'Lead Engineer',
-			dates: 'Apr 2024 – Oct 2025',
-			impact:
-				'Executed a zero-downtime migration of 170,000 users from a legacy PHP/MySQL stack to Node.js and PostgreSQL. Built the WebSocket real-time messaging system now serving 200,000 monthly active users. Rebuilt the mobile application in React Native and delivered the React web surfaces for the platform.'
-		},
-		{
-			org: 'Hubtel',
-			engagement: 'Full-time',
-			title: 'Frontend Engineer',
-			dates: 'Feb 2024 – Aug 2024',
-			impact:
-				"Led frontend development of Hubtel for Hospitals, Ghana's first comprehensive healthcare billing platform, deployed at Korle Bu Teaching Hospital. Built three role-based React portals for patients, caregivers, and administrators. Also contributed to GHQR, Ghana's national interoperable QR payment infrastructure."
-		},
-		{
-			org: 'The Brifcast Ltd. (Brif)',
-			engagement: 'Founder',
-			title: 'Co-founder & Managing Partner',
-			dates: '2023 – Present',
-			impact:
-				'Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.'
-		},
-		{
-			org: 'Built Financial Technologies',
-			engagement: 'Full-time',
-			title: 'Mobile App Developer',
-			dates: 'Sep 2021 – Sep 2024',
-			impact:
-				"Built and shipped the company's full digital product suite: the built.africa Next.js web platform serving SMEs across 14+ African countries, two production React Native apps (Built Accounting, scaled from 700 to 50,000+ installs, and Built Lite, an offline-first app for low-connectivity environments), and the Ejuma HR platform."
-		},
-		{
-			org: 'Wordnox',
-			engagement: 'Founder',
-			title: 'Founder (company closed)',
-			dates: 'Jul 2019 – Aug 2021',
-			impact:
-				'My own company, now closed. Built WordPress websites for small-business clients: where I learned what it means to build software that serves real users.'
-		}
-	];
-
 	const structuredData = {
 		'@context': 'https://schema.org',
 		'@type': 'AboutPage',
@@ -101,11 +42,12 @@
 		/>
 		<div class="story prose">
 			<p>
-				Most of my work has been on systems where a wrong answer costs someone money or trust:
+				Most of my work has been on products where a wrong answer costs someone money or trust:
 				ledgers, multi-tenant platforms, and migrations that had to happen while people were still
-				using the product. I work in Go, TypeScript and Python on PostgreSQL and a whole load of
-				tools, and I care about the unglamorous properties: consistency, idempotency,
-				recoverability, and being able to prove after the fact what the system did.
+				using the product. I work across mobile, web and backend: React Native, Go, TypeScript and
+				Python on PostgreSQL, and a whole load of tools, and I care about the unglamorous
+				properties: consistency, idempotency, recoverability, and being able to prove after the fact
+				what the system did.
 			</p>
 			<p>
 				At <a href="/projects/susupaa-platform">SusuPaa (Pavex Technologies)</a> I'm co-founder and
@@ -173,21 +115,6 @@
 			or intermittent connections. Building for that first makes everything more robust everywhere.
 		</p>
 	</div>
-</Section>
-
-<Section label="Work history">
-	<ol class="history">
-		{#each history as role (role.org)}
-			<li>
-				<div class="head">
-					<h3 class="org">{role.org}</h3>
-					<span class="dates">{role.dates} · {role.engagement}</span>
-				</div>
-				<p class="role-title">{role.title}</p>
-				<p class="impact">{role.impact}</p>
-			</li>
-		{/each}
-	</ol>
 </Section>
 
 <Section label="Elsewhere">
@@ -273,8 +200,7 @@
 	.org a:hover {
 		text-decoration: underline;
 	}
-	.line,
-	.impact {
+	.line {
 		color: var(--muted);
 		max-width: 62ch;
 	}
@@ -284,34 +210,6 @@
 		gap: 0.25rem 1.5rem;
 		font-size: var(--step-small);
 		line-height: var(--lh-small);
-	}
-	.history {
-		display: grid;
-		gap: clamp(1.5rem, 3vw, 2.5rem);
-	}
-	.history li {
-		display: grid;
-		gap: 0.25rem;
-	}
-	.head {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		align-items: baseline;
-		gap: 0.25rem 1rem;
-	}
-	.dates {
-		font-size: var(--step-small);
-		color: var(--muted);
-		font-variant-numeric: tabular-nums;
-	}
-	.role-title {
-		color: var(--fg);
-	}
-	.impact {
-		font-size: var(--step-small);
-		line-height: var(--lh-small);
-		margin-top: 0.25rem;
 	}
 	@media (min-width: 48rem) {
 		.story-grid {

@@ -11,8 +11,8 @@ export interface TimelineEntry {
 export const TIMELINE: TimelineEntry[] = [
 	{
 		years: 'Now',
-		org: 'Independent consultant',
-		line: 'Payments, ledgers and migrations for fintech teams.',
+		org: 'Independent product engineer',
+		line: 'Mobile apps, web platforms and backends for startups and businesses.',
 		cta: { label: 'Work with me', href: '/work-with-me' }
 	},
 	{
