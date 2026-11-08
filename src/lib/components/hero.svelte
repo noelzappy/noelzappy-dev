@@ -4,6 +4,8 @@
 	import { getShowcase, getStripScreens, type StripScreen } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
 	import { showcaseName } from '$lib/motion/shared';
+	import CalButton from './CalButton.svelte';
+	import { CAL_EVENTS } from '$lib/cal';
 	import RiseWords from './rise-words.svelte';
 	import WorkStrip from './work-strip.svelte';
 
@@ -106,7 +108,12 @@
 					text={headline}
 				/>{:else}{@render headline()}{/if}
 		</h1>
-		<p class="intro layer" class:off={!!active}>{intro}</p>
+		<div class="lede layer" class:off={!!active}>
+			<p class="intro">{intro}</p>
+			<div class="book">
+				<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" arrow />
+			</div>
+		</div>
 		{#each pills as pill (pill.slug)}
 			{@const on = active?.slug === pill.slug}
 			<div class="project layer" class:on aria-hidden="true" inert={!on}>
@@ -216,13 +223,25 @@
 		letter-spacing: var(--tracking-display-xl);
 		font-weight: var(--weight-display-xl);
 	}
-	.intro {
+	.lede {
 		grid-area: 1 / 2;
 		margin: calc(var(--hl) * 0.2) 0 0;
 		font-size: clamp(1.05rem, 1.35vw, 1.7rem);
-		text-wrap: pretty;
 		line-height: 1.35;
 		letter-spacing: var(--tracking-heading);
+	}
+	.intro,
+	.book {
+		margin-top: 0.1rem;
+	}
+	.book :global(.cal-link) {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4em;
+		min-height: 2.75rem;
+		padding-block: 0.5rem;
+		font-size: inherit;
+		letter-spacing: inherit;
 	}
 	/* Out of flow, so the tallest layer never sets the row's height; the headline does. Centred on
 	   the same line as the composition (the box between the header and the bottom padding). */
@@ -385,7 +404,7 @@
 		.main {
 			grid-template-columns: minmax(0, 1fr);
 		}
-		.intro {
+		.lede {
 			grid-area: 2 / 1;
 			margin-top: 1.25rem;
 			max-width: 36rem;
@@ -396,9 +415,9 @@
 		.hero {
 			--hl: clamp(2.4rem, 11.5vw, 3.5rem);
 		}
-		.intro {
+		.lede {
 			font-size: 1.05rem;
-			padding-bottom: 1.5rem;
+			padding-bottom: 0.75rem;
 		}
 		.project,
 		.shots {

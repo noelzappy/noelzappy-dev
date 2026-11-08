@@ -4,8 +4,9 @@
 	let {
 		eventSlug,
 		label = 'Book a call',
-		plain = false
-	}: { eventSlug: string; label?: string; plain?: boolean } = $props();
+		plain = false,
+		arrow = false
+	}: { eventSlug: string; label?: string; plain?: boolean; arrow?: boolean } = $props();
 
 	const calLink = $derived(`${CAL_USERNAME}/${eventSlug}`);
 	const config = { layout: 'month_view', theme: 'auto' };
@@ -37,7 +38,8 @@
 	data-cal-config={JSON.stringify(config)}
 	{@attach bookOnClick}
 >
-	{label}
+	{label}{#if arrow}
+		<span aria-hidden="true">→</span>{/if}
 </a>
 
 <style>

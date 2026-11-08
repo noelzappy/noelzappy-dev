@@ -100,6 +100,27 @@ describe('hero.svelte', () => {
 		}
 	});
 
+	it('offers a booking link after the intro and before the pills', async () => {
+		const { root } = setup();
+		const link = page.getByRole('link', { name: 'Book a 15-minute call', exact: true });
+		await expect.element(link).toHaveAttribute('href', 'https://cal.com/noelzappy/15min');
+		const el = link.element() as HTMLAnchorElement;
+		expect(el.textContent).toContain('\u2192');
+		const intro = root.querySelector('.intro')!;
+		const pillList = root.querySelector('.pills')!;
+		expect(intro.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+		expect(el.compareDocumentPosition(pillList) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+		expect(el.tabIndex).toBe(0);
+		expect(rectOf(el).height).toBeGreaterThanOrEqual(44);
+		// Tab order: the link comes before the first pill.
+		const tabbables = [...root.querySelectorAll<HTMLElement>('a[href]')].filter(
+			(a) => a.tabIndex >= 0
+		);
+		expect(tabbables.indexOf(el)).toBeLessThan(
+			tabbables.indexOf(root.querySelector('.pills a') as HTMLElement)
+		);
+	});
+
 	it('starts in the default state', async () => {
 		const { root } = setup();
 		expect(root.dataset.active).toBe('');
@@ -193,7 +214,9 @@ describe('hero.svelte', () => {
 		[1024, 700],
 		[1440, 900],
 		[800, 556],
-		[1024, 600]
+		[1024, 600],
+		[375, 667],
+		[360, 780]
 	]) {
 		it(`fits one screen at ${w}x${h}`, async () => {
 			await page.viewport(w, h);
@@ -201,6 +224,16 @@ describe('hero.svelte', () => {
 			await expect.poll(() => root.getBoundingClientRect().height).toBeLessThanOrEqual(h);
 			const all = page.getByRole('link', { name: 'All work' }).element();
 			expect(all.getBoundingClientRect().bottom).toBeLessThanOrEqual(window.innerHeight);
+			const intro0 = rectOf(root.querySelector('.intro')!);
+			const book = page.getByRole('link', { name: 'Book a 15-minute call' }).element();
+			expect(rectOf(book).bottom).toBeLessThanOrEqual(window.innerHeight);
+			expect(rectOf(book).top).toBeGreaterThanOrEqual(intro0.bottom - 2);
+			expect(rectOf(root.querySelector('.proof')!).bottom).toBeLessThanOrEqual(
+				rectOf(book).top + 2
+			);
+			expect(rectOf(book).bottom).toBeLessThanOrEqual(
+				rectOf(root.querySelector('.pills')!).top + 2
+			);
 			const pillList = root.querySelector('.pills')!.getBoundingClientRect();
 			expect(root.querySelector('.headline')!.getBoundingClientRect().bottom).toBeLessThanOrEqual(
 				pillList.top + 2
@@ -214,6 +247,7 @@ describe('hero.svelte', () => {
 				intro.left >= headline.right - 2 ||
 				intro.right <= headline.left + 2;
 			expect(apart).toBe(true);
+			if (w <= 640) return; // phones have no active state
 			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
 			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
 			for (const shot of root.querySelectorAll('.shot-set.on img')) {
@@ -235,7 +269,7 @@ describe('hero.svelte', () => {
 
 	describe('ambient work strip', () => {
 		const visibleShots = (root: HTMLElement) =>
-			[...root.querySelectorAll<HTMLElement>('.strip .track [data-copy="0"] .screen')].filter(
+			[...root.querySelectorAll<HTMLElement>('.strip .track [data-copy="0"] .card')].filter(
 				(el) => rectOf(el).right > 0 && rectOf(el).left < window.innerWidth
 			);
 
