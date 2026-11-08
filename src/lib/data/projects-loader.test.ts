@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import {
 	getAllProjects,
 	getFeaturedProjects,
+	getShowcase,
 	getNextCaseStudy,
 	getPillProjects,
 	getProjectBySlug
@@ -165,5 +166,73 @@ describe('getNextCaseStudy', () => {
 			expect(p.html, `${p.slug}: list item`).not.toMatch(/^\s*[-*] /m);
 			expect(p.html, `${p.slug}: bold`).not.toMatch(/\*\*[^*\n]+\*\*/);
 		}
+	});
+});
+
+describe('getShowcase', () => {
+	const phone = (n: number) => ({ src: `/p${n}.webp`, alt: `Phone ${n}`, kind: 'phone' as const });
+	const browser = (n: number) => ({
+		src: `/b${n}.webp`,
+		alt: `Web ${n}`,
+		kind: 'browser' as const
+	});
+
+	it('returns null when there are no shots', () => {
+		expect(getShowcase({})).toBeNull();
+		expect(getShowcase({ deviceShots: [] })).toBeNull();
+	});
+
+	it('prefers an explicit showcase', () => {
+		const showcase = { layout: 'web' as const, web: { src: '/x.webp', alt: 'X' } };
+		expect(getShowcase({ showcase, deviceShots: [phone(1)] })).toBe(showcase);
+	});
+
+	it('derives web-phones from a browser shot plus phones, capped at two phones', () => {
+		expect(
+			getShowcase({ deviceShots: [phone(1), browser(1), browser(2), phone(2), phone(3)] })
+		).toEqual({
+			layout: 'web-phones',
+			web: { src: '/b1.webp', alt: 'Web 1' },
+			phones: [
+				{ src: '/p1.webp', alt: 'Phone 1' },
+				{ src: '/p2.webp', alt: 'Phone 2' }
+			]
+		});
+	});
+
+	it('derives web from browser shots only and phones from phone shots only', () => {
+		expect(getShowcase({ deviceShots: [browser(1)] })).toEqual({
+			layout: 'web',
+			web: { src: '/b1.webp', alt: 'Web 1' }
+		});
+		expect(getShowcase({ deviceShots: [phone(1), phone(2), phone(3)] })).toEqual({
+			layout: 'phones',
+			phones: [
+				{ src: '/p1.webp', alt: 'Phone 1' },
+				{ src: '/p2.webp', alt: 'Phone 2' }
+			]
+		});
+	});
+
+	it('gives the six case studies with the best screens an explicit showcase', () => {
+		const layouts = Object.fromEntries(
+			[
+				'kekeh-mac',
+				'susupaa-platform',
+				'rbl-dating-app',
+				'built-mobile-app',
+				'givio-platform',
+				'voltax'
+			].map((slug) => [slug, getProjectBySlug(slug)?.showcase?.layout])
+		);
+		expect(layouts).toEqual({
+			'kekeh-mac': 'phones',
+			'susupaa-platform': 'web',
+			'rbl-dating-app': 'phones',
+			'built-mobile-app': 'phones',
+			'givio-platform': 'web',
+			voltax: 'web'
+		});
+		expect(getProjectBySlug('kekeh-mac')?.showcase?.phones).toHaveLength(3);
 	});
 });

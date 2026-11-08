@@ -13,6 +13,7 @@ const project = (slug: string, title: string, extra: Partial<WorkItem> = {}): Wo
 	brandColor: undefined,
 	onBrand: undefined,
 	deviceShots: undefined,
+	showcase: undefined,
 	featuredImage: undefined,
 	hasWriteup: true,
 	liveUrl: undefined,

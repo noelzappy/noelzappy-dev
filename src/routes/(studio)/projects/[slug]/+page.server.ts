@@ -37,6 +37,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		onBrand: project.onBrand ?? '',
 		heroImage: project.heroImage ?? '',
 		deviceShots: project.deviceShots ?? [],
+		showcase: project.showcase,
 		impact: project.impact ?? [],
 		next: getNextCaseStudy(project.slug)
 	};

@@ -13,7 +13,7 @@ const base = {
 };
 
 describe('work-row.svelte', () => {
-	it('renders the first device shot with its alt text', async () => {
+	it("renders the whole showcase composition with each shot's alt text", async () => {
 		render(WorkRow, {
 			project: {
 				...base,
@@ -27,7 +27,7 @@ describe('work-row.svelte', () => {
 		await expect
 			.element(page.getByRole('img', { name: 'Passenger app tracking a driver' }))
 			.toBeInTheDocument();
-		expect(page.getByRole('img', { name: 'Second shot' }).query()).toBeNull();
+		await expect.element(page.getByRole('img', { name: 'Second shot' })).toBeInTheDocument();
 	});
 
 	it('falls back to the featured image in a browser frame', async () => {

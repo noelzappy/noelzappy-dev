@@ -52,6 +52,13 @@ deviceShots:
   - src: '/portfolio/built-invoices.webp'
     alt: 'The Built Accounting app invoice list with invoice numbers, due dates and amounts'
     kind: 'phone'
+showcase:
+  layout: 'phones'
+  phones:
+    - src: '/portfolio/built-wallet.webp'
+      alt: 'The Built Accounting app home screen with an account balance, quick actions and recent transactions'
+    - src: '/portfolio/built-invoices.webp'
+      alt: 'The Built Accounting app invoice list with invoice numbers, due dates and amounts'
 ---
 
 <p>Built Financial Technologies makes an all-in-one finance product for small and medium businesses: invoicing, POS, accounting, payroll, budgets, and business credit, used across Ghana, Nigeria, Kenya, South Africa, and other African markets. I was Lead Mobile and Web Engineer there from 2021 to 2024 and shipped the company's digital product suite.</p>

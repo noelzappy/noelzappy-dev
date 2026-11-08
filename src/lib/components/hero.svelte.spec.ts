@@ -185,7 +185,7 @@ describe('hero.svelte', () => {
 			expect(intro.bottom).toBeLessThanOrEqual(headline.top + 2);
 			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
 			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
-			for (const shot of root.querySelectorAll('.shot-set.on .shot')) {
+			for (const shot of root.querySelectorAll('.shot-set.on img')) {
 				await expect.poll(() => shot.getBoundingClientRect().top).toBeGreaterThanOrEqual(0);
 				await expect.poll(() => shot.getBoundingClientRect().top).toBeLessThan(window.innerHeight);
 			}

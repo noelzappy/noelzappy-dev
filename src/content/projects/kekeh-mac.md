@@ -46,6 +46,15 @@ deviceShots:
     kind: 'phone'
 pill: true
 pillOrder: 1
+showcase:
+  layout: 'phones'
+  phones:
+    - src: '/portfolio/kekeh-mac/passenger-11-tracking-driver-on-the-way.webp'
+      alt: 'The Kekeh Mac passenger app tracking a driver on the way on a map of Freetown'
+    - src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.webp'
+      alt: 'The Kekeh Mac driver app heading to a pickup with distance, ETA and payout'
+    - src: '/portfolio/kekeh-mac/passenger-03-home.webp'
+      alt: 'The Kekeh Mac passenger home screen with wallet balance and ride, delivery, car pool and cargo options'
 ---
 
 <p>Kekeh Mac is a ride-hailing and delivery platform for Freetown, Sierra Leone. It is in a pilot, limited release. I led the build, from the first schema to the apps, with two other developers contributing smaller pieces.</p>

@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount, type Snippet } from 'svelte';
 	import type { PillProject } from '$lib/data/projects';
-	import DeviceFrame from './device-frame.svelte';
+	import { getShowcase } from '$lib/data/showcase';
+	import ProjectShowcase from './project-showcase.svelte';
 
 	/**
 	 * One-screen homepage hero. Default: a huge light headline, a short intro and a column of project
@@ -119,14 +120,17 @@
 	<div class="shots" aria-hidden="true">
 		{#each pills as pill (pill.slug)}
 			{@const on = active?.slug === pill.slug}
-			{@const shots = (pill.deviceShots ?? []).slice(0, 2)}
-			{#if shots.length}
-				<div class="shot-set layer" class:on class:browser={shots[0].kind === 'browser'}>
-					{#each shots as shot, i (shot.src)}
-						<div class="shot" class:second={i === 1}>
-							<DeviceFrame kind={shot.kind} src={shot.src} alt="" loading="eager" />
-						</div>
-					{/each}
+			{@const showcase = getShowcase(pill)}
+			{#if showcase}
+				<div class="shot-set layer" class:on>
+					<ProjectShowcase
+						showcase={{
+							...showcase,
+							web: showcase.web && { ...showcase.web, alt: '' },
+							phones: showcase.phones?.map((p) => ({ ...p, alt: '' }))
+						}}
+						size="hero"
+					/>
 				</div>
 			{/if}
 		{/each}
@@ -277,33 +281,14 @@
 		z-index: 1;
 		pointer-events: none;
 	}
+	/* The composition fills this box and fits itself inside it whole. Sized by height as well as
+	   width so it never runs under the headline column or off the bottom of the screen. */
 	.shot-set {
 		position: absolute;
 		right: var(--pad);
-		bottom: 0;
-		display: flex;
-		align-items: flex-end;
-		gap: clamp(0.75rem, 1.6vw, 1.75rem);
-		transform: translateY(10%);
-	}
-	.shot-set.on {
-		transform: none;
-	}
-	.shot {
-		width: min(clamp(9rem, 15.5vw, 17rem), 27vh);
-		margin-bottom: -9%;
-	}
-	.shot.second {
-		margin-bottom: -2%;
-		transform: translateY(-9%);
-	}
-	.shot-set.browser {
-		right: var(--pad);
-		margin-right: 0;
-	}
-	.shot-set.browser .shot {
-		width: min(clamp(22rem, 47vw, 50rem), 80vh);
-		margin-bottom: -7%;
+		bottom: var(--pad);
+		width: min(54vw, 120vh);
+		aspect-ratio: 16 / 10;
 	}
 
 	/* One layer fades out as the next fades in. The destination state's transition wins, so hiding

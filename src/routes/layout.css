@@ -32,6 +32,10 @@
 	--accent-soft: rgba(233, 201, 143, 0.12);
 	--code-bg: #1a1a18;
 
+	/* Product screens float frameless: one radius, one soft shadow, everywhere. */
+	--radius-screen: 0.5rem;
+	--shadow-screen: 0 1.5rem 2.75rem -1rem rgb(0 0 0 / 0.32);
+
 	--measure: 68ch;
 	--header-h: 4.45rem; /* measured: site-header is 75.6px tall at 17px root */
 	--page-gutter: clamp(1rem, 0.4rem + 2.6vw, 3rem);

@@ -1,18 +1,25 @@
 <script lang="ts">
-	import DeviceFrame from './device-frame.svelte';
-	import type { DeviceShot } from '$lib/data/projects';
+	import ProjectShowcase from './project-showcase.svelte';
+	import { getShowcase } from '$lib/data/showcase';
+	import type { DeviceShot, Showcase } from '$lib/data/projects';
 
 	interface Thumb {
 		title: string;
 		brandColor?: string;
 		onBrand?: 'light' | 'dark';
 		deviceShots?: DeviceShot[];
+		showcase?: Showcase;
 		featuredImage?: string;
 	}
 
 	let { project, aspect = '16 / 10' }: { project: Thumb; aspect?: string } = $props();
 
-	const shot = $derived(project.deviceShots?.[0]);
+	const showcase = $derived(
+		getShowcase(project) ??
+			(project.featuredImage
+				? { layout: 'web' as const, web: { src: project.featuredImage, alt: project.title } }
+				: null)
+	);
 	const initial = $derived(project.title.trim().charAt(0).toUpperCase());
 </script>
 
@@ -20,16 +27,10 @@
 	class="thumb"
 	class:on-dark={project.onBrand === 'light'}
 	style:background={project.brandColor ?? 'var(--border)'}
-	style:aspect-ratio={aspect}
+	style:--showcase-aspect={aspect}
 >
-	{#if shot?.kind === 'phone'}
-		<div class="phone"><DeviceFrame kind="phone" src={shot.src} alt={shot.alt} /></div>
-	{:else if shot}
-		<div class="browser"><DeviceFrame kind="browser" src={shot.src} alt={shot.alt} /></div>
-	{:else if project.featuredImage}
-		<div class="browser">
-			<DeviceFrame kind="browser" src={project.featuredImage} alt={project.title} />
-		</div>
+	{#if showcase}
+		<ProjectShowcase {showcase} size="row" />
 	{:else}
 		<span class="initial" aria-hidden="true">{initial}</span>
 	{/if}
@@ -41,15 +42,8 @@
 		overflow: hidden;
 		display: grid;
 		place-items: center;
+		aspect-ratio: var(--showcase-aspect);
 		border-radius: 0.5rem;
-	}
-	.phone {
-		width: 30%;
-		align-self: start;
-		margin-top: 9%;
-	}
-	.browser {
-		width: 78%;
 	}
 	.initial {
 		font-family: var(--font-display);

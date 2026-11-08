@@ -1,6 +1,8 @@
 import yaml from 'js-yaml';
 import type { PillProject, ProjectData } from './projects';
 
+export { getShowcase } from './showcase';
+
 function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
 	const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
 	const match = content.match(frontmatterRegex);
@@ -78,14 +80,15 @@ export function getPillProjects(): PillProject[] {
 	return getAllProjects()
 		.filter((project) => project.pill === true)
 		.sort((a, b) => (a.pillOrder ?? Infinity) - (b.pillOrder ?? Infinity))
-		.map(({ slug, title, oneLine, built, brandColor, onBrand, deviceShots }) => ({
+		.map(({ slug, title, oneLine, built, brandColor, onBrand, deviceShots, showcase }) => ({
 			slug,
 			title,
 			oneLine,
 			built,
 			brandColor,
 			onBrand,
-			deviceShots
+			deviceShots,
+			showcase
 		}));
 }
 

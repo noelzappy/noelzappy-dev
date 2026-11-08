@@ -1,7 +1,7 @@
 <script lang="ts">
 	import WorkThumb from './work-thumb.svelte';
 	import { workCta } from '$lib/content/work-cta';
-	import type { DeviceShot } from '$lib/data/projects';
+	import type { DeviceShot, Showcase } from '$lib/data/projects';
 
 	interface WorkTileProject {
 		slug: string;
@@ -11,6 +11,7 @@
 		brandColor?: string;
 		onBrand?: 'light' | 'dark';
 		deviceShots?: DeviceShot[];
+		showcase?: Showcase;
 		featuredImage?: string;
 		hasWriteup: boolean;
 		liveUrl?: string;

@@ -1,6 +1,7 @@
 <script lang="ts">
-	import type { DeviceShot } from '$lib/data/projects';
-	import DeviceFrame from './device-frame.svelte';
+	import type { DeviceShot, Showcase } from '$lib/data/projects';
+	import { getShowcase } from '$lib/data/showcase';
+	import ProjectShowcase from './project-showcase.svelte';
 
 	const ENGAGEMENT: Record<string, string> = {
 		'full-build': 'Full build',
@@ -26,6 +27,7 @@
 		brandColor = '',
 		heroImage = '',
 		deviceShots = [],
+		showcase = undefined,
 		impact = [],
 		stack = [],
 		liveUrl = '',
@@ -43,6 +45,7 @@
 		brandColor?: string;
 		heroImage?: string;
 		deviceShots?: DeviceShot[];
+		showcase?: Showcase;
 		impact?: { value: string; label: string }[];
 		stack?: string[];
 		liveUrl?: string;
@@ -68,7 +71,7 @@
 			{ label: 'Repository', href: github }
 		].filter((link) => link.href)
 	);
-	const shots = $derived(deviceShots.slice(0, 3));
+	const composition = $derived(getShowcase({ showcase, deviceShots }));
 </script>
 
 <article class="case-study">
@@ -90,15 +93,9 @@
 		<div class="hero image">
 			<img src={heroImage} alt="" loading="eager" decoding="async" />
 		</div>
-	{:else if brandColor && shots.length}
-		<div class="hero field" style:background={brandColor}>
-			<div class="shots" data-count={shots.length}>
-				{#each shots as shot (shot.src)}
-					<div class="shot {shot.kind}">
-						<DeviceFrame kind={shot.kind} src={shot.src} alt={shot.alt} loading="eager" />
-					</div>
-				{/each}
-			</div>
+	{:else if brandColor && composition}
+		<div class="hero field">
+			<ProjectShowcase showcase={composition} {brandColor} size="case" />
 		</div>
 	{/if}
 
@@ -214,39 +211,8 @@
 		object-fit: cover;
 	}
 	.hero.field {
-		display: flex;
-		justify-content: center;
-		padding: clamp(2.5rem, 6vw, 5rem) var(--gutter);
-		overflow: hidden;
-	}
-	.shots {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: clamp(1rem, 3vw, 3rem);
-		width: 100%;
-		max-width: 64rem;
-	}
-	.shot.phone {
-		flex: 0 1 15rem;
-		min-width: 0;
-	}
-	.shot.browser {
-		flex: 1 1 0;
-		min-width: 0;
-		max-width: 48rem;
-	}
-	/* The middle phone sits lower, so three read as a staggered set. */
-	.shots[data-count='3'] .shot:nth-child(2) {
-		transform: translateY(2.5rem);
-	}
-	@media (max-width: 640px) {
-		.shot.phone {
-			flex-basis: 8rem;
-		}
-		.shots[data-count='3'] .shot:nth-child(2) {
-			transform: translateY(1.25rem);
-		}
+		/* The showcase paints its own brand field and sizes its composition to fit it whole. */
+		display: block;
 	}
 
 	/* Narrative */
@@ -287,9 +253,8 @@
 	}
 	.prose :global(.shots-row img) {
 		margin: 0;
-		/* DeviceFrame screen radius is 11% of the frame width; each image is about a third of the row. */
-		border-radius: 3.4cqw;
-		box-shadow: 0 0.6rem 1.5rem rgba(0, 0, 0, 0.18);
+		border-radius: var(--radius-screen);
+		box-shadow: var(--shadow-screen);
 	}
 
 	/* Impact */

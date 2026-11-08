@@ -10,6 +10,7 @@ export function toWorkItem(p: ProjectData) {
 		brandColor: p.brandColor,
 		onBrand: p.onBrand,
 		deviceShots: p.deviceShots,
+		showcase: p.showcase,
 		featuredImage: p.featuredImage,
 		hasWriteup: p.html.trim().length > 0,
 		liveUrl: p.liveUrl,

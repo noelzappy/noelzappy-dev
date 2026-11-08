@@ -53,6 +53,11 @@ deviceShots:
     kind: 'browser'
 pill: true
 pillOrder: 2
+showcase:
+  layout: 'web'
+  web:
+    src: '/portfolio/susupaa-dashboard.webp'
+    alt: 'The SusuPaa admin dashboard showing contributions, disbursements, fees and payment flow charts'
 ---
 
 <p>SusuPaa is a multi-tenant platform for Ghana's informal savings sector: susu collectors, savings cooperatives, and microfinance institutions. Each organization runs its own groups, savings plans, loans, and accounting on a shared deployment, and every money movement has to be provable later. I co-founded the company and, as CTO, have led the platform from the first commit.</p>

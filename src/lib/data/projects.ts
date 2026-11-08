@@ -12,6 +12,10 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
 export type ProjectEngagement = 'full-build' | 'team' | 'rescue' | 'website' | 'open-source';
 export type ProjectStage = 'startup' | 'business' | 'ngo' | 'own-venture';
 export type DeviceShot = { src: string; alt: string; kind: 'phone' | 'browser' };
+export type Shot = { src: string; alt: string };
+export type ShowcaseLayout = 'web-phones' | 'phones' | 'web';
+/** One fixed composition per project: a web screen, 1-3 phone screens, or both. */
+export type Showcase = { layout: ShowcaseLayout; web?: Shot; phones?: Shot[] };
 
 export interface ProjectFrontmatter {
 	id: string;
@@ -50,6 +54,7 @@ export interface ProjectFrontmatter {
 	onBrand?: 'light' | 'dark'; // text colour that reads on brandColor
 	heroImage?: string;
 	deviceShots?: DeviceShot[];
+	showcase?: Showcase;
 	pill?: boolean; // listed as a pill on the homepage hero
 	pillOrder?: number;
 	featuredOrder?: number; // position in the homepage Selected work (featured projects only)
@@ -62,5 +67,5 @@ export interface ProjectData extends ProjectFrontmatter {
 
 export type PillProject = Pick<
 	ProjectData,
-	'slug' | 'title' | 'oneLine' | 'built' | 'brandColor' | 'onBrand' | 'deviceShots'
+	'slug' | 'title' | 'oneLine' | 'built' | 'brandColor' | 'onBrand' | 'deviceShots' | 'showcase'
 >;
