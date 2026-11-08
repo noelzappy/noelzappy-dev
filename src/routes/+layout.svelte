@@ -12,7 +12,8 @@
 
 	// Studio pages are full-bleed, so the header overlays the hero; classic pages keep it in flow.
 	// Decided from the route group in the matched route id, e.g. '/(studio)/projects/[slug]'.
-	const studio = $derived(page.route.id?.startsWith('/(studio)') ?? false);
+	// Unmatched routes (404) have no id; their error page is studio-styled, so they count too.
+	const studio = $derived(page.route.id?.startsWith('/(studio)') ?? page.status >= 400);
 </script>
 
 <svelte:head>

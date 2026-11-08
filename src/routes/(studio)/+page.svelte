@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { formatDate } from '$lib/shared/date';
 	import SEOHead from '$lib/components/seo-head.svelte';
 	import CalEmbed from '$lib/components/cal-embed.svelte';
 	import Hero from '$lib/components/hero.svelte';
@@ -32,14 +33,6 @@
 			line: 'Fast custom sites your team can edit, off WordPress for good.'
 		}
 	];
-
-	const fmt = (d: string) =>
-		new Date(d + 'T00:00:00Z').toLocaleDateString('en-GB', {
-			day: 'numeric',
-			month: 'short',
-			year: 'numeric',
-			timeZone: 'UTC'
-		});
 </script>
 
 <CalEmbed />
@@ -92,7 +85,7 @@
 				<li>
 					<a href="/writing/{post.slug}" class="post" data-sveltekit-preload-data>
 						<span class="title">{post.title}</span>
-						<time datetime={post.date}>{fmt(post.date)}</time>
+						<time datetime={post.date}>{formatDate(post.date)}</time>
 					</a>
 				</li>
 			{/each}
