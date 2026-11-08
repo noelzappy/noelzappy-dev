@@ -28,6 +28,16 @@
 
 	$effect(onscroll);
 
+	// The Menu button disappears at >=900px; don't leave the overlay open behind it.
+	$effect(() => {
+		const mq = window.matchMedia('(min-width: 900px)');
+		const sync = () => {
+			if (mq.matches) open = false;
+		};
+		mq.addEventListener('change', sync);
+		return () => mq.removeEventListener('change', sync);
+	});
+
 	async function close() {
 		open = false;
 		await tick();
@@ -74,7 +84,9 @@
 		align-items: center;
 		justify-content: space-between;
 		gap: 1rem;
-		padding: 1rem var(--page-gutter);
+		box-sizing: border-box;
+		height: var(--header-h);
+		padding: 0 var(--page-gutter);
 		color: var(--fg);
 		position: fixed;
 		inset: 0 0 auto 0;
@@ -91,6 +103,12 @@
 			transition:
 				background-color 200ms,
 				border-color 200ms;
+		}
+		.links a.cta,
+		.menu-pill {
+			transition:
+				background 150ms,
+				color 150ms;
 		}
 	}
 	/* The hero paints a flat brand colour while a project pill is active and sets data-hero-tone on
@@ -133,6 +151,12 @@
 	}
 	.links a[aria-current='page'] {
 		color: var(--accent);
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 0.4em;
+	}
+	.links a.cta[aria-current='page'] {
+		text-decoration: none;
 	}
 	.links a.cta {
 		min-height: 2.25rem;
@@ -141,9 +165,6 @@
 		border: 1px solid var(--accent);
 		border-radius: 999px;
 		color: var(--accent);
-		transition:
-			background 150ms,
-			color 150ms;
 	}
 	.links a.cta:hover,
 	.links a.cta[aria-current='page'] {
@@ -160,9 +181,6 @@
 		background: transparent;
 		color: var(--fg);
 		cursor: pointer;
-		transition:
-			background 150ms,
-			color 150ms;
 	}
 	.menu-pill:hover {
 		background: var(--fg);

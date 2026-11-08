@@ -131,4 +131,27 @@ describe('site-header.svelte', () => {
 		const text = header().textContent ?? '';
 		expect(text).not.toMatch(/Accra|Booking|GMT|\d{1,2}:\d{2}/);
 	});
+
+	it.each([
+		[1440, 900],
+		[375, 812]
+	])('renders as tall as --header-h at %i', async (w, h) => {
+		await page.viewport(w, h);
+		render(SiteHeader);
+		const probe = document.createElement('div');
+		probe.style.height = 'var(--header-h)';
+		document.body.append(probe);
+		const token = probe.getBoundingClientRect().height;
+		probe.remove();
+		expect(Math.abs(header().offsetHeight - token)).toBeLessThanOrEqual(1);
+	});
+
+	it('closes the open menu when the viewport widens past 900px', async () => {
+		await page.viewport(600, 800);
+		render(SiteHeader);
+		await page.getByRole('button', { name: 'Menu' }).click();
+		await expect.element(page.getByRole('dialog', { name: 'Menu' })).toBeVisible();
+		await page.viewport(1200, 800);
+		await expect.element(page.getByRole('dialog', { name: 'Menu' })).not.toBeInTheDocument();
+	});
 });
