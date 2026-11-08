@@ -155,6 +155,13 @@ export const manifest: Record<string, ProjectCapture> = {
 			shots: PHONE_SHOTS('Giving flow, mid-action')
 		}
 	},
+	vemphy: {
+		web: {
+			baseUrlEnv: 'CAPTURE_VEMPHY_URL',
+			defaultBaseUrl: 'https://vemphy.com',
+			shots: [{ name: 'verify-desktop', path: '/', waitFor: 'input' }]
+		}
+	},
 	voltax: {
 		web: {
 			baseUrlEnv: 'CAPTURE_VOLTAX_URL',

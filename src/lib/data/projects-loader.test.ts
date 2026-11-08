@@ -15,7 +15,7 @@ import {
 describe('projects content', () => {
 	it('loads every project with a kind and a slug', () => {
 		const projects = getAllProjects();
-		expect(projects.length).toBe(21);
+		expect(projects.length).toBe(23);
 		for (const p of projects) {
 			expect(p.slug).toBeTruthy();
 			expect(['case-study', 'open-source']).toContain(p.kind);

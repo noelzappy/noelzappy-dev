@@ -267,6 +267,7 @@ describe('manifest', () => {
 				'kekeh-mac',
 				'rbl-dating-app',
 				'susupaa-platform',
+				'vemphy',
 				'voltax'
 			].sort()
 		);
