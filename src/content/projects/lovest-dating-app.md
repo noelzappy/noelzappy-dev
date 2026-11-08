@@ -1,5 +1,6 @@
 ---
 title: 'Love Nest Dating App'
+shortTitle: 'Love Nest'
 slug: 'lovenest-dating-app'
 excerpt: 'The full backend for a dating app for single parents: Node.js, PostgreSQL and Redis, WebSocket messaging with presence, a values-based matching system, and physical gifting through partner fulfilment.'
 featured: false

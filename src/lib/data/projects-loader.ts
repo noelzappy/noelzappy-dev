@@ -80,16 +80,29 @@ export function getPillProjects(): PillProject[] {
 	return getAllProjects()
 		.filter((project) => project.pill === true)
 		.sort((a, b) => (a.pillOrder ?? Infinity) - (b.pillOrder ?? Infinity))
-		.map(({ slug, title, oneLine, built, brandColor, onBrand, deviceShots, showcase }) => ({
-			slug,
-			title,
-			oneLine,
-			built,
-			brandColor,
-			onBrand,
-			deviceShots,
-			showcase
-		}));
+		.map(
+			({
+				slug,
+				title,
+				shortTitle,
+				oneLine,
+				built,
+				brandColor,
+				onBrand,
+				deviceShots,
+				showcase
+			}) => ({
+				slug,
+				title,
+				...(shortTitle && { shortTitle }),
+				oneLine,
+				built,
+				brandColor,
+				onBrand,
+				deviceShots,
+				showcase
+			})
+		);
 }
 
 /**

@@ -1,5 +1,6 @@
 ---
 title: 'RBL Dating Platform'
+shortTitle: 'RBL Dating'
 slug: 'rbl-dating-app'
 excerpt: 'Rewrote a dating platform’s stack from PHP/MySQL to Node.js and PostgreSQL, with a new React Native app and React admin panel, migrating 170,000 users with zero downtime.'
 featured: true

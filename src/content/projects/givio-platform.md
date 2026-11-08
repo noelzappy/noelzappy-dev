@@ -1,5 +1,6 @@
 ---
 title: 'Givio Platform'
+shortTitle: 'Givio'
 slug: 'givio-platform'
 excerpt: 'Solo build of a gifting platform backed by fractional stocks and crypto: exchange and market-data integrations, PCI-compliant payments, and KYC/AML flows.'
 featured: false

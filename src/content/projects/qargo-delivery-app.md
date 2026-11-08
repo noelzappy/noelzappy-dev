@@ -1,5 +1,6 @@
 ---
 title: 'Qargo Delivery App'
+shortTitle: 'Qargo'
 slug: 'qargo-delivery-app'
 excerpt: 'React Native customer app for an on-demand delivery service in Ghana: multi-stop requests, live tracking, an in-app wallet and split deliveries; 4.8 stars, 10,000+ downloads.'
 featured: false

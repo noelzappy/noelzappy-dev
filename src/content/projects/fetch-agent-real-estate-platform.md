@@ -1,5 +1,6 @@
 ---
 title: 'Fetch Agent Real Estate Platform'
+shortTitle: 'Fetch Agent'
 slug: 'fetch-agent-real-estate-platform'
 excerpt: 'Backend for a US real estate marketplace: the APIs behind the web app and admin dashboard, and the filtering and ranking engine that matches buyers to agents.'
 featured: false

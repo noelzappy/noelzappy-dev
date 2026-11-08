@@ -1,5 +1,6 @@
 ---
 title: 'Video Merger API'
+shortTitle: 'Video Merger'
 slug: 'vi-upper'
 excerpt: 'FastAPI service that downloads videos from S3-compatible storage, merges them, and uploads the result to YouTube.'
 featured: false

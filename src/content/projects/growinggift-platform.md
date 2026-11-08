@@ -1,5 +1,6 @@
 ---
 title: 'GrowingGift Platform'
+shortTitle: 'GrowingGift'
 slug: 'growinggift-platform'
 excerpt: 'Solo build of a fractional stock and crypto gifting platform with brokerage and exchange integrations, live pricing, and generated PDF certificates; 3,000+ gifts sent in three months.'
 featured: false

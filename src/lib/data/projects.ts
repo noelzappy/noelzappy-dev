@@ -51,6 +51,7 @@ export interface ProjectFrontmatter {
 	stage?: ProjectStage;
 	built?: string[]; // what was built, e.g. ['Web app', 'API']
 	oneLine?: string; // one line for the homepage hero, <= 90 chars
+	shortTitle?: string; // short name for tight spots (hero strip cards)
 	brandColor?: string; // product's primary colour, #rrggbb
 	onBrand?: 'light' | 'dark'; // text colour that reads on brandColor
 	heroImage?: string;
@@ -68,5 +69,13 @@ export interface ProjectData extends ProjectFrontmatter {
 
 export type PillProject = Pick<
 	ProjectData,
-	'slug' | 'title' | 'oneLine' | 'built' | 'brandColor' | 'onBrand' | 'deviceShots' | 'showcase'
+	| 'slug'
+	| 'title'
+	| 'shortTitle'
+	| 'oneLine'
+	| 'built'
+	| 'brandColor'
+	| 'onBrand'
+	| 'deviceShots'
+	| 'showcase'
 >;

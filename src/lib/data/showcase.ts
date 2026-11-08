@@ -78,6 +78,7 @@ export function getStripScreens(
 	projects: {
 		slug?: string;
 		title?: string;
+		shortTitle?: string;
 		brandColor?: string;
 		onBrand?: 'light' | 'dark';
 		html?: string;
@@ -92,7 +93,7 @@ export function getStripScreens(
 		const screens: StripScreen[] = [];
 		const meta = {
 			...(href && { href }),
-			...(project.title && { name: project.title }),
+			...((project.shortTitle ?? project.title) && { name: project.shortTitle ?? project.title }),
 			...(project.brandColor && { brandColor: project.brandColor }),
 			...(project.onBrand && { onBrand: project.onBrand })
 		};

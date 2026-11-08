@@ -1,5 +1,6 @@
 ---
 title: 'Cocaptain App'
+shortTitle: 'Cocaptain'
 slug: 'cocaptain-app'
 excerpt: 'React Native app for sports clubs covering registrations, payments, teams and messaging, with GraphQL for data fetching and WebSockets for real-time updates.'
 featured: false

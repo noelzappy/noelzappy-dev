@@ -285,6 +285,21 @@ describe('getStripScreens', () => {
 	});
 });
 
+describe('getStripScreens short names', () => {
+	it('prefers shortTitle for the card name', () => {
+		const shot = { src: '/a.webp', alt: '' };
+		const screens = getStripScreens([
+			{ title: 'SusuPaa Platform', shortTitle: 'SusuPaa', showcase: { layout: 'web', web: shot } }
+		]);
+		expect(screens[0].name).toBe('SusuPaa');
+	});
+	it('gives every real strip project a name of at most 12 characters', () => {
+		for (const s of getStripScreens(getPillProjects())) {
+			expect(s.name?.length ?? 0).toBeLessThanOrEqual(12);
+		}
+	});
+});
+
 describe('getStripScreens names and colours', () => {
 	it('carries the project title and brand colours onto each screen, omitting absent ones', () => {
 		const shot = { src: '/a.webp', alt: '' };
