@@ -85,3 +85,31 @@ describe('site menu', () => {
 		expect(document.body.style.overflow).toBe('');
 	});
 });
+
+describe('site menu theme-color', () => {
+	const metas = () => [...document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')];
+
+	it('sets theme-color to the menu surface while open and restores the originals on close', async () => {
+		document.head.insertAdjacentHTML(
+			'beforeend',
+			'<meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)">' +
+				'<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)">'
+		);
+		const before = metas().map((m) => m.content);
+		expect(before).toEqual(['#0e0e0d', '#f3efe6']);
+		try {
+			const button = setup();
+			await button.click();
+			const dialog = page.getByRole('dialog', { name: 'Menu' });
+			await expect.element(dialog).toBeVisible();
+			const surface = getComputedStyle(dialog.element() as HTMLElement).backgroundColor;
+			expect(surface).not.toBe('');
+			expect(metas().map((m) => m.content)).toEqual([surface, surface]);
+			await userEvent.keyboard('{Escape}');
+			await expect.element(page.getByRole('dialog', { name: 'Menu' })).not.toBeInTheDocument();
+			expect(metas().map((m) => m.content)).toEqual(before);
+		} finally {
+			metas().forEach((m) => m.remove());
+		}
+	});
+});

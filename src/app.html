@@ -4,12 +4,20 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="color-scheme" content="light dark" />
+		<!-- Match --bg in each scheme (layout.css). Kept in step with an explicit theme by the script below and the theme toggle. -->
+		<meta name="theme-color" content="#0e0e0d" media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content="#f3efe6" media="(prefers-color-scheme: light)" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<script>
 			(function () {
 				try {
 					var t = localStorage.getItem('theme');
-					if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+					if (t === 'light' || t === 'dark') {
+						document.documentElement.setAttribute('data-theme', t);
+						var c = t === 'light' ? '#f3efe6' : '#0e0e0d';
+						var m = document.querySelectorAll('meta[name="theme-color"]');
+						for (var i = 0; i < m.length; i++) m[i].setAttribute('content', c);
+					}
 				} catch (e) {}
 			})();
 		</script>
