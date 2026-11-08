@@ -241,6 +241,7 @@ describe('hero.svelte', () => {
 			const eager = imgs.filter((i) => i.loading === 'eager');
 			expect(eager.length).toBeGreaterThan(0);
 			expect(eager.length).toBeLessThanOrEqual(3);
+			expect(eager[0].getAttribute('fetchpriority')).toBe('high');
 			for (const img of imgs.filter((i) => i.loading === 'lazy'))
 				expect(img.getAttribute('fetchpriority')).toBe('low');
 		});

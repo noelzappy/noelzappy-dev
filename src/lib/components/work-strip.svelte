@@ -43,15 +43,18 @@
 			<div class="copy" data-copy={c}>
 				{#each copy as screen, i (i)}
 					{@const ratio =
-						measured[screen.src] ?? (screen.kind === 'phone' ? PHONE_NOMINAL : WEB_NOMINAL)}
+						measured[screen.src] ??
+						screen.ratio ??
+						(screen.kind === 'phone' ? PHONE_NOMINAL : WEB_NOMINAL)}
 					{@const eager = c === 0 && i < EAGER}
+					{@const priority = eager ? (i === 0 ? 'high' : undefined) : 'low'}
 					<div class="screen {screen.kind}" style:aspect-ratio={1 / ratio}>
 						<img
 							use:measure={screen.src}
 							src={screen.src}
 							alt=""
 							loading={eager ? 'eager' : 'lazy'}
-							fetchpriority={eager ? undefined : 'low'}
+							fetchpriority={priority}
 							decoding="async"
 							draggable="false"
 						/>
@@ -67,7 +70,9 @@
 	.strip {
 		container-type: size;
 		min-height: 0;
-		overflow: clip;
+		/* Only the sides clip: the screens' shadows must fall past the band, not be cut into a line. */
+		overflow-x: clip;
+		overflow-y: visible;
 		opacity: 0.88;
 	}
 	.strip.hidden {
@@ -130,6 +135,19 @@
 	}
 	.phone img {
 		border-radius: calc(var(--r) - var(--bezel));
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.strip {
+			transition:
+				opacity 400ms ease-out,
+				visibility 0s;
+		}
+		.strip.hidden {
+			transition:
+				opacity 400ms ease-out,
+				visibility 0s linear 400ms;
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {

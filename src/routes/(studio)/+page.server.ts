@@ -1,4 +1,5 @@
 import { getAllProjects, getPillProjects, getStripScreens } from '$lib/data/projects-loader';
+import { staticImageRatio } from '$lib/server/image-size';
 import type { PageServerLoad } from './$types';
 
 export const prerender = true;
@@ -8,5 +9,11 @@ export const load: PageServerLoad = async () => {
 	const pillSlugs = new Set(pills.map((p) => p.slug));
 	// The drifting strip shows the pill projects first, then the rest of the work for variety.
 	const others = getAllProjects().filter((p) => !pillSlugs.has(p.slug));
-	return { pills, screens: getStripScreens([...pills, ...others]) };
+	return {
+		pills,
+		screens: getStripScreens([...pills, ...others]).map((s) => ({
+			...s,
+			ratio: staticImageRatio(s.src)
+		}))
+	};
 };

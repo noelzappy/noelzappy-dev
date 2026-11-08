@@ -43,7 +43,8 @@ export function getShowcase(project: {
 }
 
 /** One screen in the homepage's drifting work strip. */
-export type StripScreen = { src: string; kind: 'phone' | 'web' };
+/** `ratio` is height / width when known, so the strip can size a screen before its image loads. */
+export type StripScreen = { src: string; kind: 'phone' | 'web'; ratio?: number };
 
 /**
  * The screens for the drifting strip, interleaved across projects so web screens and phones
