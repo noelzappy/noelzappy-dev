@@ -14,7 +14,6 @@ const base = {
 	status: 'Pilot',
 	brandColor: '#34b764',
 	onBrand: 'dark' as const,
-	heroImage: '',
 	deviceShots: [
 		{
 			src: '/portfolio/kekeh-mac/passenger-03-home.webp',
@@ -57,13 +56,34 @@ describe('CaseStudy', () => {
 		await expect.element(page.getByText('12k')).toBeInTheDocument();
 	});
 
-	it('uses the hero image when set and omits absent links', async () => {
-		render(CaseStudy, {
-			...base,
-			heroImage: '/portfolio/fetch-agent/fetch-agent.webp',
-			liveUrl: 'https://x.test'
-		});
+	it('omits absent links', async () => {
+		render(CaseStudy, { ...base, liveUrl: 'https://x.test' });
 		await expect.element(page.getByRole('link', { name: 'App Store' })).not.toBeInTheDocument();
 		await expect.element(page.getByRole('link', { name: 'Live site' })).toBeInTheDocument();
+	});
+
+	it('without usable screens shows the brand field and an initial, no composed art', async () => {
+		const { container } = render(CaseStudy, {
+			...base,
+			deviceShots: [],
+			showcase: { layout: 'web' as const }
+		});
+		expect(container.querySelector('.hero img')).toBeNull();
+		expect(container.querySelector('.hero.plain')).not.toBeNull();
+	});
+
+	it('sizes the showcase field from its composition, with little empty colour', async () => {
+		await page.viewport(1440, 900);
+		const { container } = render(CaseStudy, base);
+		const field = container.querySelector('.showcase') as HTMLElement;
+		const imgs = [...field.querySelectorAll('img')];
+		await Promise.all(
+			imgs.map((i) => (i.complete ? 0 : new Promise((r) => i.addEventListener('load', r))))
+		);
+		await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+		const f = field.getBoundingClientRect();
+		const top = Math.min(...imgs.map((i) => i.getBoundingClientRect().top)) - f.top;
+		const bottom = f.bottom - Math.max(...imgs.map((i) => i.getBoundingClientRect().bottom));
+		expect(Math.max(top, bottom)).toBeLessThanOrEqual(window.innerHeight * 0.08);
 	});
 });

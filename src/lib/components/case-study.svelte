@@ -25,7 +25,7 @@
 		built = [],
 		status = '',
 		brandColor = '',
-		heroImage = '',
+		onBrand = '',
 		deviceShots = [],
 		showcase = undefined,
 		impact = [],
@@ -43,7 +43,7 @@
 		built?: string[];
 		status?: string;
 		brandColor?: string;
-		heroImage?: string;
+		onBrand?: string;
 		deviceShots?: DeviceShot[];
 		showcase?: Showcase;
 		impact?: { value: string; label: string }[];
@@ -89,13 +89,18 @@
 		{/if}
 	</header>
 
-	{#if heroImage}
-		<div class="hero image">
-			<img src={heroImage} alt="" loading="eager" decoding="async" />
-		</div>
-	{:else if brandColor && composition}
+	{#if brandColor && composition}
 		<div class="hero field">
 			<ProjectShowcase showcase={composition} {brandColor} size="case" />
+		</div>
+	{:else if brandColor}
+		<!-- No usable screens: the brand field and a large initial, never composed art. -->
+		<div
+			class="hero plain"
+			style:background={brandColor}
+			style:color={onBrand === 'light' ? '#f3efe6' : '#0e0e0d'}
+		>
+			<span aria-hidden="true">{title.trim().charAt(0).toUpperCase()}</span>
 		</div>
 	{/if}
 
@@ -204,11 +209,14 @@
 	.hero {
 		width: 100%;
 	}
-	.hero.image img {
-		display: block;
-		width: 100%;
-		max-height: 85vh;
-		object-fit: cover;
+	.hero.plain {
+		display: grid;
+		place-items: center;
+		min-height: clamp(14rem, 32vw, 30rem);
+		font-family: var(--font-display);
+		font-size: clamp(8rem, 22vw, 20rem);
+		font-weight: 300;
+		line-height: 1;
 	}
 	.hero.field {
 		/* The showcase paints its own brand field and sizes its composition to fit it whole. */

@@ -9,17 +9,11 @@
 		onBrand?: 'light' | 'dark';
 		deviceShots?: DeviceShot[];
 		showcase?: Showcase;
-		featuredImage?: string;
 	}
 
 	let { project, aspect = '16 / 10' }: { project: Thumb; aspect?: string } = $props();
 
-	const showcase = $derived(
-		getShowcase(project) ??
-			(project.featuredImage
-				? { layout: 'web' as const, web: { src: project.featuredImage, alt: project.title } }
-				: null)
-	);
+	const showcase = $derived(getShowcase(project));
 	const initial = $derived(project.title.trim().charAt(0).toUpperCase());
 </script>
 

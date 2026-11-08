@@ -14,8 +14,33 @@ const compositions: Record<string, Showcase> = {
 	'web-phones (one phone)': { layout: 'web-phones', web, phones: [phone1] },
 	phones: { layout: 'phones', phones: [phone1, phone2, phone3] },
 	'phones (one)': { layout: 'phones', phones: [phone1] },
-	web: { layout: 'web', web }
+	web: { layout: 'web', web },
+	// Aspect extremes: a 2.0 web screen, a 9:16 portrait "web" source, and a 2.28 phone.
+	'wide web + tall phones': {
+		layout: 'web-phones',
+		web: { src: '/portfolio/fetch-agent/2.webp', alt: 'Wide web' },
+		phones: [
+			{ src: '/portfolio/lovenest/discover.jpg', alt: 'Tall phone' },
+			{ src: '/portfolio/lovenest/chat.jpg', alt: 'Tall phone 2' }
+		]
+	},
+	'portrait web source': {
+		layout: 'web-phones',
+		web: { src: '/portfolio/lovenest/3.jpg', alt: 'Portrait source' },
+		phones: [phone1, phone2]
+	},
+	'3 tall phones': {
+		layout: 'phones',
+		phones: [
+			{ src: '/portfolio/lovenest/discover.jpg', alt: 'Tall A' },
+			{ src: '/portfolio/lovenest/welcome.jpg', alt: 'Tall B' },
+			{ src: '/portfolio/lovenest/chat.jpg', alt: 'Tall C' }
+		]
+	}
 };
+
+const settle = () =>
+	new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
 
 async function loaded(container: Element) {
 	await Promise.all(
@@ -84,28 +109,56 @@ describe('project-showcase.svelte', () => {
 		for (const screen of screens) expect(getComputedStyle(screen).boxShadow).toBe(expected);
 	});
 
-	for (const [label, showcase] of Object.entries(compositions)) {
-		it(`never crops: ${label} stays inside its field at 320, 640 and 1200px`, async () => {
-			const { container } = render(ProjectShowcase, { showcase, size: 'row' });
-			await loaded(container);
-			const root = container.querySelector('.showcase') as HTMLElement;
-			for (const width of [320, 640, 1200]) {
-				container.style.width = `${width}px`;
-				const field = root.getBoundingClientRect();
-				expect(field.width).toBeCloseTo(width, 0);
-				const imgs = [...root.querySelectorAll('img')];
-				expect(imgs.length).toBeGreaterThan(0);
-				for (const img of imgs) {
-					const r = img.getBoundingClientRect();
-					expect(r.width).toBeGreaterThan(0);
-					expect(r.left).toBeGreaterThanOrEqual(field.left - 1);
-					expect(r.right).toBeLessThanOrEqual(field.right + 1);
-					expect(r.top).toBeGreaterThanOrEqual(field.top - 1);
-					expect(r.bottom).toBeLessThanOrEqual(field.bottom + 1);
+	for (const size of ['row', 'case', 'hero'] as const) {
+		for (const [label, showcase] of Object.entries(compositions)) {
+			it(`never crops (${size}): ${label} stays inside its field at 320, 640 and 1200px`, async () => {
+				const { container } = render(ProjectShowcase, { showcase, size });
+				await loaded(container);
+				const root = container.querySelector('.showcase') as HTMLElement;
+				for (const width of [320, 640, 1200]) {
+					container.style.width = `${width}px`;
+					// A hero is given a box to fill; row and case size themselves.
+					container.style.height = size === 'hero' ? `${width * 0.625}px` : '';
+					await settle();
+					const field = root.getBoundingClientRect();
+					expect(field.width).toBeCloseTo(width, 0);
+					const imgs = [...root.querySelectorAll('img')];
+					expect(imgs.length).toBeGreaterThan(0);
+					for (const img of imgs) {
+						const r = img.getBoundingClientRect();
+						expect(r.width).toBeGreaterThan(0);
+						expect(r.left).toBeGreaterThanOrEqual(field.left - 1);
+						expect(r.right).toBeLessThanOrEqual(field.right + 1);
+						expect(r.top).toBeGreaterThanOrEqual(field.top - 1);
+						expect(r.bottom).toBeLessThanOrEqual(field.bottom + 1);
+					}
 				}
-			}
-		});
+			});
+		}
 	}
+
+	it('draws nothing and reports the resolved layout for invalid data', async () => {
+		const { container } = render(ProjectShowcase, { showcase: { layout: 'web' }, size: 'row' });
+		expect(container.querySelectorAll('img')).toHaveLength(0);
+		expect(container.querySelector('.showcase')?.getAttribute('data-layout')).toBe('none');
+		const second = render(ProjectShowcase, {
+			showcase: { layout: 'web-phones', phones: [phone1] },
+			size: 'row'
+		});
+		expect(second.container.querySelector('.showcase')?.getAttribute('data-layout')).toBe('phones');
+		expect(second.container.querySelectorAll('.phone img')).toHaveLength(1);
+	});
+
+	it('raises the middle phone of three above the outer two', async () => {
+		const { container } = render(ProjectShowcase, { showcase: compositions.phones, size: 'case' });
+		await loaded(container);
+		await settle();
+		const tops = [...container.querySelectorAll('.phone')].map(
+			(p) => p.getBoundingClientRect().top
+		);
+		expect(tops[1]).toBeLessThan(tops[0]);
+		expect(tops[0]).toBeCloseTo(tops[2], 0);
+	});
 
 	it('keeps phones at one width relative to the web screen and sharp (max 270px)', async () => {
 		const { container } = render(ProjectShowcase, {

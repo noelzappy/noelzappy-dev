@@ -35,7 +35,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		built: project.built ?? [],
 		brandColor: project.brandColor ?? '',
 		onBrand: project.onBrand ?? '',
-		heroImage: project.heroImage ?? '',
 		deviceShots: project.deviceShots ?? [],
 		showcase: project.showcase,
 		impact: project.impact ?? [],

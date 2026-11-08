@@ -5,6 +5,7 @@ import {
 	getAllProjects,
 	getFeaturedProjects,
 	getShowcase,
+	resolveShowcase,
 	getNextCaseStudy,
 	getPillProjects,
 	getProjectBySlug
@@ -184,7 +185,7 @@ describe('getShowcase', () => {
 
 	it('prefers an explicit showcase', () => {
 		const showcase = { layout: 'web' as const, web: { src: '/x.webp', alt: 'X' } };
-		expect(getShowcase({ showcase, deviceShots: [phone(1)] })).toBe(showcase);
+		expect(getShowcase({ showcase, deviceShots: [phone(1)] })).toEqual(showcase);
 	});
 
 	it('derives web-phones from a browser shot plus phones, capped at two phones', () => {
@@ -234,5 +235,26 @@ describe('getShowcase', () => {
 			voltax: 'web'
 		});
 		expect(getProjectBySlug('kekeh-mac')?.showcase?.phones).toHaveLength(3);
+	});
+
+	it('resolves invalid showcase data instead of drawing it', () => {
+		const shot = { src: '/a.webp', alt: 'A' };
+		expect(getShowcase({ showcase: { layout: 'web' } })).toBeNull();
+		expect(getShowcase({ showcase: { layout: 'phones', phones: [] } })).toBeNull();
+		expect(getShowcase({ showcase: { layout: 'web-phones', web: shot } })).toEqual({
+			layout: 'web',
+			web: shot
+		});
+		expect(getShowcase({ showcase: { layout: 'web-phones', phones: [shot] } })).toEqual({
+			layout: 'phones',
+			phones: [shot]
+		});
+		expect(resolveShowcase({ layout: 'web', phones: [shot], web: undefined })).toEqual({
+			layout: 'phones',
+			phones: [shot]
+		});
+		expect(
+			resolveShowcase({ layout: 'phones', phones: [shot, shot, shot, shot] })?.phones
+		).toHaveLength(3);
 	});
 });

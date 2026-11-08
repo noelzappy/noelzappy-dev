@@ -1,15 +1,20 @@
 <script lang="ts">
 	import type { Showcase } from '$lib/data/projects';
+	import { resolveShowcase } from '$lib/data/showcase';
 
 	/**
 	 * One fixed, frameless composition per project, always shown whole and at one scale.
 	 *
 	 * Everything is laid out in "units" on a grid whose width is the composition's width. A phone is
 	 * PHONE units wide and the web screen WEB units, so a phone is always 23 / 82 = 28% of the web
-	 * screen however big the composition is. The composition is sized by its field (`cqw`/`cqh`),
-	 * centred with padding, and capped in CSS pixels so the small source crops (phones are ~250-320px
-	 * wide, web screens ~820px) are never rendered larger than they are. Screens carry the site
-	 * radius and one soft shadow; phones add only a thin near-black bezel.
+	 * screen however big the composition is. Each screen's height comes from its image's real aspect
+	 * (measured on load, nominal until then), so no source can overrun the composition.
+	 *
+	 * Sizing: the composition is sized by its field (`cqw`/`cqh`), centred with padding, and capped in
+	 * CSS pixels so the small source crops (phones ~250-320px wide, web ~820px) are never rendered
+	 * larger than they are. `hero` and `row` fields are given a size and the composition fits inside
+	 * it; the `case` field is sized by the composition (capped width -> height + padding, at most
+	 * 85vh), so it never carries bands of empty colour.
 	 */
 	type Props = {
 		showcase: Showcase;
@@ -23,91 +28,132 @@
 
 	const WEB = 82;
 	const PHONE = 23;
-	const PHONE_RATIO = 2.2; // nominal phone aspect, height / width
+	const WEB_NOMINAL = 1 / 1.6; // height / width until the image reports its own
+	const PHONE_NOMINAL = 2.2;
 	const GAP = 5; // between phones in a phones-only layout
 	/** Largest phone / web render width in CSS px: the native width of the smallest sources. */
 	const MAX_PHONE_PX = 270;
 	const MAX_WEB_PX = 830;
 
-	type Placed = { src: string; alt: string; x: number; y: number };
+	/** height / width per image src, read from the loaded image. */
+	let measured = $state<Record<string, number>>({});
+	function measure(node: HTMLImageElement, src: string) {
+		const read = () => {
+			if (node.naturalWidth) measured[src] = node.naturalHeight / node.naturalWidth;
+		};
+		if (node.complete) read();
+		node.addEventListener('load', read);
+		return { destroy: () => node.removeEventListener('load', read) };
+	}
+
+	type Placed = { src: string; alt: string; x: number; y: number; ratio: number };
 	type Plan = { width: number; height: number; web?: Placed; phones: Placed[]; cap: number };
 
-	const plan = $derived.by<Plan>(() => {
-		const phones = (showcase.phones ?? []).slice(0, showcase.layout === 'web-phones' ? 2 : 3);
-		const web = showcase.web;
-		const phoneH = PHONE * PHONE_RATIO;
-		let layout = showcase.layout;
-		if (layout === 'web-phones' && (!web || !phones.length)) layout = web ? 'web' : 'phones';
-		if (layout === 'phones' && !phones.length) layout = 'web';
+	const resolved = $derived(resolveShowcase(showcase));
 
-		if (layout === 'web-phones' && web) {
+	const plan = $derived.by<Plan | null>(() => {
+		if (!resolved) return null;
+		const phones = (resolved.phones ?? []).map((p) => ({
+			...p,
+			ratio: measured[p.src] ?? PHONE_NOMINAL
+		}));
+		const web = resolved.web && {
+			...resolved.web,
+			ratio: measured[resolved.web.src] ?? WEB_NOMINAL
+		};
+
+		if (resolved.layout === 'web-phones' && web) {
 			// Phones overlap the web screen's lower corners (14 units, ~17% of it) and sit lower, so the
-			// group feels grounded. One phone takes the lower-right corner only.
+			// group feels grounded: their bottoms hang 19-23 units below the web screen's.
+			const webH = WEB * web.ratio;
 			const two = phones.length > 1;
 			const width = two ? 100 : 90;
-			const left = two ? 9 : 0;
-			const placed = phones.map((p, i) => ({
-				...p,
-				x: two ? (i === 0 ? 0 : width - PHONE) : width - PHONE,
-				y: two ? (i === 0 ? 24 : 20) : 22
-			}));
+			const hang = two ? [23.4, 19.4] : [21.4];
+			const placed = phones.map((p, i) => {
+				const h = PHONE * p.ratio;
+				return {
+					...p,
+					x: two && i === 0 ? 0 : width - PHONE,
+					y: Math.max(webH + hang[i] - h, webH * 0.4)
+				};
+			});
 			return {
 				width,
-				height: Math.max(...placed.map((p) => p.y + phoneH)),
-				web: { ...web, x: left, y: 0 },
+				height: Math.max(webH, ...placed.map((p) => p.y + PHONE * p.ratio)),
+				web: { ...web, x: two ? 9 : 0, y: 0 },
 				phones: placed,
 				cap: width * Math.min(MAX_PHONE_PX / PHONE, MAX_WEB_PX / WEB)
 			};
 		}
-		if (layout === 'phones') {
+		if (resolved.layout === 'phones') {
 			const n = phones.length;
-			const stagger = [0, 6, 0]; // the middle phone of three (or the second of two) sits lower
-			const placed = phones.map((p, i) => ({ ...p, x: i * (PHONE + GAP), y: stagger[i] }));
+			// Two: the second sits lower. Three: the middle one is raised, the outer two sit lower.
+			const stagger = n === 3 ? [6, 0, 6] : [0, 6];
+			const placed = phones.map((p, i) => ({ ...p, x: i * (PHONE + GAP), y: stagger[i] ?? 0 }));
+			const width = n * PHONE + (n - 1) * GAP;
 			return {
-				width: n * PHONE + (n - 1) * GAP,
-				height: phoneH + (n > 1 ? 6 : 0),
+				width,
+				height: Math.max(...placed.map((p) => p.y + PHONE * p.ratio)),
 				phones: placed,
-				cap: (n * PHONE + (n - 1) * GAP) * (MAX_PHONE_PX / PHONE)
+				cap: width * (MAX_PHONE_PX / PHONE)
 			};
 		}
+		const only = web as Placed & { ratio: number };
 		return {
 			width: WEB,
-			height: WEB / 1.5, // nominal 1.5 covers the 1.33-2.0 sources
-			web: { ...(web as { src: string; alt: string }), x: 0, y: 0 },
+			height: WEB * only.ratio,
+			web: { ...only, x: 0, y: 0 },
 			phones: [],
 			cap: MAX_WEB_PX
 		};
 	});
 
 	const loading = $derived(size === 'row' ? 'lazy' : 'eager');
-	const centredWeb = $derived(plan.phones.length === 0);
 </script>
 
 <div
 	class="showcase {size}"
 	style:background={brandColor}
 	style:view-transition-name={name}
-	data-layout={showcase.layout}
+	data-layout={resolved?.layout ?? 'none'}
 >
-	<div class="stage">
-		<div
-			class="composition"
-			style:--wc={plan.width}
-			style:--ar={plan.width / plan.height}
-			style:--cap="{plan.cap}px"
-		>
-			{#if plan.web}
-				<div class="web" class:centred={centredWeb} style:--x={plan.web.x} style:--y={plan.web.y}>
-					<img src={plan.web.src} alt={plan.web.alt} {loading} decoding="async" draggable="false" />
-				</div>
-			{/if}
-			{#each plan.phones as phone, i (i)}
-				<div class="phone" style:--x={phone.x} style:--y={phone.y}>
-					<img src={phone.src} alt={phone.alt} {loading} decoding="async" draggable="false" />
-				</div>
-			{/each}
+	{#if plan}
+		<div class="stage">
+			<div
+				class="composition"
+				style:--wc={plan.width}
+				style:--ar={plan.width / plan.height}
+				style:--cap="{plan.cap}px"
+			>
+				{#if plan.web}
+					<div class="web" style:--x={plan.web.x} style:--y={plan.web.y}>
+						<img
+							use:measure={plan.web.src}
+							src={plan.web.src}
+							alt={plan.web.alt}
+							{loading}
+							decoding="async"
+							draggable="false"
+							style:aspect-ratio={1 / plan.web.ratio}
+						/>
+					</div>
+				{/if}
+				{#each plan.phones as phone, i (i)}
+					<div class="phone" style:--x={phone.x} style:--y={phone.y}>
+						<img
+							use:measure={phone.src}
+							src={phone.src}
+							alt={phone.alt}
+							{loading}
+							decoding="async"
+							draggable="false"
+							style:aspect-ratio={1 / phone.ratio}
+						/>
+					</div>
+				{/each}
+			</div>
 		</div>
-	</div>
+	{/if}
 </div>
 
 <style>
@@ -118,9 +164,11 @@
 	.showcase.row {
 		aspect-ratio: var(--showcase-aspect, 16 / 10);
 	}
+	/* Sized by its composition, so it is a container for the composition's cqw. */
 	.showcase.case {
-		aspect-ratio: 16 / 9;
-		max-height: 85vh;
+		container-type: inline-size;
+		--padx: 6cqw;
+		--pady: 3.5cqw;
 	}
 	.showcase.hero {
 		height: 100%;
@@ -138,7 +186,9 @@
 		inset: 0;
 	}
 	.case .stage {
-		inset: 8% 6%;
+		position: static;
+		container-type: normal;
+		padding: var(--pady) var(--padx);
 	}
 
 	/* Fits the stage by whichever axis binds first, then stops at the sharp-pixel cap. */
@@ -148,6 +198,15 @@
 		container-type: inline-size;
 		width: min(100cqw, calc(100cqh * var(--ar)), var(--cap));
 		aspect-ratio: var(--ar);
+	}
+	/* Case: width from the field's width, the cap, and the 85vh height budget; the field's height
+	   then follows (composition height + 2 * padding). */
+	.case .composition {
+		width: min(
+			calc(100cqw - 2 * var(--padx)),
+			var(--cap),
+			calc((85vh - 2 * var(--pady)) * var(--ar))
+		);
 	}
 
 	.web,
@@ -161,6 +220,7 @@
 		display: block;
 		width: 100%;
 		height: auto;
+		object-fit: contain;
 		-webkit-user-drag: none;
 		user-select: none;
 	}
@@ -170,10 +230,6 @@
 		overflow: hidden;
 		border-radius: var(--radius-screen);
 		line-height: 0;
-	}
-	.web.centred {
-		top: 50%;
-		transform: translateY(-50%);
 	}
 
 	/* Thin near-black bezel (1.8% of the phone's width); the corner radius is 14% of its width. */

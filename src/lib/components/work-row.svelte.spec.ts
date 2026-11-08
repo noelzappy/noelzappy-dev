@@ -30,9 +30,12 @@ describe('work-row.svelte', () => {
 		await expect.element(page.getByRole('img', { name: 'Second shot' })).toBeInTheDocument();
 	});
 
-	it('falls back to the featured image in a browser frame', async () => {
-		render(WorkRow, { project: { ...base, featuredImage: '/favicon.png' } });
-		await expect.element(page.getByRole('img', { name: 'Kekeh Mac' })).toBeInTheDocument();
+	it('does not compose a featured image: no showcase means the brand field and initial', async () => {
+		const { container } = render(WorkRow, {
+			project: { ...base, brandColor: '#34b764', featuredImage: '/favicon.png' }
+		});
+		expect(container.querySelector('.thumb img')).toBeNull();
+		await expect.element(page.getByText('K', { exact: true })).toBeInTheDocument();
 	});
 
 	it('shows an initial swatch and no img when there is no imagery', async () => {

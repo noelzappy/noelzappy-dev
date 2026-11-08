@@ -1,7 +1,7 @@
 import yaml from 'js-yaml';
 import type { PillProject, ProjectData } from './projects';
 
-export { getShowcase } from './showcase';
+export { getShowcase, resolveShowcase } from './showcase';
 
 function parseFrontmatter(content: string): { data: Record<string, unknown>; content: string } {
 	const frontmatterRegex = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/;
