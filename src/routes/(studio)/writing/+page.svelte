@@ -40,10 +40,14 @@
 		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem 1.75rem;
+		gap: 0 1.75rem;
 		font-size: var(--step-body);
 	}
 	.tags a {
+		display: inline-flex;
+		align-items: center;
+		min-width: var(--tap-min);
+		min-height: var(--tap-min);
 		color: var(--fg);
 		text-decoration: none;
 	}

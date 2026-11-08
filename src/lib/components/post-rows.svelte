@@ -73,10 +73,14 @@
 	.tags {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem 1.25rem;
+		gap: 0 1.25rem;
 		font-size: var(--step-small);
 	}
 	.tags a {
+		display: inline-flex;
+		align-items: center;
+		min-width: var(--tap-min);
+		min-height: var(--tap-min);
 		color: var(--muted);
 		text-decoration: none;
 	}
