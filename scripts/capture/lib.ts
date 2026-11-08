@@ -106,6 +106,13 @@ export function cappedSize(
 	return { width: maxWidth, height: Math.round((height * maxWidth) / width) };
 }
 
+/** Slugified project slug; throws if nothing is left (it would write files flat into static/portfolio). */
+export function requireSlug(raw: string): string {
+	const slug = slugify(raw);
+	if (!slug) throw new Error(`Slug "${raw}" has no letters or digits after slugifying.`);
+	return slug;
+}
+
 export function parseKind(value: string | undefined): ShotKind {
 	if (value === undefined) return 'phone';
 	if (value === 'phone' || value === 'browser') return value;
@@ -237,15 +244,16 @@ export const STATUS_BAR = {
 	batteryLevel: '100',
 	cellularBars: '4',
 	wifiBars: '3',
-	dataNetwork: 'wifi'
+	dataNetwork: 'wifi',
+	operatorName: ''
 } as const;
 
 /** Arguments (after `xcrun`) that set the clean marketing status bar. */
-export function statusBarOverrideArgs(): string[] {
+export function statusBarOverrideArgs(udid: string): string[] {
 	return [
 		'simctl',
 		'status_bar',
-		'booted',
+		udid,
 		'override',
 		'--time',
 		STATUS_BAR.time,
@@ -258,16 +266,18 @@ export function statusBarOverrideArgs(): string[] {
 		'--wifiBars',
 		STATUS_BAR.wifiBars,
 		'--dataNetwork',
-		STATUS_BAR.dataNetwork
+		STATUS_BAR.dataNetwork,
+		'--operatorName',
+		STATUS_BAR.operatorName
 	];
 }
 
-export function statusBarClearArgs(): string[] {
-	return ['simctl', 'status_bar', 'booted', 'clear'];
+export function statusBarClearArgs(udid: string): string[] {
+	return ['simctl', 'status_bar', udid, 'clear'];
 }
 
-export function screenshotArgs(output: string): string[] {
-	return ['simctl', 'io', 'booted', 'screenshot', '--type=png', output];
+export function screenshotArgs(udid: string, output: string): string[] {
+	return ['simctl', 'io', udid, 'screenshot', '--type=png', output];
 }
 
 export interface SimDevice {

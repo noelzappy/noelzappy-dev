@@ -16,7 +16,7 @@ import {
 	parseKind,
 	pngSize,
 	slugFromFilename,
-	slugify,
+	requireSlug,
 	sortFilenames,
 	uniqueNames
 } from './lib';
@@ -37,7 +37,7 @@ async function main() {
 		process.exit(args.flags.help ? 0 : 1);
 	}
 	const [folder, rawSlug] = args.positionals;
-	const slug = slugify(rawSlug);
+	const slug = requireSlug(rawSlug);
 	const kind = parseKind(flagString(args, 'kind'));
 	const files = sortFilenames(
 		readdirSync(folder).filter(

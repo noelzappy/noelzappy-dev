@@ -1,7 +1,7 @@
 /**
  * Capture iOS Simulator screens into static/portfolio/<slug>/<name>.webp.
  *
- *   bun run capture:ios <slug> [--device "iPhone 15 Pro"] [--shot name] [--auto]
+ *   bun run capture:ios <slug> [--device "iPhone 17 Pro"] [--shot name] [--auto]
  */
 import { createInterface } from 'node:readline/promises';
 import { join } from 'node:path';
@@ -20,7 +20,7 @@ import {
 import { manifest } from './projects';
 import { fail, makeTempDir, removeDir, requireTool, run, toWebp } from './shell';
 
-const HELP = `Usage: bun run capture:ios <slug> [--device "iPhone 15 Pro"] [--shot name] [--auto]
+const HELP = `Usage: bun run capture:ios <slug> [--device "iPhone 17 Pro"] [--shot name] [--auto]
 
 Boots (or reuses) a simulator, sets a 9:41 status bar, then captures each iOS shot for <slug>
 from scripts/capture/projects.ts. For each shot it prints the name and note and waits for Enter.
@@ -32,13 +32,14 @@ from scripts/capture/projects.ts. For each shot it prints the name and note and 
 The status bar override is cleared when the run ends, including on Ctrl-C.`;
 
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
-let statusBarSet = false;
+let statusBarUdid: string | undefined;
 
 function clearStatusBar() {
-	if (!statusBarSet) return;
-	statusBarSet = false;
+	if (!statusBarUdid) return;
+	const udid = statusBarUdid;
+	statusBarUdid = undefined;
 	try {
-		run('xcrun', statusBarClearArgs());
+		run('xcrun', statusBarClearArgs(udid));
 	} catch {
 		// Simulator may already be shut down.
 	}
@@ -83,11 +84,11 @@ async function main() {
 		clearStatusBar();
 		process.exit(130);
 	});
-	run('xcrun', statusBarOverrideArgs());
-	statusBarSet = true;
+	run('xcrun', statusBarOverrideArgs(device.udid));
+	statusBarUdid = device.udid;
 
 	if (ios.bundleId) {
-		run('xcrun', ['simctl', 'launch', 'booted', ios.bundleId]);
+		run('xcrun', ['simctl', 'launch', device.udid, ios.bundleId]);
 		await sleep(1500);
 	} else {
 		console.log('No bundleId in the manifest: open the app yourself.');
@@ -99,7 +100,7 @@ async function main() {
 		for (const shot of shots) {
 			console.log(`\n== ${shot.name}${shot.note ? `: ${shot.note}` : ''}`);
 			if (shot.deepLink) {
-				run('xcrun', ['simctl', 'openurl', 'booted', shot.deepLink]);
+				run('xcrun', ['simctl', 'openurl', device.udid, shot.deepLink]);
 				await sleep(1500);
 			}
 			if (auto && shot.deepLink) {
@@ -108,7 +109,7 @@ async function main() {
 				await rl.question('Set up the screen, then press Enter to capture... ');
 			}
 			const png = join(tmp, `${shot.name}.png`);
-			run('xcrun', screenshotArgs(png));
+			run('xcrun', screenshotArgs(device.udid, png));
 			const out = outputPath(slug, shot.name);
 			const size = toWebp(png, out);
 			console.log(`${out}  ${size.width}x${size.height}`);

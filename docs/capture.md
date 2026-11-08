@@ -9,7 +9,7 @@ no device frame; `ProjectShowcase` renders them frameless.
 | Situation                                   | Command                                                                        |
 | ------------------------------------------- | ------------------------------------------------------------------------------ |
 | Web app or admin screen, local or staging   | `bun run capture:web <slug> [--shot name] [--dry-run]`                         |
-| Mobile app in the iOS Simulator             | `bun run capture:ios <slug> [--device "iPhone 15 Pro"] [--shot name] [--auto]` |
+| Mobile app in the iOS Simulator             | `bun run capture:ios <slug> [--device "iPhone 17 Pro"] [--shot name] [--auto]` |
 | Real iPhone, or any folder of PNG/JPEG/HEIC | `bun run capture:ingest <folder> <slug> [--kind phone\|browser]`               |
 
 Shots are declared in `scripts/capture/projects.ts`. Fill in the `TODO` placeholders (URLs, bundle

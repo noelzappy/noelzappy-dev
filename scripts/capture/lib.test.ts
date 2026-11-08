@@ -18,7 +18,9 @@ import {
 	pickWebShots,
 	pngSize,
 	publicPath,
+	requireSlug,
 	resolveBaseUrl,
+	screenshotArgs,
 	slugFromFilename,
 	slugify,
 	sortFilenames,
@@ -78,6 +80,11 @@ describe('names and paths', () => {
 		expect(cappedSize(1290, 2796, 1179)).toEqual({ width: 1179, height: 2555 });
 		expect(cappedSize(1179, 2556, 1179)).toEqual({ width: 1179, height: 2556 });
 		expect(cappedSize(800, 600, 2880)).toEqual({ width: 800, height: 600 });
+	});
+	it('rejects a slug that slugifies to nothing', () => {
+		expect(requireSlug('Kekeh Mac')).toBe('kekeh-mac');
+		expect(() => requireSlug('///')).toThrow(/no letters or digits/);
+		expect(() => requireSlug('')).toThrow();
 	});
 	it('parses --kind', () => {
 		expect(parseKind(undefined)).toBe('phone');
@@ -185,11 +192,36 @@ describe('web helpers', () => {
 
 describe('simulator helpers', () => {
 	it('builds the status bar override command', () => {
-		expect(statusBarOverrideArgs().join(' ')).toBe(
-			'simctl status_bar booted override --time 9:41 --batteryState charged --batteryLevel 100 --cellularBars 4 --wifiBars 3 --dataNetwork wifi'
-		);
+		expect(statusBarOverrideArgs('UDID-1')).toEqual([
+			'simctl',
+			'status_bar',
+			'UDID-1',
+			'override',
+			'--time',
+			'9:41',
+			'--batteryState',
+			'charged',
+			'--batteryLevel',
+			'100',
+			'--cellularBars',
+			'4',
+			'--wifiBars',
+			'3',
+			'--dataNetwork',
+			'wifi',
+			'--operatorName',
+			''
+		]);
 		expect(STATUS_BAR.time).toBe('9:41');
-		expect(statusBarClearArgs()).toEqual(['simctl', 'status_bar', 'booted', 'clear']);
+		expect(statusBarClearArgs('UDID-1')).toEqual(['simctl', 'status_bar', 'UDID-1', 'clear']);
+		expect(screenshotArgs('UDID-1', 'a.png')).toEqual([
+			'simctl',
+			'io',
+			'UDID-1',
+			'screenshot',
+			'--type=png',
+			'a.png'
+		]);
 	});
 	const list = {
 		devices: {

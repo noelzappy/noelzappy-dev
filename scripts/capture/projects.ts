@@ -56,7 +56,7 @@ export interface IosShot {
 }
 
 export interface IosTarget {
-	/** Simulator device name, e.g. 'iPhone 15 Pro'. */
+	/** Simulator device name, e.g. 'iPhone 17 Pro'. */
 	device: string;
 	/** Launched with `xcrun simctl launch` when set. */
 	bundleId?: string;
@@ -74,7 +74,7 @@ const PHONE_SHOTS = (key: string): IosShot[] => [
 	{ name: 'success', note: 'Confirmation or result screen' }
 ];
 
-const DEVICE = 'iPhone 15 Pro';
+const DEVICE = 'iPhone 17 Pro';
 
 export const manifest: Record<string, ProjectCapture> = {
 	'kekeh-mac': {
