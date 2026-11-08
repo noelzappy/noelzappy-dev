@@ -66,6 +66,11 @@
 		text-decoration: none;
 		transition: color 0.2s ease;
 	}
+	/* The address is 23 characters at display size: scale it down on phones rather than let it
+	   break mid-word. */
+	.big-links a[href^='mailto:'] {
+		font-size: min(var(--step-display-m), 6.2vw);
+	}
 	.big-links a:hover,
 	.big-links a:focus-visible,
 	.big-links :global(.cal-link:hover),
