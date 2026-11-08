@@ -56,6 +56,7 @@
 	.big-links :global(.cal-link) {
 		width: fit-content;
 		max-width: 100%;
+		min-height: var(--tap-min);
 		overflow-wrap: anywhere;
 		font-size: var(--step-display-m);
 		line-height: var(--lh-display-m);
@@ -83,10 +84,14 @@
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem 1.5rem;
+		gap: 0 1rem;
 		margin-inline-end: auto;
 	}
 	.links a {
+		display: inline-flex;
+		align-items: center;
+		min-width: var(--tap-min);
+		min-height: var(--tap-min);
 		color: var(--muted);
 		text-decoration: none;
 	}

@@ -273,6 +273,7 @@
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4em;
+		min-height: var(--tap-min);
 		padding: 0.55rem 1.3rem;
 		border: 1px solid color-mix(in srgb, currentColor 55%, transparent);
 		border-radius: 999px;

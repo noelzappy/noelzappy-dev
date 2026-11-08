@@ -161,6 +161,7 @@
 	.close {
 		font: inherit;
 		font-size: 0.9rem;
+		min-height: var(--tap-min);
 		padding: 0.4rem 1rem;
 		border: 1px solid var(--ink);
 		border-radius: 999px;
@@ -192,6 +193,7 @@
 	}
 	.nav a {
 		display: inline-block;
+		min-height: var(--tap-min);
 		font-family: var(--font-display);
 		font-size: var(--step-display-l);
 		line-height: var(--lh-display-l);
@@ -221,7 +223,9 @@
 		gap: 0.5rem;
 	}
 	.pills a {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap-min);
 		padding: 0.4rem 0.9rem;
 		border: 1px solid var(--ink);
 		border-radius: 999px;

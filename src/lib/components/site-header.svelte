@@ -194,6 +194,9 @@
 		height: 2.75rem;
 	}
 	.wordmark {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap-min);
 		font-family: var(--font-display);
 		font-size: 1.15rem;
 		font-weight: 500;
