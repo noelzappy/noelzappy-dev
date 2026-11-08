@@ -120,6 +120,32 @@ describe('CaseStudy', () => {
 		}
 	});
 
+	it('at 375px the showcase sits above the meta list, after the title', async () => {
+		await page.viewport(375, 812);
+		const { container } = render(CaseStudy, base);
+		const top = (sel: string) =>
+			(container.querySelector(sel) as HTMLElement).getBoundingClientRect().top;
+		expect(top('h1')).toBeLessThan(top('.showcase'));
+		expect(top('.showcase')).toBeLessThan(top('.meta'));
+		// Brand field still runs edge to edge.
+		const hero = (container.querySelector('.hero') as HTMLElement).getBoundingClientRect();
+		expect(hero.left).toBe(0);
+		expect(hero.width).toBe(document.documentElement.clientWidth);
+		// Morph name is untouched.
+		expect(container.querySelector('.showcase')?.getAttribute('data-showcase-name')).toBe(
+			showcaseName('kekeh-mac')
+		);
+	});
+
+	it('at 1280px the meta list stays above the showcase, as before', async () => {
+		await page.viewport(1280, 900);
+		const { container } = render(CaseStudy, base);
+		const top = (sel: string) =>
+			(container.querySelector(sel) as HTMLElement).getBoundingClientRect().top;
+		expect(top('h1')).toBeLessThan(top('.meta'));
+		expect(top('.meta')).toBeLessThan(top('.showcase'));
+	});
+
 	it('keeps the morph name on the showcase', () => {
 		const { container } = render(CaseStudy, base);
 		expect(container.querySelector('.showcase')?.getAttribute('data-showcase-name')).toBe(

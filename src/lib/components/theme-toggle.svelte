@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { syncThemeColor } from '$lib/theme-color';
 
 	type Theme = 'light' | 'dark';
 	let theme = $state<Theme | null>(null);
@@ -23,6 +24,7 @@
 			/* storage unavailable: theme still applies for this page */
 		}
 		theme = next;
+		syncThemeColor();
 	}
 </script>
 

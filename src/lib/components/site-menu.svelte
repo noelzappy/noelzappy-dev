@@ -8,6 +8,7 @@
 
 <script lang="ts">
 	import { tick } from 'svelte';
+	import { overrideThemeColor } from '$lib/theme-color';
 
 	let {
 		open,
@@ -43,6 +44,12 @@
 		return () => {
 			document.body.style.overflow = prev;
 		};
+	});
+
+	// iOS tints its status bar from theme-color: match the overlay's own surface while it is open.
+	$effect(() => {
+		if (!open || !dialog) return;
+		return overrideThemeColor(getComputedStyle(dialog).backgroundColor);
 	});
 
 	function focusables(): HTMLElement[] {
