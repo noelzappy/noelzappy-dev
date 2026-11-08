@@ -297,8 +297,6 @@ describe('hero.svelte', () => {
 		}
 
 		it('hides while a pill is active and pauses when the pill list is engaged', async () => {
-			// Needs real animations: the blanket reset would also reset the play state.
-			noMotion.remove();
 			const { root } = setup();
 			const strip = root.querySelector('.strip') as HTMLElement;
 			const track = strip.querySelector('.track') as HTMLElement;
@@ -306,18 +304,30 @@ describe('hero.svelte', () => {
 			await page.getByRole('link', { name: 'Kekeh Mac' }).hover();
 			await expect.poll(() => root.dataset.active).toBe('kekeh-mac');
 			await expect.poll(() => getComputedStyle(strip).visibility).toBe('hidden');
-			await expect.poll(() => getComputedStyle(track).animationPlayState).toBe('paused');
+			// The drift has stopped: the track stays where it is.
+			await new Promise((r) => setTimeout(r, 150));
+			const at = track.style.transform;
+			await new Promise((r) => setTimeout(r, 250));
+			expect(track.style.transform).toBe(at);
 		});
 
 		it('is static under reduced motion and animates otherwise', async () => {
-			noMotion.remove();
+			// The previous test left the pointer on a pill, which would pause the strip.
+			await cdp().send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: 1, y: 1 });
 			const { root } = setup();
 			const track = root.querySelector('.strip .track') as HTMLElement;
-			expect(getComputedStyle(track).animationName).not.toBe('none');
-			expect(parseFloat(getComputedStyle(track).animationDuration)).toBeGreaterThanOrEqual(60);
-			expect(parseFloat(getComputedStyle(track).animationDuration)).toBeLessThanOrEqual(90);
+			await expect.poll(() => track.style.transform).not.toBe('');
+			await expect
+				.poll(() => {
+					const t = track.style.transform;
+					return new Promise((r) => setTimeout(() => r(track.style.transform !== t), 300));
+				})
+				.toBe(true);
 			await emulateMotion('reduce');
-			await expect.poll(() => getComputedStyle(track).animationName).toBe('none');
+			await expect.poll(() => track.style.transform).toBe('');
+			await expect
+				.poll(() => getComputedStyle(root.querySelector('.strip [data-copy="1"]')!).display)
+				.toBe('none');
 		});
 	});
 
