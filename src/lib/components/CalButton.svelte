@@ -54,6 +54,7 @@
 	}
 	.cal-link.plain {
 		display: inline-block;
+		min-height: var(--tap-min);
 		color: inherit;
 		text-decoration: none;
 		letter-spacing: inherit;

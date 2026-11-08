@@ -207,9 +207,14 @@
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.25rem 1.5rem;
+		gap: 0 1.5rem;
 		font-size: var(--step-small);
 		line-height: var(--lh-small);
+	}
+	.links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap-min);
 	}
 	/* Side by side only once the content column can hold a readable measure beside the photo. */
 	@media (min-width: 72rem) {
