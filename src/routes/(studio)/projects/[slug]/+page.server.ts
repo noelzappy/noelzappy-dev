@@ -14,6 +14,19 @@ export const load: PageServerLoad = async ({ params }) => {
 	const project = getProjectBySlug(params.slug);
 	if (!project || !project.html.trim()) error(404, 'Project not found');
 
+	// The Next block shows the next project's showcase, so carry what that needs.
+	const nextStudy = getNextCaseStudy(project.slug);
+	const nextProject = nextStudy ? getProjectBySlug(nextStudy.slug) : undefined;
+	const next =
+		nextStudy && nextProject
+			? {
+					...nextStudy,
+					brandColor: nextProject.brandColor ?? '',
+					onBrand: nextProject.onBrand,
+					showcase: withShotRatios(getShowcase(nextProject))
+				}
+			: null;
+
 	return {
 		slug: project.slug,
 		title: project.title,
@@ -40,6 +53,6 @@ export const load: PageServerLoad = async ({ params }) => {
 		deviceShots: project.deviceShots ?? [],
 		showcase: withShotRatios(getShowcase(project)),
 		impact: project.impact ?? [],
-		next: getNextCaseStudy(project.slug)
+		next
 	};
 };

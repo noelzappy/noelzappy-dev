@@ -3,6 +3,7 @@
 	import { getShowcase } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
 	import Section from './section.svelte';
+	import WorkThumb from './work-thumb.svelte';
 	import { showcaseName } from '$lib/motion/shared';
 
 	const ENGAGEMENT: Record<string, string> = {
@@ -56,7 +57,13 @@
 		iosUrl?: string;
 		androidUrl?: string;
 		github?: string;
-		next?: { slug: string; title: string } | null;
+		next?: {
+			slug: string;
+			title: string;
+			brandColor?: string;
+			onBrand?: 'light' | 'dark';
+			showcase?: Showcase;
+		} | null;
 	} = $props();
 
 	const meta = $derived(
@@ -76,6 +83,14 @@
 		].filter((link) => link.href)
 	);
 	const composition = $derived(getShowcase({ showcase, deviceShots }));
+	// The Next link morphs into the next case study's top, so it carries that project's name only
+	// when that page will show a named showcase (brand field and composition). Never the current
+	// project's own name: names stay unique per page.
+	const nextName = $derived(
+		next?.brandColor && getShowcase({ showcase: next.showcase })
+			? showcaseName(next.slug)
+			: undefined
+	);
 </script>
 
 <article class="case-study">
@@ -154,7 +169,22 @@
 	{#if next}
 		<Section label="Next">
 			<nav class="next" aria-label="Next case study">
-				<a href="/projects/{next.slug}">{next.title}</a>
+				<a href="/projects/{next.slug}" data-sveltekit-preload-data>
+					{#if next.brandColor}
+						<span class="next-visual" aria-hidden="true">
+							<WorkThumb
+								project={{
+									title: next.title,
+									brandColor: next.brandColor,
+									onBrand: next.onBrand,
+									showcase: next.showcase
+								}}
+								name={nextName}
+							/>
+						</span>
+					{/if}
+					<span class="next-title">{next.title}</span>
+				</a>
 			</nav>
 		</Section>
 	{/if}
@@ -330,6 +360,9 @@
 		margin: 0;
 	}
 	.next a {
+		display: grid;
+		gap: 1.25rem;
+		max-width: 40rem;
 		font-family: var(--font-display);
 		font-size: var(--step-display-m);
 		line-height: var(--lh-display-m);
@@ -342,5 +375,8 @@
 	.next a:hover,
 	.next a:focus-visible {
 		color: var(--accent);
+	}
+	.next-visual {
+		display: block;
 	}
 </style>
