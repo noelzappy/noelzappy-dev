@@ -23,6 +23,7 @@ built:
   - 'API'
   - 'Admin'
   - 'Real-time dispatch'
+featuredImage: '/portfolio/kekeh-mac/og.png'
 brandColor: '#34b764'
 onBrand: 'dark'
 deviceShots:

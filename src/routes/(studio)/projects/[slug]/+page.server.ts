@@ -1,5 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { getAllProjects, getNextCaseStudy, getProjectBySlug } from '$lib/data/projects-loader';
+import { getShowcase } from '$lib/data/showcase';
+import { withShotRatios } from '$lib/server/image-size';
 import type { EntryGenerator, PageServerLoad } from './$types';
 
 export const prerender = true;
@@ -36,7 +38,7 @@ export const load: PageServerLoad = async ({ params }) => {
 		brandColor: project.brandColor ?? '',
 		onBrand: project.onBrand ?? '',
 		deviceShots: project.deviceShots ?? [],
-		showcase: project.showcase,
+		showcase: withShotRatios(getShowcase(project)),
 		impact: project.impact ?? [],
 		next: getNextCaseStudy(project.slug)
 	};

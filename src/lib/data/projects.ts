@@ -12,7 +12,8 @@ export const PROJECT_CATEGORIES: ProjectCategory[] = [
 export type ProjectEngagement = 'full-build' | 'team' | 'rescue' | 'website' | 'open-source';
 export type ProjectStage = 'startup' | 'business' | 'ngo' | 'own-venture';
 export type DeviceShot = { src: string; alt: string; kind: 'phone' | 'browser' };
-export type Shot = { src: string; alt: string };
+/** `ratio` is height / width when known up front (server-measured), so layout is stable before load. */
+export type Shot = { src: string; alt: string; ratio?: number };
 export type ShowcaseLayout = 'web-phones' | 'phones' | 'web';
 /** One fixed composition per project: a web screen, 1-3 phone screens, or both. */
 export type Showcase = { layout: ShowcaseLayout; web?: Shot; phones?: Shot[] };

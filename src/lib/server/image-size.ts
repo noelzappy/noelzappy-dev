@@ -1,5 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
+import type { Shot, Showcase } from '../data/projects';
 
 /** Width and height of a WebP file from its header, or `null` for anything else or on any error. */
 export function webpSize(bytes: Uint8Array): { width: number; height: number } | null {
@@ -28,4 +29,15 @@ export function staticImageRatio(src: string): number | undefined {
 	} catch {
 		return undefined;
 	}
+}
+
+/** A showcase with each shot's real height / width attached, so its field is sized before load. */
+export function withShotRatios(showcase: Showcase | null): Showcase | undefined {
+	if (!showcase) return undefined;
+	const add = (shot: Shot): Shot => ({ ...shot, ratio: staticImageRatio(shot.src) });
+	return {
+		...showcase,
+		web: showcase.web && add(showcase.web),
+		phones: showcase.phones?.map(add)
+	};
 }

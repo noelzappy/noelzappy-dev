@@ -178,3 +178,18 @@ describe('project-showcase.svelte', () => {
 		}
 	});
 });
+
+describe('ProjectShowcase provided ratios', () => {
+	it('lays a shot out at its provided ratio before the image has loaded', () => {
+		const { container } = render(ProjectShowcase, {
+			showcase: {
+				layout: 'phones',
+				phones: [{ src: '/portfolio/rbl-messages.webp?provided-ratio', alt: 'A', ratio: 1.5 }]
+			},
+			size: 'case'
+		});
+		const img = container.querySelector('img') as HTMLImageElement;
+		expect(img.complete).toBe(false);
+		expect(parseFloat(img.style.aspectRatio)).toBeCloseTo(1 / 1.5, 4);
+	});
+});

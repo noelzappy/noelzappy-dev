@@ -2,6 +2,7 @@
 	import type { DeviceShot, Showcase } from '$lib/data/projects';
 	import { getShowcase } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
+	import Section from './section.svelte';
 	import { showcaseName } from '$lib/motion/shared';
 
 	const ENGAGEMENT: Record<string, string> = {
@@ -112,15 +113,16 @@
 		</div>
 	{/if}
 
-	<div class="column prose">
-		<!-- eslint-disable-next-line svelte/no-at-html-tags -- project bodies are authored HTML in the repo -->
-		{@html html}
-	</div>
+	<Section label="Story">
+		<div class="prose">
+			<!-- eslint-disable-next-line svelte/no-at-html-tags -- project bodies are authored HTML in the repo -->
+			{@html html}
+		</div>
+	</Section>
 
 	{#if impact.length > 0}
-		<section class="impact" aria-labelledby="impact-heading">
-			<h2 id="impact-heading">Impact</h2>
-			<ul>
+		<Section label="Impact">
+			<ul class="impact">
 				{#each impact as item (item.label)}
 					<li>
 						<strong>{item.value}</strong>
@@ -128,39 +130,33 @@
 					</li>
 				{/each}
 			</ul>
-		</section>
+		</Section>
 	{/if}
 
-	{#if stack.length || links.length}
-		<section class="column facts">
-			{#if stack.length}
-				<div>
-					<h2>Stack</h2>
-					<p class="tags">
-						{#each stack as item (item)}<span class="tag">{item}</span>{/each}
-					</p>
-				</div>
-			{/if}
-			{#if links.length}
-				<div>
-					<h2>Links</h2>
-					<p class="links">
-						{#each links as link (link.label)}
-							<a href={link.href} rel="noopener noreferrer">{link.label}</a>
-						{/each}
-					</p>
-				</div>
-			{/if}
-		</section>
+	{#if stack.length}
+		<Section label="Stack">
+			<p class="tags">
+				{#each stack as item (item)}<span class="tag">{item}</span>{/each}
+			</p>
+		</Section>
+	{/if}
+
+	{#if links.length}
+		<Section label="Links">
+			<p class="links">
+				{#each links as link (link.label)}
+					<a href={link.href} rel="noopener noreferrer">{link.label}</a>
+				{/each}
+			</p>
+		</Section>
 	{/if}
 
 	{#if next}
-		<nav class="next" aria-label="Next case study">
-			<div class="next-inner">
-				<p>Next case study</p>
+		<Section label="Next">
+			<nav class="next" aria-label="Next case study">
 				<a href="/projects/{next.slug}">{next.title}</a>
-			</div>
-		</nav>
+			</nav>
+		</Section>
 	{/if}
 </article>
 
@@ -173,6 +169,11 @@
 		padding-top: calc(var(--header-h) + clamp(2rem, 6vw, 5rem));
 		padding-bottom: calc(var(--rhythm) * 8);
 		gap: clamp(3rem, 7vw, 6rem);
+	}
+
+	.case-study > :global(.sec) {
+		width: 100%;
+		box-sizing: border-box;
 	}
 
 	.top {
@@ -214,6 +215,10 @@
 	}
 
 	/* Full-bleed hero */
+	.top,
+	.hero {
+		margin-bottom: clamp(3rem, 7vw, 6rem);
+	}
 	.hero {
 		width: 100%;
 	}
@@ -231,16 +236,12 @@
 		display: block;
 	}
 
-	/* Narrative */
-	.column {
-		width: 100%;
-		max-width: calc(var(--measure) + 2 * var(--gutter));
-		margin-inline: auto;
-		padding-inline: var(--gutter);
-		box-sizing: border-box;
-	}
+	/* Narrative: lives in a Section body, so its left edge is the site grid's second column. */
 	.prose {
 		font-size: 1.05rem;
+	}
+	.prose > :global(:not(.shots-row, img)) {
+		max-width: var(--measure);
 	}
 	.prose :global(h2) {
 		font-family: var(--font-display);
@@ -273,21 +274,7 @@
 		box-shadow: var(--shadow-screen);
 	}
 
-	/* Impact */
 	.impact {
-		padding-inline: var(--gutter);
-		border-top: 1px solid var(--border);
-		padding-top: 1.5rem;
-	}
-	.impact h2 {
-		margin: 0 0 1.5rem;
-		font-size: 0.78rem;
-		letter-spacing: var(--tracking-caption);
-		text-transform: uppercase;
-		color: var(--muted);
-		font-weight: 400;
-	}
-	.impact ul {
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -308,24 +295,9 @@
 		color: var(--muted);
 	}
 
-	/* Stack + links */
-	.facts {
-		display: grid;
-		gap: 2rem;
-	}
-	.facts h2 {
-		margin: 0 0 0.75rem;
-		font-size: 0.78rem;
-		letter-spacing: var(--tracking-caption);
-		text-transform: uppercase;
-		color: var(--muted);
-		font-weight: 400;
-	}
-	.facts p {
-		margin: 0;
-	}
 	.tags,
 	.links {
+		margin: 0;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.4rem 1.25rem;
@@ -337,24 +309,6 @@
 		color: var(--accent);
 	}
 
-	/* Next */
-	.next {
-		width: 100%;
-		max-width: var(--page-max);
-		margin-inline: auto;
-		padding-inline: var(--gutter);
-	}
-	.next-inner {
-		border-top: 1px solid var(--border);
-		padding-top: 1.5rem;
-	}
-	.next p {
-		margin: 0 0 0.75rem;
-		font-size: 0.78rem;
-		letter-spacing: var(--tracking-caption);
-		text-transform: uppercase;
-		color: var(--muted);
-	}
 	.next a {
 		font-family: var(--font-display);
 		font-size: var(--step-display-l);

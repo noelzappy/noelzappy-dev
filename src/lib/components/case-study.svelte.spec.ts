@@ -3,6 +3,7 @@ import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import '../../routes/layout.css';
 import CaseStudy from './case-study.svelte';
+import { showcaseName } from '$lib/motion/shared';
 
 const base = {
 	title: 'Kekeh Mac',
@@ -85,5 +86,43 @@ describe('CaseStudy', () => {
 		const top = Math.min(...imgs.map((i) => i.getBoundingClientRect().top)) - f.top;
 		const bottom = f.bottom - Math.max(...imgs.map((i) => i.getBoundingClientRect().bottom));
 		expect(Math.max(top, bottom)).toBeLessThanOrEqual(window.innerHeight * 0.08);
+	});
+
+	it('puts the narrative on the Section grid, level with the other sections at 768px and up', async () => {
+		await page.viewport(1440, 900);
+		const { container } = render(CaseStudy, {
+			...base,
+			impact: [{ value: '12k', label: 'trips' }]
+		});
+		const prose = container.querySelector('.prose') as HTMLElement;
+		const bodies = [...container.querySelectorAll('.sec .body')] as HTMLElement[];
+		expect(bodies.length).toBeGreaterThan(1);
+		const left = prose.getBoundingClientRect().left;
+		for (const body of bodies) expect(body.getBoundingClientRect().left).toBeCloseTo(left, 0);
+		// And it is not the title's left edge: column 2, not the page edge.
+		const title = container.querySelector('h1') as HTMLElement;
+		expect(left).toBeGreaterThan(title.getBoundingClientRect().left + 100);
+	});
+
+	it('keeps the showcase inside its hero field', async () => {
+		await page.viewport(1440, 900);
+		const { container } = render(CaseStudy, base);
+		const field = container.querySelector('.hero') as HTMLElement;
+		const showcase = container.querySelector('.showcase') as HTMLElement;
+		const f = field.getBoundingClientRect();
+		for (const img of showcase.querySelectorAll('img')) {
+			const r = img.getBoundingClientRect();
+			expect(r.left).toBeGreaterThanOrEqual(f.left);
+			expect(r.right).toBeLessThanOrEqual(f.right);
+			expect(r.top).toBeGreaterThanOrEqual(f.top);
+			expect(r.bottom).toBeLessThanOrEqual(f.bottom);
+		}
+	});
+
+	it('keeps the morph name on the showcase', () => {
+		const { container } = render(CaseStudy, base);
+		expect(container.querySelector('.showcase')?.getAttribute('data-showcase-name')).toBe(
+			showcaseName('kekeh-mac')
+		);
 	});
 });

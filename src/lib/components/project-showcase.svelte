@@ -8,7 +8,7 @@
 	 * Everything is laid out in "units" on a grid whose width is the composition's width. A phone is
 	 * PHONE units wide and the web screen WEB units, so a phone is always 23 / 82 = 28% of the web
 	 * screen however big the composition is. Each screen's height comes from its image's real aspect
-	 * (measured on load, nominal until then), so no source can overrun the composition.
+	 * (measured on load; a server-provided `ratio`, else nominal, until then), so no source can overrun the composition.
 	 *
 	 * Sizing: the composition is sized by its field (`cqw`/`cqh`), centred with padding, and capped in
 	 * CSS pixels so the small source crops (phones ~250-320px wide, web ~820px) are never rendered
@@ -58,11 +58,11 @@
 		if (!resolved) return null;
 		const phones = (resolved.phones ?? []).map((p) => ({
 			...p,
-			ratio: measured[p.src] ?? PHONE_NOMINAL
+			ratio: measured[p.src] ?? p.ratio ?? PHONE_NOMINAL
 		}));
 		const web = resolved.web && {
 			...resolved.web,
-			ratio: measured[resolved.web.src] ?? WEB_NOMINAL
+			ratio: measured[resolved.web.src] ?? resolved.web.ratio ?? WEB_NOMINAL
 		};
 
 		if (resolved.layout === 'web-phones' && web) {
