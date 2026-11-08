@@ -56,6 +56,7 @@
 	.big-links :global(.cal-link) {
 		width: fit-content;
 		max-width: 100%;
+		min-height: var(--tap-min);
 		overflow-wrap: anywhere;
 		font-size: var(--step-display-m);
 		line-height: var(--lh-display-m);
@@ -64,6 +65,11 @@
 		color: var(--muted);
 		text-decoration: none;
 		transition: color 0.2s ease;
+	}
+	/* The address is 23 characters at display size: scale it down on phones rather than let it
+	   break mid-word. */
+	.big-links a[href^='mailto:'] {
+		font-size: min(var(--step-display-m), 6.2vw);
 	}
 	.big-links a:hover,
 	.big-links a:focus-visible,
@@ -83,10 +89,16 @@
 	.links {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.5rem 1.5rem;
-		margin-inline-end: auto;
+		gap: 0;
+		margin-inline: -0.5rem auto;
 	}
 	.links a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: var(--tap-min);
+		min-height: var(--tap-min);
+		padding-inline: 0.5rem;
 		color: var(--muted);
 		text-decoration: none;
 	}

@@ -231,9 +231,15 @@
 		display: flex;
 		flex-wrap: wrap;
 		align-items: baseline;
-		gap: 0.25rem 1.25rem;
+		gap: 0 1.25rem;
 		font-size: var(--step-small);
 		line-height: var(--lh-small);
+	}
+	.proof a {
+		display: inline-flex;
+		align-items: center;
+		min-width: var(--tap-min);
+		min-height: var(--tap-min);
 	}
 	.proof-label {
 		font-size: var(--step-caption);
@@ -320,6 +326,8 @@
 		max-width: 56ch;
 	}
 	.call-line :global(.cal-link) {
+		display: inline-block;
+		min-height: var(--tap-min);
 		font-size: var(--step-display-m);
 		line-height: var(--lh-display-m);
 		letter-spacing: var(--tracking-display-m);

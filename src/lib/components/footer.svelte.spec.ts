@@ -29,4 +29,19 @@ describe('footer.svelte', () => {
 		expect(href('X')).toBe('https://x.com/noelzappy');
 		expect(href('RSS')).toBe('/rss.xml');
 	});
+
+	it('keeps the email address on one line at phone widths', async () => {
+		await page.viewport(360, 780);
+		try {
+			render(Footer);
+			const link = page.getByRole('link', { name: 'emmanuel@noelzappy.com' }).element();
+			const range = document.createRange();
+			range.selectNodeContents(link);
+			// A mid-word break (overflow-wrap: anywhere) would lay the text out on two lines.
+			expect(range.getClientRects()).toHaveLength(1);
+			expect(link.getBoundingClientRect().right).toBeLessThanOrEqual(360);
+		} finally {
+			await page.viewport(414, 896);
+		}
+	});
 });

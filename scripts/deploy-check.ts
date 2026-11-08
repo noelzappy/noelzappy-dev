@@ -2,8 +2,10 @@
  * Pre-deploy gate. Run after `bun run build`:  bun scripts/deploy-check.ts
  *
  * Exits non-zero while placeholder content is still on the site:
- *  - placeholder testimonials in src/lib/data/testimonials.ts
+ *  - placeholder testimonials rendered into the build output (the testimonials component only
+ *    renders them in dev, so a production build passes; this guards against that gate breaking)
  *  - "TODO(Emmanuel)" in rendered output (HTML comments are ignored)
+ * Warns (does not fail) while placeholder testimonials remain in src/lib/data/testimonials.ts.
  * Prints warnings (does not fail) for every other "TODO(Emmanuel)" in src/, e.g. in
  * server-rendered routes or source comments that never reach the prerendered HTML.
  *
@@ -12,14 +14,12 @@
  */
 import { readdirSync, readFileSync, existsSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { hasPlaceholderTestimonials } from '../src/lib/data/testimonials';
+import { TESTIMONIALS, hasPlaceholderTestimonials } from '../src/lib/data/testimonials';
 
 const OUTPUT = '.svelte-kit/cloudflare';
 const problems: string[] = [];
 
-if (hasPlaceholderTestimonials()) {
-	problems.push('Placeholder testimonials are still in src/lib/data/testimonials.ts.');
-}
+const placeholders = TESTIMONIALS.filter((t) => t.placeholder);
 
 function htmlFiles(dir: string): string[] {
 	return readdirSync(dir).flatMap((name) => {
@@ -35,10 +35,16 @@ if (!existsSync(OUTPUT)) {
 	for (const file of htmlFiles(OUTPUT)) {
 		const rendered = readFileSync(file, 'utf8').replace(/<!--[\s\S]*?-->/g, '');
 		if (rendered.includes('TODO(Emmanuel)')) problems.push(`TODO(Emmanuel) in rendered ${file}`);
+		if (placeholders.some((t) => rendered.includes(t.quote))) {
+			problems.push(`Placeholder testimonial rendered in ${file}`);
+		}
 	}
 }
 
 const warnings: string[] = [];
+if (hasPlaceholderTestimonials()) {
+	warnings.push('src/lib/data/testimonials.ts: placeholder testimonials (hidden in production).');
+}
 function sourceFiles(dir: string): string[] {
 	return readdirSync(dir).flatMap((name) => {
 		const full = join(dir, name);

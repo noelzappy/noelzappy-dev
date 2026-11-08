@@ -113,6 +113,9 @@
 		}
 	}
 	.meta a {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap-min);
 		color: var(--muted);
 		text-decoration: none;
 	}
@@ -172,6 +175,9 @@
 		color: var(--accent);
 	}
 	.all {
+		display: flex;
+		align-items: center;
+		min-height: var(--tap-min);
 		color: var(--muted);
 	}
 	@media (min-width: 48rem) {
