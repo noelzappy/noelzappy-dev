@@ -13,7 +13,10 @@
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
-		"test": "npm run test:unit -- --run"
+		"test": "npm run test:unit -- --run",
+		"capture:web": "bun scripts/capture/web.ts",
+		"capture:ios": "bun scripts/capture/ios.ts",
+		"capture:ingest": "bun scripts/capture/ingest.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.4.0",
