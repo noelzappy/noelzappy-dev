@@ -68,7 +68,7 @@
 	const structuredData = {
 		'@context': 'https://schema.org',
 		'@type': 'CollectionPage',
-		name: 'Work — Emmanuel Yeboah',
+		name: 'Work | Emmanuel Yeboah',
 		url: 'https://noelzappy.dev/projects',
 		author: { '@type': 'Person', name: 'Emmanuel Yeboah', url: 'https://noelzappy.dev' }
 	};
@@ -83,7 +83,7 @@
 
 <PageHeader
 	eyebrow="Work"
-	title="Selected work — from first app to production."
+	title="Selected work: from first app to production."
 	intro="Products I've built end to end for startups and businesses, and the tools I maintain in the open."
 />
 

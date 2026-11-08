@@ -17,7 +17,7 @@
 	<link
 		rel="alternate"
 		type="application/rss+xml"
-		title="Emmanuel Yeboah — Writing"
+		title="Emmanuel Yeboah | Writing"
 		href="/rss.xml"
 	/>
 	<link

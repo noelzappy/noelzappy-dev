@@ -57,6 +57,6 @@ export const TIMELINE: TimelineEntry[] = [
 	{
 		years: '2019–2021',
 		org: 'Wordnox',
-		line: 'Founder (company closed). WordPress sites for clients.'
+		line: 'Founder (company closed). Websites for clients.'
 	}
 ];

@@ -9,7 +9,7 @@ const URL_SET = { endpoint: 'https://forge.example/api/public/inquiry' };
 
 const LONG = 'Our payouts drift out of sync with the ledger every Friday night.';
 const FALLBACK = 'Something went wrong. Email me directly at emmanuel@noelzappy.com.';
-const THANKS = "Thanks — I'll get back to you within one working day.";
+const THANKS = "Thanks, I'll get back to you within one working day.";
 
 async function fill(name: string, email: string, message: string, company = '') {
 	await page.getByLabelText('Name').fill(name);

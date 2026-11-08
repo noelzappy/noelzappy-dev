@@ -64,7 +64,7 @@ After launch, everything looked good… until traffic ramped up.
 The “swipe” endpoint started timing out. Some requests took **up to 6 seconds**.
 
 The cause was straightforward and painful:  
-I was running the full matching algorithm — geo filtering, compatibility scoring — **on-demand** every time a user requested a card.
+I was running the full matching algorithm (geo filtering, compatibility scoring) **on-demand** every time a user requested a card.
 
 At this scale, that doesn’t fly.
 

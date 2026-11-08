@@ -38,7 +38,7 @@ stats:
     description: 'Growing user base'
 gallery:
   - '/portfolio/rblapp.webp'
-oneLine: 'A dating platform I moved to a new stack — 170,000 live users, zero downtime.'
+oneLine: 'A dating platform I moved to a new stack, with 170,000 live users and zero downtime.'
 built:
   - 'Mobile app'
   - 'Web app'

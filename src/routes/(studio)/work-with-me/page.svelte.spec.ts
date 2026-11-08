@@ -8,8 +8,7 @@ import { getAllProjects } from '$lib/data/projects-loader';
 const OFFER_TITLES = [
 	'Build the whole product',
 	'Lead or join your team',
-	'Fix, rescue or migrate',
-	'Websites with a real admin'
+	'Fix, rescue or migrate'
 ];
 
 describe('/work-with-me', () => {
@@ -27,10 +26,19 @@ describe('/work-with-me', () => {
 		expect(intro).toContain('software products end to end');
 	});
 
-	it('lists the four offers in order', async () => {
+	it('lists exactly the three offers in order', async () => {
 		const { container } = render(Page);
 		const titles = [...container.querySelectorAll('.offer h3')].map((h) => h.textContent?.trim());
 		expect(titles).toEqual(OFFER_TITLES);
+		expect(container.querySelectorAll('.offer')).toHaveLength(3);
+	});
+
+	it('has no website-rebuild offer, WordPress mention or client list', async () => {
+		const { container } = render(Page);
+		const text = container.textContent!;
+		expect(text).not.toContain('WordPress');
+		expect(text).not.toContain('Websites with a real admin');
+		expect(container.querySelector('.offers')!.textContent).not.toContain('Clients');
 	});
 
 	it('points every internal proof link at a project with a writeup', async () => {

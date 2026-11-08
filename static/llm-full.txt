@@ -1,21 +1,21 @@
-# Emmanuel Yeboah — Product Engineer · Mobile, Web & Backend
+# Emmanuel Yeboah · Product Engineer · Mobile, Web & Backend
 
-> Independent product engineer — mobile, web and backend. https://noelzappy.dev · @noelzappy · emmanuel@noelzappy.com
+> Independent product engineer: mobile, web and backend. https://noelzappy.dev · @noelzappy · emmanuel@noelzappy.com
 
 ## Summary
 
-I design and build software products end to end — mobile apps, web platforms and the backends behind them — and ship them to production. Best at products that move money. Six years on correctness-critical systems. Based in Accra, Ghana; works remotely (GMT, with overlap for European and US East Coast hours).
+I design and build software products end to end: mobile apps, web platforms and the backends behind them. I ship them to production and I'm best at products that move money. Six years on correctness-critical systems. Based in Accra, Ghana; works remotely (GMT, with overlap for European and US East Coast hours).
 
 ## Timeline
 
-- Now — Independent product engineer: mobile apps, web platforms and backends for startups and businesses. Co-founder & CTO at Pavex. Writing about systems.
-- 2025–present — SusuPaa. Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for ₵12.5M+ in successful deposits. Cut p99 API latency from 1.6s to 500ms.
-- 2024–2025 — Fetch Agent. Backend engineer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
-- 2024–2025 — RBL Matchmaking. Lead engineer. Zero-downtime migration of 170,000 live users from PHP/MySQL to Node.js/PostgreSQL; real-time messaging for 200,000 monthly actives.
-- 2024 — Hubtel. Frontend engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.
-- 2023–present — The Brifcast Ltd. (Brif). Co-founder & Managing Partner. Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.
-- 2021–2024 — Built Financial Technologies. Mobile app developer. Shipped the web platform, two React Native apps, one offline-first, and an HR platform.
-- 2019–2021 — Wordnox. Founder (company closed). WordPress sites for clients.
+- Now: Independent product engineer: mobile apps, web platforms and backends for startups and businesses. Co-founder & CTO at Pavex. Writing about systems.
+- 2025–present: SusuPaa. Co-founder and CTO (Pavex Technologies). Built the platform and its custom append-only ledger, the system of record for ₵12.5M+ in successful deposits. Cut p99 API latency from 1.6s to 500ms.
+- 2024–2025: Fetch Agent. Backend engineer (contract). Built the agent-ranking and filtering engine that matches buyers to agents, and the APIs behind the app and admin dashboard, held under 200ms.
+- 2024–2025: RBL Matchmaking. Lead engineer. Zero-downtime migration of 170,000 live users from PHP/MySQL to Node.js/PostgreSQL; real-time messaging for 200,000 monthly actives.
+- 2024: Hubtel. Frontend engineer. Led frontend for Hubtel for Hospitals; contributed to GHQR.
+- 2023–present: The Brifcast Ltd. (Brif). Co-founder & Managing Partner. Media company telling the stories of African founders, with an editorial side and a small production studio. I run the business side (partnerships, client work, operations) and built the internal tools we use.
+- 2021–2024: Built Financial Technologies. Mobile app developer. Shipped the web platform, two React Native apps, one offline-first, and an HR platform.
+- 2019–2021: Wordnox. Founder (company closed). Websites for clients.
 
 ## Focus
 
@@ -23,11 +23,11 @@ mobile apps, React Native, Expo, web apps, payment integrations, mobile money, l
 
 ## Site map
 
-- / — homepage: hero with selected work
-- /writing — all posts, with per-tag pages at /writing/tag/<tag>; RSS at /rss.xml
-- /projects — open-source repositories and client/product case studies
-- /work-with-me — how I work with teams: whole-product builds, team augmentation, rescues and migrations, websites; book a 15-minute call
-- /about — story and timeline
+- /: homepage: hero with selected work
+- /writing: all posts, with per-tag pages at /writing/tag/<tag>; RSS at /rss.xml
+- /projects: open-source repositories and client/product case studies
+- /work-with-me: how I work with teams (whole-product builds, team augmentation, rescues and migrations); book a 15-minute call
+- /about: story and timeline
 - /sitemap.xml
 
 ## Links

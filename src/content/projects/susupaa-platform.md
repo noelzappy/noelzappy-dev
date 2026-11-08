@@ -37,7 +37,7 @@ gallery:
   - '/portfolio/susupaa-webapp.webp'
   - '/portfolio/susupaa-website.webp'
 problem: 'Susu collectors, savings cooperatives, and microfinance institutions were running group savings, passbooks, and loans through WhatsApp messages, paper ledgers, and phone calls. Any system replacing that had to be the single source of truth for money it never held: every contribution, payout, and repayment provable after the fact, no double-credits under concurrent operations, and strict isolation between hundreds of independent organizations sharing one deployment.'
-lessons: "Starting with event sourcing from day one rather than retrofitting it later. Our transaction ledger needed audit trails that we had to rebuild after launch — designing the data model around immutable events from the start would have saved us two weeks of migration work. I'd also invest earlier in contract testing between services; we had integration bugs that only surfaced in staging because our unit tests mocked too aggressively."
+lessons: "Starting with event sourcing from day one rather than retrofitting it later. Our transaction ledger needed audit trails that we had to rebuild after launch. Designing the data model around immutable events from the start would have saved us two weeks of migration work. I'd also invest earlier in contract testing between services; we had integration bugs that only surfaced in staging because our unit tests mocked too aggressively."
 oneLine: 'Savings and lending software for susu collectors, cooperatives and microfinance.'
 built:
   - 'Web app'

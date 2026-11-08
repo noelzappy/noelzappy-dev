@@ -158,7 +158,7 @@
 
 {#if status === 'done'}
 	<p class="done" role="status" tabindex="-1" bind:this={statusEl}>
-		Thanks — I'll get back to you within one working day.
+		Thanks, I'll get back to you within one working day.
 	</p>
 {:else}
 	<form {onsubmit} novalidate class="form" aria-label="Send me a message">

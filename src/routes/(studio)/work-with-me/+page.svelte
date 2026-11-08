@@ -10,48 +10,40 @@
 	import { TESTIMONIALS } from '$lib/data/testimonials';
 
 	const intro =
-		"I design and build software products end to end — mobile apps, web platforms and the backends behind them — and I'm best at the ones that move money. I work with startups and businesses, usually when one of these is true:";
+		"I design and build software products end to end: mobile apps, web platforms and the backends behind them. I'm best at the ones that move money, and I work with startups and businesses in three ways.";
 	const description =
-		"I design and build software products end to end — mobile apps, web platforms and the backends behind them — and I'm best at the ones that move money. I work with startups and businesses.";
+		"I design and build software products end to end: mobile apps, web platforms and the backends behind them. I'm best at the ones that move money. I work with startups and businesses.";
 
 	type Proof = { label: string; href: string };
-	const OFFERS: { title: string; when: string; proof: Proof[]; note?: string; clients?: string }[] =
-		[
-			{
-				title: 'Build the whole product',
-				when: 'Usually when you have an idea, or a prototype that has outgrown its author, and no engineering team yet. I take it from the first screen to the app-store release: the mobile app, the web app, the backend and the admin your team will run it from.',
-				proof: [
-					{ label: 'Kekeh Mac', href: '/projects/kekeh-mac' },
-					{ label: 'Givio', href: '/projects/givio-platform' },
-					{ label: 'GrowingGift', href: '/projects/growinggift-platform' }
-				]
-			},
-			{
-				title: 'Lead or join your team',
-				when: 'Usually when your team needs a senior engineer, or someone to lead the engineering, and the hire cannot wait. I join as a senior or lead engineer, or step in as a fractional CTO, and work inside the way your team already ships.',
-				proof: [
-					{ label: 'RBL, as lead engineer', href: '/projects/rbl-dating-app' },
-					{ label: 'Fetch Agent', href: '/projects/fetch-agent-real-estate-platform' }
-				],
-				note: 'Co-founder & CTO at Pavex'
-			},
-			{
-				title: 'Fix, rescue or migrate',
-				when: "Usually when your payment integrations are fragile, balances drift, or you have to move off a legacy stack with live users. I build payment layers that fail over cleanly, ledgers that finance can trace, and migrations that don't take you down.",
-				proof: [
-					{ label: 'The RBL migration', href: '/projects/rbl-dating-app' },
-					{ label: 'The SusuPaa ledger', href: '/projects/susupaa-platform' },
-					{ label: 'Voltax, my open-source payments SDK', href: 'https://voltax.noelzappy.dev' }
-				]
-			},
-			{
-				title: 'Websites with a real admin',
-				when: 'Usually when your site lives on WordPress and every change needs a developer. I build fast custom sites with an admin your own team can edit, so the site stays current without me.',
-				proof: [],
-				clients:
-					'KAS Foundation, Smiling Hour Foundation, Ashasie Tour, Owl Studios, Agbawe Archives'
-			}
-		];
+	const OFFERS: { title: string; when: string; proof: Proof[]; note?: string }[] = [
+		{
+			title: 'Build the whole product',
+			when: 'You have an idea, or a prototype that has outgrown its first version, and no engineering team yet. I take it from the first screen to a release in the app stores: the mobile app, the web app, the backend and the admin your team will run it from.',
+			proof: [
+				{ label: 'Kekeh Mac', href: '/projects/kekeh-mac' },
+				{ label: 'Givio', href: '/projects/givio-platform' },
+				{ label: 'GrowingGift', href: '/projects/growinggift-platform' }
+			]
+		},
+		{
+			title: 'Lead or join your team',
+			when: 'Your team needs a senior engineer now, or someone to lead engineering while you hire. I join as a senior or lead engineer, or as a fractional CTO, and work inside the way your team already ships.',
+			proof: [
+				{ label: 'RBL, as lead engineer', href: '/projects/rbl-dating-app' },
+				{ label: 'Fetch Agent', href: '/projects/fetch-agent-real-estate-platform' }
+			],
+			note: 'Co-founder & CTO at Pavex'
+		},
+		{
+			title: 'Fix, rescue or migrate',
+			when: 'Payments that fail quietly, balances that drift, a stack that slows every release, or a move off a legacy system with live users. I find what is actually breaking, fix it, and migrate without taking you down.',
+			proof: [
+				{ label: 'The RBL migration', href: '/projects/rbl-dating-app' },
+				{ label: 'The SusuPaa ledger', href: '/projects/susupaa-platform' },
+				{ label: 'Voltax, my open-source payments SDK', href: 'https://voltax.noelzappy.dev' }
+			]
+		}
+	];
 
 	const CAPABILITIES = [
 		{ group: 'Mobile', items: 'Expo / React Native' },
@@ -90,7 +82,7 @@
 
 <CalEmbed />
 <SEOHead
-	title="Work with me — Emmanuel Yeboah"
+	title="Work with me | Emmanuel Yeboah"
 	{description}
 	canonical="https://noelzappy.dev/work-with-me"
 />
@@ -112,12 +104,6 @@
 								<a href={p.href}>{p.label}</a>
 							{/each}
 							{#if offer.note}<span>{offer.note}</span>{/if}
-						</p>
-					{/if}
-					{#if offer.clients}
-						<p class="proof">
-							<span class="proof-label">Clients</span>
-							<span>{offer.clients}</span>
 						</p>
 					{/if}
 				</div>
