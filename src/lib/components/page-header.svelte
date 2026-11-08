@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { wordRise } from '$lib/motion/word-rise';
+	import RiseWords from './rise-words.svelte';
 	let { eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string } = $props();
 </script>
 
 <header class="page-header">
 	{#if eyebrow}<p class="eyebrow">{eyebrow}</p>{/if}
-	<h1 class="page-title" use:wordRise>{title}</h1>
+	<h1 class="page-title" aria-label={title}><RiseWords text={title} /></h1>
 	{#if intro}<p class="intro">{intro}</p>{/if}
 </header>
 

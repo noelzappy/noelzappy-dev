@@ -47,7 +47,10 @@
 		{/if}
 	</div>
 	<!-- Only rows that link to a case study carry a morph name (one per slug, so never a duplicate). -->
-	<WorkThumb {project} name={project.hasWriteup ? showcaseName(project.slug) : undefined} />
+	<WorkThumb
+		{project}
+		name={project.hasWriteup && project.brandColor ? showcaseName(project.slug) : undefined}
+	/>
 </article>
 
 <style>

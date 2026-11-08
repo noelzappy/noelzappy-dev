@@ -29,7 +29,7 @@ describe('fadeUp', () => {
 		document.body.append(spacer);
 		const el = box(2000);
 		fadeUp(el);
-		expect(el.classList.contains('fade-up')).toBe(true);
+		await expect.poll(() => el.classList.contains('fade-up')).toBe(true);
 		expect(el.classList.contains('fade-up-in')).toBe(false);
 		window.scrollTo(0, 1800);
 		await expect.poll(() => el.classList.contains('fade-up-in')).toBe(true);
@@ -37,5 +37,21 @@ describe('fadeUp', () => {
 		window.scrollTo(0, 1800);
 		await frame();
 		expect(el.classList.contains('fade-up-in')).toBe(true);
+	});
+
+	it('stays visible when scroll resets to the top after mount (client navigation)', async () => {
+		await page.viewport(800, 600);
+		const spacer = document.createElement('div');
+		spacer.style.height = '4000px';
+		document.body.append(spacer);
+		const el = box(100);
+		window.scrollTo(0, 3000);
+		fadeUp(el);
+		window.scrollTo(0, 0);
+		await frame();
+		await frame();
+		await new Promise((r) => setTimeout(r, 100));
+		expect(el.classList.contains('fade-up')).toBe(false);
+		expect(el.classList.contains('fade-up-in')).toBe(false);
 	});
 });

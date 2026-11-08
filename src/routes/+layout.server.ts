@@ -1,4 +1,5 @@
 import { getPosts } from '$lib/content/writing';
+import { getShowcase } from '$lib/data/showcase';
 import { getAllProjects, getPillProjects } from '$lib/data/projects-loader';
 import type { MenuPill, MenuPost } from '$lib/components/site-menu.svelte';
 
@@ -9,9 +10,10 @@ export function load() {
 		.map(({ slug, title, date, tags, description }) => ({ slug, title, date, tags, description }));
 	// The menu only needs names and links; the homepage loads the full pill data itself.
 	const pills: MenuPill[] = getPillProjects().map(({ slug, title }) => ({ slug, title }));
-	// Slugs that have a case-study page: only these can be morphed into.
+	// Slugs that can be morphed into: a case-study page whose top shows a brand field and a
+	// composition (the case study only names its showcase then).
 	const writeups = getAllProjects()
-		.filter((p) => p.html.trim().length > 0)
+		.filter((p) => p.html.trim().length > 0 && p.brandColor && getShowcase(p))
 		.map((p) => p.slug);
 	return { pills, posts, writeups };
 }

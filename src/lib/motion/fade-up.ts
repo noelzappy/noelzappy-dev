@@ -1,8 +1,12 @@
 /**
  * Fades an element up (12px, 500ms) the first time it scrolls into view, once. Nothing is hidden
- * until this runs after hydration, so prerendered HTML and no-JS visitors always see the content.
- * Elements already in view at mount are left visible (no flash above the fold). Reduced motion:
- * never hidden. The hidden state itself lives in CSS (`.fade-up`, inside motion-OK).
+ * until after hydration, so prerendered HTML and no-JS visitors always see the content.
+ *
+ * Whether the element starts hidden is decided on the observer's FIRST callback, not at mount:
+ * after a client navigation SvelteKit resets scroll after mount, so an element that ends up above
+ * the fold must not be hidden. If the first entry intersects, the element stays visible untouched;
+ * otherwise it is hidden (`.fade-up`, CSS, motion-OK only) and revealed once on intersect. Reduced
+ * motion: never hidden.
  */
 export function fadeUp(node: HTMLElement) {
 	if (
@@ -11,13 +15,17 @@ export function fadeUp(node: HTMLElement) {
 	) {
 		return;
 	}
-	const rect = node.getBoundingClientRect();
-	if (rect.top < innerHeight && rect.bottom > 0) return;
-
-	node.classList.add('fade-up');
+	let first = true;
 	const io = new IntersectionObserver(
 		(entries) => {
-			if (!entries.some((e) => e.isIntersecting)) return;
+			const visible = entries.some((e) => e.isIntersecting);
+			if (first) {
+				first = false;
+				if (visible) return io.disconnect();
+				node.classList.add('fade-up');
+				return;
+			}
+			if (!visible) return;
 			node.classList.add('fade-up-in');
 			io.disconnect();
 		},

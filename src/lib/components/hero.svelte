@@ -4,7 +4,7 @@
 	import { getShowcase, getStripScreens, type StripScreen } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
 	import { showcaseName } from '$lib/motion/shared';
-	import { wordRise } from '$lib/motion/word-rise';
+	import RiseWords from './rise-words.svelte';
 	import WorkStrip from './work-strip.svelte';
 
 	/**
@@ -97,8 +97,14 @@
 	<WorkStrip screens={stripScreens} paused={engaged || tabHidden || !!active} hidden={!!active} />
 
 	<div class="main">
-		<h1 use:wordRise class="headline layer page-title" class:off={!!active}>
-			{#if typeof headline === 'string'}{headline}{:else}{@render headline()}{/if}
+		<h1
+			class="headline layer page-title"
+			class:off={!!active}
+			aria-label={typeof headline === 'string' ? headline : undefined}
+		>
+			{#if typeof headline === 'string'}<RiseWords
+					text={headline}
+				/>{:else}{@render headline()}{/if}
 		</h1>
 		<p class="intro layer" class:off={!!active}>{intro}</p>
 		{#each pills as pill (pill.slug)}
@@ -159,7 +165,6 @@
 							phones: showcase.phones?.map((p) => ({ ...p, alt: '' }))
 						}}
 						size="hero"
-						brandColor={pill.brandColor}
 						name={on ? showcaseName(pill.slug) : undefined}
 						deferred
 					/>
@@ -314,6 +319,12 @@
 	.shot-set {
 		position: absolute;
 		inset: 0;
+	}
+	/* Transparent normally (the hero's own field shows through, so nothing has a visible edge while
+	   it fades). Painted only for the morph's old snapshot, which then carries the field into the
+	   case study. */
+	:global(html.morph-active) .shot-set.on :global(.showcase) {
+		background: var(--hero-bg);
 	}
 
 	/* One layer fades out as the next fades in. The destination state's transition wins, so hiding
