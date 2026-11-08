@@ -11,7 +11,11 @@
 		showcase?: Showcase;
 	}
 
-	let { project, aspect = '16 / 10' }: { project: Thumb; aspect?: string } = $props();
+	let {
+		project,
+		aspect = '16 / 10',
+		name
+	}: { project: Thumb; aspect?: string; name?: string } = $props();
 
 	const showcase = $derived(getShowcase(project));
 	const initial = $derived(project.title.trim().charAt(0).toUpperCase());
@@ -24,7 +28,7 @@
 	style:--showcase-aspect={aspect}
 >
 	{#if showcase}
-		<ProjectShowcase {showcase} size="row" />
+		<ProjectShowcase {showcase} size="row" brandColor={project.brandColor} {name} />
 	{:else}
 		<span class="initial" aria-hidden="true">{initial}</span>
 	{/if}

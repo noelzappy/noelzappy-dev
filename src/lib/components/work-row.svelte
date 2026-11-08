@@ -1,5 +1,7 @@
 <script lang="ts">
 	import WorkThumb from './work-thumb.svelte';
+	import { fadeUp } from '$lib/motion/fade-up';
+	import { showcaseName } from '$lib/motion/shared';
 	import { workCta } from '$lib/content/work-cta';
 	import type { DeviceShot, Showcase } from '$lib/data/projects';
 
@@ -23,7 +25,7 @@
 	const cta = $derived(workCta(project));
 </script>
 
-<article class="row">
+<article class="row" use:fadeUp>
 	<div class="text">
 		<h3 class="name">
 			{#if project.hasWriteup}
@@ -44,7 +46,8 @@
 			>
 		{/if}
 	</div>
-	<WorkThumb {project} />
+	<!-- Only rows that link to a case study carry a morph name (one per slug, so never a duplicate). -->
+	<WorkThumb {project} name={project.hasWriteup ? showcaseName(project.slug) : undefined} />
 </article>
 
 <style>

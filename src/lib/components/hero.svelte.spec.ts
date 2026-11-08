@@ -141,6 +141,23 @@ describe('hero.svelte', () => {
 		await expect.poll(() => root.dataset.active).toBe('');
 	});
 
+	it('names at most one showcase at a time: none by default, only the active one when hovered', async () => {
+		const { root } = setup();
+		const named = () =>
+			[...root.querySelectorAll('*')]
+				.map((el) => getComputedStyle(el).viewTransitionName)
+				.filter((n) => n && n !== 'none');
+		const nameOnly = () => named().filter((n) => n.startsWith('project-'));
+		expect(nameOnly()).toEqual([]);
+		for (const pill of pills) {
+			await page.getByRole('link', { name: pill.title }).hover();
+			await expect.poll(() => root.dataset.active).toBe(pill.slug);
+			await expect.poll(nameOnly).toEqual([`project-${pill.slug}`]);
+		}
+		await page.elementLocator(root).hover({ position: { x: 8, y: 8 } });
+		await expect.poll(nameOnly).toEqual([]);
+	});
+
 	it('switching pill to pill shows exactly one project layer and hides the rest', async () => {
 		const { root } = setup();
 		for (const pill of pills) {

@@ -1,5 +1,5 @@
 import { getPosts } from '$lib/content/writing';
-import { getPillProjects } from '$lib/data/projects-loader';
+import { getAllProjects, getPillProjects } from '$lib/data/projects-loader';
 import type { MenuPill, MenuPost } from '$lib/components/site-menu.svelte';
 
 export function load() {
@@ -9,5 +9,9 @@ export function load() {
 		.map(({ slug, title, date, tags, description }) => ({ slug, title, date, tags, description }));
 	// The menu only needs names and links; the homepage loads the full pill data itself.
 	const pills: MenuPill[] = getPillProjects().map(({ slug, title }) => ({ slug, title }));
-	return { pills, posts };
+	// Slugs that have a case-study page: only these can be morphed into.
+	const writeups = getAllProjects()
+		.filter((p) => p.html.trim().length > 0)
+		.map((p) => p.slug);
+	return { pills, posts, writeups };
 }

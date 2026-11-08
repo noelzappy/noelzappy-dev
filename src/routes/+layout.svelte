@@ -7,7 +7,7 @@
 
 	let { children, data } = $props();
 
-	setupPageReveal();
+	setupPageReveal(() => new Set(data.writeups));
 </script>
 
 <svelte:head>

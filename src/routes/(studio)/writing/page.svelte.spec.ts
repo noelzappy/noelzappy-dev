@@ -6,7 +6,7 @@ import Page from './+page.svelte';
 import { getPosts, getTags } from '$lib/content/writing';
 import { toPostItem } from '$lib/content/posts-view';
 
-const data = { pills: [], posts: getPosts().map(toPostItem), tags: getTags() };
+const data = { pills: [], writeups: [], posts: getPosts().map(toPostItem), tags: getTags() };
 
 describe('/writing', () => {
 	it('renders the Writing h1 as the page title', async () => {

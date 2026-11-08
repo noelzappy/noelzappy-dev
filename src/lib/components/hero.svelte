@@ -3,6 +3,8 @@
 	import type { PillProject } from '$lib/data/projects';
 	import { getShowcase, getStripScreens, type StripScreen } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
+	import { showcaseName } from '$lib/motion/shared';
+	import { wordRise } from '$lib/motion/word-rise';
 	import WorkStrip from './work-strip.svelte';
 
 	/**
@@ -95,7 +97,7 @@
 	<WorkStrip screens={stripScreens} paused={engaged || tabHidden || !!active} hidden={!!active} />
 
 	<div class="main">
-		<h1 class="headline layer page-title" class:off={!!active}>
+		<h1 use:wordRise class="headline layer page-title" class:off={!!active}>
 			{#if typeof headline === 'string'}{headline}{:else}{@render headline()}{/if}
 		</h1>
 		<p class="intro layer" class:off={!!active}>{intro}</p>
@@ -157,6 +159,8 @@
 							phones: showcase.phones?.map((p) => ({ ...p, alt: '' }))
 						}}
 						size="hero"
+						brandColor={pill.brandColor}
+						name={on ? showcaseName(pill.slug) : undefined}
 						deferred
 					/>
 				</div>
@@ -211,6 +215,7 @@
 		grid-area: 1 / 2;
 		margin: calc(var(--hl) * 0.2) 0 0;
 		font-size: clamp(1.05rem, 1.35vw, 1.7rem);
+		text-wrap: pretty;
 		line-height: 1.35;
 		letter-spacing: var(--tracking-heading);
 	}
@@ -342,6 +347,25 @@
 			transition:
 				background-color 150ms ease-out,
 				color 150ms ease-out;
+		}
+		/* The active composition's screens stagger in: the web screen first, then each phone 80ms
+		   apart (restarts every time a showcase becomes the active one). */
+		.shot-set.on :global(.web) {
+			animation: shot-in 500ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+		}
+		.shot-set.on :global(.phone) {
+			animation: shot-in 500ms cubic-bezier(0.22, 0.8, 0.2, 1) both;
+			animation-delay: calc(120ms + var(--i, 0) * 80ms);
+		}
+		@keyframes shot-in {
+			from {
+				opacity: 0;
+				transform: translateY(14px);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
 		}
 	}
 

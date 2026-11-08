@@ -1,10 +1,11 @@
 <script lang="ts">
+	import { wordRise } from '$lib/motion/word-rise';
 	let { eyebrow, title, intro }: { eyebrow?: string; title: string; intro?: string } = $props();
 </script>
 
 <header class="page-header">
 	{#if eyebrow}<p class="eyebrow">{eyebrow}</p>{/if}
-	<h1 class="page-title">{title}</h1>
+	<h1 class="page-title" use:wordRise>{title}</h1>
 	{#if intro}<p class="intro">{intro}</p>{/if}
 </header>
 

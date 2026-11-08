@@ -342,19 +342,19 @@ pre {
 	}
 
 	/* Old page stays put; new page stays hidden until the screen is fully covered. */
-	::view-transition-old(root) {
+	html.reveal-active::view-transition-old(root) {
 		animation: none;
 	}
-	::view-transition-new(root) {
+	html.reveal-active::view-transition-new(root) {
 		animation: reveal-swap 800ms step-end both;
 		mix-blend-mode: normal;
 	}
 
-	::view-transition-group(reveal-panel) {
+	html.reveal-active::view-transition-group(reveal-panel) {
 		animation: reveal-curtain 800ms both;
 	}
-	::view-transition-old(reveal-panel),
-	::view-transition-new(reveal-panel) {
+	html.reveal-active::view-transition-old(reveal-panel),
+	html.reveal-active::view-transition-new(reveal-panel) {
 		animation: none;
 		mix-blend-mode: normal;
 	}
@@ -363,16 +363,64 @@ pre {
 	   under the curtain until full cover (400ms), then drop it. Its group holds the old geometry
 	   and jumps (step-end, not slides) to the new geometry at the same instant. The new heading
 	   then rises 24px and fades in as the panel clears, ending with the curtain at 800ms. */
-	::view-transition-group(page-title) {
+	html.reveal-active::view-transition-group(page-title) {
 		animation-duration: 400ms;
 		animation-timing-function: step-end;
 		animation-fill-mode: both;
 	}
-	::view-transition-old(page-title) {
+	html.reveal-active::view-transition-old(page-title) {
 		animation: title-old-hold 400ms step-end both;
 	}
-	::view-transition-new(page-title) {
+	html.reveal-active::view-transition-new(page-title) {
 		animation: title-rise 400ms cubic-bezier(0.22, 0.8, 0.2, 1) 400ms both;
+	}
+
+	/* Shared-element morph (html.morph-active, set instead of reveal-active when a project pill or
+	   work row opens its case study): no curtain. The root cross-fades over 350ms; the one element
+	   carrying a project name (`project-<slug>`: the old showcase and the case-study showcase) gets
+	   the default geometry morph, 550ms ease-in-out; the old title holds then drops at 300ms, and
+	   the case-study title rises after the showcase has mostly landed. Every group other than root
+	   and page-title is a project showcase, so the generic selector styles it. */
+	html.morph-active::view-transition-group(*) {
+		animation-duration: 550ms;
+		animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+	}
+	html.morph-active::view-transition-group(root) {
+		animation-duration: 350ms;
+		animation-timing-function: ease;
+	}
+	html.morph-active::view-transition-group(page-title) {
+		animation-duration: 300ms;
+		animation-timing-function: step-end;
+		animation-fill-mode: both;
+	}
+	html.morph-active::view-transition-old(page-title) {
+		animation: title-old-fade 250ms ease-out both;
+	}
+	html.morph-active::view-transition-new(page-title) {
+		animation: title-rise 400ms cubic-bezier(0.22, 0.8, 0.2, 1) 300ms both;
+	}
+	@keyframes title-old-fade {
+		from {
+			opacity: 1;
+		}
+		to {
+			opacity: 0;
+		}
+	}
+
+	/* Below-the-fold content fades up once (see $lib/motion/fade-up.ts). The hidden state exists
+	   only after hydration adds .fade-up, and never under reduced motion. */
+	.fade-up {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	.fade-up.fade-up-in {
+		opacity: 1;
+		transform: none;
+		transition:
+			opacity 500ms ease-out,
+			transform 500ms ease-out;
 	}
 
 	@keyframes reveal-curtain {

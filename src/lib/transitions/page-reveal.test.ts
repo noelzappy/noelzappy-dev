@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { shouldReveal, setupPageReveal } from './page-reveal';
+import { shouldReveal, setupPageReveal, morphSlug } from './page-reveal';
 
 const nav = vi.hoisted(() => ({ cb: null as null | ((n: unknown) => unknown) }));
 vi.mock('$app/navigation', () => ({
@@ -93,5 +93,80 @@ describe('setupPageReveal', () => {
 		vi.stubGlobal('document', { documentElement: { classList: { add() {}, remove() {} } } });
 		setupPageReveal();
 		expect(nav.cb!(navigation)).toBeUndefined();
+	});
+});
+
+describe('morphSlug', () => {
+	const writeups = new Set(['kekeh-mac', 'susupaa']);
+	const rootWith = (name: string | null) =>
+		({
+			querySelector: (sel: string) =>
+				name && sel === `[data-showcase-name="${name}"]` ? ({} as Element) : null
+		}) as unknown as ParentNode;
+
+	it('morphs when the target has a writeup and the source carries that name', () => {
+		expect(
+			morphSlug(new URL('https://x/projects/kekeh-mac'), writeups, rootWith('project-kekeh-mac'))
+		).toBe('kekeh-mac');
+	});
+
+	it('uses the curtain when the source has no matching named element', () => {
+		expect(morphSlug(new URL('https://x/projects/kekeh-mac'), writeups, rootWith(null))).toBeNull();
+		expect(
+			morphSlug(new URL('https://x/projects/kekeh-mac'), writeups, rootWith('project-susupaa'))
+		).toBeNull();
+	});
+
+	it('uses the curtain when the project has no writeup', () => {
+		expect(
+			morphSlug(new URL('https://x/projects/other'), writeups, rootWith('project-other'))
+		).toBeNull();
+	});
+
+	it('uses the curtain for non-case-study targets', () => {
+		for (const path of ['/projects', '/about', '/projects/kekeh-mac/extra']) {
+			expect(
+				morphSlug(new URL(`https://x${path}`), writeups, rootWith('project-kekeh-mac'))
+			).toBeNull();
+		}
+		expect(morphSlug(null, writeups, rootWith('project-kekeh-mac'))).toBeNull();
+	});
+});
+
+describe('setupPageReveal mode', () => {
+	function run(rootHasName: boolean, target: string) {
+		const classes = new Set<string>();
+		const seen: string[] = [];
+		vi.stubGlobal('matchMedia', () => ({ matches: false }));
+		vi.stubGlobal('document', {
+			documentElement: {
+				classList: {
+					add: (c: string) => (classes.add(c), seen.push(c)),
+					remove: (c: string) => classes.delete(c)
+				}
+			},
+			querySelector: () => (rootHasName ? {} : null),
+			startViewTransition: (cb: () => Promise<void>) => {
+				void cb();
+				return { finished: new Promise<void>(() => {}) };
+			}
+		});
+		setupPageReveal(() => new Set(['kekeh-mac']));
+		void nav.cb!({
+			from: { url: new URL('https://x/') },
+			to: { url: new URL(`https://x${target}`) },
+			type: 'link',
+			complete: Promise.resolve()
+		});
+		return seen;
+	}
+
+	it('adds morph-active instead of reveal-active for a matching pill/row click', () => {
+		expect(run(true, '/projects/kekeh-mac')).toEqual(['morph-active']);
+	});
+
+	it('keeps the curtain otherwise', () => {
+		expect(run(false, '/projects/kekeh-mac')).toEqual(['reveal-active']);
+		expect(run(true, '/about')).toEqual(['reveal-active']);
 	});
 });

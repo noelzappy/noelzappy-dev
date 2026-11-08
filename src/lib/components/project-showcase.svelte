@@ -21,7 +21,8 @@
 		/** Paints the field. Omit to sit on whatever surface the parent provides. */
 		brandColor?: string;
 		size: 'hero' | 'row' | 'case';
-		/** view-transition-name for the morph between hero, row and case study. */
+		/** view-transition-name for the morph between hero, row and case study. Only one element on a
+		 * page may carry a given name, so callers set it only on the one that is on show. */
 		name?: string;
 		/** Defer loading and fetch at low priority: for compositions that start out hidden. */
 		deferred?: boolean;
@@ -118,6 +119,7 @@
 	class="showcase {size}"
 	style:background={brandColor}
 	style:view-transition-name={name}
+	data-showcase-name={name}
 	data-layout={resolved?.layout ?? 'none'}
 >
 	{#if plan}
@@ -143,7 +145,7 @@
 					</div>
 				{/if}
 				{#each plan.phones as phone, i (i)}
-					<div class="phone" style:--x={phone.x} style:--y={phone.y}>
+					<div class="phone" style:--x={phone.x} style:--y={phone.y} style:--i={i}>
 						<img
 							use:measure={phone.src}
 							src={phone.src}

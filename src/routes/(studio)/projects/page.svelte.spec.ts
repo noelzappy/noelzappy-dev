@@ -149,4 +149,16 @@ describe('/projects +page.svelte', () => {
 		expect(page.getByRole('button', { name: 'Open source' }).query()).toBeNull();
 		await expect.element(page.getByRole('button', { name: 'Fintech' })).toBeInTheDocument();
 	});
+
+	it('never has two elements with the same view-transition-name', async () => {
+		render(Page, { data } as never);
+		await expect
+			.element(page.getByRole('link', { name: 'Phone App', exact: true }))
+			.toBeInTheDocument();
+		const names = [...document.body.querySelectorAll('*')]
+			.map((el) => getComputedStyle(el).viewTransitionName)
+			.filter((n) => n && n !== 'none');
+		expect(names.length).toBeGreaterThan(0);
+		expect(new Set(names).size).toBe(names.length);
+	});
 });

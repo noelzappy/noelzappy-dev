@@ -6,7 +6,7 @@ import { getPostsByTag, getTags } from '$lib/content/writing';
 import { toPostItem } from '$lib/content/posts-view';
 
 const tag = getTags()[0].tag;
-const data = { pills: [], tag, posts: getPostsByTag(tag).map(toPostItem) };
+const data = { pills: [], writeups: [], tag, posts: getPostsByTag(tag).map(toPostItem) };
 
 describe('/writing/tag/[tag]', () => {
 	it('shows the Tag eyebrow and the tag as the h1', async () => {

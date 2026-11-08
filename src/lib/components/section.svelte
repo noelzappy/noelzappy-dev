@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { fadeUp } from '$lib/motion/fade-up';
 
 	let {
 		label,
@@ -14,7 +15,7 @@
 		{#if aside}<div class="aside">{@render aside()}</div>{:else if label}<h2 class="label">
 				{label}
 			</h2>{/if}
-		<div class="body">{@render children()}</div>
+		<div class="body" use:fadeUp>{@render children()}</div>
 	</div>
 </section>
 

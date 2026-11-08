@@ -2,6 +2,7 @@
 	import type { DeviceShot, Showcase } from '$lib/data/projects';
 	import { getShowcase } from '$lib/data/showcase';
 	import ProjectShowcase from './project-showcase.svelte';
+	import { showcaseName } from '$lib/motion/shared';
 
 	const ENGAGEMENT: Record<string, string> = {
 		'full-build': 'Full build',
@@ -18,6 +19,7 @@
 	};
 
 	let {
+		slug = '',
 		title,
 		html,
 		engagement = '',
@@ -36,6 +38,7 @@
 		github = '',
 		next = null
 	}: {
+		slug?: string;
 		title: string;
 		html: string;
 		engagement?: string;
@@ -91,7 +94,12 @@
 
 	{#if brandColor && composition}
 		<div class="hero field">
-			<ProjectShowcase showcase={composition} {brandColor} size="case" />
+			<ProjectShowcase
+				showcase={composition}
+				{brandColor}
+				size="case"
+				name={slug ? showcaseName(slug) : undefined}
+			/>
 		</div>
 	{:else if brandColor}
 		<!-- No usable screens: the brand field and a large initial, never composed art. -->
