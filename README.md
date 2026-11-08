@@ -46,7 +46,7 @@ bun run build
 bun scripts/deploy-check.ts
 ```
 
-Exits non-zero while placeholder testimonials (`src/lib/data/testimonials.ts`) or `TODO(Emmanuel)` text are still on the rendered site. It is deliberately not part of `bun run test`, so placeholders stay visible during development without failing CI.
+Exits non-zero while a placeholder testimonial (`src/lib/data/testimonials.ts`) or `TODO(Emmanuel)` text is rendered into the build output. Placeholder testimonials render only in dev, so a production build passes and the script just warns that they still exist in the source. It is deliberately not part of `bun run test`, so placeholders stay visible during development without failing CI.
 
 ## Deploy
 
