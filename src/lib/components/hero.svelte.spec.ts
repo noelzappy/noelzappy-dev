@@ -18,12 +18,12 @@ const pills: PillProject[] = [
 		onBrand: 'dark',
 		deviceShots: [
 			{
-				src: '/portfolio/kekeh-mac/passenger-11-tracking-driver-on-the-way.png',
+				src: '/portfolio/kekeh-mac/passenger-11-tracking-driver-on-the-way.webp',
 				alt: 'Passenger tracking',
 				kind: 'phone'
 			},
 			{
-				src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.png',
+				src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.webp',
 				alt: 'Driver heading to pickup',
 				kind: 'phone'
 			}
@@ -37,7 +37,7 @@ const pills: PillProject[] = [
 		brandColor: '#ffb61e',
 		onBrand: 'dark',
 		deviceShots: [
-			{ src: '/portfolio/susupaa-dashboard.png', alt: 'SusuPaa dashboard', kind: 'browser' }
+			{ src: '/portfolio/susupaa-dashboard.webp', alt: 'SusuPaa dashboard', kind: 'browser' }
 		]
 	},
 	{
@@ -47,7 +47,7 @@ const pills: PillProject[] = [
 		built: ['Mobile app', 'Web app', 'API', 'Data migration'],
 		brandColor: '#6e2e5e',
 		onBrand: 'light',
-		deviceShots: [{ src: '/portfolio/rbl-quick-match.png', alt: 'RBL quick match', kind: 'phone' }]
+		deviceShots: [{ src: '/portfolio/rbl-quick-match.webp', alt: 'RBL quick match', kind: 'phone' }]
 	}
 ];
 

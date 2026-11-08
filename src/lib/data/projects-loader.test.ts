@@ -38,7 +38,7 @@ describe('projects content', () => {
 
 	it('Voltax carries a real docs screen on its brand field', () => {
 		const p = getProjectBySlug('voltax');
-		expect(p?.deviceShots?.[0]?.src).toBe('/portfolio/voltax/voltax-docs.png');
+		expect(p?.deviceShots?.[0]?.src).toBe('/portfolio/voltax/voltax-docs.webp');
 		expect(p?.brandColor).toBe('#3d50f5');
 		expect(p?.onBrand).toBe('light');
 	});

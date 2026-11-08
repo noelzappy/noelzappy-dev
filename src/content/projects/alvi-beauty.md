@@ -5,7 +5,7 @@ excerpt: 'Backend and system architecture for a beauty booking product spanning 
 featured: true
 featuredOrder: 4
 publishedAt: '2022-04-06T00:00:00.000Z'
-featuredImage: '/portfolio/alvibeauty.png'
+featuredImage: '/portfolio/alvibeauty.webp'
 liveUrl: 'https://alvibeauty.com/en-ua'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.beautypoisk.user'
 iosUrl: 'https://apps.apple.com/app/alvibeauty-client/id1640579339'
@@ -32,7 +32,7 @@ categories:
   - 'Mobile App'
   - 'Web App'
 gallery:
-  - '/portfolio/alvibeauty.png'
+  - '/portfolio/alvibeauty.webp'
   - '/portfolio/alvibeauty-2.jpg'
 oneLine: 'Backend and architecture for a beauty booking product across four apps and the web.'
 built:

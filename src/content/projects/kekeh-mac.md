@@ -26,22 +26,22 @@ built:
 brandColor: '#34b764'
 onBrand: 'dark'
 deviceShots:
-  - src: '/portfolio/kekeh-mac/passenger-11-tracking-driver-on-the-way.png'
+  - src: '/portfolio/kekeh-mac/passenger-11-tracking-driver-on-the-way.webp'
     alt: 'The Kekeh Mac passenger app tracking a driver on the way on a map of Freetown'
     kind: 'phone'
-  - src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.png'
+  - src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.webp'
     alt: 'The Kekeh Mac driver app heading to a pickup with distance, ETA and payout'
     kind: 'phone'
-  - src: '/portfolio/kekeh-mac/passenger-03-home.png'
+  - src: '/portfolio/kekeh-mac/passenger-03-home.webp'
     alt: 'The Kekeh Mac passenger home screen with wallet balance and ride, delivery, car pool and cargo options'
     kind: 'phone'
-  - src: '/portfolio/kekeh-mac/driver-03-home-online.png'
+  - src: '/portfolio/kekeh-mac/driver-03-home-online.webp'
     alt: 'The Kekeh Mac driver home screen while online'
     kind: 'phone'
-  - src: '/portfolio/kekeh-mac/driver-11-wallet.png'
+  - src: '/portfolio/kekeh-mac/driver-11-wallet.webp'
     alt: 'The Kekeh Mac driver wallet'
     kind: 'phone'
-  - src: '/portfolio/kekeh-mac/passenger-12-trip-complete.png'
+  - src: '/portfolio/kekeh-mac/passenger-12-trip-complete.webp'
     alt: 'The Kekeh Mac passenger trip complete screen'
     kind: 'phone'
 pill: true
@@ -55,9 +55,9 @@ pillOrder: 1
 <p>Give Freetown one platform for rides, deliveries and shared trips, and give its drivers the financial tools they rarely get.</p>
 
 <div class="shots-row">
-<img src="/portfolio/kekeh-mac/driver-03-home-online.png" alt="The driver app home screen while online and ready for jobs" loading="lazy" decoding="async" width="496" height="1080">
-<img src="/portfolio/kekeh-mac/driver-11-wallet.png" alt="The driver app wallet screen" loading="lazy" decoding="async" width="496" height="1080">
-<img src="/portfolio/kekeh-mac/passenger-12-trip-complete.png" alt="The passenger app trip complete screen" loading="lazy" decoding="async" width="496" height="1080">
+<img src="/portfolio/kekeh-mac/driver-03-home-online.webp" alt="The driver app home screen while online and ready for jobs" loading="lazy" decoding="async" width="496" height="1080">
+<img src="/portfolio/kekeh-mac/driver-11-wallet.webp" alt="The driver app wallet screen" loading="lazy" decoding="async" width="496" height="1080">
+<img src="/portfolio/kekeh-mac/passenger-12-trip-complete.webp" alt="The passenger app trip complete screen" loading="lazy" decoding="async" width="496" height="1080">
 </div>
 
 <h2>Real-time dispatch</h2>

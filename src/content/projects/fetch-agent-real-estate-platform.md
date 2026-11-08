@@ -4,7 +4,7 @@ slug: 'fetch-agent-real-estate-platform'
 excerpt: 'Backend for a US real estate marketplace: the APIs behind the web app and admin dashboard, and the filtering and ranking engine that matches buyers to agents.'
 featured: false
 publishedAt: '2025-04-06T15:20:30.000Z'
-featuredImage: '/portfolio/fetch-agent/fetch-agent.png'
+featuredImage: '/portfolio/fetch-agent/fetch-agent.webp'
 liveUrl: 'https://fetchagent.com'
 role: 'Backend Engineer (contract)'
 kind: 'case-study'
@@ -23,9 +23,9 @@ stack:
 categories:
   - 'Web App'
 gallery:
-  - '/portfolio/fetch-agent/fetch-agent.png'
-  - '/portfolio/fetch-agent/1.png'
-  - '/portfolio/fetch-agent/2.png'
+  - '/portfolio/fetch-agent/fetch-agent.webp'
+  - '/portfolio/fetch-agent/1.webp'
+  - '/portfolio/fetch-agent/2.webp'
 oneLine: 'Backend and matching engine for a US marketplace that pairs homebuyers with agents.'
 built:
   - 'API'
@@ -35,10 +35,10 @@ engagement: 'team'
 brandColor: '#025346'
 onBrand: 'light'
 deviceShots:
-  - src: '/portfolio/fetch-agent/2.png'
+  - src: '/portfolio/fetch-agent/2.webp'
     alt: 'The Fetch Agent search page with a map of agent locations and a list of matching agents with fee types'
     kind: 'browser'
-  - src: '/portfolio/fetch-agent/service-areas.png'
+  - src: '/portfolio/fetch-agent/service-areas.webp'
     alt: 'The Fetch Agent service area form where an agent sets fee types and pins a location on a map'
     kind: 'browser'
 ---

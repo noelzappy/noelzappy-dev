@@ -4,7 +4,7 @@ slug: 'growinggift-platform'
 excerpt: 'Solo build of a fractional stock and crypto gifting platform with brokerage and exchange integrations, live pricing, and generated PDF certificates; 3,000+ gifts sent in three months.'
 featured: false
 publishedAt: '2024-06-01T00:00:00.000Z'
-featuredImage: '/portfolio/growing-gifts-webapp.png'
+featuredImage: '/portfolio/growing-gifts-webapp.webp'
 role: 'Software Engineer'
 kind: 'case-study'
 status: 'Shipped'
@@ -28,8 +28,8 @@ stats:
     value: '3,000+'
     description: 'Digital investment gifts in first 3 months'
 gallery:
-  - '/portfolio/growing-gifts-webapp.png'
-  - '/portfolio/growing-gifts-website.png'
+  - '/portfolio/growing-gifts-webapp.webp'
+  - '/portfolio/growing-gifts-website.webp'
 oneLine: 'Fractional stock and crypto gift certificates, built solo end to end.'
 built:
   - 'Web app'
@@ -40,7 +40,7 @@ engagement: 'full-build'
 brandColor: '#307cef'
 onBrand: 'dark'
 deviceShots:
-  - src: '/portfolio/growinggifts-landing.png'
+  - src: '/portfolio/growinggifts-landing.webp'
     alt: 'The GrowingGifts landing page with the headline "A Gift Card: The perfect gift for any occasion" and a three-step how-it-works section'
     kind: 'browser'
 ---

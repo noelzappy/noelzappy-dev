@@ -17,12 +17,12 @@ const base = {
 	heroImage: '',
 	deviceShots: [
 		{
-			src: '/portfolio/kekeh-mac/passenger-03-home.png',
+			src: '/portfolio/kekeh-mac/passenger-03-home.webp',
 			alt: 'Passenger tracking',
 			kind: 'phone' as const
 		},
 		{
-			src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.png',
+			src: '/portfolio/kekeh-mac/driver-05-heading-to-pickup.webp',
 			alt: 'Driver heading to pickup',
 			kind: 'phone' as const
 		}
@@ -60,7 +60,7 @@ describe('CaseStudy', () => {
 	it('uses the hero image when set and omits absent links', async () => {
 		render(CaseStudy, {
 			...base,
-			heroImage: '/portfolio/fetch-agent/fetch-agent.png',
+			heroImage: '/portfolio/fetch-agent/fetch-agent.webp',
 			liveUrl: 'https://x.test'
 		});
 		await expect.element(page.getByRole('link', { name: 'App Store' })).not.toBeInTheDocument();

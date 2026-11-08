@@ -5,7 +5,7 @@ excerpt: 'Web platform and two production React Native apps for an SME finance p
 featured: true
 featuredOrder: 5
 publishedAt: '2022-12-01T21:38:00.000Z'
-featuredImage: '/portfolio/builtapp.png'
+featuredImage: '/portfolio/builtapp.webp'
 liveUrl: 'https://built.africa'
 iosUrl: 'https://apps.apple.com/gh/app/built-accounting/id1547855525'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.builtaccounting.app'
@@ -35,7 +35,7 @@ stats:
     value: '14+'
     description: 'Used in over 14 countries worldwide'
 gallery:
-  - '/portfolio/builtapp.png'
+  - '/portfolio/builtapp.webp'
 oneLine: 'Web platform and two React Native apps for an SME finance product.'
 built:
   - 'Mobile apps'
@@ -46,10 +46,10 @@ engagement: 'team'
 brandColor: '#3d6ca5'
 onBrand: 'light'
 deviceShots:
-  - src: '/portfolio/built-wallet.png'
+  - src: '/portfolio/built-wallet.webp'
     alt: 'The Built Accounting app home screen with an account balance, quick actions and recent transactions'
     kind: 'phone'
-  - src: '/portfolio/built-invoices.png'
+  - src: '/portfolio/built-invoices.webp'
     alt: 'The Built Accounting app invoice list with invoice numbers, due dates and amounts'
     kind: 'phone'
 ---

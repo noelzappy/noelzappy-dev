@@ -5,7 +5,7 @@ excerpt: 'Rewrote a dating platform’s stack from PHP/MySQL to Node.js and Post
 featured: true
 featuredOrder: 3
 publishedAt: '2024-09-06T15:01:56.000Z'
-featuredImage: '/portfolio/rblapp.png'
+featuredImage: '/portfolio/rblapp.webp'
 iosUrl: 'https://apps.apple.com/us/app/real-black-love-dating-app/id961016844'
 androidUrl: 'https://play.google.com/store/apps/details?id=com.ht.realblacklove'
 role: 'Lead Engineer'
@@ -36,7 +36,7 @@ stats:
     value: '200,000+'
     description: 'Growing user base'
 gallery:
-  - '/portfolio/rblapp.png'
+  - '/portfolio/rblapp.webp'
 oneLine: 'A dating platform I moved to a new stack — 170,000 live users, zero downtime.'
 built:
   - 'Mobile app'
@@ -46,10 +46,10 @@ built:
 brandColor: '#6e2e5e'
 onBrand: 'light'
 deviceShots:
-  - src: '/portfolio/rbl-quick-match.png'
+  - src: '/portfolio/rbl-quick-match.webp'
     alt: 'The Real Black Love app showing a Quick Match profile card'
     kind: 'phone'
-  - src: '/portfolio/rbl-messages.png'
+  - src: '/portfolio/rbl-messages.webp'
     alt: 'The Real Black Love app showing a list of recent conversations'
     kind: 'phone'
 pill: true

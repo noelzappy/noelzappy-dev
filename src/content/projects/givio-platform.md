@@ -4,7 +4,7 @@ slug: 'givio-platform'
 excerpt: 'Solo build of a gifting platform backed by fractional stocks and crypto: exchange and market-data integrations, PCI-compliant payments, and KYC/AML flows.'
 featured: false
 publishedAt: '2025-02-01T00:00:00.000Z'
-featuredImage: '/portfolio/givio-webapp.png'
+featuredImage: '/portfolio/givio-webapp.webp'
 liveUrl: 'https://app.givioapp.com'
 role: 'Software Engineer'
 kind: 'case-study'
@@ -25,7 +25,7 @@ stack:
 categories:
   - 'Web App'
 gallery:
-  - '/portfolio/givio-webapp.png'
+  - '/portfolio/givio-webapp.webp'
 oneLine: 'A gifting platform where each gift is backed by fractional stocks or crypto.'
 built:
   - 'Web app'
@@ -36,7 +36,7 @@ engagement: 'full-build'
 brandColor: '#00cd6a'
 onBrand: 'dark'
 deviceShots:
-  - src: '/portfolio/givio-dashboard.png'
+  - src: '/portfolio/givio-dashboard.webp'
     alt: 'The Givio dashboard with gift card totals, a list of stocks and ETFs to add, and a selection cart'
     kind: 'browser'
 ---
