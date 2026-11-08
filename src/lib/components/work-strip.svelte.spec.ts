@@ -36,6 +36,7 @@ describe('WorkStrip', () => {
 		expect(first.querySelectorAll('.screen')[2].tagName).toBe('DIV');
 		// External destinations open safely.
 		expect(first.querySelectorAll('.screen')[1].getAttribute('rel')).toContain('noopener');
+		expect(first.querySelectorAll('.screen')[1].getAttribute('target')).toBe('_blank');
 	});
 
 	it('cannot be reached by keyboard', async () => {

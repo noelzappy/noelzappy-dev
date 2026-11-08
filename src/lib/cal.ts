@@ -26,6 +26,19 @@ declare global {
 	}
 }
 
+/** embed.js failed to load (blocked, offline): bookings fall back to the cal.com page. */
+let embedFailed = false;
+
+/** The public cal.com booking page, the fallback when the popup cannot open. */
+export function calUrl(calLink: string): string {
+	return `${CAL_ORIGIN}/${calLink}`;
+}
+
+/** Test hook: forget a previous embed failure. */
+export function resetCalEmbedFailure(): void {
+	embedFailed = false;
+}
+
 /** Installs the Cal queue stub (the official snippet) and injects embed.js once. */
 export function loadCalEmbed(): void {
 	if (typeof window === 'undefined') return;
@@ -58,7 +71,12 @@ export function loadCalEmbed(): void {
 	stub.ns ??= {};
 	stub.q ??= [];
 	stub.loaded = true;
-	document.head.appendChild(document.createElement('script')).src = CAL_SCRIPT;
+	const script = document.createElement('script');
+	script.src = CAL_SCRIPT;
+	script.addEventListener('error', () => {
+		embedFailed = true;
+	});
+	document.head.appendChild(script);
 	stub('init', { origin: CAL_ORIGIN });
 }
 
@@ -73,8 +91,15 @@ export function scheduleCalEmbed(): void {
 	else window.addEventListener('load', start, { once: true });
 }
 
-/** Opens the Cal popup for an event. Safe to call before the embed has loaded. */
-export function openCal(calLink: string, config: Record<string, unknown>): void {
+/**
+ * Opens the Cal popup for an event and returns true, or returns false when the embed is unusable
+ * (its script failed to load) so the caller lets the link open cal.com instead. Safe to call
+ * before the embed has loaded: the call is queued.
+ */
+export function openCal(calLink: string, config: Record<string, unknown>): boolean {
+	if (embedFailed) return false;
 	loadCalEmbed();
+	if (embedFailed) return false;
 	window.Cal!('modal', { calLink, config });
+	return true;
 }

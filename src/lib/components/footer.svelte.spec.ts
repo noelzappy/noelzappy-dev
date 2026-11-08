@@ -17,7 +17,7 @@ describe('footer.svelte', () => {
 
 	it('has the booking button and email link', async () => {
 		render(Footer);
-		await expect.element(page.getByRole('button', { name: 'Book a 15-minute call' })).toBeVisible();
+		await expect.element(page.getByRole('link', { name: 'Book a 15-minute call' })).toBeVisible();
 		expect(href('emmanuel@noelzappy.com')).toBe('mailto:emmanuel@noelzappy.com');
 	});
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { CAL_USERNAME, openCal } from '$lib/cal.js';
+	import { CAL_USERNAME, calUrl, openCal } from '$lib/cal.js';
 
 	let {
 		eventSlug,
@@ -12,18 +12,22 @@
 
 	// Native listener (not Svelte's delegated one) so it stops the click before
 	// the Cal embed's own document listener sees it: one popup, never two.
-	function bookOnClick(node: HTMLButtonElement) {
+	// Without JS, before hydration, or when the embed cannot load, the link simply opens cal.com.
+	function bookOnClick(node: HTMLAnchorElement) {
 		const onClick = (event: MouseEvent) => {
+			if (!openCal(calLink, config)) return;
+			event.preventDefault();
 			event.stopPropagation();
-			openCal(calLink, config);
 		};
 		node.addEventListener('click', onClick);
 		return () => node.removeEventListener('click', onClick);
 	}
 </script>
 
-<button
-	type="button"
+<a
+	href={calUrl(calLink)}
+	target="_blank"
+	rel="noopener noreferrer"
 	class="cal-link"
 	class:plain
 	data-cal-link={calLink}
@@ -31,7 +35,7 @@
 	{@attach bookOnClick}
 >
 	{label}
-</button>
+</a>
 
 <style>
 	.cal-link {
@@ -46,6 +50,7 @@
 		cursor: pointer;
 	}
 	.cal-link.plain {
+		display: inline-block;
 		color: inherit;
 		text-decoration: none;
 		letter-spacing: inherit;

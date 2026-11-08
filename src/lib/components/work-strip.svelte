@@ -71,7 +71,7 @@
 							aria-hidden="true"
 							{...screen.href.startsWith('/')
 								? { 'data-sveltekit-preload-data': 'hover' }
-								: { rel: 'noopener noreferrer' }}
+								: { target: '_blank', rel: 'noopener noreferrer' }}
 						>
 							{@render shot(screen.src, eager, priority)}
 						</a>
@@ -109,9 +109,13 @@
 		height: 100%;
 		animation: drift 80s linear infinite;
 	}
-	.track.paused,
-	.strip:hover .track {
+	.track.paused {
 		animation-play-state: paused;
+	}
+	@media (hover: hover) {
+		.strip:hover .track {
+			animation-play-state: paused;
+		}
 	}
 	.copy {
 		display: flex;
