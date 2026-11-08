@@ -50,7 +50,7 @@ Exits non-zero while placeholder testimonials (`src/lib/data/testimonials.ts`) o
 
 ## Deploy
 
-Cloudflare Pages builds from `main` (`wrangler.toml`). No runtime environment variables are required.
+Cloudflare Pages builds from `main` (`wrangler.toml`). No runtime environment variables are required. `PUBLIC_TURNSTILE_SITE_KEY` and `PUBLIC_FORGE_INQUIRY_URL` (see `env.example`) are build-time variables: set both in the Pages project's build environment, then redeploy. Left unset, the inquiry form shows the email fallback on submit.
 
 ## License
 

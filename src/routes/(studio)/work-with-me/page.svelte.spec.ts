@@ -1,9 +1,7 @@
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import '../../layout.css';
-vi.mock('$env/dynamic/public', () => ({ env: {} }));
-
 import Page from './+page.svelte';
 import { getAllProjects } from '$lib/data/projects-loader';
 

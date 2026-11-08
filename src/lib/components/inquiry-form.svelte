@@ -1,6 +1,9 @@
 <script lang="ts">
 	import { onMount, tick } from 'svelte';
-	import { env } from '$env/dynamic/public';
+	import * as pub from '$env/static/public';
+
+	/** Overrides for the build-time PUBLIC_* values (used by tests). */
+	let { config }: { config?: { siteKey?: string; endpoint?: string } } = $props();
 
 	const EMAIL = 'emmanuel@noelzappy.com';
 	const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
@@ -25,10 +28,14 @@
 	let siteKey = $state('');
 	let endpoint = $state('');
 	let token = $state('');
+	let widgetFailed = $state(false);
 	let widgetEl = $state<HTMLElement>();
 	let widgetId: string | undefined;
 	let statusEl = $state<HTMLElement>();
-	const inputs: Partial<Record<Field, HTMLElement>> = {};
+	let nameEl = $state<HTMLElement>();
+	let emailEl = $state<HTMLElement>();
+	let messageEl = $state<HTMLElement>();
+	let turnstileErrEl = $state<HTMLElement>();
 
 	function turnstile(): Turnstile | undefined {
 		return (window as unknown as { turnstile?: Turnstile }).turnstile;
@@ -50,9 +57,10 @@
 	}
 
 	onMount(() => {
-		// Read on the client so prerendered pages work whenever the values are set.
-		siteKey = env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
-		endpoint = env.PUBLIC_FORGE_INQUIRY_URL ?? '';
+		// Build-time values; unset leaves the email fallback.
+		const publicEnv = pub as Record<string, string | undefined>;
+		siteKey = config?.siteKey ?? publicEnv.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+		endpoint = config?.endpoint ?? publicEnv.PUBLIC_FORGE_INQUIRY_URL ?? '';
 		if (!siteKey) return;
 		let cancelled = false;
 		loadTurnstile()
@@ -69,7 +77,10 @@
 					'error-callback': () => (token = '')
 				});
 			})
-			.catch(() => {});
+			.catch(() => {
+				// No widget will ever appear: stop demanding a token and let submit show the email fallback.
+				widgetFailed = true;
+			});
 		return () => {
 			cancelled = true;
 			if (widgetId) turnstile()?.remove(widgetId);
@@ -87,7 +98,7 @@
 		if (len === 0) e.message = 'Tell me a little about what is going on.';
 		else if (len < MIN) e.message = `Please write at least ${MIN} characters (you have ${len}).`;
 		else if (len > MAX) e.message = `Please keep it under ${MAX} characters (you have ${len}).`;
-		if (siteKey && !token) e.turnstile = 'Please complete the verification.';
+		if (siteKey && !widgetFailed && !token) e.turnstile = 'Please complete the verification.';
 		return e;
 	}
 
@@ -103,7 +114,9 @@
 		const first = (['name', 'email', 'message', 'turnstile'] as Field[]).find((f) => errors[f]);
 		if (first) {
 			await tick();
-			inputs[first]?.focus();
+			({ name: nameEl, email: emailEl, message: messageEl, turnstile: turnstileErrEl })[
+				first
+			]?.focus();
 			return;
 		}
 		status = 'sending';
@@ -158,7 +171,7 @@
 				autocomplete="name"
 				required
 				bind:value={name}
-				bind:this={inputs.name}
+				bind:this={nameEl}
 				aria-invalid={errors.name ? 'true' : undefined}
 				aria-describedby={describedBy('name')}
 			/>
@@ -177,7 +190,7 @@
 				spellcheck="false"
 				required
 				bind:value={email}
-				bind:this={inputs.email}
+				bind:this={emailEl}
 				aria-invalid={errors.email ? 'true' : undefined}
 				aria-describedby={describedBy('email')}
 			/>
@@ -203,7 +216,7 @@
 				rows="6"
 				required
 				bind:value={message}
-				bind:this={inputs.message}
+				bind:this={messageEl}
 				aria-invalid={errors.message ? 'true' : undefined}
 				aria-describedby={describedBy('message')}
 			></textarea>
@@ -226,7 +239,7 @@
 			<div class="field">
 				<div bind:this={widgetEl} class="widget"></div>
 				{#if errors.turnstile}
-					<p class="error" id="inquiry-turnstile-error" tabindex="-1" bind:this={inputs.turnstile}>
+					<p class="error" id="inquiry-turnstile-error" tabindex="-1" bind:this={turnstileErrEl}>
 						{errors.turnstile}
 					</p>
 				{/if}

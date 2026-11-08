@@ -1,12 +1,11 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { render } from 'vitest-browser-svelte';
 import { page } from 'vitest/browser';
 import '../../routes/layout.css';
 
-const publicEnv = vi.hoisted(() => ({ PUBLIC_FORGE_INQUIRY_URL: '' as string | undefined }));
-vi.mock('$env/dynamic/public', () => ({ env: publicEnv }));
-
 import InquiryForm from './inquiry-form.svelte';
+
+const URL_SET = { endpoint: 'https://forge.example/api/public/inquiry' };
 
 const LONG = 'Our payouts drift out of sync with the ledger every Friday night.';
 const FALLBACK = 'Something went wrong. Email me directly at emmanuel@noelzappy.com.';
@@ -20,10 +19,8 @@ async function fill(name: string, email: string, message: string, company = '') 
 }
 const submit = () => page.getByRole('button', { name: 'Send' });
 
-beforeEach(() => {
-	publicEnv.PUBLIC_FORGE_INQUIRY_URL = undefined;
-});
 afterEach(() => {
+	vi.restoreAllMocks();
 	vi.unstubAllGlobals();
 });
 
@@ -107,10 +104,9 @@ describe('inquiry form', () => {
 	});
 
 	it('posts JSON and replaces the form with the thanks message on {ok:true}', async () => {
-		publicEnv.PUBLIC_FORGE_INQUIRY_URL = 'https://forge.example/api/public/inquiry';
 		const fetchMock = vi.fn(async () => Response.json({ ok: true }));
 		vi.stubGlobal('fetch', fetchMock);
-		render(InquiryForm);
+		render(InquiryForm, { config: URL_SET });
 		await fill('Ama', 'ama@example.com', LONG, 'Acme');
 		await submit().click();
 		const status = page.getByRole('status');
@@ -132,12 +128,11 @@ describe('inquiry form', () => {
 	});
 
 	it('keeps the text and shows the fallback when the server refuses', async () => {
-		publicEnv.PUBLIC_FORGE_INQUIRY_URL = 'https://forge.example/api/public/inquiry';
 		vi.stubGlobal(
 			'fetch',
 			vi.fn(async () => Response.json({ ok: false }, { status: 400 }))
 		);
-		render(InquiryForm);
+		render(InquiryForm, { config: URL_SET });
 		await fill('Ama', 'ama@example.com', LONG);
 		await submit().click();
 		await expect.element(page.getByRole('alert')).toHaveTextContent(FALLBACK);
@@ -146,12 +141,11 @@ describe('inquiry form', () => {
 	});
 
 	it('keeps the text on a network error', async () => {
-		publicEnv.PUBLIC_FORGE_INQUIRY_URL = 'https://forge.example/api/public/inquiry';
 		vi.stubGlobal(
 			'fetch',
 			vi.fn(async () => Promise.reject(new TypeError('offline')))
 		);
-		render(InquiryForm);
+		render(InquiryForm, { config: URL_SET });
 		await fill('Ama', 'ama@example.com', LONG);
 		await submit().click();
 		await expect.element(page.getByRole('alert')).toHaveTextContent(FALLBACK);
@@ -159,17 +153,36 @@ describe('inquiry form', () => {
 	});
 
 	it('disables the button while the request is pending', async () => {
-		publicEnv.PUBLIC_FORGE_INQUIRY_URL = 'https://forge.example/api/public/inquiry';
 		let resolve!: (r: Response) => void;
 		vi.stubGlobal(
 			'fetch',
 			vi.fn(() => new Promise<Response>((r) => (resolve = r)))
 		);
-		render(InquiryForm);
+		render(InquiryForm, { config: URL_SET });
 		await fill('Ama', 'ama@example.com', LONG);
 		await submit().click();
 		await expect.element(page.getByRole('button', { name: 'Sending…' })).toBeDisabled();
 		resolve(Response.json({ ok: true }));
 		await expect.element(page.getByRole('status')).toHaveTextContent(THANKS);
+	});
+
+	it('shows the email fallback instead of demanding a token when the Turnstile script fails to load', async () => {
+		const fetchMock = vi.fn();
+		vi.stubGlobal('fetch', fetchMock);
+		const real = document.head.appendChild.bind(document.head);
+		vi.spyOn(document.head, 'appendChild').mockImplementation(((node: Node) => {
+			if (node instanceof HTMLScriptElement && node.src.includes('turnstile')) {
+				queueMicrotask(() => node.dispatchEvent(new Event('error')));
+				return node;
+			}
+			return real(node);
+		}) as typeof document.head.appendChild);
+		render(InquiryForm, { config: { ...URL_SET, siteKey: 'test-key' } });
+		await fill('Ama', 'ama@example.com', LONG);
+		await vi.waitFor(async () => {
+			await submit().click();
+			await expect.element(page.getByRole('alert')).toHaveTextContent(FALLBACK);
+		});
+		expect(document.body.textContent).not.toContain('complete the verification');
 	});
 });
