@@ -157,4 +157,13 @@ describe('getNextCaseStudy', () => {
 	it('returns null for an unknown slug', () => {
 		expect(getNextCaseStudy('does-not-exist')).toBeNull();
 	});
+
+	it('bodies are HTML, not markdown (they render through {@html})', () => {
+		for (const p of getAllProjects()) {
+			// Ignore anything inside HTML tags (attributes) by testing line starts and bold pairs only.
+			expect(p.html, `${p.slug}: heading`).not.toMatch(/^#{1,6} /m);
+			expect(p.html, `${p.slug}: list item`).not.toMatch(/^\s*[-*] /m);
+			expect(p.html, `${p.slug}: bold`).not.toMatch(/\*\*[^*\n]+\*\*/);
+		}
+	});
 });

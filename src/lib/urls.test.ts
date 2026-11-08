@@ -1,4 +1,4 @@
-import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { getAllProjects } from '$lib/data/projects-loader';
@@ -82,5 +82,9 @@ describe('pre-redesign URLs', () => {
 		for (const source of legacy.redirectSources) {
 			expect(current, source).toMatch(new RegExp(`^${source.replace(/[*]/g, '\\*')}\\s`, 'm'));
 		}
+	});
+
+	it('every static file public before the redesign still exists (images, fonts, robots)', () => {
+		for (const file of legacy.staticFiles) expect(existsSync(file), file).toBe(true);
 	});
 });
