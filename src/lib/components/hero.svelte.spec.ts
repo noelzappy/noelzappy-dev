@@ -121,6 +121,25 @@ describe('hero.svelte', () => {
 		);
 	});
 
+	it('shows the proof line directly under the intro: intro, proof, booking link, pills', async () => {
+		const { root } = setup();
+		const text =
+			"I'm best at products that move money: wallets, savings, lending and payments. Ten shipped for teams in Ghana, Sierra Leone and the US.";
+		const proof = root.querySelector('.proof') as HTMLElement;
+		expect(proof.textContent).toBe(text);
+		const intro = root.querySelector('.intro')!;
+		const book = page.getByRole('link', { name: 'Book a 15-minute call' }).element();
+		const pillList = root.querySelector('.pills')!;
+		const follows = (a: Node, b: Node) =>
+			!!(a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING);
+		expect(follows(intro, proof)).toBe(true);
+		expect(follows(proof, book)).toBe(true);
+		expect(follows(book, pillList)).toBe(true);
+		expect(rectOf(proof).top).toBeGreaterThanOrEqual(rectOf(intro).bottom - 1);
+		expect(rectOf(book).top).toBeGreaterThanOrEqual(rectOf(proof).bottom - 1);
+		expect(proof.getAttribute('aria-hidden')).toBeNull();
+	});
+
 	it('starts in the default state', async () => {
 		const { root } = setup();
 		expect(root.dataset.active).toBe('');

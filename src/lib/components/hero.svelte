@@ -25,6 +25,9 @@
 	}: { pills: PillProject[]; headline: string | Snippet; intro: string; screens?: StripScreen[] } =
 		$props();
 
+	const PROOF =
+		"I'm best at products that move money: wallets, savings, lending and payments. Ten shipped for teams in Ghana, Sierra Leone and the US.";
+
 	const stripScreens = $derived(screens?.length ? screens : getStripScreens(pills));
 
 	// Text colours for `onBrand`. Contrast against the brand fields is checked in the task report.
@@ -110,6 +113,7 @@
 		</h1>
 		<div class="lede layer" class:off={!!active}>
 			<p class="intro">{intro}</p>
+			<p class="proof">{PROOF}</p>
 			<div class="book">
 				<CalButton eventSlug={CAL_EVENTS.intro} label="Book a 15-minute call" arrow />
 			</div>
@@ -231,6 +235,17 @@
 		letter-spacing: var(--tracking-heading);
 	}
 	.intro,
+	.proof {
+		margin: 0;
+		text-wrap: pretty;
+	}
+	.proof {
+		margin-top: 0.6rem;
+		color: var(--muted);
+		font-size: var(--step-small);
+		line-height: var(--lh-small);
+		letter-spacing: var(--tracking-small);
+	}
 	.book {
 		margin-top: 0.1rem;
 	}
