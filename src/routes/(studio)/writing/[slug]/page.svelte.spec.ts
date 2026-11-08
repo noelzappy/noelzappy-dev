@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { render } from 'vitest-browser-svelte';
+import { page } from 'vitest/browser';
 import '../../../layout.css';
 import Page from './+page.svelte';
 import { load } from './+page';
@@ -83,5 +84,15 @@ describe('/writing/[slug]', () => {
 		}
 		expect(container.querySelectorAll('time')).toHaveLength(1);
 		expect(container.querySelectorAll('.sec')).toHaveLength(2);
+	});
+
+	it('aligns the prev/next nav with the prose column', async () => {
+		await page.viewport(1000, 700);
+		const data = await loadSlug(posts[1].slug);
+		const { container } = render(Page, { data });
+		const nav = container.querySelector('.adjacent')!;
+		expect(nav.getBoundingClientRect().left).toBe(
+			container.querySelector('.prose')!.getBoundingClientRect().left
+		);
 	});
 });

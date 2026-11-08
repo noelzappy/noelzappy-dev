@@ -46,5 +46,8 @@
 			grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
 			gap: var(--page-gutter);
 		}
+		.body {
+			grid-column: 2;
+		}
 	}
 </style>
