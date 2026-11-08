@@ -152,6 +152,7 @@
 	.chip {
 		font: inherit;
 		font-size: var(--step-small);
+		min-height: var(--tap-min);
 		padding: 0.45rem 0.95rem;
 		border: 1px solid var(--border);
 		border-radius: 999px;
@@ -213,9 +214,16 @@
 		font-size: var(--step-small);
 		color: var(--muted);
 	}
+	.oss-meta a {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-width: var(--tap-min);
+		min-height: var(--tap-min);
+	}
 	.oss-meta {
 		display: flex;
-		align-items: baseline;
+		align-items: center;
 		gap: 1rem;
 		font-size: var(--step-small);
 		white-space: nowrap;

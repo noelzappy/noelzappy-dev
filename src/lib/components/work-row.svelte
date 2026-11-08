@@ -70,6 +70,8 @@
 		font-weight: var(--weight-display-m);
 	}
 	.name a {
+		display: inline-block;
+		min-height: var(--tap-min);
 		color: var(--fg);
 		text-decoration: none;
 	}
@@ -90,8 +92,10 @@
 		color: var(--muted);
 	}
 	.cta {
-		display: inline-block;
-		margin-top: 1.5rem;
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap-min);
+		margin-top: 1rem;
 		color: var(--fg);
 		font-size: var(--step-small);
 		text-decoration: underline;

@@ -347,12 +347,15 @@
 		margin: 0;
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.4rem 1.25rem;
+		gap: 0 1.25rem;
 	}
 	.tags {
 		gap: 0.35rem;
 	}
 	.links a {
+		display: inline-flex;
+		align-items: center;
+		min-height: var(--tap-min);
 		color: var(--accent);
 	}
 
