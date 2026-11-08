@@ -75,7 +75,7 @@ showcase:
 <li><strong>The open toolkit</strong>, <a href="https://github.com/vemphy/vc" rel="noopener noreferrer">vemphy/vc</a>, is the public repository that does the checking: <code>@vemphy/vc</code> in TypeScript and <code>vc-go</code> in Go, with a set of signed test claims that both must answer correctly.</li>
 </ul>
 
-<p>I also designed the identity: a warm paper background, one sea-blue accent, a status palette that is never decorative, and a mark made of two separate strokes that read as a V. Every word of the site's own copy lives in one file.</p>
+<p>I also designed the identity: a warm paper background, one sea-blue accent, a status palette that is never decorative, and a mark made of two separate strokes that read as a V.</p>
 
 <h2>Decisions that mattered</h2>
 
@@ -105,7 +105,7 @@ showcase:
 
 <h2>Where it stands</h2>
 
-<p>Vemphy is in pilot. The public verify site is live and the registry, the staff console and the open toolkit are built. The issuer dashboard has sign-in, passkeys and an overview, and its remaining screens are the next work. I wrote a load test for the verification endpoint with a target, but the repository does not yet record a run against a real registry, so I do not claim the target is met.</p>
+<p>Vemphy is in pilot. The public verify site is live and the registry, the staff console and the open toolkit are built. The issuer dashboard has sign-in, passkeys and an overview, and its remaining screens are the next work.</p>
 
 <h2>Stack</h2>
 
