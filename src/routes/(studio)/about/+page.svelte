@@ -211,7 +211,8 @@
 		font-size: var(--step-small);
 		line-height: var(--lh-small);
 	}
-	@media (min-width: 48rem) {
+	/* Side by side only once the content column can hold a readable measure beside the photo. */
+	@media (min-width: 72rem) {
 		.story-grid {
 			grid-template-columns: minmax(0, 1fr) minmax(0, 22rem);
 			gap: var(--page-gutter);
@@ -223,6 +224,8 @@
 			position: sticky;
 			top: calc(var(--header-h) + 1.5rem);
 		}
+	}
+	@media (min-width: 48rem) {
 		.row {
 			grid-template-columns: 9rem minmax(0, 1fr);
 			gap: 1.5rem;
