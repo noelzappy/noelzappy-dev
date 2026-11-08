@@ -141,6 +141,36 @@ Emmanuel (2026-11-08): the site's email becomes `emmanuel@noelzappy.com` everywh
 
 ---
 
+### Task 6c: Persistent header with visible navigation
+
+Emmanuel (2026-11-08): key menu items always visible; header fixed (doesn't disappear on scroll) and in the site's language; remove "Booking Q1 projects" and the Accra time from the header.
+
+- `src/lib/components/site-header.svelte`: desktop (≥ 900px) layout = wordmark left; inline links **Work** `/projects` · **About** `/about` · **Writing** `/writing`; **Work with me** `/work-with-me` as an accent pill; theme toggle. The Menu button and full-screen overlay remain for < 900px (links don't fit) and may stay on desktop only if it adds something (it doesn't — hide it ≥ 900px). Active link state uses the accent. Remove `LocalTime` and `AVAILABILITY` from the header (footer keeps the Accra time; `AVAILABILITY` stays exported for later use or is deleted if unused — grep).
+- Fixed header: `position: fixed; inset-inline: 0; top: 0`; transparent over the hero/brand fields at scroll 0 (keeps `data-hero-tone` colouring), and after ~24px of scroll becomes a solid `--bg` bar with a 1px `--border` bottom hairline (no blur, no shadow). Transition background/border 200ms inside the motion-OK query. Pages already offset content by `--header-h`; verify nothing sits under the header (anchors use `scroll-margin-top: var(--header-h)`). The skip link still works. The reveal curtain and morph still cover/animate correctly with a fixed header (header must sit below the curtain panel's z-index).
+- Tests: links visible at 1280 with exact hrefs; Menu button hidden ≥ 900px and visible at 375; header stays at top 0 after scrolling 2000px; header has a solid background after scroll and transparent at top on `/`; no LocalTime / availability text in the header.
+- Commit `feat: persistent header with visible navigation`.
+
+### Task 6d: Copy pass: no em dashes, no website-rebuild offer, full name
+
+- Remove every em dash (—) and spaced en dash used as a dash from rendered text: `src/**` (components, routes, constants incl. `SITE_TITLE` → "Emmanuel Yeboah · Product Engineer · Mobile, Web & Backend" or similar without dashes), `src/content/projects/*.md`, `src/content/writing/*.md` (prose only, not code blocks), `static/llm-full.txt`. Rewrite each sentence naturally (comma, colon, full stop or parentheses) — don't just swap the character. Keep numeric ranges like "2021–2024" (en dash between numbers is fine) — ruling: only dashes used as punctuation are removed. Add a test scanning built HTML (or source) for "—" (and " – ") outside `<code>`/`<pre>` → 0.
+- Remove the "Websites with a real admin" offer and every website-rebuild / WordPress mention from `/work-with-me` (offer 04 + client-name list), `llm-full.txt`, homepage/meta, keywords. `/work-with-me` has three offers with this exact copy:
+  1. **Build the whole product** — "You have an idea, or a prototype that has outgrown its first version, and no engineering team yet. I take it from the first screen to a release in the app stores: the mobile app, the web app, the backend and the admin your team will run it from."
+  2. **Lead or join your team** — "Your team needs a senior engineer now, or someone to lead engineering while you hire. I join as a senior or lead engineer, or as a fractional CTO, and work inside the way your team already ships."
+  3. **Fix, rescue or migrate** — "Payments that fail quietly, balances that drift, a stack that slows every release, or a move off a legacy system with live users. I find what is actually breaking, fix it, and migrate without taking you down."
+     (The "—" above separates title from copy in this plan only.) Keep the existing proof links for the three offers.
+- About: intro becomes "I'm Emmanuel Noel Zappy Yeboah, a product engineer based in Accra, Ghana. I've been writing software since 2018." (rest unchanged; portrait unchanged — Emmanuel will replace it after a photoshoot).
+- Tests: work-with-me has exactly three offers with the titles above and no "WordPress"/"Websites with a real admin" text; about intro contains the full name; the dash scan.
+- Commit `content: no em dashes, three offers, full name on about`.
+
+### Task 6e: Booking, next-project morph, clickable strip
+
+- **Cal booking bug (systematic debugging first):** "Book a 15-minute call" doesn't open the Cal calendar anywhere. Reproduce in headless Chromium on the dev server (click every booking control: work-with-me, contact, footer, any other), find the root cause (e.g. `CalEmbed` missing on pages, embed script init not re-run after client-side navigation, the footer using a plain link, CSP, view-transition interference), and fix it at the source: load the Cal embed once globally (root layout, lazy after load to protect LCP), every booking control uses `CalButton` (footer included; footer button opens the popup instead of linking to `#call`), and the popup works after client-side navigation. Test: clicking a booking button calls the Cal API / inserts the Cal modal element (mock `window.Cal` in unit tests; verify the real popup headlessly and describe it in the report).
+- **Next-project block:** the case-study "Next" Section shows the next project's showcase (`ProjectShowcase size="row"` on its brand field, or the initial treatment when it has none) with its title, as one link, carrying `view-transition-name` = that project's showcase name (unique on the page: the current project's top has a different name). Clicking it morphs into the next page's top (reuse the Task 5 morph decision: source has `[data-showcase-name]` for the target slug). Test: the Next link contains a named showcase for the next slug; morph mode chosen for that navigation.
+- **Clickable strip:** each homepage strip screen links to its project page (`/projects/<slug>` when it has a writeup, else the project's live URL or `/projects`). The strip stays `aria-hidden` for assistive tech (the pills give the same navigation) but items are clickable by pointer/touch: render as `<a tabindex="-1" aria-hidden="true">`; remove `inert` from the strip (inert blocks clicks) while keeping it out of the tab order and accessibility tree; cursor pointer; pause the drift while the strip is hovered. Test: clicking a strip item navigates to its project; strip items not focusable; strip still `aria-hidden`.
+- Commit(s): `fix: booking opens the Cal popup everywhere`, `feat: next-project morph and clickable work strip`.
+
+---
+
 ### Task 7: Gate and sign-off package
 
 **Mobile pass (Emmanuel asked 2026-11-08 — required, not optional):**
