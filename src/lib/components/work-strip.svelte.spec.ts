@@ -6,9 +6,23 @@ import WorkStrip, { parallaxP, parallaxX } from './work-strip.svelte';
 import type { StripScreen } from '$lib/data/showcase';
 
 const screens: StripScreen[] = [
-	{ src: '/favicon.png', kind: 'phone', href: '/projects/kekeh-mac' },
-	{ src: '/favicon.png', kind: 'web', href: 'https://alvi.test' },
-	{ src: '/favicon.png', kind: 'phone' }
+	{
+		src: '/favicon.png',
+		kind: 'phone',
+		href: '/projects/kekeh-mac',
+		name: 'Kekeh Mac',
+		brandColor: '#34b764',
+		onBrand: 'dark'
+	},
+	{
+		src: '/favicon.png',
+		kind: 'web',
+		href: 'https://alvi.test',
+		name: 'A very long project name that cannot possibly fit on one line of a narrow card',
+		brandColor: '#ffb61e',
+		onBrand: 'dark'
+	},
+	{ src: '/favicon.png', kind: 'phone', name: 'No Colour' }
 ];
 
 const frame = () => new Promise<void>((r) => requestAnimationFrame(() => r()));
@@ -32,6 +46,25 @@ describe('parallax maths', () => {
 		expect(parallaxX(1, 80)).toBe(-80);
 		expect(parallaxX(-1, 80)).toBe(80);
 		expect(parallaxX(3, 80)).toBe(-80);
+	});
+});
+
+describe('parallax ranges', () => {
+	it('phones travel +-7% of the card width, web shots 25%', async () => {
+		const { container } = render(WorkStrip, { screens, offset: 0 });
+		await frame();
+		const read = (kind: string) => {
+			const card = container.querySelector<HTMLElement>(`[data-copy="0"] .${kind} .card`)!;
+			const obj = card.querySelector<HTMLElement>('.obj')!;
+			const w = card.getBoundingClientRect().width;
+			const at = (p: number) => {
+				card.style.setProperty('--p', String(p));
+				return obj.getBoundingClientRect().left - card.getBoundingClientRect().left;
+			};
+			return (at(-1) - at(1)) / 2 / w;
+		};
+		expect(read('phone')).toBeCloseTo(0.07, 2);
+		expect(read('web')).toBeCloseTo(0.25, 2);
 	});
 });
 
@@ -77,7 +110,7 @@ describe('WorkStrip', () => {
 
 	it('gives every card the same portrait 2:3 size, square cornered', () => {
 		const { container } = render(WorkStrip, { screens });
-		const cards = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .screen')];
+		const cards = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .card')];
 		expect(cards.length).toBeGreaterThan(3);
 		const first = cards[0].getBoundingClientRect();
 		for (const card of cards) {
@@ -90,30 +123,96 @@ describe('WorkStrip', () => {
 		}
 	});
 
-	it('draws each image wider than its card, for web and phone shots', () => {
+	it('labels every card with its project name, below the card, on one line with an ellipsis', () => {
 		const { container } = render(WorkStrip, { screens });
-		for (const kind of ['web', 'phone']) {
-			const card = container.querySelector<HTMLElement>(`[data-copy="0"] .screen.${kind}`)!;
-			const img = card.querySelector('img')!;
-			expect(img.getBoundingClientRect().width).toBeGreaterThan(
-				card.getBoundingClientRect().width + 2
+		const items = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .screen')];
+		expect(items.slice(0, 3).map((i) => i.querySelector('.label')?.textContent)).toEqual([
+			'Kekeh Mac',
+			screens[1].name,
+			'No Colour'
+		]);
+		for (const item of items) {
+			const label = item.querySelector<HTMLElement>('.label')!;
+			const card = item.querySelector<HTMLElement>('.card')!;
+			expect(card.contains(label)).toBe(false);
+			expect(label.getBoundingClientRect().top).toBeGreaterThanOrEqual(
+				card.getBoundingClientRect().bottom + 6
+			);
+			expect(label.getBoundingClientRect().width).toBeLessThanOrEqual(
+				card.getBoundingClientRect().width + 1
+			);
+			const cs = getComputedStyle(label);
+			expect(cs.whiteSpace).toBe('nowrap');
+			expect(cs.textOverflow).toBe('ellipsis');
+			expect(cs.overflow).toBe('hidden');
+			expect(parseFloat(cs.lineHeight)).toBeGreaterThan(0);
+			expect(label.getBoundingClientRect().height).toBeLessThanOrEqual(
+				parseFloat(cs.lineHeight) + 1
 			);
 		}
 	});
 
-	it('the image lags its card: it moves left on screen by less than the track does', async () => {
+	it('paints the card with the brand colour, or the neutral surface token when there is none', () => {
+		const { container } = render(WorkStrip, { screens });
+		const cards = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .card')];
+		const probe = document.createElement('div');
+		probe.style.background = '#34b764';
+		document.body.append(probe);
+		const green = getComputedStyle(probe).backgroundColor;
+		probe.style.background = '#ffb61e';
+		const amber = getComputedStyle(probe).backgroundColor;
+		probe.style.background = 'var(--code-bg)';
+		const fallback = getComputedStyle(probe).backgroundColor;
+		probe.remove();
+		expect(getComputedStyle(cards[0]).backgroundColor).toBe(green);
+		expect(getComputedStyle(cards[1]).backgroundColor).toBe(amber);
+		expect(getComputedStyle(cards[2]).backgroundColor).toBe(fallback);
+	});
+
+	it('draws a phone as a bezelled object 62% of the card wide, centred, top at 14%', () => {
+		const { container } = render(WorkStrip, { screens, offset: 0 });
+		const card = container.querySelector<HTMLElement>('[data-copy="0"] .phone .card')!;
+		const obj = card.querySelector<HTMLElement>('.obj')!;
+		const c = card.getBoundingClientRect();
+		const o = obj.getBoundingClientRect();
+		expect(o.width / c.width).toBeCloseTo(0.62, 1);
+		expect(o.top - c.top).toBeCloseTo(c.height * 0.14, 0);
+		const cs = getComputedStyle(obj);
+		expect(parseFloat(cs.borderTopLeftRadius)).toBeGreaterThan(o.width * 0.08);
+		expect(cs.backgroundColor).toBe('rgb(11, 11, 12)');
+		expect(cs.paddingTop).not.toBe('0px');
+	});
+
+	it('draws a web shot at 150% of the card width, offset 12% / 18%, with the screen radius', () => {
+		const { container } = render(WorkStrip, { screens, offset: 0 });
+		const card = container.querySelector<HTMLElement>('[data-copy="0"] .web .card')!;
+		const obj = card.querySelector<HTMLElement>('.obj')!;
+		const c = card.getBoundingClientRect();
+		const o = obj.getBoundingClientRect();
+		expect(o.width / c.width).toBeCloseTo(1.5, 1);
+		expect(o.top - c.top).toBeCloseTo(c.height * 0.18, 0);
+		expect(o.width).toBeGreaterThan(c.width);
+		expect(getComputedStyle(obj).borderTopLeftRadius).toBe(
+			getComputedStyle(document.documentElement).getPropertyValue('--radius-screen').trim() ===
+				'0.5rem'
+				? `${0.5 * parseFloat(getComputedStyle(document.documentElement).fontSize)}px`
+				: getComputedStyle(obj).borderTopLeftRadius
+		);
+	});
+
+	it('the object lags its card: it moves left on screen by less than the track does', async () => {
 		const { container, rerender } = render(WorkStrip, { screens, offset: 0 });
 		await frame();
 		const strip = container.querySelector('.strip') as HTMLElement;
 		const sr = strip.getBoundingClientRect();
-		const cards = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .screen')];
+		const cards = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .card')];
 		// A card well inside the strip (p away from the clamp).
 		const card = cards.find((c) => {
 			const r = c.getBoundingClientRect();
 			return r.left > sr.left + 20 && r.right < sr.right - 20;
 		})!;
 		expect(card).toBeTruthy();
-		const img = card.querySelector('img')!;
+		const img = card.querySelector('.obj')!;
 		const cardX = () => card.getBoundingClientRect().left;
 		const imgX = () => img.getBoundingClientRect().left;
 		const c0 = cardX();
@@ -149,7 +248,7 @@ describe('WorkStrip', () => {
 		expect(track.style.transform).toBe(t0);
 	});
 
-	it('with reduced motion: no transform on images and only the first copy shows', async () => {
+	it('with reduced motion: no transform on the composed objects and only the first copy shows', async () => {
 		const real = window.matchMedia.bind(window);
 		vi.spyOn(window, 'matchMedia').mockImplementation((q: string) =>
 			q.includes('prefers-reduced-motion')
@@ -165,8 +264,8 @@ describe('WorkStrip', () => {
 		await frame();
 		const track = container.querySelector('.track') as HTMLElement;
 		expect(track.style.transform).toBe('');
-		for (const img of container.querySelectorAll('img')) {
-			expect(getComputedStyle(img).transform).toBe('none');
+		for (const obj of container.querySelectorAll('.obj')) {
+			expect(getComputedStyle(obj).transform).toBe('none');
 		}
 		const second = container.querySelector('[data-copy="1"]') as HTMLElement;
 		expect(getComputedStyle(second).display).toBe('none');
