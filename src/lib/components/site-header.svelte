@@ -6,16 +6,8 @@
 	import SiteMenu, { type MenuPill, type MenuPost } from './site-menu.svelte';
 	import { AVAILABILITY } from '$lib/shared/site';
 
-	/**
-	 * `overlay` is decided by the root layout: true on `(studio)` routes (full-bleed pages), where
-	 * the header is absolutely positioned and transparent over the hero; false on `(classic)` routes,
-	 * where it sits in normal flow above the content column.
-	 */
-	let {
-		overlay = false,
-		pills = [],
-		posts = []
-	}: { overlay?: boolean; pills?: MenuPill[]; posts?: MenuPost[] } = $props();
+	/** The header is absolutely positioned and transparent over each page's full-bleed hero. */
+	let { pills = [], posts = [] }: { pills?: MenuPill[]; posts?: MenuPost[] } = $props();
 
 	let open = $state(false);
 	let button = $state<HTMLButtonElement | null>(null);
@@ -33,7 +25,7 @@
 	});
 </script>
 
-<header class="site-header" class:overlay>
+<header class="site-header">
 	<div class="left">
 		<button
 			type="button"
@@ -62,8 +54,6 @@
 		gap: 1rem;
 		padding: 1rem clamp(1.25rem, 3vw, 2.5rem);
 		color: var(--fg);
-	}
-	.site-header.overlay {
 		position: absolute;
 		inset: 0 0 auto 0;
 		z-index: 20;
@@ -71,13 +61,13 @@
 	}
 	/* The hero paints a flat brand colour while a project pill is active and sets data-hero-tone on
 	   <html>; re-point the header's tokens so it reads on that field. */
-	:global(html[data-hero-tone='dark']) .site-header.overlay {
+	:global(html[data-hero-tone='dark']) .site-header {
 		--fg: #0e0e0d;
 		--bg: var(--hero-field);
 		--muted: #0e0e0d;
 		--accent: #0e0e0d;
 	}
-	:global(html[data-hero-tone='light']) .site-header.overlay {
+	:global(html[data-hero-tone='light']) .site-header {
 		--fg: #f3efe6;
 		--bg: var(--hero-field);
 		--muted: #f3efe6;

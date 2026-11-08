@@ -3,17 +3,11 @@
 	import SiteHeader from '$lib/components/site-header.svelte';
 	import Footer from '$lib/components/footer.svelte';
 
-	import { page } from '$app/state';
 	import { setupPageReveal } from '$lib/transitions/page-reveal';
 
 	let { children, data } = $props();
 
 	setupPageReveal();
-
-	// Studio pages are full-bleed, so the header overlays the hero; classic pages keep it in flow.
-	// Decided from the route group in the matched route id, e.g. '/(studio)/projects/[slug]'.
-	// Unmatched routes (404) have no id; their error page is studio-styled, so they count too.
-	const studio = $derived(page.route.id?.startsWith('/(studio)') ?? page.status >= 400);
 </script>
 
 <svelte:head>
@@ -35,7 +29,7 @@
 	/>
 </svelte:head>
 
-<SiteHeader overlay={studio} pills={data.pills} posts={data.posts} />
+<SiteHeader pills={data.pills} posts={data.posts} />
 {@render children()}
 <Footer />
 <div class="reveal-panel" aria-hidden="true"></div>

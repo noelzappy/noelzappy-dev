@@ -18,7 +18,7 @@ const posts = [
 const pills = [{ slug: 'p1', title: 'Project One' }];
 
 function setup() {
-	render(SiteHeader, { overlay: false, pills, posts });
+	render(SiteHeader, { pills, posts });
 	return page.getByRole('button', { name: 'Menu' });
 }
 
