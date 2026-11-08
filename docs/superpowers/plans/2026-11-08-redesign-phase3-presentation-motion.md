@@ -125,6 +125,22 @@
 
 ---
 
+### Task 6b: Site email + Forge intake form
+
+Emmanuel (2026-11-08): the site's email becomes `emmanuel@noelzappy.com` everywhere (Cloudflare Email Routing will forward `me@noelzappy.dev` later). Add the inquiry form from `~/workspace/forge/docs/handover/ADDENDUM_INTAKE_FORM.md` to `/work-with-me`.
+
+**Files:**
+
+- Replace every `me@noelzappy.dev` in `src/**` and `static/llm-full.txt` (footer, contact, about, work-with-me, JSON-LD `email`, constants) with `emmanuel@noelzappy.com`; keep a test that no `me@noelzappy.dev` remains in the build output.
+- Create `src/lib/components/inquiry-form.svelte` per the addendum: fields Name*, Work email* (`type=email`), Company, "What's going on?"* (20–2000 chars), hidden honeypot `website` (off-screen, `tabindex=-1`, `autocomplete=off`, `aria-hidden`), Cloudflare Turnstile widget (site key from `PUBLIC_TURNSTILE_SITE_KEY`; script loaded only on this page, only when the key is set). POST JSON `{name,email,company,message,website,turnstile_token}` to `PUBLIC_FORGE_INQUIRY_URL` (from `$env/dynamic/public`). Client validation with errors tied to fields (`aria-describedby`), submit disabled while sending, success replaces the form with "Thanks — I'll get back to you within one working day.", failure/network/URL unset shows "Something went wrong. Email me directly at emmanuel@noelzappy.com." and keeps the text. Focus moves to the success or error message. No analytics.
+- Place it in the `#call` section of `src/routes/(studio)/work-with-me/+page.svelte` under the booking button with the line "Prefer to write it down? Tell me what's breaking and I'll reply within one working day."; styled in the site's language (labels small caps eyebrow style, inputs with hairline borders, accent focus ring), works at 375px.
+- `env.example`: add `PUBLIC_TURNSTILE_SITE_KEY` and `PUBLIC_FORGE_INQUIRY_URL`.
+- Tests: `inquiry-form.svelte.spec.ts` — required/length/email validation messages tied to fields; honeypot not focusable and not in the accessibility tree; with the URL unset, submit shows the email fallback and keeps the message; mocked fetch `{ok:true}` shows the thanks message and focuses it; failure keeps text; button disabled while pending.
+
+- [ ] Steps: failing tests → implement → pass → screenshot /work-with-me#call at 1440 and 375 → commit `feat: site email and Forge inquiry form`.
+
+---
+
 ### Task 7: Gate and sign-off package
 
 - [ ] Step 1: Headless screenshots of every page at 375×812, 1280×720, 1440×900, 2000×1200, 2560×1440, dark + light → `.superpowers/sdd/<this plan>/screens/`. Review each for exposed dead space, clipped screens, misalignment, header overlap; fix in owning files (own commits).
