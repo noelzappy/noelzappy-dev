@@ -332,6 +332,19 @@
 		border-radius: var(--r);
 	}
 
+	/* Phones: no names under the cards (the pills name the projects), and the space goes to the
+	   images, a little larger than the band's old share. Units on the zeros: calc() needs them. */
+	@media (max-width: 640px) {
+		.track {
+			--label-gap: 0rem;
+			--label-lh: 0rem;
+			--h: clamp(4.5rem, min(100cqh - 0.5rem, 36vh), 25rem);
+		}
+		.label {
+			display: none;
+		}
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		.strip {
 			transition:

@@ -1,6 +1,6 @@
 import { describe, expect, it, vi, afterEach } from 'vitest';
 import { render } from 'vitest-browser-svelte';
-import { userEvent } from 'vitest/browser';
+import { page, userEvent } from 'vitest/browser';
 import '../../routes/layout.css';
 import WorkStrip, { parallaxP, parallaxX } from './work-strip.svelte';
 import type { StripScreen } from '$lib/data/showcase';
@@ -123,7 +123,16 @@ describe('WorkStrip', () => {
 		}
 	});
 
-	it('labels every card with its project name, below the card, on one line with an ellipsis', () => {
+	it('on phones hides the names and gives the cards the space', async () => {
+		await page.viewport(375, 812);
+		const { container } = render(WorkStrip, { screens });
+		const label = container.querySelector<HTMLElement>('.label')!;
+		expect(getComputedStyle(label).display).toBe('none');
+		await page.viewport(1280, 800);
+	});
+
+	it('labels every card with its project name, below the card, on one line with an ellipsis', async () => {
+		await page.viewport(1280, 800);
 		const { container } = render(WorkStrip, { screens });
 		const items = [...container.querySelectorAll<HTMLElement>('[data-copy="0"] .screen')];
 		expect(items.slice(0, 3).map((i) => i.querySelector('.label')?.textContent)).toEqual([
