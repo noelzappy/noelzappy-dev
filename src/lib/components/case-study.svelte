@@ -254,6 +254,37 @@
 	.hero {
 		width: 100%;
 	}
+
+	/* Below the Section breakpoint the showcase leads: title, showcase, then the meta list, so the
+	   shared-element morph lands in the first viewport. CSS order only: the DOM (and so the SSR markup
+	   and reading order: title, meta, showcase) is unchanged. .top dissolves so its children join the
+	   article's flex column and can be ordered around the hero. */
+	@media (max-width: 47.999rem) {
+		.top {
+			display: contents;
+			margin-bottom: 0;
+		}
+		.top h1,
+		.top .meta {
+			box-sizing: border-box;
+			width: calc(min(100%, var(--page-max)) - 2 * var(--gutter));
+			margin-inline: auto;
+		}
+		.case-study > :global(*) {
+			order: 3;
+		}
+		.top h1 {
+			order: 0;
+			margin-bottom: -1rem;
+		}
+		.hero {
+			order: 1;
+			margin-bottom: 0;
+		}
+		.top .meta {
+			order: 2;
+		}
+	}
 	.hero.plain {
 		display: grid;
 		place-items: center;
