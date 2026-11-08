@@ -1,6 +1,5 @@
 <script lang="ts">
 	import SEOHead from '$lib/components/seo-head.svelte';
-	import CalEmbed from '$lib/components/cal-embed.svelte';
 	import Hero from '$lib/components/hero.svelte';
 	import {
 		HomepageStructuredData,
@@ -13,7 +12,6 @@
 	let { data }: { data: PageData } = $props();
 </script>
 
-<CalEmbed />
 <SEOHead
 	title={SITE_TITLE}
 	description={SITE_DESCRIPTION}

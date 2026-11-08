@@ -3,7 +3,6 @@
 	import PageHeader from '$lib/components/page-header.svelte';
 	import Section from '$lib/components/section.svelte';
 	import CalButton from '$lib/components/CalButton.svelte';
-	import CalEmbed from '$lib/components/cal-embed.svelte';
 	import { CAL_EVENTS } from '$lib/cal.js';
 
 	const structuredData = {
@@ -19,7 +18,6 @@
 	};
 </script>
 
-<CalEmbed />
 <SEOHead
 	title="Contact"
 	description="Get in touch about a product you need built, a team that needs a senior engineer, or a system that needs fixing."
