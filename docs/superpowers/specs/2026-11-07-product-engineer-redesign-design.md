@@ -254,3 +254,26 @@ plan.
 
 Framework change, a CMS, 3D/WebGL art, AI-generated imagery, blog redesign beyond restyle,
 analytics changes, the lead engine (its spec is updated separately in `~/workspace/handover`).
+
+## 12. Phase 3 — presentation and motion (Emmanuel, 2026-11-08)
+
+Reviewed on a 2000px-wide screen. Decisions:
+
+- **Homepage = hero + footer only.** Selected work, What I do, Track record and Writing sections
+  are removed from the homepage; they live behind Menu/Work. (Replaces §5.1 items 2–5.)
+- **No exposed dead space.** The default hero gets a visual anchor: the headline scales with the
+  viewport width (Metalab-style) with the intro beside it, and a slow, continuous strip of real
+  product screens drifts through the open band. The hover state centres one full, uncropped
+  composition in the right half. Checked at 1280, 1440, 2000 and 2560px wide.
+- **Frameless composed screens everywhere.** No browser chrome. Screens use the site radius and one
+  soft shadow; phones get a thin bezel only. Each project has one fixed composition (e.g. one web
+  screen with two phones overlapping, same scale, fully visible) reused by the hero, work rows and
+  the case-study top. Replaces `DeviceFrame` browser chrome.
+- **Motion: signature + subtle.** Signature: clicking a project pill or work row morphs that
+  project's composition into the case-study top via View Transitions shared elements (the curtain
+  is skipped for that navigation). Subtle: headline words rise on load, hover screens stagger in,
+  sections fade up once on scroll. All off under `prefers-reduced-motion`.
+- **Performance:** Google Analytics loads after the window `load` event; hidden hero images are
+  not eager-loaded; layout data no longer ships every project's screens to every route.
+- **Testimonials placeholders render only in dev builds**; production hides the section until real
+  quotes exist (spec §5.4).
