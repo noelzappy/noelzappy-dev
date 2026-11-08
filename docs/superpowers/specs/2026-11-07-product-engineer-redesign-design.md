@@ -71,7 +71,7 @@ Personalised:
 
 ### 3.2 Colour
 
-- Dark-first: ink background (~#0E0E0D), warm off-white text (~#F3EFE6), muted (~#9A988F).
+- Dark-first: ink background (~~#0E0E0D), warm off-white text (~~#F3EFE6), muted (~#9A988F).
 - Light theme and the menu overlay: warm paper (~#F3EFE6) with ink text (Metalab's light overlay).
 - One accent, warm gold (~#E9C98F on dark; a darker, AA-contrast variant on light), used for
   links, focus rings and availability.
