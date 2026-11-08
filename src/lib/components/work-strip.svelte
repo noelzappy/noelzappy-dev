@@ -32,8 +32,9 @@
 	 * reader (the hero pills give the same navigation). Pointer and touch users can click a screen to
 	 * open its project, so the strip is not inert; the drift pauses while it is hovered.
 	 *
-	 * Every card is the same portrait 2:3 size. The image inside is wider than the card and lags it
-	 * (parallax), so each card pans across its screenshot as it crosses the strip. One rAF loop moves
+	 * Every card is the same portrait 2:3 size, painted in its project's brand colour, with the
+	 * screen composed inside it as an object (a bezelled phone, or a wide web shot bleeding off the
+	 * edge) and the project's name under it. The object lags the card (parallax). One rAF loop moves
 	 * the track and writes a `--p` position per card; layout is measured once, not per frame. The
 	 * track holds two identical copies and slides by one copy's width, so the loop has no seam.
 	 *
@@ -73,7 +74,7 @@
 		if (!strip || !track) return;
 		const stripEl = strip;
 		const trackEl = track;
-		const cards = [...trackEl.querySelectorAll<HTMLElement>('.screen')];
+		const cards = [...trackEl.querySelectorAll<HTMLElement>('.card')];
 		void copy.length;
 
 		if (reduced) {
@@ -169,15 +170,20 @@
 	});
 </script>
 
-{#snippet shot(src: string, eager: boolean, priority: 'high' | 'low' | undefined)}
-	<img
-		{src}
-		alt=""
-		loading={eager ? 'eager' : 'lazy'}
-		fetchpriority={priority}
-		decoding="async"
-		draggable="false"
-	/>
+{#snippet shot(screen: StripScreen, eager: boolean, priority: 'high' | 'low' | undefined)}
+	<span class="card" style:--brand={screen.brandColor} style:--ratio={screen.ratio ?? WEB_NOMINAL}>
+		<span class="obj">
+			<img
+				src={screen.src}
+				alt=""
+				loading={eager ? 'eager' : 'lazy'}
+				fetchpriority={priority}
+				decoding="async"
+				draggable="false"
+			/>
+		</span>
+	</span>
+	<span class="label">{screen.name ?? ''}</span>
 {/snippet}
 
 <div class="strip" class:hidden class:reduced aria-hidden="true" bind:this={strip}>
@@ -190,7 +196,6 @@
 					{#if screen.href}
 						<a
 							class="screen {screen.kind}"
-							style:--ratio={screen.ratio ?? WEB_NOMINAL}
 							href={screen.href}
 							tabindex="-1"
 							aria-hidden="true"
@@ -198,11 +203,11 @@
 								? { 'data-sveltekit-preload-data': 'hover' }
 								: { target: '_blank', rel: 'noopener noreferrer' }}
 						>
-							{@render shot(screen.src, eager, priority)}
+							{@render shot(screen, eager, priority)}
 						</a>
 					{:else}
-						<div class="screen {screen.kind}" style:--ratio={screen.ratio ?? WEB_NOMINAL}>
-							{@render shot(screen.src, eager, priority)}
+						<div class="screen {screen.kind}">
+							{@render shot(screen, eager, priority)}
 						</div>
 					{/if}
 				{/each}
@@ -225,7 +230,10 @@
 		visibility: hidden;
 	}
 	.track {
-		--h: clamp(4.5rem, min(100cqh - 1.5rem, 32vh), 25rem);
+		--label-gap: 0.5rem;
+		--label-lh: 1.35rem;
+		/* The card plus its label fit the band as the card alone did before. */
+		--h: clamp(4.5rem, min(100cqh - 1.5rem - var(--label-gap) - var(--label-lh), 32vh), 25rem);
 		--w: calc(var(--h) * 2 / 3);
 		--gap: clamp(0.5rem, 0.7vw, 0.875rem);
 		position: relative;
@@ -246,39 +254,82 @@
 		position: static;
 	}
 
+	/* A card plus its name label: one link. Static, so the card's offsetLeft is against the track. */
 	.screen {
-		position: relative;
+		display: block;
 		flex: none;
+		width: var(--w);
+		line-height: 0;
+	}
+	a.screen {
+		cursor: pointer;
+		color: inherit;
+		text-decoration: none;
+	}
+	.card {
+		position: relative;
+		display: block;
 		width: var(--w);
 		height: var(--h);
 		overflow: hidden;
 		border-radius: 0;
-		line-height: 0;
-		/* Web shots pan across the whole screenshot; phones are drawn 1.25x the card's width. */
-		--iw: max(var(--w), calc(var(--h) / var(--ratio)));
+		background: var(--brand, var(--code-bg));
 	}
-	.screen.phone {
-		--iw: calc(var(--w) * 1.25);
-	}
-	a.screen {
+	.label {
 		display: block;
-		cursor: pointer;
+		margin-top: var(--label-gap);
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		font-size: var(--step-small);
+		line-height: var(--label-lh);
+		height: var(--label-lh);
+		color: var(--muted);
+	}
+
+	/* The composed object. Its parallax lags the card (see parallaxX): range is 7% of the card's
+	   width for phones, 25% for web shots. */
+	.obj {
+		position: absolute;
+		display: block;
+		box-sizing: border-box;
+		line-height: 0;
+		--range: 0.25;
+		transform: translate3d(calc(var(--p, 0) * var(--w) * var(--range) * -1), 0, 0);
+		will-change: transform;
+		box-shadow: var(--shadow-screen);
+	}
+	.web .obj {
+		left: 12%;
+		top: 18%;
+		width: 150%;
+		overflow: hidden;
+		border-radius: var(--radius-screen);
+	}
+	/* Thin near-black bezel as ProjectShowcase draws it; screen radius is 9% of the screen's width. */
+	.phone .obj {
+		--range: 0.07;
+		--ow: calc(var(--w) * 0.62);
+		--bezel: calc(var(--ow) * 0.018);
+		--r: calc(var(--ow) * 0.09);
+		left: 19%;
+		top: 14%;
+		width: 62%;
+		padding: var(--bezel);
+		border-radius: calc(var(--r) + var(--bezel));
+		background: #0b0b0c;
 	}
 	img {
-		position: absolute;
-		top: 0;
-		left: 50%;
 		display: block;
-		width: var(--iw);
-		max-width: none;
-		height: 100%;
-		margin-left: calc(var(--iw) / -2);
+		width: 100%;
+		height: auto;
+		aspect-ratio: 1 / var(--ratio);
 		object-fit: cover;
-		/* Lags the card: opposes its position across the strip (see parallaxX). */
-		transform: translate3d(calc(var(--p, 0) * (var(--iw) - var(--w)) / -2), 0, 0);
-		will-change: transform;
 		-webkit-user-drag: none;
 		user-select: none;
+	}
+	.phone img {
+		border-radius: var(--r);
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
@@ -298,14 +349,14 @@
 	.strip.reduced .copy[data-copy='1'] {
 		display: none;
 	}
-	.strip.reduced img {
+	.strip.reduced .obj {
 		transform: none;
 	}
 	@media (prefers-reduced-motion: reduce) {
 		.copy[data-copy='1'] {
 			display: none;
 		}
-		img {
+		.obj {
 			transform: none;
 		}
 	}

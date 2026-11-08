@@ -50,6 +50,11 @@ export type StripScreen = {
 	ratio?: number;
 	/** Where a click on the screen leads; absent when the project has nowhere to send it. */
 	href?: string;
+	/** The project's name, shown under its card. */
+	name?: string;
+	/** The card's background; absent projects fall back to a neutral surface token. */
+	brandColor?: string;
+	onBrand?: 'light' | 'dark';
 };
 
 /** The case study when there is a writeup, else the live site, else the work index. */
@@ -72,6 +77,9 @@ function stripHref(project: {
 export function getStripScreens(
 	projects: {
 		slug?: string;
+		title?: string;
+		brandColor?: string;
+		onBrand?: 'light' | 'dark';
 		html?: string;
 		liveUrl?: string;
 		showcase?: Showcase;
@@ -82,9 +90,15 @@ export function getStripScreens(
 		const showcase = getShowcase(project);
 		const href = stripHref(project);
 		const screens: StripScreen[] = [];
-		if (showcase?.web) screens.push({ src: showcase.web.src, kind: 'web', ...(href && { href }) });
+		const meta = {
+			...(href && { href }),
+			...(project.title && { name: project.title }),
+			...(project.brandColor && { brandColor: project.brandColor }),
+			...(project.onBrand && { onBrand: project.onBrand })
+		};
+		if (showcase?.web) screens.push({ src: showcase.web.src, kind: 'web', ...meta });
 		for (const phone of showcase?.phones ?? [])
-			screens.push({ src: phone.src, kind: 'phone', ...(href && { href }) });
+			screens.push({ src: phone.src, kind: 'phone', ...meta });
 		return screens;
 	});
 	const out: StripScreen[] = [];

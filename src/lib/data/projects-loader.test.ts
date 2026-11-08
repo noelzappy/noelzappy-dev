@@ -285,6 +285,24 @@ describe('getStripScreens', () => {
 	});
 });
 
+describe('getStripScreens names and colours', () => {
+	it('carries the project title and brand colours onto each screen, omitting absent ones', () => {
+		const shot = { src: '/a.webp', alt: '' };
+		const screens = getStripScreens([
+			{
+				title: 'A',
+				brandColor: '#112233',
+				onBrand: 'light',
+				showcase: { layout: 'phones', phones: [shot] }
+			},
+			{ title: 'B', showcase: { layout: 'phones', phones: [{ src: '/b.webp', alt: '' }] } }
+		]);
+		expect(screens[0]).toMatchObject({ name: 'A', brandColor: '#112233', onBrand: 'light' });
+		expect(screens[1].name).toBe('B');
+		expect('brandColor' in screens[1]).toBe(false);
+	});
+});
+
 describe('getStripScreens links', () => {
 	const shot = (n: number) => ({ src: `/p${n}.webp`, alt: '' });
 	const phones = { layout: 'phones' as const, phones: [shot(1)] };
