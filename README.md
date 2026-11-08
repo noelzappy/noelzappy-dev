@@ -25,7 +25,7 @@ Adding a post: create the markdown file, commit, deploy. It appears on `/`, `/wr
 
 ## Routes
 
-`/`, `/writing`, `/writing/[slug]`, `/writing/tag/[tag]`, `/projects`, `/projects/[slug]`, `/about`, `/rss.xml`, `/sitemap.xml`. `/contact` and `/services` exist but are unlinked. Old `/notes/*`, `/work/*` and `/open-source` URLs redirect permanently (`src/lib/redirects.ts`).
+`/`, `/projects`, `/projects/[slug]`, `/work-with-me`, `/about`, `/writing`, `/writing/[slug]`, `/writing/tag/[tag]`, `/contact`, `/rss.xml`, `/sitemap.xml`. Old `/notes/*`, `/work/*` and `/open-source` URLs redirect permanently (`src/lib/redirects.ts`).
 
 ## Develop
 
@@ -38,6 +38,15 @@ bun run check      # svelte-check
 bun run test       # vitest (first run: npx playwright install chromium)
 bun run lint
 ```
+
+## Before deploying
+
+```sh
+bun run build
+bun scripts/deploy-check.ts
+```
+
+Exits non-zero while placeholder testimonials (`src/lib/data/testimonials.ts`) or `TODO(Emmanuel)` text are still on the rendered site. It is deliberately not part of `bun run test`, so placeholders stay visible during development without failing CI.
 
 ## Deploy
 
