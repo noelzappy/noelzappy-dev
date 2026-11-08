@@ -52,7 +52,23 @@
 	type Placed = { src: string; alt: string; x: number; y: number; ratio: number };
 	type Plan = { width: number; height: number; web?: Placed; phones: Placed[]; cap: number };
 
-	const resolved = $derived(resolveShowcase(showcase));
+	/** The field's own width, 0 until measured (prerender), so SSR draws the full composition. */
+	let width = $state(0);
+	/** At or under this the composition is trimmed so each phone stays legible (>= ~140px). */
+	const COMPACT_PX = 640;
+	const compact = $derived(width > 0 && width <= COMPACT_PX);
+
+	/**
+	 * On a narrow field: at most 2 phones, and a web screen goes without its phones (beside one it
+	 * would leave the phone ~80px wide). Decided in the plan, not hidden by CSS, so the field's height
+	 * and the morph target always match what is drawn.
+	 */
+	const resolved = $derived.by(() => {
+		const full = resolveShowcase(showcase);
+		if (!full || !compact) return full;
+		if (full.layout === 'web-phones') return { layout: 'web' as const, web: full.web };
+		return { ...full, phones: full.phones?.slice(0, 2) };
+	});
 
 	const plan = $derived.by<Plan | null>(() => {
 		if (!resolved) return null;
@@ -117,6 +133,7 @@
 
 <div
 	class="showcase {size}"
+	bind:clientWidth={width}
 	style:background={brandColor}
 	style:view-transition-name={name}
 	data-showcase-name={name}

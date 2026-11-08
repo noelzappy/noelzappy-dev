@@ -125,4 +125,50 @@ describe('CaseStudy', () => {
 			showcaseName('kekeh-mac')
 		);
 	});
+
+	it('at 375px shows two legible phones, whole, in the case top', async () => {
+		await page.viewport(375, 812);
+		const { container } = render(CaseStudy, {
+			...base,
+			deviceShots: [
+				...base.deviceShots,
+				{ src: '/portfolio/kekeh-mac/driver-11-wallet.webp', alt: 'Wallet', kind: 'phone' as const }
+			]
+		});
+		const field = container.querySelector('.showcase') as HTMLElement;
+		await expect.poll(() => field.querySelectorAll('img').length).toBe(2);
+		const f = field.getBoundingClientRect();
+		for (const img of field.querySelectorAll('img')) {
+			const r = img.getBoundingClientRect();
+			expect(r.width).toBeGreaterThanOrEqual(140);
+			expect(r.left).toBeGreaterThanOrEqual(f.left);
+			expect(r.right).toBeLessThanOrEqual(f.right);
+			expect(r.bottom).toBeLessThanOrEqual(f.bottom);
+		}
+	});
+
+	it('at 375px a prose shots-row keeps each phone at least 140px wide', async () => {
+		await page.viewport(375, 812);
+		const { container } = render(CaseStudy, {
+			...base,
+			html:
+				'<div class="shots-row">' +
+				['driver-03-home-online', 'driver-11-wallet', 'passenger-12-trip-complete']
+					.map(
+						(n) => `<img src="/portfolio/kekeh-mac/${n}.webp" alt="${n}" width="496" height="1080">`
+					)
+					.join('') +
+				'</div>'
+		});
+		const imgs = [...container.querySelectorAll('.shots-row img')] as HTMLImageElement[];
+		expect(imgs).toHaveLength(3);
+		for (const img of imgs) expect(img.getBoundingClientRect().width).toBeGreaterThanOrEqual(140);
+		const row = container.querySelector('.shots-row') as HTMLElement;
+		const rr = row.getBoundingClientRect();
+		for (const img of imgs.slice(0, 2)) {
+			const r = img.getBoundingClientRect();
+			expect(r.left).toBeGreaterThanOrEqual(rr.left - 1);
+			expect(r.right).toBeLessThanOrEqual(rr.right + 1);
+		}
+	});
 });

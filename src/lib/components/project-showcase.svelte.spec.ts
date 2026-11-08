@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
+import { page } from 'vitest/browser';
 import { render } from 'vitest-browser-svelte';
 import type { Showcase } from '$lib/data/projects';
 import '../../routes/layout.css';
@@ -8,6 +9,11 @@ const web = { src: '/portfolio/susupaa-dashboard.webp', alt: 'SusuPaa dashboard'
 const phone1 = { src: '/portfolio/rbl-quick-match.webp', alt: 'RBL quick match' };
 const phone2 = { src: '/portfolio/rbl-messages.webp', alt: 'RBL messages' };
 const phone3 = { src: '/portfolio/built-wallet.webp', alt: 'Built wallet' };
+
+beforeEach(async () => {
+	// Wide field: the full composition. Narrow (compact) fields are covered at the end.
+	await page.viewport(1200, 900);
+});
 
 const compositions: Record<string, Showcase> = {
 	'web-phones': { layout: 'web-phones', web, phones: [phone1, phone2] },
@@ -20,21 +26,21 @@ const compositions: Record<string, Showcase> = {
 		layout: 'web-phones',
 		web: { src: '/portfolio/fetch-agent/2.webp', alt: 'Wide web' },
 		phones: [
-			{ src: '/portfolio/lovenest/discover.jpg', alt: 'Tall phone' },
-			{ src: '/portfolio/lovenest/chat.jpg', alt: 'Tall phone 2' }
+			{ src: '/portfolio/lovenest/discover.webp', alt: 'Tall phone' },
+			{ src: '/portfolio/lovenest/chat.webp', alt: 'Tall phone 2' }
 		]
 	},
 	'portrait web source': {
 		layout: 'web-phones',
-		web: { src: '/portfolio/lovenest/3.jpg', alt: 'Portrait source' },
+		web: { src: '/portfolio/lovenest/3.webp', alt: 'Portrait source' },
 		phones: [phone1, phone2]
 	},
 	'3 tall phones': {
 		layout: 'phones',
 		phones: [
-			{ src: '/portfolio/lovenest/discover.jpg', alt: 'Tall A' },
-			{ src: '/portfolio/lovenest/welcome.jpg', alt: 'Tall B' },
-			{ src: '/portfolio/lovenest/chat.jpg', alt: 'Tall C' }
+			{ src: '/portfolio/lovenest/discover.webp', alt: 'Tall A' },
+			{ src: '/portfolio/lovenest/welcome.webp', alt: 'Tall B' },
+			{ src: '/portfolio/lovenest/chat.webp', alt: 'Tall C' }
 		]
 	}
 };
@@ -191,5 +197,27 @@ describe('ProjectShowcase provided ratios', () => {
 		const img = container.querySelector('img') as HTMLImageElement;
 		expect(img.complete).toBe(false);
 		expect(parseFloat(img.style.aspectRatio)).toBeCloseTo(1 / 1.5, 4);
+	});
+});
+
+describe('ProjectShowcase on a narrow field', () => {
+	beforeEach(async () => {
+		await page.viewport(375, 812);
+	});
+
+	it('draws at most two phones, each at least 140px wide', async () => {
+		const { container } = render(ProjectShowcase, { showcase: compositions.phones, size: 'case' });
+		await expect.poll(() => container.querySelectorAll('img').length).toBe(2);
+		for (const img of container.querySelectorAll('img'))
+			expect(img.getBoundingClientRect().width).toBeGreaterThanOrEqual(140);
+	});
+
+	it('draws a web-phones composition as its web screen alone', async () => {
+		const { container } = render(ProjectShowcase, {
+			showcase: compositions['web-phones'],
+			size: 'case'
+		});
+		await expect.poll(() => container.querySelectorAll('img').length).toBe(1);
+		expect(container.querySelector('.showcase')?.getAttribute('data-layout')).toBe('web');
 	});
 });

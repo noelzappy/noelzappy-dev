@@ -478,3 +478,11 @@ pre {
 		animation: none !important;
 	}
 }
+
+/* Print: fade-up content is never left hidden on paper. */
+@media print {
+	.fade-up {
+		opacity: 1;
+		transform: none;
+	}
+}

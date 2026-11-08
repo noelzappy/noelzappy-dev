@@ -215,9 +215,11 @@
 	}
 
 	/* Full-bleed hero */
-	.top,
+	.top {
+		margin-bottom: clamp(2rem, 4vw, 3.5rem);
+	}
 	.hero {
-		margin-bottom: clamp(3rem, 7vw, 6rem);
+		margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 	}
 	.hero {
 		width: 100%;
@@ -268,6 +270,21 @@
 		margin-block: 2rem;
 		container-type: inline-size;
 	}
+	/* Narrow screens: two phones' worth of width each (>= ~140px), the row scrolls and snaps. */
+	@media (max-width: 40rem) {
+		.prose :global(.shots-row) {
+			display: flex;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scrollbar-width: none;
+			padding-bottom: 0.5rem;
+		}
+		.prose :global(.shots-row img) {
+			flex: 0 0 calc((100cqw - clamp(0.5rem, 2.5vw, 1.25rem)) / 2);
+			width: calc((100cqw - clamp(0.5rem, 2.5vw, 1.25rem)) / 2);
+			scroll-snap-align: start;
+		}
+	}
 	.prose :global(.shots-row img) {
 		margin: 0;
 		border-radius: var(--radius-screen);
@@ -309,12 +326,15 @@
 		color: var(--accent);
 	}
 
+	.next {
+		margin: 0;
+	}
 	.next a {
 		font-family: var(--font-display);
-		font-size: var(--step-display-l);
-		line-height: var(--lh-display-l);
-		letter-spacing: var(--tracking-display-l);
-		font-weight: var(--weight-display-l);
+		font-size: var(--step-display-m);
+		line-height: var(--lh-display-m);
+		letter-spacing: var(--tracking-display-m);
+		font-weight: var(--weight-display-m);
 		color: var(--fg);
 		text-decoration: none;
 		overflow-wrap: anywhere;
